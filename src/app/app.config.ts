@@ -27,6 +27,7 @@ export const appConfig: ApplicationConfig = {
         authDomain: 'what-to-eat-90d3e.firebaseapp.com',
         messagingSenderId: '276849599452',
         measurementId: 'G-FWE0TE8LCZ',
+        apiKey: 'AIzaSyBV6PbTETDHd5rYI_4ZLFOUpo3lBRIHfFo',
       })
     ),
     provideAuth(() => getAuth()),
