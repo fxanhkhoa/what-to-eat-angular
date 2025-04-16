@@ -16,20 +16,17 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    loadComponent: () =>
+      import('./module/admin/admin.component').then((m) => m.AdminComponent),
+    canActivate: [authenticationGuard, authorizationGuard],
+    data: { permissions: [Permissions.ADMIN_DASHBOARD] },
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: 'dashboard',
         loadComponent: () =>
           import('./module/admin/dashboard/dashboard.component').then(
             (m) => m.DashboardComponent
           ),
-        canActivate: [authenticationGuard, authorizationGuard],
-        data: { permissions: [Permissions.ADMIN_DASHBOARD] },
       },
     ],
   },
