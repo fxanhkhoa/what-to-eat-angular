@@ -13,6 +13,7 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import { bearerInterceptor } from './interceptor/bearer.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +32,6 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAuth(() => getAuth()),
-    provideHttpClient(withFetch(), withInterceptors([])),
+    provideHttpClient(withFetch(), withInterceptors([bearerInterceptor])),
   ],
 };

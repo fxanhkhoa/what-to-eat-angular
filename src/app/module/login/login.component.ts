@@ -1,9 +1,11 @@
 import { AuthService } from '@/app/service/auth.service';
 import { Cookies_Key } from '@/enum/cookies.enum';
-import { Component, inject } from '@angular/core';
+import { JWTTokenPayload } from '@/types/auth.type';
+import { Component, inject, OnInit } from '@angular/core';
 import { signInWithPopup, Auth, GoogleAuthProvider } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,23 @@ import cookies from 'js-cookie';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private readonly auth = inject(Auth);
   private readonly authService = inject(AuthService);
   private router = inject(Router);
+
+  ngOnInit(): void {
+    const token = cookies.get(Cookies_Key.TOKEN);
+    if (!token) this.router.navigate(['/login']);
+
+    const decoded = jwtDecode<JWTTokenPayload>(token ?? '');
+
+    if (decoded.role_name === 'ADMIN') {
+      this.router.navigate(['/admin']);
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 
   async loginWithGoogle() {
     const userCredential = await signInWithPopup(
