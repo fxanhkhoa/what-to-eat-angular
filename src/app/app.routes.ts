@@ -16,20 +16,60 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    loadComponent: () =>
+      import('./module/admin/admin.component').then((m) => m.AdminComponent),
+    canActivate: [authenticationGuard, authorizationGuard],
+    data: {
+      permissions: [Permissions.ADMIN_DASHBOARD],
+      breadcrumb: 'Admin',
+    },
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: 'dashboard',
         loadComponent: () =>
           import('./module/admin/dashboard/dashboard.component').then(
             (m) => m.DashboardComponent
           ),
-        canActivate: [authenticationGuard, authorizationGuard],
-        data: { permissions: [Permissions.ADMIN_DASHBOARD] },
+        data: {
+          breadcrumb: 'Dashboard',
+        },
+      },
+      {
+        path: 'ingredient',
+        loadComponent: () =>
+          import(
+            './module/admin/admin-ingredient/admin-ingredient.component'
+          ).then((m) => m.AdminIngredientComponent),
+        data: {
+          breadcrumb: 'Ingredient',
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
+          },
+          {
+            path: 'list',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component'
+              ).then((m) => m.AdminIngredientListComponent),
+            data: {
+              breadcrumb: 'List',
+            },
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component'
+              ).then((m) => m.AdminIngredientUpdateComponent),
+            data: {
+              breadcrumb: 'Create/Update',
+            },
+          },
+        ],
       },
     ],
   },

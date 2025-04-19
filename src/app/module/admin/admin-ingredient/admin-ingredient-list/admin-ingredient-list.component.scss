@@ -1,0 +1,83 @@
+.ingredients-table-container {
+  padding: 20px;
+
+  .filters-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+
+    mat-form-field {
+      flex: 1;
+      min-width: 200px;
+    }
+  }
+
+  .table-container {
+    overflow: auto;
+    max-height: 60vh;
+    width: 100%;
+    border-radius: 4px;
+
+    table {
+      width: 100%;
+
+      .mat-column-slug {
+        min-width: 100px;
+      }
+
+      .mat-column-title {
+        min-width: 150px;
+      }
+
+      .mat-column-measure {
+        min-width: 80px;
+      }
+
+      .mat-column-calories,
+      .mat-column-carbohydrate,
+      .mat-column-fat,
+      .mat-column-weight,
+      .mat-column-protein,
+      .mat-column-cholesterol,
+      .mat-column-sodium {
+        min-width: 100px;
+        text-align: right;
+      }
+
+      .mat-column-ingredientCategory {
+        min-width: 180px;
+      }
+    }
+  }
+
+  .language-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+
+    .language-tag {
+      font-size: 10px;
+      background-color: #e0e0e0;
+      border-radius: 4px;
+      padding: 2px 4px;
+      color: #616161;
+    }
+  }
+
+  .category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .category-chip {
+      font-size: 12px;
+      background-color: #f0f0f0;
+      border-radius: 16px;
+      padding: 4px 8px;
+      color: #424242;
+    }
+  }
+}

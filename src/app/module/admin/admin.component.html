@@ -1,0 +1,82 @@
+<mat-sidenav-container class="sidenav-container !bg-cover !bg-no-repeat !bg-center">
+    <mat-sidenav #drawer
+        class="sidenav ml-2 !rounded-xl !bg-transparent !bg-gradient-to-br !from-white/50 !via-white-30 !to-transparent !shadow-lg !ring-1 !ring-black/5"
+        fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <div class="flex mt-3 px-3 gap-3" [class.justify-center]="!(isHandset$)">
+            <img src="/logo/what-to-eat-favicon-color.png" alt="logo"
+                class="w-10 h-10 object-cover object-center shadow rounded-full brightness-200" />
+            <div class="flex flex-col">
+                <span class="text-white text-sm font-semibold">
+                    {{payload?.name}}
+                </span>
+                <span class="text-white text-xs font-light">
+                    {{payload?.role_name}}
+                </span>
+            </div>
+        </div>
+        <div class="border-t border-gray-50 opacity-50 mx-3 mt-2"></div>
+        <div i18n class="flex text-white mt-2 justify-center font-semibold">Menu</div>
+        <mat-nav-list>
+            <a mat-list-item href="#">
+                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
+                    <mat-icon class="!text-white min-w-5">
+                        dashboard
+                    </mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white text-sm font-light">Dashboard</span>
+                    }
+                </div>
+            </a>
+            <a mat-list-item [routerLink]="['/admin/ingredient']">
+                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
+                    <mat-icon class="!text-white min-w-5">
+                        rice_bowl
+                    </mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white text-sm font-light">Ingredient</span>
+                    }
+                </div>
+            </a>
+            <a mat-list-item href="#">
+                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
+                    <mat-icon class="!text-white min-w-5">
+                        room_service
+                    </mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white text-sm font-light">Dish</span>
+                    }
+                </div>
+            </a>
+        </mat-nav-list>
+        <div class="border-t border-gray-50 opacity-50 mx-3 mt-2"></div>
+        <mat-nav-list>
+            <a mat-list-item href="#" (click)="logout()">
+                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
+                    <mat-icon class="!text-white min-w-5">
+                        logout
+                    </mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white text-sm font-light">Logout</span>
+                    }
+                </div>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary"
+            class="!rounded-xl !bg-transparent !bg-gradient-to-br !from-white/50 !via-white/30 !to-transparent !shadow-lg !ring-1 !ring-black/5 !text-white">
+            @if (isHandset$ | async) {
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            }
+            <div>
+                <app-breadcrumb></app-breadcrumb>
+            </div>
+        </mat-toolbar>
+        <div class="p-5">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,21 @@
+.sidenav-container {
+  height: 100%;
+  background: url("/images/admin-bg.jpg");
+}
+
+.sidenav {
+  width: fit-content;
+  height: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}

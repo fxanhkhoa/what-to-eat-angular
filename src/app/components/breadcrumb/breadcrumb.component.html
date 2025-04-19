@@ -1,0 +1,11 @@
+<nav>
+    <ng-container *ngFor="let breadcrumb of breadcrumbs; let last = last">
+        <ng-container *ngIf="!last">
+            <a mat-stroked-button class="text-base !text-white" [routerLink]="breadcrumb.url">{{ breadcrumb.label }}</a> <span class="text-base">
+                &gt; </span>
+        </ng-container>
+        <ng-container *ngIf="last" class="">
+            <span class="text-base">{{ breadcrumb.label }}</span>
+        </ng-container>
+    </ng-container>
+</nav>

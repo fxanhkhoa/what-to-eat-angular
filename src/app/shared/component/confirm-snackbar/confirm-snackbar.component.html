@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="flex justify-center mb-2">
+        <mat-icon class="icon">help_outline</mat-icon>
+    </div>
+    <div class="flex justify-center">
+        <h2 class="text-center">{{ data.mainMsg }}</h2>
+    </div>
+    <div class="flex justify-center">
+        <span class="sub-text">{{ data.subMsg }}</span>
+    </div>
+    <div class="flex justify-end">
+        <button mat-raised-button color="primary" (click)="onCancel()">{{ 'cancel' | translate }}</button>
+        <button mat-stroked-button color="primary" (click)="onConfirm()">{{ 'confirm' | translate }}</button>
+    </div>
+</div>
