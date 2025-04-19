@@ -6,3 +6,18 @@ export type BaseType = {
   createdBy?: string;
   updatedBy?: string;
 };
+
+export type MultiLanguage<T> = {
+  lang: string;
+  data: T;
+};
+
+export type APIPagination<T> = {
+  data: Array<T>;
+  count: number;
+};
+
+export type PagingDto = {
+  page?: number;
+  limit?: number;
+};

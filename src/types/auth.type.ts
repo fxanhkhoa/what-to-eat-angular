@@ -10,6 +10,7 @@ export type JWTTokenPayload = {
   email: string;
   role_name: string;
   google_id: string;
+  name: string;
 };
 
 export type RetrievedTokenFromRefreshToken = Omit<ResultToken, 'refreshToken'>;
