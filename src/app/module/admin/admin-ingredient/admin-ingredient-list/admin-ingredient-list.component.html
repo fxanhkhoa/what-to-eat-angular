@@ -38,7 +38,7 @@
             <div class="flex justify-center items-center p-5">
                 <mat-spinner></mat-spinner>
             </div>
-            } @else {                                
+            } @else {
             <table mat-table [dataSource]="dataSource" matSort>
 
                 <ng-container matColumnDef="action">
@@ -60,7 +60,10 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Slug </th>
                     <td mat-cell *matCellDef="let element">
                         <div class="flex gap-2">
-                            <a mat-button routerLink="/ingredient/{{element.slug}}">{{element.slug}}</a>
+                            <a mat-button routerLink="/ingredient/{{element.slug}}">
+                                <span>{{element.slug}}</span>
+                                <mat-icon>open_in_new</mat-icon>
+                            </a>
                         </div>
                     </td>
                 </ng-container>

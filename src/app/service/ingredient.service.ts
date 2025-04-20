@@ -4,6 +4,7 @@ import {
   CreateIngredientDto,
   Ingredient,
   QueryIngredientDto,
+  UpdateIngredientDto,
 } from '@/types/ingredient.type';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
@@ -31,7 +32,20 @@ export class IngredientService {
     );
   }
 
+  update(id: string, ingredient: UpdateIngredientDto) {
+    return this.http.patch<Ingredient>(
+      `${environment.API_URL}/${prefix}/${id}`,
+      ingredient
+    );
+  }
+
   findOne(id: string) {
     return this.http.get<Ingredient>(`${environment.API_URL}/${prefix}/${id}`);
+  }
+
+  delete(id: string) {
+    return this.http.delete<Ingredient>(
+      `${environment.API_URL}/${prefix}/${id}`
+    );
   }
 }

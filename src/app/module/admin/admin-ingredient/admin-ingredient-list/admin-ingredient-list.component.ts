@@ -28,6 +28,7 @@ import { IngredientService } from '@/app/service/ingredient.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime, finalize } from 'rxjs';
+import { ToastService } from '@/app/shared/service/toast.service';
 
 @Component({
   selector: 'app-admin-ingredient-list',
@@ -82,6 +83,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   private ingredientService = inject(IngredientService);
   private route = inject(ActivatedRoute);
   private platformId = inject<string>(PLATFORM_ID);
+  private toastService = inject(ToastService);
 
   ngOnInit(): void {
     // Subscribe to search input changes
@@ -230,5 +232,24 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = '';
   }
 
-  onDelete(id: string) {}
+  onDelete(id: string) {
+    this.toastService
+      .showConfirm(
+        'Delete Ingredient',
+        'Are you sure you want to delete this ingredient?'
+      )
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.ingredientService.delete(id).subscribe(() => {
+            this.toastService.showSuccess(
+              $localize`Deleted`,
+              $localize`Ingredient deleted successfully`,
+              1500
+            );
+            this.loadData();
+          });
+        }
+      });
+  }
 }

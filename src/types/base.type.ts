@@ -5,6 +5,8 @@ export type BaseType = {
   updatedAt: string;
   createdBy?: string;
   updatedBy?: string;
+  deletedBy?: string;
+  deletedAt?: string;
 };
 
 export type MultiLanguage<T> = {
