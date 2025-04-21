@@ -3,10 +3,8 @@ import {
   AfterViewInit,
   Component,
   inject,
-  makeStateKey,
   OnInit,
   PLATFORM_ID,
-  TransferState,
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';

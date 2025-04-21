@@ -28,6 +28,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
+import { DishService } from '@/app/service/dish.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dish-list',
@@ -45,23 +47,25 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   templateUrl: './admin-dish-list.component.html',
   styleUrl: './admin-dish-list.component.scss',
 })
 export class AdminDishListComponent implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder);
+  private dishService = inject(DishService);
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   displayedColumns: string[] = [
+    'actions',
     'thumbnail',
     'title',
     'preparationTime',
     'cookingTime',
     'difficultLevel',
     'mealCategories',
-    'actions',
   ];
   dataSource: MatTableDataSource<Dish>;
 
@@ -79,6 +83,11 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   tags: string[] = [];
   ingredients: string[] = [];
   labels: string[] = [];
+
+  totalItems = 0;
+  pageSize = 25;
+  currentPage = 1;
+  isLoading = false;
 
   constructor() {
     // Initialize with empty array, replace with your data source
@@ -113,7 +122,26 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  loadDishes() {}
+  loadDishes() {
+    this.dishService
+      .findAll({
+        ...this.filterForm.value,
+        page: this.currentPage,
+        limit: this.pageSize,
+      })
+      .subscribe((res) => {
+        if (res.count === 0) {
+          this.dataSource.data = [];
+          return;
+        }
+        this.dataSource.data = res.data;
+        this.totalItems = res.count;
+
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+        }, 500);
+      });
+  }
 
   // Helper method to get title in default language (assuming English is default)
   getDefaultTitle(titles: MultiLanguage<string>[]): string {

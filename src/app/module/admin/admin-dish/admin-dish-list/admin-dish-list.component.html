@@ -139,10 +139,25 @@
     <div class="overflow-x-auto rounded-t-lg">
         <table mat-table [dataSource]="dataSource" matSort class="w-full">
 
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="w-24"> Actions </th>
+                <td mat-cell *matCellDef="let dish">
+                    <div class="flex gap-2">
+                        <a mat-mini-fab [routerLink]="['/admin/dish', dish._id]" matTooltip=" Edit dish">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                        <button mat-icon-button (click)="deleteDish(dish)" matTooltip="Delete dish">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
             <!-- Thumbnail Column -->
             <ng-container matColumnDef="thumbnail">
                 <th mat-header-cell *matHeaderCellDef class="w-24"> Image </th>
-                <td mat-cell *matCellDef="let dish">
+                <td mat-cell *matCellDef="let dish" class="!py-3">
                     <img [src]="dish.thumbnail || 'assets/images/placeholder.png'"
                         class="h-16 w-16 object-cover rounded-md" alt="Dish thumbnail">
                 </td>
@@ -161,7 +176,7 @@
                             class="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">
                             {{ tag }}
                         </span>
-                        <span *ngIf="dish.tags.length > 3" class="text-xs text-gray-500">
+                        <span *ngIf="dish.tags.length > 3" class="text-xs text-gray-500 my-auto">
                             +{{ dish.tags.length - 3 }} more
                         </span>
                     </div>
@@ -172,9 +187,9 @@
             <ng-container matColumnDef="preparationTime">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Prep Time </th>
                 <td mat-cell *matCellDef="let dish">
-                    <div class="flex items-center">
+                    <div class="flex items-center flex-nowrap">
                         <mat-icon class="text-gray-400 mr-1 text-sm">schedule</mat-icon>
-                        {{ dish.preparationTime || 'N/A' }} min
+                        <span class="text-nowrap">{{ dish.preparationTime || 'N/A' }} min</span>
                     </div>
                 </td>
             </ng-container>
@@ -185,7 +200,7 @@
                 <td mat-cell *matCellDef="let dish">
                     <div class="flex items-center">
                         <mat-icon class="text-gray-400 mr-1 text-sm">outdoor_grill</mat-icon>
-                        {{ dish.cookingTime || 'N/A' }} min
+                        <span class="text-nowrap">{{ dish.cookingTime || 'N/A' }} min</span>
                     </div>
                 </td>
             </ng-container>
@@ -217,24 +232,6 @@
                         <span *ngIf="dish.mealCategories.length > 2" class="text-xs text-gray-500">
                             +{{ dish.mealCategories.length - 2 }} more
                         </span>
-                    </div>
-                </td>
-            </ng-container>
-
-            <!-- Actions Column -->
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef class="w-24"> Actions </th>
-                <td mat-cell *matCellDef="let dish">
-                    <div class="flex gap-2">
-                        <button mat-icon-button color="primary" (click)="viewDish(dish)" matTooltip="View details">
-                            <mat-icon>visibility</mat-icon>
-                        </button>
-                        <button mat-icon-button color="accent" (click)="editDish(dish)" matTooltip="Edit dish">
-                            <mat-icon>edit</mat-icon>
-                        </button>
-                        <button mat-icon-button color="warn" (click)="deleteDish(dish)" matTooltip="Delete dish">
-                            <mat-icon>delete</mat-icon>
-                        </button>
                     </div>
                 </td>
             </ng-container>
