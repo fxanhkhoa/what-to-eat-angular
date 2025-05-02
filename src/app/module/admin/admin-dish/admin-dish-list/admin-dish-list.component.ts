@@ -2,13 +2,18 @@ import { DIFFICULT_LEVELS, MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { INGREDIENT_CATEGORIES } from '@/enum/ingredient.enum';
 import { MultiLanguage } from '@/types/base.type';
 import { Dish, QueryDishDto } from '@/types/dish.type';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformServer } from '@angular/common';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   inject,
+  OnChanges,
   OnInit,
+  PLATFORM_ID,
+  signal,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import {
@@ -21,15 +26,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize } from 'rxjs';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { DishService } from '@/app/service/dish.service';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSliderModule } from '@angular/material/slider';
+import { ToastService } from '@/app/shared/service/toast.service';
 
 @Component({
   selector: 'app-admin-dish-list',
@@ -48,13 +60,18 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MatProgressSpinnerModule,
+    MatSliderModule,
   ],
   templateUrl: './admin-dish-list.component.html',
   styleUrl: './admin-dish-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminDishListComponent implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder);
   private dishService = inject(DishService);
+  private toastService = inject(ToastService);
+  private platformId = inject<string>(PLATFORM_ID);
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -84,10 +101,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   ingredients: string[] = [];
   labels: string[] = [];
 
-  totalItems = 0;
-  pageSize = 25;
-  currentPage = 1;
-  isLoading = false;
+  isLoading = signal(false);
 
   constructor() {
     // Initialize with empty array, replace with your data source
@@ -95,7 +109,6 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.loadDishes();
     this.filterForm = this.fb.group({
       keyword: [''],
       tags: [[]],
@@ -109,33 +122,54 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
       ingredients: [[]],
       labels: [[]],
     });
-
-    this.filterForm.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
-      .subscribe((formValue) => {
-        this.applyFilter(this.cleanFormValue(formValue));
-      });
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.initTable();
+    this.loadDishes();
+  }
+
+  initTable() {
     this.dataSource.sort = this.sort;
+    // this.dataSource.paginator = this.paginator;
+
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'title':
+          // Sort by the English title or first available title
+          const englishTitle = item.title.find((t) => t.lang === 'en');
+          return englishTitle ? englishTitle.data : item.title[0]?.data || '';
+        case 'mealCategories':
+          return item.mealCategories.join(', ');
+        default:
+          return item[property as keyof Dish] as string | number;
+      }
+    };
   }
 
   loadDishes() {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
+    this.isLoading.set(true);
     this.dishService
       .findAll({
-        ...this.filterForm.value,
-        page: this.currentPage,
-        limit: this.pageSize,
+        ...this.cleanFormValue(this.filterForm.value),
+        page: this.paginator.pageIndex + 1,
+        limit: this.paginator.pageSize,
       })
+      .pipe(
+        distinctUntilChanged(),
+        finalize(() => (this.isLoading.set(false)))
+      )
       .subscribe((res) => {
         if (res.count === 0) {
           this.dataSource.data = [];
           return;
         }
         this.dataSource.data = res.data;
-        this.totalItems = res.count;
+        this.paginator.length = res.count;
 
         setTimeout(() => {
           this.dataSource.sort = this.sort;
@@ -149,20 +183,27 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
     return defaultTitle ? defaultTitle.data : 'No title available';
   }
 
-  // Methods for CRUD operations
-  viewDish(dish: Dish): void {
-    console.log('View dish details', dish);
-    // Implement navigation to detail view
-  }
-
-  editDish(dish: Dish): void {
-    console.log('Edit dish', dish);
-    // Implement edit functionality
-  }
-
   deleteDish(dish: Dish): void {
-    console.log('Delete dish', dish);
-    // Implement delete functionality with confirmation dialog
+    this.toastService
+      .showConfirm(
+        $localize`Delete Dish`,
+        $localize`Are you sure you want to delete "${
+          dish.title.find((t) => t.lang === 'en')!.data
+        }"?`
+      )
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.dishService.delete(dish._id).subscribe(() => {
+            this.toastService.showSuccess(
+              $localize`Deleted`,
+              $localize`Ingredient deleted successfully`,
+              1500
+            );
+            this.loadDishes();
+          });
+        }
+      });
   }
 
   toggleFilter(): void {
@@ -191,11 +232,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(query: QueryDishDto): void {
-    console.log('Filtering dishes with query:', query);
-    // Here you would call your service to get filtered dishes
-    // this.dishService.getDishes(query).subscribe(dishes => {
-    //   this.dishes = dishes;
-    // });
+    this.loadDishes();
   }
 
   // Chip input methods
