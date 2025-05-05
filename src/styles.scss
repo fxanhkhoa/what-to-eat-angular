@@ -22,12 +22,40 @@ html {
 // @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-html,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0px;
+  overflow: hidden;
+}
+
 body {
   height: 100%;
-  background-color: #f8f8ff;
+  margin: 0;
+  padding: 0px;
 }
 body {
+  height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.dark-theme {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: custom_mat.$primary-palette,
+        tertiary: custom_mat.$tertiary-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+.client-body {
+  background-image: url("/images/dark-bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

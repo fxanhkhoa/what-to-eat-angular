@@ -7,7 +7,16 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./module/home/home.component').then((m) => m.HomeComponent),
+      import('./module/client/client.component').then((m) => m.ClientComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./module/client/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
+      },
+    ],
   },
   {
     path: 'login',
