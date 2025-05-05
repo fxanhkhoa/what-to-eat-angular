@@ -1,17 +1,30 @@
-import { Component, Inject, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-image-viewer',
-  standalone: true,
-  imports: [MatIconModule],
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './image-viewer.component.html',
   styleUrl: './image-viewer.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageViewerComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: string
-  ) {}
+  readonly dialogRef = inject(MatDialogRef<ImageViewerComponent>);
+  readonly data = inject<string>(MAT_DIALOG_DATA);
 }

@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
     if (!isRunningInBrowser) return;
     const token = cookies.get(Cookies_Key.TOKEN);
-    if (!token) this.router.navigate(['/login']);
+    if (!token) return;
     const decoded = jwtDecode<JWTTokenPayload>(token ?? '');
 
     if (decoded.role_name === 'ADMIN') {

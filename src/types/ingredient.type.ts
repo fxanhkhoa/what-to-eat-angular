@@ -33,3 +33,7 @@ export type CreateIngredientDto = {
   sodium?: number;
   images: string[];
 };
+
+export type UpdateIngredientDto = {
+  id: string;
+} & CreateIngredientDto;

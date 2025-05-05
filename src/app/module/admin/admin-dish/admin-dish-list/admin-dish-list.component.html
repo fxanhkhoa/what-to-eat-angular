@@ -1,0 +1,263 @@
+<div
+    class="p-5 rounded-xl bg-gradient-to-br from-white/80 via-white/70 to-white/60 shadow-lg ring-1 ring-black/5 shadow-lg">
+    <!-- Filter -->
+    <div class="mb-4 flex justify-between items-center">
+        <h1 class="text-xl font-semibold text-gray-800">Dish Management</h1>
+        <div class="flex gap-5">
+            <button mat-raised-button [routerLink]="['/admin/dish', 'create']">
+                <mat-icon>add</mat-icon>
+                <span i18n>Create</span>
+            </button>
+            <button mat-button color="primary" (click)="toggleFilter()">
+                <mat-icon>filter_list</mat-icon>
+                {{ isFilterExpanded ? 'Hide Filters' : 'Show Filters' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Filter Panel -->
+    <div *ngIf="isFilterExpanded" class="mb-6 p-4 bg-gray-50 rounded-lg transition-all" [formGroup]="filterForm">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Keyword Search -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search by keyword" formControlName="keyword">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+
+            <!-- Tags with Chips -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Tags</mat-label>
+                <mat-chip-grid #tagsList aria-label="Tag selection">
+                    <mat-chip *ngFor="let tag of tags" [removable]="true" (removed)="removeChip(tag, 'tags')">
+                        {{tag}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="New tag..." [matChipInputFor]="tagsList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addChip($event, 'tags')">
+                </mat-chip-grid>
+                <mat-hint>Press Enter or comma to add</mat-hint>
+            </mat-form-field>
+
+            <!-- Difficulty Levels -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Difficulty Levels</mat-label>
+                <mat-select formControlName="difficultLevels" multiple>
+                    <mat-option *ngFor="let level of difficultLevelOptions" [value]="level">{{ level }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Preparation Time Range -->
+            <div class="flex flex-col gap-2">
+                <span class="text-gray-700">Preparation Time: {{ filterForm.get('preparationTimeFrom')?.value || 0 }} -
+                    {{ filterForm.get('preparationTimeTo')?.value || 180 }} min</span>
+                <mat-slider class="w-full" [min]="0" [max]="180" [step]="5" [discrete]="true">
+                    <input matSliderStartThumb formControlName="preparationTimeFrom">
+                    <input matSliderEndThumb formControlName="preparationTimeTo">
+                </mat-slider>
+            </div>
+
+            <!-- Cooking Time Range -->
+            <div class="flex flex-col gap-2">
+                <span class="text-gray-700">Cooking Time: {{ filterForm.get('cookingTimeFrom')?.value || 0 }} - {{
+                    filterForm.get('cookingTimeTo')?.value || 180 }} min</span>
+                <mat-slider class="w-full" [min]="0" [max]="180" [step]="5" [discrete]="true">
+                    <input matSliderStartThumb formControlName="cookingTimeFrom">
+                    <input matSliderEndThumb formControlName="cookingTimeTo">
+                </mat-slider>
+            </div>
+
+            <!-- Meal Categories -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Meal Categories</mat-label>
+                <mat-select formControlName="mealCategories" multiple>
+                    <mat-option *ngFor="let category of mealCategoryOptions" [value]="category">{{ category
+                        }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Ingredient Categories -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Ingredient Categories</mat-label>
+                <mat-select formControlName="ingredientCategories" multiple>
+                    <mat-option *ngFor="let category of ingredientCategoryOptions" [value]="category">{{ category
+                        }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <!-- Ingredients with Chips -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Ingredients</mat-label>
+                <mat-chip-grid #ingredientsList aria-label="Ingredient selection">
+                    <mat-chip *ngFor="let ingredient of ingredients" [removable]="true"
+                        (removed)="removeChip(ingredient, 'ingredients')">
+                        {{ingredient}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Add ingredient..." [matChipInputFor]="ingredientsList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addChip($event, 'ingredients')">
+                </mat-chip-grid>
+                <mat-hint>Enter ingredients to filter recipes</mat-hint>
+            </mat-form-field>
+
+            <!-- Labels with Chips -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Labels</mat-label>
+                <mat-chip-grid #labelsList aria-label="Label selection">
+                    <mat-chip *ngFor="let label of labels" [removable]="true" (removed)="removeChip(label, 'labels')">
+                        {{label}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Add label..." [matChipInputFor]="labelsList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="addChip($event, 'labels')">
+                </mat-chip-grid>
+                <mat-hint>Enter labels to filter recipes</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <!-- Filter Actions -->
+        <div class="flex justify-end mt-4 gap-2">
+            <button mat-stroked-button color="warn" (click)="clearFilter()">
+                <mat-icon>clear</mat-icon> Clear Filters
+            </button>
+            <button mat-raised-button color="primary" (click)="applyFilter(cleanFormValue(filterForm.value))">
+                <mat-icon>filter_alt</mat-icon> Apply Filters
+            </button>
+        </div>
+    </div>
+
+    <!-- Results Table (Placeholder - you can integrate with your existing table) -->
+    <div class="mt-4">
+        <!-- Your dish table component or code goes here -->
+        <p *ngIf="!isFilterExpanded" class="text-gray-500 italic">Use the filter button above to refine your search</p>
+    </div>
+
+    <!-- Table -->
+    <div class="overflow-auto rounded-t-lg mat-elevation-z8 max-h-[70vh]">
+        @if (isLoading()) {
+        <div class="flex justify-center items-center p-5">
+            <mat-spinner></mat-spinner>
+        </div>
+        } @else {
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="w-24"> Actions </th>
+                <td mat-cell *matCellDef="let dish">
+                    <div class="flex gap-2">
+                        <a mat-mini-fab [routerLink]="['/admin/dish', dish._id]" matTooltip=" Edit dish">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                        <button mat-icon-button (click)="deleteDish(dish)" matTooltip="Delete dish">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Thumbnail Column -->
+            <ng-container matColumnDef="thumbnail">
+                <th mat-header-cell *matHeaderCellDef class="w-24"> Image </th>
+                <td mat-cell *matCellDef="let dish" class="!py-3">
+                    <img [src]="dish.thumbnail || '/images/placeholder.png'" class="h-16 w-16 object-cover rounded-md"
+                        alt="Dish thumbnail">
+                </td>
+            </ng-container>
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+                <td mat-cell *matCellDef="let dish">
+                    <div class="font-medium">{{ getDefaultTitle(dish.title) }}</div>
+                    <div class="text-xs text-gray-500 truncate max-w-xs">
+                        {{ dish.shortDescription[0]?.data || 'No description' }}
+                    </div>
+                    <div class="flex flex-wrap gap-1 mt-1">
+                        <span *ngFor="let tag of dish.tags.slice(0, 3)"
+                            class="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">
+                            {{ tag }}
+                        </span>
+                        <span *ngIf="dish.tags.length > 3" class="text-xs text-gray-500 my-auto">
+                            +{{ dish.tags.length - 3 }} more
+                        </span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Preparation Time Column -->
+            <ng-container matColumnDef="preparationTime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Prep Time </th>
+                <td mat-cell *matCellDef="let dish">
+                    <div class="flex items-center flex-nowrap">
+                        <mat-icon class="text-gray-400 mr-1 text-sm">schedule</mat-icon>
+                        <span class="text-nowrap">{{ dish.preparationTime || 'N/A' }} min</span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Cooking Time Column -->
+            <ng-container matColumnDef="cookingTime">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cook Time </th>
+                <td mat-cell *matCellDef="let dish">
+                    <div class="flex items-center">
+                        <mat-icon class="text-gray-400 mr-1 text-sm">outdoor_grill</mat-icon>
+                        <span class="text-nowrap">{{ dish.cookingTime || 'N/A' }} min</span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Difficulty Level Column -->
+            <ng-container matColumnDef="difficultLevel">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Difficulty </th>
+                <td mat-cell *matCellDef="let dish">
+                    <span [ngClass]="{
+                      'bg-green-100 text-green-800': dish.difficultLevel === 'EASY',
+                      'bg-yellow-100 text-yellow-800': dish.difficultLevel === 'MEDIUM',
+                      'bg-red-100 text-red-800': dish.difficultLevel === 'HARD',
+                      'bg-gray-100 text-gray-800': !dish.difficultLevel
+                    }" class="px-2 py-1 text-xs rounded-full">
+                        {{ dish.difficultLevel || 'N/A' }}
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Meal Categories Column -->
+            <ng-container matColumnDef="mealCategories">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Categories </th>
+                <td mat-cell *matCellDef="let dish">
+                    <div class="flex flex-wrap gap-1">
+                        <span *ngFor="let category of dish.mealCategories.slice(0, 2)"
+                            class="px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-800">
+                            {{ category }}
+                        </span>
+                        <span *ngIf="dish.mealCategories.length > 2" class="text-xs text-gray-500">
+                            +{{ dish.mealCategories.length - 2 }} more
+                        </span>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Header and Row Definitions -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="bg-gray-100"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                class="hover:bg-gray-50 transition-colors cursor-pointer"></tr>
+
+            <!-- No Data Row -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell py-4 text-center text-gray-500" [attr.colspan]="displayedColumns.length">
+                    No dishes found matching the filter "{{dataSource.filter}}"
+                </td>
+            </tr>
+        </table>
+        }
+    </div>
+
+    <!-- Paginator -->
+    <mat-paginator class="rounded-b-lg" [pageSize]="25" [length]="0" [pageIndex]="0"
+        [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of dishes" (page)="loadDishes()">
+    </mat-paginator>
+</div>

@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import cookies from 'js-cookie';
 import { Cookies_Key } from '@/enum/cookies.enum';
 import { jwtDecode } from 'jwt-decode';
-import { JWTTokenPayload } from '@/types/auth.type';
+import { JWTTokenPayload, RolePermission } from '@/types/auth.type';
 import { isPlatformBrowser } from '@angular/common';
 
 export const authorizationGuard: CanActivateFn = async (route, state) => {
@@ -22,14 +22,22 @@ export const authorizationGuard: CanActivateFn = async (route, state) => {
 
   const decoded = jwtDecode<JWTTokenPayload>(token ?? '');
 
-  const role = await firstValueFrom(
-    authorizationService.findByName(decoded.role_name)
-  );
+  try {
+    const role = await firstValueFrom(
+      authorizationService.findByName(decoded.role_name)
+    );
 
-  let result = true;
-  requirePermission.forEach((e) => {
-    if (!role.permission.includes(e)) result = false;
-  });
+    let result = true;
+    requirePermission.forEach((e) => {
+      if (!role?.permission.includes(e)) result = false;
+    });
 
-  return result;
+    return result;
+  } catch (error) {
+    cookies.remove(Cookies_Key.TOKEN);
+    location.href = '/login';
+    return false;
+  }
+
+  return false;
 };

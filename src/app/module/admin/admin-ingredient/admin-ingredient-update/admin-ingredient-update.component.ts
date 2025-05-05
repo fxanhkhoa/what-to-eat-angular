@@ -1,8 +1,12 @@
 import { IngredientService } from '@/app/service/ingredient.service';
+import { ToastService } from '@/app/shared/service/toast.service';
 import { AvailableLanguages } from '@/constant/language.constant';
 import { INGREDIENT_CATEGORIES } from '@/enum/ingredient.enum';
 import { MultiLanguage } from '@/types/base.type';
-import { CreateIngredientDto } from '@/types/ingredient.type';
+import {
+  CreateIngredientDto,
+  UpdateIngredientDto,
+} from '@/types/ingredient.type';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
@@ -44,6 +48,7 @@ export class AdminIngredientUpdateComponent implements OnInit {
   private ingredientService = inject(IngredientService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private toastService = inject(ToastService);
 
   ingredientForm: FormGroup = new FormGroup([]);
   availableLanguages = AvailableLanguages; // Add your supported languages
@@ -128,21 +133,48 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.ingredientForm.valid) {
+      this.isLoading = true;
       const formValue = this.ingredientForm.value;
+      if (this.ingredientId && this.ingredientId !== 'create') {
+        const ingredient: UpdateIngredientDto = {
+          ...formValue,
+          ingredientCategory: Array.isArray(formValue.ingredientCategory)
+            ? formValue.ingredientCategory
+            : [formValue.ingredientCategory],
+          id: this.ingredientId,
+        };
+
+        this.ingredientService
+          .update(this.ingredientId, ingredient)
+          .subscribe((res) => {
+            this.toastService.showSuccess(
+              $localize`Updated`,
+              $localize`Ingredient updated successfully`,
+              1500
+            );
+            this.router.navigate(['/admin/ingredient']);
+          });
+
+        return;
+      }
+
       const ingredient: CreateIngredientDto = {
         ...formValue,
         ingredientCategory: Array.isArray(formValue.ingredientCategory)
           ? formValue.ingredientCategory
           : [formValue.ingredientCategory],
       };
-      console.log('Ingredient to create:', ingredient);
-      // Call your service to create the ingredient
+
       this.isLoading = true;
       this.ingredientService
         .create(ingredient)
         .pipe(finalize(() => (this.isLoading = false)))
         .subscribe((res) => {
-          console.log('Ingredient created:', res);
+          this.toastService.showSuccess(
+            $localize`Created`,
+            $localize`Ingredient created successfully`,
+            1500
+          );
           this.router.navigate(['/admin/ingredient']);
         });
     } else {

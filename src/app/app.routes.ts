@@ -71,6 +71,43 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'dish',
+        loadComponent: () =>
+          import('./module/admin/admin-dish/admin-dish.component').then(
+            (m) => m.AdminDishComponent
+          ),
+        data: {
+          breadcrumb: 'Dish',
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
+          },
+          {
+            path: 'list',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-dish/admin-dish-list/admin-dish-list.component'
+              ).then((m) => m.AdminDishListComponent),
+            data: {
+              breadcrumb: 'List',
+            },
+          },
+          {
+            path: ':id',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-dish/admin-dish-update/admin-dish-update.component'
+              ).then((m) => m.AdminDishUpdateComponent),
+            data: {
+              breadcrumb: 'Create/Update',
+            },
+          },
+        ],
+      },
     ],
   },
 ];

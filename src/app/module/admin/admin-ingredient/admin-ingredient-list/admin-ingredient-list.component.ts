@@ -3,20 +3,15 @@ import {
   AfterViewInit,
   Component,
   inject,
-  makeStateKey,
   OnInit,
   PLATFORM_ID,
-  TransferState,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import {
-  MatPaginator,
-  MatPaginatorModule,
-  PageEvent,
-} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MultiLanguage } from '@/types/base.type';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,6 +23,10 @@ import { IngredientService } from '@/app/service/ingredient.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { debounceTime, finalize } from 'rxjs';
+import { ToastService } from '@/app/shared/service/toast.service';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-viewer.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin-ingredient-list',
@@ -45,6 +44,7 @@ import { debounceTime, finalize } from 'rxjs';
     MatButtonModule,
     MatProgressSpinnerModule,
     RouterModule,
+    MatTooltipModule,
   ],
   templateUrl: './admin-ingredient-list.component.html',
   styleUrl: './admin-ingredient-list.component.scss',
@@ -53,6 +53,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'action',
     'slug',
+    'images',
     'title',
     'measure',
     'calories',
@@ -69,10 +70,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Ingredient>([]);
   searchControl = new FormControl('');
   categoryFilter = new FormControl('');
-  totalItems = 0;
-  pageSize = 25;
-  currentPage = 1;
-  isLoading = false;
+  isLoading = signal(false);
 
   availableCategories: string[] = [];
 
@@ -82,6 +80,8 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   private ingredientService = inject(IngredientService);
   private route = inject(ActivatedRoute);
   private platformId = inject<string>(PLATFORM_ID);
+  private toastService = inject(ToastService);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
     // Subscribe to search input changes
@@ -99,25 +99,23 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     this.categoryFilter.valueChanges.subscribe((value) => {
       this.filterByCategory(value || '');
     });
+  }
 
+  ngAfterViewInit(): void {
+    this.initTableFunctions();
     // Load data (replace with your actual data loading)
     const page = parseInt(this.route.snapshot.paramMap.get('page') ?? '1', 10);
     const limit = parseInt(
       this.route.snapshot.paramMap.get('limit') ?? '25',
       10
     );
-    this.currentPage = page;
-    this.pageSize = limit;
+    this.paginator.pageIndex = page - 1;
+    this.paginator.pageSize = limit;
     this.loadData();
-  }
-
-  ngAfterViewInit(): void {
-    this.initTableFunctions();
   }
 
   initTableFunctions() {
     this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
 
     // Custom sorting for title field (multilanguage)
     this.dataSource.sortingDataAccessor = (item, property) => {
@@ -139,18 +137,18 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
       return;
     }
     const query: QueryIngredientDto = {
-      page: this.currentPage,
-      limit: this.pageSize,
+      page: this.paginator.pageIndex + 1,
+      limit: this.paginator.pageSize,
     };
 
     if (keyword) {
       query.keyword = keyword;
     }
 
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.ingredientService
       .findAll(query)
-      .pipe(finalize(() => (this.isLoading = false)))
+      .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe((res) => {
         if (res.count === 0) {
           this.dataSource.data = [];
@@ -164,19 +162,12 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
           item.ingredientCategory.forEach((cat) => allCategories.add(cat));
         });
         this.availableCategories = Array.from(allCategories).sort();
-        this.totalItems = res.count;
+        this.paginator.length = res.count;
 
         setTimeout(() => {
           this.dataSource.sort = this.sort;
         }, 500);
       });
-  }
-
-  pageChanged(event: PageEvent) {
-    this.currentPage = event.pageIndex + 1;
-    this.pageSize = event.pageSize;
-    console.log(this.currentPage, this.pageSize);
-    this.loadData();
   }
 
   applyFilter(filterValue: string) {
@@ -230,5 +221,39 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = '';
   }
 
-  onDelete(id: string) {}
+  onDelete(id: string) {
+    this.toastService
+      .showConfirm(
+        'Delete Ingredient',
+        'Are you sure you want to delete this ingredient?'
+      )
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.ingredientService.delete(id).subscribe(() => {
+            this.toastService.showSuccess(
+              $localize`Deleted`,
+              $localize`Ingredient deleted successfully`,
+              1500
+            );
+            this.loadData();
+          });
+        }
+      });
+  }
+
+  previewImage(imageUrl: string): void {
+    // Open image in dialog for larger view
+    this.dialog.open(ImageViewerComponent, {
+      data: imageUrl,
+      width: '80%',
+      maxWidth: '1200px',
+      autoFocus: false,
+    });
+  }
+
+  handleImageError(event: any): void {
+    event.target.src = '/images/placeholder.png';
+    event.target.classList.add('error-image'); // Optional: add a class to style error images
+  }
 }

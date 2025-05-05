@@ -1,8 +1,13 @@
-<div class="container-fluid">
-  <div class="d-flex justify-content-end">
-    <button mat-icon-button color="warn" mat-dialog-close>
-      <mat-icon>highlight_off</mat-icon>
-    </button>
-  </div>
-  <img class="w-full h-auto" [src]="data" />
+<div class="flex justify-between items-center px-5">
+  <h2 mat-dialog-title i18n>Image Preview</h2>
+  <button mat-icon-button color="warn" mat-dialog-close>
+    <mat-icon>highlight_off</mat-icon>
+  </button>
 </div>
+
+<mat-dialog-content>
+  <img class="w-full h-auto" [src]="data" />
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
