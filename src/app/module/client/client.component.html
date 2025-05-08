@@ -4,7 +4,7 @@
         <div class="flex items-center justify-between h-16">
             <!-- Logo -->
             <div class="flex-shrink-0 pt-2">
-                <a routerLink="/" class="text-white font-bold text-xl">
+                <a routerLink="/" class="text-white font-bold text-xl" id="nav-logo">
                     <img src="/logo/what-to-eat-high-resolution-logo-white-transparent.png" alt="logo"
                         class="w-20 h-auto object-cover object-center shadow brightness-200" />
                 </a>
@@ -46,7 +46,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div [ngClass]="{'max-h-[300px] overflow-auto': !isMenuOpen}"
+    <div [ngClass]="{'max-h-[300px] overflow-auto': isMenuOpen}"
         class="md:hidden bg-black/20 bg-opacity-75 h-100% max-h-0 overflow-hidden duration-300">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a routerLink="/" routerLinkActive="text-gray-300" [routerLinkActiveOptions]="{exact: true}"

@@ -1,12 +1,36 @@
-<div class="min-h-screen bg-[url('/images/hero-bread.webp')] bg-cover bg-center]">
-    <div class="grid grid-cols-12 gap-5">
-        <div class="col-span-12 md:col-span-4">
-
+<div class="min-h-screen bg-[url('/images/hero-bread.webp')] bg-cover bg-center h-full">
+    <div class="grid grid-cols-12 gap-5 h-full">
+        <div class="col-span-12 md:col-span-5 py-5 md:pb-20">
+            <div class="flex flex-col items-center md:justify-between gap-5 h-full">
+                <div class="bg-[url('/images/splash.png')] bg-cover bg-center p-32">
+                    <img src="/logo/what-to-eat-high-resolution-logo-black-transparent.webp" alt="logo"
+                        class="w-32 md:w-64 h-auto" />
+                </div>
+                <div class="flex flex-col gap-5 max-w-72">
+                    <span class="text-4xl font-bold" i18n>Hungry? Eat What</span>
+                    <span class="text-xl text-left font-light" i18n>Unlock a world of dining options and find your next
+                        meal,
+                        conveniently and wherever you are.</span>
+                </div>
+                <div class="flex w-full max-w-72">
+                    <button mat-fab extended routerLink="/menu" class="!bg-[#6f5850] !text-white" i18n>
+                        <mat-icon>restaurant</mat-icon>
+                        Find your meal
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-7 h-full">
+            <div class="flex md:flex-col justify-center md:justify-center md:items-end md:pr-5 h-full">
+                <a href="https://www.facebook.com" target="_blank" mat-icon-button aria-label="Facebook">
+                    <mat-icon svgIcon="facebook" class="scale-125"></mat-icon>
+                </a>
+                <a href="https://www.tiktok.com" target="_blank" mat-icon-button aria-label="Tiktok">
+                    <mat-icon svgIcon="tiktok"></mat-icon>
+                </a>
+            </div>
         </div>
     </div>
-    <!-- <div class="flex flex-col items-center justify-center h-screen">
-        <h1 class="text-4xl font-bold text-center bg-gradient-to-r from-gray-900 to-stone-400 bg-clip-text text-transparent">
-            Welcome to Bread Shop
-        </h1>
-    </div> -->
 </div>
+
+<app-dish-section></app-dish-section>

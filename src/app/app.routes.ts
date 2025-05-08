@@ -16,6 +16,13 @@ export const routes: Routes = [
             (m) => m.HomeComponent
           ),
       },
+      {
+        path: 'dish',
+        loadComponent: () =>
+          import('./module/client/dish/dish.component').then(
+            (m) => m.DishComponent
+          ),
+      },
     ],
   },
   {
