@@ -33,6 +33,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0px;
+  overflow-y: auto;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
@@ -59,4 +60,40 @@ body {
   background-image: url("/images/dark-bg.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
+  font-family: "Playfair Display", Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #6f5850, #8a7267);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #5d4a43, #776259);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6f5850 rgba(255, 255, 255, 0.1);
+}
+
+:root {
+  @include mat.list-overrides(
+    (
+      list-item-selected-container-color: #f3a54675,
+    )
+  );
 }

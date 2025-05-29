@@ -1,1 +1,26 @@
-<p>dish-section works!</p>
+<div class="flex items-center p-5">
+    <div class="flex justify-between w-full">
+        <div class="flex flex-col gap-3">
+            <span i18n class="text-gray-300 px-3 pt-3">Filter By</span>
+            <form [formGroup]="mealCategoryForm" class="max-h-32 overflow-auto">
+                <mat-selection-list [multiple]="false" formControlName="mealCategory"
+                    [hideSingleSelectionIndicator]="true">
+                    @for (item of mealCategories; track item) {
+                    <mat-list-option value="{{ item }}" i18n>{{ item }}</mat-list-option>
+                    }
+                </mat-selection-list>
+            </form>
+        </div>
+        <div>
+            <h3 i18n
+                class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                Favorite Dishes</h3>
+        </div>
+        <div class="flex gap-3 max-w-40 items-center text-[#F3A446]">
+            <div>
+                <mat-icon>select_all</mat-icon>
+            </div>
+            <span class="tracking-wider">Let's pick your favorites to enlighten your day</span>
+        </div>
+    </div>
+</div>
