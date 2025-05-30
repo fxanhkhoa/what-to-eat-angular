@@ -1,7 +1,7 @@
 import { JWTTokenPayload } from '@/types/auth.type';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { AsyncPipe, DOCUMENT } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, Renderer2 } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, Renderer2, DOCUMENT } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';

@@ -1,5 +1,5 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, inject, OnInit, Renderer2 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, Renderer2, DOCUMENT } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';

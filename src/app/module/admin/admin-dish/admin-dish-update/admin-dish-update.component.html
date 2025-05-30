@@ -1,364 +1,402 @@
 <div class="p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Create New Dish</h1>
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Create New Dish</h1>
 
-    <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <!-- Basic Information -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Slug -->
-            <mat-form-field class="w-full" appearance="outline">
-                <mat-label>Slug</mat-label>
-                <input matInput formControlName="slug" placeholder="dish-name-slug">
-                <mat-error *ngIf="dishForm.get('slug')?.hasError('required')">
-                    Slug is required
-                </mat-error>
-            </mat-form-field>
+  <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Basic Information -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Slug -->
+      <mat-form-field class="w-full" appearance="outline">
+        <mat-label>Slug</mat-label>
+        <input matInput formControlName="slug" placeholder="dish-name-slug">
+        @if (dishForm.get('slug')?.hasError('required')) {
+          <mat-error>
+            Slug is required
+          </mat-error>
+        }
+      </mat-form-field>
 
-            <!-- Thumbnail with Preview -->
-            <div class="flex flex-col w-full">
-                <mat-form-field class="w-full" appearance="outline">
-                    <mat-label>Thumbnail URL</mat-label>
-                    <input matInput formControlName="thumbnail" placeholder="https://example.com/image.jpg">
-                    <button *ngIf="dishForm.get('thumbnail')?.value" type="button" mat-icon-button matSuffix
-                        (click)="previewImage(dishForm.get('thumbnail')?.value)" matTooltip="Preview image">
-                        <mat-icon>visibility</mat-icon>
-                    </button>
+      <!-- Thumbnail with Preview -->
+      <div class="flex flex-col w-full">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Thumbnail URL</mat-label>
+          <input matInput formControlName="thumbnail" placeholder="https://example.com/image.jpg">
+          @if (dishForm.get('thumbnail')?.value) {
+            <button type="button" mat-icon-button matSuffix
+              (click)="previewImage(dishForm.get('thumbnail')?.value)" matTooltip="Preview image">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <!-- Image Preview -->
+        @if (dishForm.get('thumbnail')?.value) {
+          <div
+            class="mt-2 border rounded p-2 flex flex-col items-center">
+            <img [src]="dishForm.get('thumbnail')?.value" class="max-h-32 object-contain"
+              alt="Thumbnail preview" (error)="handleImageError($event)">
+              <span class="text-xs text-gray-500 mt-1">Thumbnail Preview</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Multilanguage Title -->
+      <div class="border rounded-lg p-4 bg-gray-50">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold text-gray-700">Title Translations</h3>
+          <button type="button" mat-raised-button color="primary" (click)="addLanguageField('title', '')"
+            class="h-10">
+            Add Language
+          </button>
+        </div>
+        <div class="text-sm text-gray-600">
+          <p>Click the button above to add another language field to all translation sections.</p>
+        </div>
+        <div formArrayName="title" class="space-y-3">
+          @for (title of titleArray.controls; track title; let i = $index) {
+            <div [formGroupName]="i"
+              class="flex gap-4 items-center">
+              <mat-form-field class="w-1/4" appearance="outline">
+                <mat-label>Language</mat-label>
+                <mat-select formControlName="lang">
+                  @for (lang of availableLanguages; track lang) {
+                    <mat-option [value]="lang">
+                      {{ lang.toUpperCase() }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="w-3/4" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="data" placeholder="Dish Title">
+              </mat-form-field>
+              <!-- Remove button - only show if there's more than one language -->
+              @if (titleArray.length > 1) {
+                <button type="button" mat-icon-button color="warn"
+                  (click)="removeLanguageField('title', i)" matTooltip="Remove language">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Multilanguage Short Description -->
+      <div class="border rounded-lg p-4 bg-gray-50">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold text-gray-700">Short Description Translations</h3>
+          <button type="button" mat-raised-button color="primary"
+            (click)="addLanguageField('shortDescription', '')" class="h-10">
+            Add Language
+          </button>
+        </div>
+        <div formArrayName="shortDescription" class="space-y-3">
+          @for (desc of shortDescriptionArray.controls; track desc; let i = $index) {
+            <div [formGroupName]="i"
+              class="flex gap-4 items-center">
+              <mat-form-field class="w-1/4" appearance="outline">
+                <mat-label>Language</mat-label>
+                <mat-select formControlName="lang">
+                  @for (lang of availableLanguages; track lang) {
+                    <mat-option [value]="lang">
+                      {{ lang.toUpperCase() }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="w-3/4" appearance="outline">
+                <mat-label>Short Description</mat-label>
+                <textarea matInput formControlName="data" placeholder="Brief description of the dish"
+                rows="2"></textarea>
+              </mat-form-field>
+              <!-- Remove button - only show if there's more than one language -->
+              @if (shortDescriptionArray.length > 1) {
+                <button type="button" mat-icon-button color="warn"
+                  (click)="removeLanguageField('shortDescription', i)" matTooltip="Remove language">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Multilanguage Content -->
+      <div class="border rounded-lg p-4 bg-gray-50">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold text-gray-700">Content Translations</h3>
+          <button type="button" mat-raised-button color="primary" (click)="addLanguageField('content', '')"
+            class="h-10">
+            Add Language
+          </button>
+        </div>
+        <div formArrayName="content" class="space-y-6">
+          @for (content of contentArray.controls; track content; let i = $index) {
+            <div [formGroupName]="i"
+              class="flex flex-col gap-2">
+              <div class="flex gap-4 items-center">
+                <mat-form-field class="w-1/4" appearance="outline">
+                  <mat-label>Language</mat-label>
+                  <mat-select formControlName="lang">
+                    @for (lang of availableLanguages; track lang) {
+                      <mat-option [value]="lang">
+                        {{ lang.toUpperCase() }}
+                      </mat-option>
+                    }
+                  </mat-select>
                 </mat-form-field>
-
-                <!-- Image Preview -->
-                <div *ngIf="dishForm.get('thumbnail')?.value"
-                    class="mt-2 border rounded p-2 flex flex-col items-center">
-                    <img [src]="dishForm.get('thumbnail')?.value" class="max-h-32 object-contain"
-                        alt="Thumbnail preview" (error)="handleImageError($event)">
-                    <span class="text-xs text-gray-500 mt-1">Thumbnail Preview</span>
-                </div>
+                <!-- Remove button - only show if there's more than one language -->
+                @if (contentArray.length > 1) {
+                  <button type="button" mat-icon-button color="warn"
+                    (click)="removeLanguageField('content', i)" matTooltip="Remove language">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                }
+              </div>
+              <div class="w-full">
+                <quill-editor class="w-full max-h-[50vh]" [formControlName]="'data'" [modules]="quillModules">
+                </quill-editor>
+              </div>
             </div>
+          }
         </div>
+      </div>
 
-        <!-- Multilanguage Title -->
-        <div class="border rounded-lg p-4 bg-gray-50">
+      <!-- Time and Difficulty -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Preparation Time (minutes)</mat-label>
+          <input matInput type="number" formControlName="preparationTime" min="0">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cooking Time (minutes)</mat-label>
+          <input matInput type="number" formControlName="cookingTime" min="0">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Difficulty Level</mat-label>
+          <mat-select formControlName="difficultLevel">
+            <mat-option [value]="">-- Select Difficulty --</mat-option>
+            @for (level of difficultyLevels; track level) {
+              <mat-option [value]="level">
+                {{level | titlecase}}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Categories and Tags -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Meal Categories</mat-label>
+          <mat-select formControlName="mealCategories" multiple>
+            @for (category of mealCategoryOptions; track category) {
+              <mat-option [value]="category">
+                {{ category }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ingredient Categories</mat-label>
+          <mat-select formControlName="ingredientCategories" multiple>
+            @for (category of ingredientCategoryOptions; track category) {
+              <mat-option [value]="category">
+                {{ category }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Tags</mat-label>
+          <mat-chip-grid #tagsList>
+            @for (tag of dishForm.get('tags')?.value || []; track tag) {
+              <mat-chip [removable]="true" (removed)="removeTag(tag)">
+                {{tag}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            }
+            <input placeholder="New tag..." [matChipInputFor]="tagsList"
+              (matChipInputTokenEnd)="updateTags($event)">
+            </mat-chip-grid>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Labels</mat-label>
+            <mat-chip-grid #labelsList>
+              @for (label of dishForm.get('labels')?.value || []; track label) {
+                <mat-chip [removable]="true" (removed)="removeLabel(label)">
+                  {{label}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              }
+              <input placeholder="New label..." [matChipInputFor]="labelsList"
+                (matChipInputTokenEnd)="updateLabel($event)">
+              </mat-chip-grid>
+            </mat-form-field>
+          </div>
+
+          <!-- Videos Array with Previews -->
+          <div class="border rounded-lg p-4 bg-gray-50">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Title Translations</h3>
-                <button type="button" mat-raised-button color="primary" (click)="addLanguageField('title', '')"
-                    class="h-10">
-                    Add Language
-                </button>
-            </div>
-            <div class="text-sm text-gray-600">
-                <p>Click the button above to add another language field to all translation sections.</p>
-            </div>
-            <div formArrayName="title" class="space-y-3">
-                <div *ngFor="let title of titleArray.controls; let i = index" [formGroupName]="i"
-                    class="flex gap-4 items-center">
-                    <mat-form-field class="w-1/4" appearance="outline">
-                        <mat-label>Language</mat-label>
-                        <mat-select formControlName="lang">
-                            <mat-option *ngFor="let lang of availableLanguages" [value]="lang">
-                                {{ lang.toUpperCase() }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="w-3/4" appearance="outline">
-                        <mat-label>Title</mat-label>
-                        <input matInput formControlName="data" placeholder="Dish Title">
-                    </mat-form-field>
-
-                    <!-- Remove button - only show if there's more than one language -->
-                    <button *ngIf="titleArray.length > 1" type="button" mat-icon-button color="warn"
-                        (click)="removeLanguageField('title', i)" matTooltip="Remove language">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Multilanguage Short Description -->
-        <div class="border rounded-lg p-4 bg-gray-50">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Short Description Translations</h3>
-                <button type="button" mat-raised-button color="primary"
-                    (click)="addLanguageField('shortDescription', '')" class="h-10">
-                    Add Language
-                </button>
-            </div>
-            <div formArrayName="shortDescription" class="space-y-3">
-                <div *ngFor="let desc of shortDescriptionArray.controls; let i = index" [formGroupName]="i"
-                    class="flex gap-4 items-center">
-                    <mat-form-field class="w-1/4" appearance="outline">
-                        <mat-label>Language</mat-label>
-                        <mat-select formControlName="lang">
-                            <mat-option *ngFor="let lang of availableLanguages" [value]="lang">
-                                {{ lang.toUpperCase() }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="w-3/4" appearance="outline">
-                        <mat-label>Short Description</mat-label>
-                        <textarea matInput formControlName="data" placeholder="Brief description of the dish"
-                            rows="2"></textarea>
-                    </mat-form-field>
-
-                    <!-- Remove button - only show if there's more than one language -->
-                    <button *ngIf="shortDescriptionArray.length > 1" type="button" mat-icon-button color="warn"
-                        (click)="removeLanguageField('shortDescription', i)" matTooltip="Remove language">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Multilanguage Content -->
-        <div class="border rounded-lg p-4 bg-gray-50">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Content Translations</h3>
-                <button type="button" mat-raised-button color="primary" (click)="addLanguageField('content', '')"
-                    class="h-10">
-                    Add Language
-                </button>
-            </div>
-            <div formArrayName="content" class="space-y-6">
-                <div *ngFor="let content of contentArray.controls; let i = index" [formGroupName]="i"
-                    class="flex flex-col gap-2">
-                    <div class="flex gap-4 items-center">
-                        <mat-form-field class="w-1/4" appearance="outline">
-                            <mat-label>Language</mat-label>
-                            <mat-select formControlName="lang">
-                                <mat-option *ngFor="let lang of availableLanguages" [value]="lang">
-                                    {{ lang.toUpperCase() }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <!-- Remove button - only show if there's more than one language -->
-                        <button *ngIf="contentArray.length > 1" type="button" mat-icon-button color="warn"
-                            (click)="removeLanguageField('content', i)" matTooltip="Remove language">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </div>
-
-                    <div class="w-full">
-                        <quill-editor class="w-full max-h-[50vh]" [formControlName]="'data'" [modules]="quillModules">
-                        </quill-editor>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Time and Difficulty -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <mat-form-field appearance="outline">
-                <mat-label>Preparation Time (minutes)</mat-label>
-                <input matInput type="number" formControlName="preparationTime" min="0">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Cooking Time (minutes)</mat-label>
-                <input matInput type="number" formControlName="cookingTime" min="0">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Difficulty Level</mat-label>
-                <mat-select formControlName="difficultLevel">
-                    <mat-option [value]="">-- Select Difficulty --</mat-option>
-                    <mat-option *ngFor="let level of difficultyLevels" [value]="level">
-                        {{level | titlecase}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <!-- Categories and Tags -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <mat-form-field appearance="outline">
-                <mat-label>Meal Categories</mat-label>
-                <mat-select formControlName="mealCategories" multiple>
-                    <mat-option *ngFor="let category of mealCategoryOptions" [value]="category">
-                        {{ category }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Ingredient Categories</mat-label>
-                <mat-select formControlName="ingredientCategories" multiple>
-                    <mat-option *ngFor="let category of ingredientCategoryOptions" [value]="category">
-                        {{ category }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <mat-form-field appearance="outline">
-                <mat-label>Tags</mat-label>
-                <mat-chip-grid #tagsList>
-                    @for (tag of dishForm.get('tags')?.value || []; track tag) {
-                    <mat-chip [removable]="true" (removed)="removeTag(tag)">
-                        {{tag}}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                    }
-                    <input placeholder="New tag..." [matChipInputFor]="tagsList"
-                        (matChipInputTokenEnd)="updateTags($event)">
-                </mat-chip-grid>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Labels</mat-label>
-                <mat-chip-grid #labelsList>
-                    @for (label of dishForm.get('labels')?.value || []; track label) {
-                    <mat-chip [removable]="true" (removed)="removeLabel(label)">
-                        {{label}}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                    </mat-chip>
-                    }
-                    <input placeholder="New label..." [matChipInputFor]="labelsList"
-                        (matChipInputTokenEnd)="updateLabel($event)">
-                </mat-chip-grid>
-            </mat-form-field>
-        </div>
-
-        <!-- Videos Array with Previews -->
-        <div class="border rounded-lg p-4 bg-gray-50">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Videos</h3>
-                <button type="button" mat-raised-button color="primary" (click)="addVideo()" class="h-10">
-                    Add Video
-                </button>
+              <h3 class="text-lg font-semibold text-gray-700">Videos</h3>
+              <button type="button" mat-raised-button color="primary" (click)="addVideo()" class="h-10">
+                Add Video
+              </button>
             </div>
 
             <div formArrayName="videos" class="space-y-6">
-                <div *ngFor="let video of videosArray.controls; let i = index"
-                    class="flex flex-col gap-2 pb-4 border-b last:border-b-0">
-                    <div class="flex items-center gap-2">
-                        <mat-form-field class="flex-grow" appearance="outline">
-                            <mat-label>Video URL</mat-label>
-                            <input matInput [formControlName]="i"
-                                placeholder="[https://youtube.com/watch?v=xxxxx]or [https://vimeo.com/xxxxx]">
-                        </mat-form-field>
-
-                        <button type="button" mat-icon-button color="primary" *ngIf="video.value"
-                            (click)="previewVideo(video.value)" matTooltip="Preview video">
-                            <mat-icon>play_circle</mat-icon>
+              @for (video of videosArray.controls; track video; let i = $index) {
+                <div
+                  class="flex flex-col gap-2 pb-4 border-b last:border-b-0">
+                  <div class="flex items-center gap-2">
+                    <mat-form-field class="flex-grow" appearance="outline">
+                      <mat-label>Video URL</mat-label>
+                      <input matInput [formControlName]="i"
+                        placeholder="[https://youtube.com/watch?v=xxxxx]or [https://vimeo.com/xxxxx]">
+                      </mat-form-field>
+                      @if (video.value) {
+                        <button type="button" mat-icon-button color="primary"
+                          (click)="previewVideo(video.value)" matTooltip="Preview video">
+                          <mat-icon>play_circle</mat-icon>
                         </button>
-
-                        <button type="button" mat-icon-button color="warn" (click)="removeVideo(i)"
-                            matTooltip="Remove video">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                      }
+                      <button type="button" mat-icon-button color="warn" (click)="removeVideo(i)"
+                        matTooltip="Remove video">
+                        <mat-icon>delete</mat-icon>
+                      </button>
                     </div>
-
                     <!-- Video Preview -->
                     <!-- <div *ngIf="getVideoEmbedUrl(video.value)" class="w-full">
-                        <div class="aspect-video max-h-[180px] border rounded overflow-hidden">
-                            <iframe [src]="getVideoEmbedUrl(video.value)" class="w-full h-full" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div> -->
+                    <div class="aspect-video max-h-[180px] border rounded overflow-hidden">
+                      <iframe [src]="getVideoEmbedUrl(video.value)" class="w-full h-full" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                      </iframe>
+                    </div>
+                  </div> -->
                 </div>
+              }
             </div>
-        </div>
+          </div>
 
-        <!-- Ingredients -->
-        <div class="border rounded-lg p-4 bg-gray-50">
+          <!-- Ingredients -->
+          <div class="border rounded-lg p-4 bg-gray-50">
             <div class="flex justify-between items-center mb-3">
-                <h2 class="text-lg font-medium">Ingredients</h2>
-                <button type="button" mat-mini-fab color="primary" (click)="addIngredient()">
-                    <mat-icon>add</mat-icon>
-                </button>
+              <h2 class="text-lg font-medium">Ingredients</h2>
+              <button type="button" mat-mini-fab color="primary" (click)="addIngredient()">
+                <mat-icon>add</mat-icon>
+              </button>
             </div>
 
             <div formArrayName="ingredients" class="space-y-4">
-                <div *ngFor="let ingredient of ingredientsArray.controls; let i = index" [formGroupName]="i"
-                    class="grid grid-cols-1 md:grid-cols-4 gap-3 pb-3 border-b last:border-b-0">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Quantity</mat-label>
-                        <input matInput type="number" formControlName="quantity" min="0" step="0.1">
-                        <mat-error *ngIf="ingredient.get('quantity')?.hasError('required')">
-                            Quantity is required
-                        </mat-error>
+              @for (ingredient of ingredientsArray.controls; track ingredient; let i = $index) {
+                <div [formGroupName]="i"
+                  class="grid grid-cols-1 md:grid-cols-4 gap-3 pb-3 border-b last:border-b-0">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Quantity</mat-label>
+                    <input matInput type="number" formControlName="quantity" min="0" step="0.1">
+                    @if (ingredient.get('quantity')?.hasError('required')) {
+                      <mat-error>
+                        Quantity is required
+                      </mat-error>
+                    }
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="col-span-2">
+                    <mat-label>Ingredient</mat-label>
+                    <input matInput [formControlName]="'ingredient'" placeholder="Search ingredient..."
+                      [matAutocomplete]="ingredientAuto">
+                      <mat-autocomplete #ingredientAuto="matAutocomplete" [displayWith]="displayIngredient"
+                        (optionSelected)="selectIngredient($event, i)">
+                        @for (ingredient of filteredIngredients | async; track ingredient) {
+                          <mat-option [value]="ingredient">
+                            <div class="flex gap-3 items-center">
+                              @if (ingredient.images?.length) {
+                                <span>
+                                  <img [src]="ingredient.images[0]" class="w-6 h-6 object-cover rounded">
+                                </span>
+                              }
+                              <span>
+                                {{(ingredient.title | multiLanguage : 'en')?.data}}
+                                <small class="text-gray-600 ml-1">{{ingredient.measure}}</small>
+                              </span>
+                            </div>
+                          </mat-option>
+                        }
+                      </mat-autocomplete>
                     </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="col-span-2">
-                        <mat-label>Ingredient</mat-label>
-                        <input matInput [formControlName]="'ingredient'" placeholder="Search ingredient..."
-                            [matAutocomplete]="ingredientAuto">
-                        <mat-autocomplete #ingredientAuto="matAutocomplete" [displayWith]="displayIngredient"
-                            (optionSelected)="selectIngredient($event, i)">
-                            <mat-option *ngFor="let ingredient of filteredIngredients | async" [value]="ingredient">
-                                <div class="flex gap-3 items-center">
-                                    <span *ngIf="ingredient.images?.length">
-                                        <img [src]="ingredient.images[0]" class="w-6 h-6 object-cover rounded">
-                                    </span>
-                                    <span>
-                                        {{(ingredient.title | multiLanguage : 'en')?.data}}
-                                        <small class="text-gray-600 ml-1">{{ingredient.measure}}</small>
-                                    </span>
-                                </div>
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-
                     <div class="flex items-center gap-3">
-                        <mat-form-field appearance="outline" class="flex-grow">
-                            <mat-label>Note</mat-label>
-                            <input matInput formControlName="note">
-                        </mat-form-field>
-
+                      <mat-form-field appearance="outline" class="flex-grow">
+                        <mat-label>Note</mat-label>
+                        <input matInput formControlName="note">
+                      </mat-form-field>
+                      @if (ingredientsArray.length > 1) {
                         <button type="button" mat-icon-button color="warn" (click)="removeIngredient(i)"
-                            *ngIf="ingredientsArray.length > 1">
-                            <mat-icon>delete</mat-icon>
+                          >
+                          <mat-icon>delete</mat-icon>
                         </button>
+                      }
                     </div>
-                </div>
+                  </div>
+                }
+              </div>
             </div>
-        </div>
 
-        <!-- Related Dishes -->
-        <mat-form-field class="w-full" appearance="outline">
-            <mat-label>Related Dishes</mat-label>
-            <mat-chip-grid #chipList aria-label="Related dish selection">
-                <mat-chip-option *ngFor="let dish of selectedRelatedDishes" [selectable]="true" [removable]="true"
+            <!-- Related Dishes -->
+            <mat-form-field class="w-full" appearance="outline">
+              <mat-label>Related Dishes</mat-label>
+              <mat-chip-grid #chipList aria-label="Related dish selection">
+                @for (dish of selectedRelatedDishes; track dish) {
+                  <mat-chip-option [selectable]="true" [removable]="true"
                     (removed)="removeRelatedDish(dish)">
                     <div class="flex gap-3 items-center">
-                        <img [src]="dish.thumbnail" alt="" class="w-6 h-6 object-cover rounded">
-                        <span>
-                            {{(dish.title | multiLanguage : 'en')?.data}}
-                        </span>
+                      <img [src]="dish.thumbnail" alt="" class="w-6 h-6 object-cover rounded">
+                      <span>
+                        {{(dish.title | multiLanguage : 'en')?.data}}
+                      </span>
                     </div>
                     <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip-option>
+                  </mat-chip-option>
+                }
                 <input placeholder="Search dishes..." #relatedDishInput [formControl]="relatedDishCtrl"
-                    [matAutocomplete]="auto" [matChipInputFor]="chipList"
-                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-            </mat-chip-grid>
+                  [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+                </mat-chip-grid>
 
-            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRelatedDish($event)">
-                <mat-option *ngFor="let dish of filteredDishes | async" [value]="dish">
-                    <div class="flex gap-3">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRelatedDish($event)">
+                  @for (dish of filteredDishes | async; track dish) {
+                    <mat-option [value]="dish">
+                      <div class="flex gap-3">
                         <img [src]="dish.thumbnail" alt="" class="w-8 h-8 object-cover rounded">
                         <span>
-                            {{(dish.title | multiLanguage : 'en')?.data}}
+                          {{(dish.title | multiLanguage : 'en')?.data}}
                         </span>
-                    </div>
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
+                      </div>
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+              </mat-form-field>
 
-        <!-- Form Actions -->
-        <div class="flex justify-end gap-4 pt-4">
-            <button type="button" mat-stroked-button color="warn">Cancel</button>
-            <button type="submit" mat-raised-button color="primary" [disabled]="dishForm.invalid">
-                @if (dishId && dishId !== 'create') {
-                <span i18n>Update Dish</span>
-                } @else {
-                <span i18n>Create Dish</span>
-                }
-                @if (isLoading) {
-                <mat-spinner diameter="20"></mat-spinner>
-                }
-            </button>
-        </div>
-    </form>
-</div>
+              <!-- Form Actions -->
+              <div class="flex justify-end gap-4 pt-4">
+                <button type="button" mat-stroked-button color="warn">Cancel</button>
+                <button type="submit" mat-raised-button color="primary" [disabled]="dishForm.invalid">
+                  @if (dishId && dishId !== 'create') {
+                    <span i18n>Update Dish</span>
+                  } @else {
+                    <span i18n>Create Dish</span>
+                  }
+                  @if (isLoading) {
+                    <mat-spinner diameter="20"></mat-spinner>
+                  }
+                </button>
+              </div>
+            </form>
+          </div>

@@ -7,7 +7,7 @@ import {
   CreateIngredientDto,
   UpdateIngredientDto,
 } from '@/types/ingredient.type';
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import {
   FormArray,
@@ -36,10 +36,9 @@ import { finalize } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
-    CommonModule,
     RouterModule,
-    MatProgressSpinnerModule,
-  ],
+    MatProgressSpinnerModule
+],
   templateUrl: './admin-ingredient-update.component.html',
   styleUrl: './admin-ingredient-update.component.scss',
 })
