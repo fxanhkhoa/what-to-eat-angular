@@ -2,6 +2,8 @@
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
 @use "./_theme-colors.scss" as custom_mat;
+@use "styles/neumorphism.scss";
+@use "styles/animista.scss";
 
 html {
   @include mat.theme(
@@ -25,16 +27,21 @@ html {
 html {
   height: 100%;
   margin: 0;
-  padding: 0px;
-  overflow: hidden;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 100%; /* Set to 100% instead of auto */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 body {
   height: 100%;
   margin: 0;
-  padding: 0px;
+  padding: 0;
   overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .dark-theme {

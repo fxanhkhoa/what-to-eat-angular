@@ -27,12 +27,9 @@ export class DishService {
   }
 
   findRandom(limit: number) {
-    return this.http.get<APIPagination<Dish>>(
-      `${environment.API_URL}/${prefix}/random`,
-      {
-        params: { limit: limit },
-      }
-    );
+    return this.http.get<Dish[]>(`${environment.API_URL}/${prefix}/random`, {
+      params: { limit: limit },
+    });
   }
 
   create(dto: CreateDishDto) {
