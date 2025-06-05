@@ -1,6 +1,6 @@
 .neumorphic_dark {
   padding: 0.5rem 1rem;
-  border-radius: 10px;
+  border-radius: calc(infinity * 1px);
   font-weight: 500;
   display: inline-block;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
@@ -10,7 +10,7 @@
 
 .neumorphic-inset_dark {
   padding: 0.5rem 1rem;
-  border-radius: 10px;
+  border-radius: calc(infinity * 1px);
   font-weight: 500;
   display: inline-block;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.7),

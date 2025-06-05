@@ -103,4 +103,9 @@ body {
       list-item-selected-container-color: #f3a54675,
     )
   );
+  @include mat.button-overrides(
+    (
+      protected-container-elevation-shadow: "5px 5px 10px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.05)",
+    )
+  );
 }
