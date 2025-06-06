@@ -1,0 +1,7 @@
+<div class="masonry-grid" [style.column-count]="columns" [style.column-gap.px]="gap">
+    @for (item of items; track item) {
+        <div class="masonry-item" *ngFor="let item of items; let i = index" [style.margin-bottom.px]="gap">
+            <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item, index: i }"></ng-container>
+        </div>
+    }
+</div>

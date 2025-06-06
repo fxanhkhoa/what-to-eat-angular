@@ -1,0 +1,19 @@
+<div class="p-5 mx-auto flex flex-col gap-5">
+    <div class="flex justify-center">
+        <h3 i18n
+            class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+            Ingredients</h3>
+    </div>
+    <div class="grid grid-cols-12 gap-3">
+        <div class="col-span-9">
+            @if (isLoading) {
+            <div class="col-span-12 flex justify-center">
+                <mat-spinner></mat-spinner>
+            </div>
+            }
+        </div>
+        <div class="col-span-3">
+
+        </div>
+    </div>
+</div>

@@ -12,52 +12,8 @@
   }
 
   &.inactive {
-    opacity: 0;
+    display: none;
     z-index: 0;
     pointer-events: none;
-  }
-
-  // Initial slide
-  &:first-child {
-    position: relative;
-  }
-}
-
-// Navigation button hover effects
-button[mat-icon-button] {
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-// Indicator buttons
-button[mat-mini-fab] {
-  transition: transform 0.2s ease;
-
-  &.mat-accent {
-    transform: scale(1.2);
-  }
-
-  &:hover {
-    opacity: 0.9;
-  }
-}
-
-// Additional responsive styles for mobile
-@media (max-width: 640px) {
-  .slide-item {
-    .text-overlay {
-      padding: 12px;
-
-      h3 {
-        font-size: 1.25rem;
-      }
-
-      p {
-        font-size: 0.875rem;
-      }
-    }
   }
 }

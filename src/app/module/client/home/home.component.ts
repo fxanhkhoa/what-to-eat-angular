@@ -4,7 +4,7 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DishSectionComponent } from './dish-section/dish-section.component';
 import { GameSectionComponent } from './game-section/game-section.component';
-import { GameItem } from '@/types/game.type';
+import { IngredientSectionComponent } from './ingredient-section/ingredient-section.component';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +13,7 @@ import { GameItem } from '@/types/game.type';
     MatIconModule,
     DishSectionComponent,
     GameSectionComponent,
+    IngredientSectionComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -20,10 +21,6 @@ import { GameItem } from '@/types/game.type';
 export class HomeComponent {
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
-
-  gameSectionList: GameItem[] = [
-    { imageUrl: '/images/wheel-of-fortune.jpg', text: 'Wheel Of Fortune' },
-  ];
 
   constructor() {
     this.iconRegistry.addSvgIcon(

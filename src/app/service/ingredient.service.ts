@@ -25,6 +25,12 @@ export class IngredientService {
     );
   }
 
+  findRandom(limit: number) {
+    return this.http.get<Ingredient[]>(`${environment.API_URL}/${prefix}/random`, {
+      params: { limit: limit },
+    });
+  }
+
   create(ingredient: CreateIngredientDto) {
     return this.http.post<Ingredient>(
       `${environment.API_URL}/${prefix}`,
