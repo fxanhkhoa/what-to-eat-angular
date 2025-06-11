@@ -17,6 +17,7 @@ export type Ingredient = {
 
 export type QueryIngredientDto = {
   keyword?: string;
+  ingredientCategory?: string[];
 } & PagingDto;
 
 export type CreateIngredientDto = {

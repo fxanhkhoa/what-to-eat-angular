@@ -1,0 +1,23 @@
+.glassmorphic {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); // Adjust the last value (0.2) for transparency
+  backdrop-filter: blur(10px); // Adjust the blur intensity as needed
+  border: 1px solid rgba(255, 255, 255, 0.3); // Subtle white border
+  border-radius: 10px; // Rounded corners
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Soft shadow for depth
+  // You can add padding, margin, etc. as needed for your specific use case
+  padding: 20px;
+}
+
+.glassmorphic_dark {
+  background-color: rgba(0, 0, 0, 0.1) !important; // Darker background with transparency
+  backdrop-filter: blur(10px) !important; // Same blur effect
+  border: 1px solid rgba(255, 255, 255, 0.1); // Very subtle white border for definition
+  border-radius: 10px; // Rounded corners
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important; // Slightly stronger shadow for depth against dark backgrounds
+  padding: 20px;
+}

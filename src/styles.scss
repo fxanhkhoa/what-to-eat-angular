@@ -3,6 +3,7 @@
 @use "@angular/material" as mat;
 @use "./_theme-colors.scss" as custom_mat;
 @use "styles/neumorphism.scss";
+@use "styles/glassmorphism.scss";
 @use "styles/animista.scss";
 
 html {
@@ -25,7 +26,7 @@ html {
 @import "tailwindcss/utilities.css" layer(utilities);
 
 html {
-  // height: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* Prevent horizontal scrolling */
@@ -34,12 +35,11 @@ html {
 }
 
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   width: auto;
+  height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   box-sizing: border-box; /* Include padding in width calculation */
 }

@@ -25,10 +25,19 @@ export class IngredientService {
     );
   }
 
-  findRandom(limit: number) {
-    return this.http.get<Ingredient[]>(`${environment.API_URL}/${prefix}/random`, {
-      params: { limit: limit },
-    });
+  findRandom(limit: number, ingredientCategories?: string[]) {
+    const queryParams: any = {
+      limit: limit,
+    };
+    if (ingredientCategories && ingredientCategories.length > 0) {
+      queryParams['ingredientCategory'] = ingredientCategories;
+    }
+    return this.http.get<Ingredient[]>(
+      `${environment.API_URL}/${prefix}/random`,
+      {
+        params: queryParams,
+      }
+    );
   }
 
   create(ingredient: CreateIngredientDto) {

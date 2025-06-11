@@ -1,12 +1,8 @@
-.masonry-grid {
-  display: block;
-  width: 100%;
-  column-fill: balance;
-  break-inside: avoid;
+/* masonry-gallery.component.scss */
+.masonry-container {
+  min-height: 100px;
 }
 
 .masonry-item {
-  display: inline-block;
-  width: 100%;
-  break-inside: avoid;
+  position: absolute;
 }
