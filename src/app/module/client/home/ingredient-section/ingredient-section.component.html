@@ -1,0 +1,84 @@
+<div class="min-h-[80vh] p-5 mx-auto flex flex-col justify-center gap-5 my-20">
+    <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 relative">
+            @if (isLoading) {
+            <div class="col-span-12 flex justify-center">
+                <mat-spinner></mat-spinner>
+            </div>
+            } @else {
+            <div class="absolute -translate-y-20 top-0 left-0 right-0 w-auto h-auto flex justify-center z-10">
+                <h3 i18n
+                    class="glassmorphic_dark text-5xl font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    Ingredients</h3>
+            </div>
+            @if (images && images.length > 0) {
+            <div #galleryContainer id="ingredient-list-masonry" (mouseenter)="pauseScrolling()"
+                (mouseleave)="resumeScrolling()" (touchstart)="pauseScrolling()" (touchend)="resumeScrolling()"
+                class="max-h-[60vh] overflow-auto">
+                <app-masonry-gallery #masonryGallery [images]="images" [columns]="3" class="block w-full">
+                    <ng-template let-item let-i="index">
+                        <!-- Custom template for each item -->
+                        <mat-card class="glassmorphic_dark group duration-300">
+                            <img [src]="item.src" [alt]="item.title || ''"
+                                class="w-auto h-full object-contain rounded-lg" (load)="masonryGallery.arrangeItems()">
+                            @if (item.title) {
+                            <div class="overflow-hidden transition-all duration-300 ease-in-out">
+                                <mat-card-title
+                                    class="mt-2 text-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    {{ item.title }}
+                                </mat-card-title>
+                            </div>
+                            }
+                        </mat-card>
+                    </ng-template>
+                </app-masonry-gallery>
+            </div>
+            } @else {
+            <div class="flex flex-col justify-center items-center h-60 glassmorphic_dark rounded-lg p-8">
+                <button matIconButton aria-label="No Ingredients" class="mt-10">
+                    <mat-icon class="text-[#F3A446] scale-150">no_meals</mat-icon>
+                </button>
+                <h3 class="text-2xl font-semibold text-center mb-2" i18n>No Ingredients Found</h3>
+                <p class="text-center text-gray-400 mb-4" i18n>There are no ingredients matching your current selection.</p>
+                <button mat-raised-button color="primary" (click)="resetFilters()">
+                    <mat-icon>refresh</mat-icon>
+                    Reset Filters
+                </button>
+            </div>
+            }
+            }
+        </div>
+        <div class="col-span-12">
+            <div class="flex justify-center items-center gap-10 h-full w-full mt-5">
+                <!-- <button mat-mini-fab color="primary" (click)="rotateCarousel('left')" aria-label="Rotate left"
+                    i18n-aria-label="@@rotateCarouselLeft">
+                    <mat-icon>chevron_left</mat-icon>
+                </button> -->
+                <div class="flex flex-nowrap gap-5 glassmorphic_dark overflow-auto max-w-[80vh]">
+                    @for(category of ingredientCategories; track category; let index = $index) {
+                    <button matIconButton aria-label="Open category" [matTooltip]="category"
+                        i18n-matTooltip="@@ingredientCategory{{category}}" (click)="selectIngredientCategory(category)"
+                        [ngClass]="{'!scale-125 !-translate-y-3 !bg-gray-500': isSelected(category) }"
+                        class="hover:!scale-125 hover:!-translate-y-3 !duration-300 !transition-all">
+                        <mat-icon class="scale-150 mx-auto" [svgIcon]="ingredientCategoryIcons[index]"></mat-icon>
+                    </button>
+                    }
+                </div>
+                <!-- <button mat-mini-fab color="primary" (click)="rotateCarousel('right')" aria-label="Rotate right"
+                    i18n-aria-label="@@rotateCarouselRight">
+                    <mat-icon>chevron_right</mat-icon>
+                </button> -->
+                <!-- <div class="w-full mx-auto overflow-hidden">
+                    <div class="curved-carousel translate-x-58" [style.transform]="'rotate(' + carouselRotation + 'deg)'">
+                        @for(category of ingredientCategories; track category; let index = $index) {
+                        <button matFab aria-label="Open category" [matTooltip]="category"
+                            i18n-matTooltip="@@ingredientCategory{{category}}" class="carousel-item !w-40 !h-40 glassmorphic_dark"
+                            [style.--index]="index" [style.--total]="ingredientCategories.length">
+                            <mat-icon class="!w-32 !h-32" [svgIcon]="ingredientCategoryIcons[index]"></mat-icon>
+                        </button>
+                        }
+                    </div> -->
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,6 +2,9 @@
 // For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
 @use "./_theme-colors.scss" as custom_mat;
+@use "styles/neumorphism.scss";
+@use "styles/glassmorphism.scss";
+@use "styles/animista.scss";
 
 html {
   @include mat.theme(
@@ -22,12 +25,87 @@ html {
 // @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
 
-html,
-body {
+html {
   height: 100%;
-  background-color: #f8f8ff;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: 100%; /* Set to 100% instead of auto */
+  box-sizing: border-box; /* Include padding in width calculation */
 }
+
 body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  width: auto;
+  height: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.dark-theme {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: custom_mat.$primary-palette,
+        tertiary: custom_mat.$tertiary-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  & {
+    color: white;
+    background-color: #121212;
+  }
+}
+
+.client-body {
+  background-image: url("/images/dark-bg.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "Playfair Display", Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #6f5850, #8a7267);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #5d4a43, #776259);
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6f5850 rgba(255, 255, 255, 0.1);
+}
+
+:root {
+  @include mat.list-overrides(
+    (
+      list-item-selected-container-color: #f3a54675,
+    )
+  );
+  @include mat.button-overrides(
+    (
+      protected-container-elevation-shadow: "5px 5px 10px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.05)",
+    )
+  );
 }

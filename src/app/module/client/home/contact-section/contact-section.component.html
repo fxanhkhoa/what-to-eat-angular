@@ -1,0 +1,95 @@
+<section class="py-16">
+    <div class="container mx-auto px-4 glassmorphic_dark">
+        <h2 i18n
+            class="text-3xl font-bold text-center mb-12 font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+            Contact Us</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Contact Form -->
+            <div class="rounded-lg shadow-lg p-8">
+                <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field appearance="fill" class="w-full mb-4">
+                        <mat-label i18n>Name</mat-label>
+                        <input matInput formControlName="name" i18n-placeholder placeholder="Your Name">
+                        <mat-error i18n *ngIf="contactForm.get('name')?.hasError('required')">
+                            Name is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-full mb-4">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" i18n-placeholder placeholder="your.email@example.com">
+                        <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+                            Email is required
+                        </mat-error>
+                        <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+                            Please enter a valid email address
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill" class="w-full mb-6">
+                        <mat-label i18n>Message</mat-label>
+                        <textarea matInput formControlName="message" rows="5" i18n-placeholder
+                            placeholder="Your message"></textarea>
+                        <mat-error i18n *ngIf="contactForm.get('message')?.hasError('required')">
+                            Message is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    @if (isSending) {
+                    <button mat-raised-button color="primary" type="submit" class="w-full py-2" [disabled]="isSending">
+                        <mat-spinner diameter="20"></mat-spinner>
+                    </button>
+                    } @else {
+                    <button mat-raised-button color="primary" type="submit" class="w-full py-2" [disabled]="isSending">
+                        <mat-icon>send</mat-icon>
+                        <span i18n>Send Message</span>
+                    </button>
+                    }
+                </form>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="rounded-lg shadow-lg p-8">
+                <h3
+                    class="text-2xl font-semibold mb-6 font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    Get In Touch</h3>
+
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <mat-icon class="text-primary mr-3">location_on</mat-icon>
+                        <span>123 Main Street, City, Country</span>
+                    </div>
+
+                    <div class="flex items-start">
+                        <mat-icon class="text-primary mr-3">phone</mat-icon>
+                        <span>+1 234 567 8900</span>
+                    </div>
+
+                    <div class="flex items-start">
+                        <mat-icon class="text-primary mr-3">email</mat-icon>
+                        <span>info{{'@'}}yourcompany.com</span>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h4 class="text-lg font-medium mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <button mat-mini-fab color="primary" aria-label="Facebook">
+                            <mat-icon>facebook</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="primary" aria-label="Tiktok">
+                            <mat-icon svgIcon="tiktok"></mat-icon>
+                        </button>
+                        <button mat-mini-fab color="primary" aria-label="LinkedIn">
+                            <mat-icon>linkedin</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="primary" aria-label="Instagram">
+                            <mat-icon>photo_camera</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

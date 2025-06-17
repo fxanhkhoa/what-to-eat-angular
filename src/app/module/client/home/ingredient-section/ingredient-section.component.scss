@@ -1,0 +1,40 @@
+.curved-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease; // Smooth rotation on click
+}
+
+// Individual carousel items
+.carousel-item {
+  position: absolute;
+  transform-origin: center;
+  // Increase the translate value to create a bigger gap (from -120px to -150px)
+  transform: rotate(calc(var(--index) * (360deg / var(--total))))
+    translate(0, -300px)
+    rotate(calc(-1 * var(--index) * (360deg / var(--total))));
+
+  // Also update the hover effect with the same increased distance
+  transition: all 0.3s ease;
+  &:hover {
+    transform: rotate(calc(var(--index) * (360deg / var(--total))))
+      translate(0, -160px)
+      rotate(calc(-1 * var(--index) * (360deg / var(--total)))) scale(1.2);
+    z-index: 10;
+  }
+}
+
+// Control buttons container
+.carousel-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}

@@ -1,7 +1,7 @@
 import { JWTTokenPayload } from '@/types/auth.type';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, Renderer2, DOCUMENT } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -33,6 +33,9 @@ import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.comp
 })
 export class AdminComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);
+  private document = inject(DOCUMENT);
+  private renderer = inject(Renderer2);
+
   payload?: JWTTokenPayload;
 
   isHandset$: Observable<boolean> = this.breakpointObserver
@@ -43,6 +46,8 @@ export class AdminComponent implements OnInit {
     );
 
   ngOnInit(): void {
+    this.renderer.removeClass(this.document.body, 'dark-theme');
+
     const token = cookies.get(Cookies_Key.TOKEN);
 
     if (token) {

@@ -1,0 +1,9 @@
+<!-- masonry-gallery.component.html -->
+<div class="masonry-container relative w-full">
+    @for (image of images; track $index) {
+    <div class="masonry-item transition-all duration-300 overflow-hidden rounded-lg shadow-md">
+        <ng-container [ngTemplateOutlet]="itemTemplate"
+            [ngTemplateOutletContext]="{ $implicit: image, index: $index }"></ng-container>
+    </div>
+    }
+</div>

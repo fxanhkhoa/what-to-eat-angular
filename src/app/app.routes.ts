@@ -7,7 +7,23 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./module/home/home.component').then((m) => m.HomeComponent),
+      import('./module/client/client.component').then((m) => m.ClientComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./module/client/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
+      },
+      {
+        path: 'dish',
+        loadComponent: () =>
+          import('./module/client/dish/dish.component').then(
+            (m) => m.DishComponent
+          ),
+      },
+    ],
   },
   {
     path: 'login',
