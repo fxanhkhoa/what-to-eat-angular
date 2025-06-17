@@ -12,7 +12,7 @@ RUN npm run build:ssr
 FROM node:22-alpine
 WORKDIR /app
 
-COPY --from=build /app/dist/what-to-eat-angular ./app/dist/what-to-eat-angular
+COPY --from=build /app/dist/what-to-eat-angular ./dist/what-to-eat-angular
 COPY --from=build /app/package*.json ./
 
 # Install only production dependencies
