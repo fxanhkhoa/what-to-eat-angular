@@ -21,3 +21,10 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important; // Slightly stronger shadow for depth against dark backgrounds
   padding: 20px;
 }
+
+.glassmorphic-container_dark {
+  background-color: rgba(0, 0, 0, 0.1) !important; // Darker background with transparency
+  backdrop-filter: blur(10px) !important; // Same blur effect
+  border: 1px solid rgba(255, 255, 255, 0.1); // Very subtle white border for definition
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important; // Slightly stronger shadow for depth against dark backgrounds
+}

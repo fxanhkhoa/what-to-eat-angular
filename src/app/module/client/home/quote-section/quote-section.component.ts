@@ -87,13 +87,18 @@ export class QuoteSectionComponent implements OnInit {
   ];
 
   currentQuote: FoodQuote = this.quotes[0];
+  visible = true;
 
   ngOnInit(): void {
     this.getRandomQuote();
   }
 
   getRandomQuote(): void {
-    const randomIndex = Math.floor(Math.random() * this.quotes.length);
-    this.currentQuote = this.quotes[randomIndex];
+    this.visible = false;
+    setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * this.quotes.length);
+      this.currentQuote = this.quotes[randomIndex];
+      this.visible = true;
+    }, 300);
   }
 }

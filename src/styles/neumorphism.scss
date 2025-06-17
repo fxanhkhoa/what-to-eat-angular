@@ -8,11 +8,25 @@
   background: #2a2a2a; /* Dark background */
 }
 
+.neumorphic-container_dark {
+  display: inline-block;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+    -5px -5px 10px rgba(255, 255, 255, 0.05);
+  background: #2a2a2a; /* Dark background */
+}
+
 .neumorphic-inset_dark {
   padding: 0.5rem 1rem;
   border-radius: calc(infinity * 1px);
   font-weight: 500;
   display: inline-block;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.7),
+    inset -3px -3px 5px rgba(255, 255, 255, 0.05);
+  background: #222222; /* Slightly darker background for inset effect */
+}
+
+.neumorphic-container-inset_dark {
+   display: inline-block;
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.7),
     inset -3px -3px 5px rgba(255, 255, 255, 0.05);
   background: #222222; /* Slightly darker background for inset effect */

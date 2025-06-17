@@ -1,7 +1,8 @@
 <!-- nav.component.html -->
 <div (wheel)="onScroll($event)" class="h-full">
-    <nav class="fixed top-0 w-[95%] left-1/2 transform -translate-x-1/2 mx-auto mt-2 bg-transparent z-50 rounded-lg" [ngClass]="{'nav-glassmorphic duration-500': isScrolled}">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="fixed top-0 w-[95%] left-1/2 transform -translate-x-1/2 mx-auto mt-2 bg-transparent z-50 rounded-lg"
+        [ngClass]="{'nav-glassmorphic duration-500': isScrolled}">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 pt-2">
@@ -69,4 +70,124 @@
     </nav>
 
     <router-outlet></router-outlet>
+
+    <!-- footer.component.html -->
+    <footer class="neumorphic-container-inset_dark">
+        <div class="mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Top Section with Logo and Links -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo and About -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <img src="/logo/what-to-eat-high-resolution-logo-transparent.png" alt="What To Eat Logo"
+                            class="h-12 w-auto brightness-200 mr-2" />
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4" i18n>
+                        Discover delicious recipes and meal ideas tailored to your preferences and dietary needs.
+                    </p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <button matIconButton href="#">
+                            <mat-icon>facebook</mat-icon>
+                        </button>
+                        <button matIconButton href="#">
+                            <mat-icon svgIcon="tiktok"></mat-icon>
+                        </button>
+                        <button matIconButton href="#">
+                            <mat-icon>photo_camera</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-span-1">
+                    <mat-list role="list">
+                        <h3 mat-subheader class="text-lg font-semibold" i18n>Quick Links</h3>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/" i18n>
+                                Home
+                            </a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/dish" i18n>
+                                All Dishes
+                            </a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/about" i18n>
+                                About Us
+                            </a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/contact" i18n>Contact</a>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
+                <!-- Categories -->
+                <div class=" col-span-1">
+                    <mat-list role="list">
+                        <h3 mat-subheader class="text-lg font-semibold" i18n>Categories</h3>
+                        <mat-list-item role="listItem">
+                            <a matButton href="#">Breakfast</a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton href="#">Lunch</a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton href="#">Dinner</a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton href="#">Desserts</a>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-span-1">
+                    <h3 class="text-lg font-semibold mb-4" i18n>Stay Updated</h3>
+                    <p class="text-gray-400 text-sm mb-4" i18n>Subscribe to our newsletter for the latest recipes and
+                        tips.</p>
+
+                    <form [formGroup]="newsletterForm" (ngSubmit)="subscribeToNewsletter()" class="flex flex-wrap">
+                        <mat-form-field appearance="fill" class="w-full bg-transparent">
+                            <mat-label class="text-gray-300" i18n>Your email</mat-label>
+                            <input matInput formControlName="email" type="email" i18n-placeholder
+                                placeholder="Your email" class="text-white">
+                            <mat-error *ngIf="newsletterForm.get('email')?.hasError('required')" i18n>Email is
+                                required</mat-error>
+                            <mat-error *ngIf="newsletterForm.get('email')?.hasError('email')" i18n>Please enter a valid
+                                email</mat-error>
+                            <mat-icon matSuffix class="text-green-500">email</mat-icon>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit" class="w-full"
+                            [disabled]="newsletterForm.invalid">
+                            <mat-icon>send</mat-icon>
+                            <span i18n>Subscribe</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Section with Copyright -->
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        © {{currentYear}} What To Eat. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a i18n href="#"
+                            class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy
+                            Policy</a>
+                        <a i18n href="#"
+                            class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms
+                            of Service</a>
+                        <a i18n href="#"
+                            class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie
+                            Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>

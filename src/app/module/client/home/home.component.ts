@@ -5,7 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { DishSectionComponent } from './dish-section/dish-section.component';
 import { GameSectionComponent } from './game-section/game-section.component';
 import { IngredientSectionComponent } from './ingredient-section/ingredient-section.component';
-import { QuoteSectionComponent } from "./quote-section/quote-section.component";
+import { QuoteSectionComponent } from './quote-section/quote-section.component';
+import { ContactSectionComponent } from './contact-section/contact-section.component';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,9 @@ import { QuoteSectionComponent } from "./quote-section/quote-section.component";
     DishSectionComponent,
     GameSectionComponent,
     IngredientSectionComponent,
-    QuoteSectionComponent
-],
+    QuoteSectionComponent,
+    ContactSectionComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
