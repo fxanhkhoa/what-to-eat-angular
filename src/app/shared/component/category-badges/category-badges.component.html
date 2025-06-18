@@ -2,8 +2,8 @@
     @for (category of categories; track category) {
     <span
         [class]="'px-2 py-1 rounded-lg text-sm font-medium whitespace-nowrap flex-shrink-0 category-neumorphic_dark ' + getColorForCategory(category)"
-        [title]="category" i18n>
-        {{ category }}
+        [title]="category">
+        {{ category | categoryTranslate }}
     </span>
     }
 </div>

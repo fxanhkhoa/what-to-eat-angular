@@ -1,13 +1,13 @@
 <!-- nav.component.html -->
 <div (wheel)="onScroll($event)" class="h-full">
     <nav class="fixed top-0 w-[95%] left-1/2 transform -translate-x-1/2 mx-auto mt-2 bg-transparent z-50 rounded-lg"
-        [ngClass]="{'nav-glassmorphic duration-500': isScrolled}">
+        [ngClass]="{'md:nav-glassmorphic duration-500': isScrolled}">
         <div class="mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 pt-2">
                     <a routerLink="/" class="text-white font-bold text-xl" id="nav-logo">
-                        <img src="/logo/what-to-eat-high-resolution-logo-white-transparent.png" alt="logo"
+                        <img src="/assets/logo/what-to-eat-high-resolution-logo-white-transparent.png" alt="logo"
                             class="w-20 h-auto object-cover object-center shadow brightness-200" />
                     </a>
                 </div>
@@ -25,6 +25,23 @@
                         <a mat-button routerLink="/ingredient" routerLinkActive="!text-gray-300 !underline"
                             class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                             i18n>Ingredient</a>
+
+                        <!-- Language Selector -->
+                        <button mat-button [matMenuTriggerFor]="languageMenu" class="text-white hover:text-gray-300">
+                            <div class="flex items-center">
+                                <mat-icon>language</mat-icon>
+                                <span class="ml-1">{{ currentLanguage.toUpperCase() }}</span>
+                            </div>
+                        </button>
+                        <mat-menu #languageMenu="matMenu">
+                            <button mat-menu-item *ngFor="let lang of availableLanguages"
+                                (click)="changeLanguage(lang.code)">
+                                <div class="flex gap-3">
+                                    <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" />
+                                    <span>{{ lang.name }}</span>
+                                </div>
+                            </button>
+                        </mat-menu>
                     </div>
                 </div>
 
@@ -51,19 +68,38 @@
 
         <!-- Mobile Menu -->
         <div [ngClass]="{'max-h-[300px] overflow-auto': isMenuOpen}"
-            class="md:hidden bg-black/20 bg-opacity-75 h-100% max-h-0 overflow-hidden duration-300">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a routerLink="/" routerLinkActive="text-gray-300" [routerLinkActiveOptions]="{exact: true}"
-                    class="text-white hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                <a routerLink="/about" routerLinkActive="text-gray-300"
-                    class="text-white hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">About</a>
-                <a routerLink="/services" routerLinkActive="text-gray-300"
-                    class="text-white hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">Services</a>
-                <a routerLink="/contact" routerLinkActive="text-gray-300"
-                    class="text-white hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <button routerLink="/login"
-                    class="mt-1 w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-300">
-                    Login
+            class="md:hidden glassmorphic_dark w-fit ml-auto !p-0 !border-0 h-full max-h-0 overflow-hidden duration-300">
+            <div class="px-2 pt-2 pb-3 flex flex-col">
+                <a mat-button routerLink="/" routerLinkActive="!text-gray-300 !underline"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Home</a>
+                <a mat-button routerLink="/dish" routerLinkActive="!text-gray-300 !underline"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Dish</a>
+                <a mat-button routerLink="/ingredient" routerLinkActive="!text-gray-300 !underline"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Ingredient</a>
+
+                <!-- Language Selector for Mobile -->
+                <button mat-button [matMenuTriggerFor]="mobileLanguageMenu"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
+                    <div class="flex items-center">
+                        <mat-icon>language</mat-icon>
+                        <span class="ml-1">Language: {{ currentLanguage.toUpperCase() }}</span>
+                    </div>
+                </button>
+                <mat-menu #mobileLanguageMenu="matMenu">
+                    <button mat-menu-item *ngFor="let lang of availableLanguages" (click)="changeLanguage(lang.code)">
+                        <span>{{ lang.name }}</span>
+                    </button>
+                </mat-menu>
+
+                <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300 mx-auto"
+                    aria-label="Login button">
+                    <mat-icon>account_circle</mat-icon>
+                </button>
+
+                <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300 mx-auto"
+                    aria-label="Login button">
+                    <mat-icon>account_circle</mat-icon>
                 </button>
             </div>
         </div>
@@ -79,7 +115,7 @@
                 <!-- Logo and About -->
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center mb-4">
-                        <img src="/logo/what-to-eat-high-resolution-logo-transparent.png" alt="What To Eat Logo"
+                        <img src="/assets/logo/what-to-eat-high-resolution-logo-transparent.png" alt="What To Eat Logo"
                             class="h-12 w-auto brightness-200 mr-2" />
                     </div>
                     <p class="text-gray-400 text-sm mb-4" i18n>
@@ -127,18 +163,11 @@
                 <div class=" col-span-1">
                     <mat-list role="list">
                         <h3 mat-subheader class="text-lg font-semibold" i18n>Categories</h3>
+                        @for (item of mealCategories; track item) {
                         <mat-list-item role="listItem">
-                            <a matButton href="#">Breakfast</a>
+                            <a matButton href="#">{{item | categoryTranslate}}</a>
                         </mat-list-item>
-                        <mat-list-item role="listItem">
-                            <a matButton href="#">Lunch</a>
-                        </mat-list-item>
-                        <mat-list-item role="listItem">
-                            <a matButton href="#">Dinner</a>
-                        </mat-list-item>
-                        <mat-list-item role="listItem">
-                            <a matButton href="#">Desserts</a>
-                        </mat-list-item>
+                        }
                     </mat-list>
                 </div>
 

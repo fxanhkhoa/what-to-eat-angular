@@ -24,7 +24,7 @@
                             @if (item.title) {
                             <div class="overflow-hidden transition-all duration-300 ease-in-out">
                                 <mat-card-title
-                                    class="mt-2 text-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                    class="mt-2 text-center md:opacity-0 group-hover:opacity-100 transform md:translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                     {{ item.title }}
                                 </mat-card-title>
                             </div>
@@ -39,7 +39,8 @@
                     <mat-icon class="text-[#F3A446] scale-150">no_meals</mat-icon>
                 </button>
                 <h3 class="text-2xl font-semibold text-center mb-2" i18n>No Ingredients Found</h3>
-                <p class="text-center text-gray-400 mb-4" i18n>There are no ingredients matching your current selection.</p>
+                <p class="text-center text-gray-400 mb-4" i18n>There are no ingredients matching your current selection.
+                </p>
                 <button mat-raised-button color="primary" (click)="resetFilters()">
                     <mat-icon>refresh</mat-icon>
                     Reset Filters
@@ -54,12 +55,12 @@
                     i18n-aria-label="@@rotateCarouselLeft">
                     <mat-icon>chevron_left</mat-icon>
                 </button> -->
-                <div class="flex flex-nowrap gap-5 glassmorphic_dark overflow-auto max-w-[80vh]">
+                <div class="flex flex-wrap lg:flex-nowrap gap-5 glassmorphic_dark overflow-auto max-w-[80vh]">
                     @for(category of ingredientCategories; track category; let index = $index) {
-                    <button matIconButton aria-label="Open category" [matTooltip]="category"
-                        i18n-matTooltip="@@ingredientCategory{{category}}" (click)="selectIngredientCategory(category)"
+                    <button matIconButton aria-label="Open category" [matTooltip]="category | categoryTranslate"
+                        (click)="selectIngredientCategory(category)"
                         [ngClass]="{'!scale-125 !-translate-y-3 !bg-gray-500': isSelected(category) }"
-                        class="hover:!scale-125 hover:!-translate-y-3 !duration-300 !transition-all">
+                        class="hover:!scale-125 hover:!-translate-y-3 active:!scale-125 active:!-translate-y-3 !duration-300 !transition-all">
                         <mat-icon class="scale-150 mx-auto" [svgIcon]="ingredientCategoryIcons[index]"></mat-icon>
                     </button>
                     }

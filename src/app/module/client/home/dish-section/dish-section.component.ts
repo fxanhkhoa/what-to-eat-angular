@@ -19,6 +19,7 @@ import { finalize } from 'rxjs';
 import { CategoryBadgesComponent } from '@/app/shared/component/category-badges/category-badges.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
 
 @Component({
   selector: 'app-dish-section',
@@ -36,7 +37,8 @@ import { RouterModule } from '@angular/router';
     DecimalPipe,
     CommonModule,
     RouterModule,
-  ],
+    CategoryTranslatePipe
+],
   templateUrl: './dish-section.component.html',
   styleUrl: './dish-section.component.scss',
 })

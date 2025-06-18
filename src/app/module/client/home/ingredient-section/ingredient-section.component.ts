@@ -20,6 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { INGREDIENT_CATEGORIES } from '@/enum/ingredient.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
 
 type ButtonPosition = {
   top: number;
@@ -36,7 +37,8 @@ type ButtonPosition = {
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
-  ],
+    CategoryTranslatePipe
+],
   templateUrl: './ingredient-section.component.html',
   styleUrl: './ingredient-section.component.scss',
 })
@@ -66,7 +68,7 @@ export class IngredientSectionComponent implements OnInit, OnDestroy {
       const icon = category.replaceAll(' ', '_').toLowerCase();
       this.iconRegistry.addSvgIcon(
         icon,
-        this.sanitizer.bypassSecurityTrustResourceUrl(`/icons/${icon}.svg`)
+        this.sanitizer.bypassSecurityTrustResourceUrl(`/assets/icons/${icon}.svg`)
       );
       this.ingredientCategoryIcons.push(icon);
     });

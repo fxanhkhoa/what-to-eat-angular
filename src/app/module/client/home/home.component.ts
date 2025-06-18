@@ -29,12 +29,12 @@ export class HomeComponent {
   constructor() {
     this.iconRegistry.addSvgIcon(
       'facebook',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/icons/facebook.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/facebook.svg')
     );
 
     this.iconRegistry.addSvgIcon(
       'tiktok',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/icons/tiktok.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/tiktok.svg')
     );
   }
 }

@@ -504,7 +504,7 @@ export class AdminDishUpdateComponent {
   }
 
   handleImageError(event: any): void {
-    event.target.src = '/images/placeholder.png'; // Replace with your placeholder image
+    event.target.src = '/assets/images/placeholder.png'; // Replace with your placeholder image
     event.target.classList.add('error-image');
   }
 

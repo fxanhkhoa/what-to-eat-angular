@@ -49,7 +49,7 @@ export class ContactSectionComponent {
   constructor() {
     this.iconRegistry.addSvgIcon(
       'tiktok',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/icons/tiktok.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/tiktok.svg')
     );
   }
 
