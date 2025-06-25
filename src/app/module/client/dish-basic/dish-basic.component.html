@@ -1,0 +1,75 @@
+<!-- dish.component.html -->
+<section id="banner">
+    <div class="banner h-64 flex flex-col gap-2 justify-center items-center text-purple-500 p-5">
+        <h1 class="drop-shadow-lg font-bold uppercase" i18n>{{ 'metadata.dish.title' }}</h1>
+        <h5 class="text-gray-200" i18n>{{ 'metadata.dish.description' }}</h5>
+        <div class="flex gap-2 mt-3">
+            <a class="group text-gray-300 hover:text-white font-semibold transition-all duration-300 ease-in-out"
+                href="/">
+                <span
+                    i18n
+                    class="bg-left-bottom bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
+                    {{ 'home' }}
+                </span>
+            </a>
+            <span>/</span>
+            <span i18n class="text-gray-300 font-bold underline">{{ 'dish' }}</span>
+        </div>
+    </div>
+</section>
+
+<section id="main" class="p-5 md:p-10 flex flex-col">
+    <div class="flex">
+        <button (click)="goBack()"
+            class="group text-purple-700 hover:text-purple-500 font-semibold transition-all duration-300 ease-in-out">
+            <span
+                class="bg-left-bottom bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
+                <i class="fa-solid fa-circle-left my-auto"></i>
+                <span class="ml-2" i18n>{{ 'back' }}</span>
+            </span>
+        </button>
+    </div>
+    <div class="grid grid-cols-12 p-5 md:h-[80vh]">
+        <div class="col-span-12 md:col-span-3 xl:col-span-3">
+            <!-- <app-dish-filter [selectedLanguage]="selectedLanguage" [filter]="filter"
+                (search)="onSearch($event)"></app-dish-filter> -->
+        </div>
+        <div class="col-span-12 md:col-span-9 xl:col-span-9 h-[60vh] md:h-auto overflow-auto">
+            <div class="p-2 md:p-5">
+                <div class="grid grid-cols-12 gap-5">
+                    <div *ngIf="!rows.length" class="col-span-12 md:h-[60vh]">
+                        <!-- <app-empty></app-empty> -->
+                    </div>
+                    <!-- <app-dish-card *ngFor="let dish of rows; let i = index" [dish]="dish"
+                        [selectedLanguage]="selectedLanguage"></app-dish-card> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <nav class="flex flex-col items-center gap-4 mt-3" aria-label="pagination">
+        <div class="flex items-center gap-2">
+            <button
+                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
+                [ngClass]="{'bg-purple-900 text-white': false}" [disabled]="currentPage === 1"
+                (click)="goToPreviousPage()">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <ng-container *ngFor="let page of pages">
+                <span *ngIf="page.type === 'ellipsis'">...</span>
+                <button *ngIf="page.type !== 'ellipsis'"
+                    class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
+                    [ngClass]="{'bg-purple-900 text-white': currentPage === page.value}" (click)="goToPage(page.value)">
+                    {{ page.value }}
+                </button>
+            </ng-container>
+
+            <button
+                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
+                [ngClass]="{'bg-purple-900 text-white': false}" [disabled]="currentPage === totalPages"
+                (click)="goToNextPage()">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </nav> -->
+</section>
