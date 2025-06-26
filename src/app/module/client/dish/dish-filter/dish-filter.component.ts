@@ -17,11 +17,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DomSanitizer } from '@angular/platform-browser';
 
 type Tag = {
   id: string;
@@ -54,6 +55,8 @@ export class DishFilterComponent implements OnInit {
 
   localeId = inject<string>(LOCALE_ID);
   private fb = inject(FormBuilder);
+  private iconRegistry = inject(MatIconRegistry);
+  private sanitizer = inject(DomSanitizer);
 
   mealCategoriesOptions: string[] = Object.values(MEAL_CATEGORIES);
   ingredientCategoriesOptions: string[] = Object.values(INGREDIENT_CATEGORIES);
@@ -71,6 +74,39 @@ export class DishFilterComponent implements OnInit {
     mealCategories: [this.filter.mealCategories || []],
     ingredientCategories: [this.filter.ingredientCategories || []],
   });
+
+  constructor() {
+    this.iconRegistry.addSvgIcon(
+      'easy',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/icons/easy.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'medium',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/icons/medium.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'hard',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/icons/hard.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'cooking_time',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/icons/cooking_time.svg'
+      )
+    );
+    this.iconRegistry.addSvgIcon(
+      'preparation_time',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/icons/preparation_time.svg'
+      )
+    );
+  }
 
   ngOnInit(): void {
     // Initialize tags if they exist in filter
@@ -111,6 +147,24 @@ export class DishFilterComponent implements OnInit {
   }
 
   formatLabel(value: number): string {
-    return `${value}`;
+    return value + $localize`minute`;
+  }
+
+  toggleDifficultyLevel(level: string) {
+    if (this.difficultyLevels?.value?.includes(level)) {
+      this.difficultyLevels?.setValue(
+        this.difficultyLevels?.value?.filter((l: string) => l !== level)
+      );
+    } else {
+      this.filterForm
+        .get('difficultLevels')
+        ?.setValue([...this.difficultyLevels?.value!, level]);
+    }
+
+    console.log(this.difficultyLevels);
+  }
+
+  public get difficultyLevels() {
+    return this.filterForm.get('difficultLevels');
   }
 }

@@ -29,3 +29,58 @@
     inset -3px -3px 5px rgba(255, 255, 255, 0.05);
   background: #222222; /* Slightly darker background for inset effect */
 }
+
+/* Base neumorphic styles for dark theme */
+.neumorphic-easy,
+.neumorphic-medium,
+.neumorphic-hard {
+  padding: 0.5rem 1rem;
+  border-radius: calc(infinity * 1px);
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
+    -5px -5px 10px rgba(255, 255, 255, 0.05);
+  background: #2a2a2a; /* Dark background */
+}
+
+/* Specific colors for each difficulty */
+.neumorphic-easy {
+  color: #4ade80 !important; /* Green for easy */
+  text-shadow: 0 0 5px rgba(74, 222, 128, 0.3) !important;
+}
+
+.neumorphic-medium {
+  color: #f59e0b !important; /* Amber for medium */
+  text-shadow: 0 0 5px rgba(245, 158, 11, 0.3) !important;
+}
+
+.neumorphic-hard {
+  color: #ef4444 !important; /* Red for hard */
+  text-shadow: 0 0 5px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Base inset neumorphic styles for dark theme */
+.neumorphic-inset-easy,
+.neumorphic-inset-medium,
+.neumorphic-inset-hard {
+  padding: 0.5rem 1rem;
+  border-radius: calc(infinity * 1px);
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.7),
+    inset -3px -3px 5px rgba(255, 255, 255, 0.05);
+  background: #222222; /* Slightly darker background for inset effect */
+}
+
+/* Specific colors for each difficulty */
+.neumorphic-inset-easy {
+  color: #4ade80; /* Green for easy */
+}
+
+.neumorphic-inset-medium {
+  color: #f59e0b; /* Amber for medium */
+}
+
+.neumorphic-inset-hard {
+  color: #ef4444; /* Red for hard */
+}

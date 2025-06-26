@@ -3,11 +3,11 @@ import { MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { Dish, QueryDishDto } from '@/types/dish.type';
 import { CommonModule } from '@angular/common';
 import { Component, inject, LOCALE_ID, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dish',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './dish.component.html',
   styleUrl: './dish.component.scss',
 })
@@ -16,7 +16,6 @@ export class DishComponent implements OnInit {
   private router = inject(Router);
   localeId = inject<string>(LOCALE_ID);
   private dishService = inject(DishService);
-  private location = inject(Location);
   Math = Math;
 
   rows: Dish[] = [];

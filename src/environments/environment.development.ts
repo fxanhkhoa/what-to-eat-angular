@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:1323',
+  API_URL: 'https://api.eatwhat.io.vn',
 };
