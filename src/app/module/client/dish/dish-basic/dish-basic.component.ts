@@ -3,11 +3,21 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Meta, Title } from '@angular/platform-browser';
-import { DishFilterComponent } from "../dish-filter/dish-filter.component";
+import { DishFilterComponent } from '../dish-filter/dish-filter.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { EmptyComponent } from "@/app/components/empty/empty.component";
 
 @Component({
   selector: 'app-dish-basic',
-  imports: [CommonModule, MatButtonModule, DishFilterComponent],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    DishFilterComponent,
+    MatIconModule,
+    MatExpansionModule,
+    EmptyComponent
+],
   templateUrl: './dish-basic.component.html',
   styleUrl: './dish-basic.component.scss',
 })
@@ -23,7 +33,9 @@ export class DishBasicComponent implements OnInit {
   }
 
   setupMetaTags(): void {
-    this.titleService.setTitle($localize`The Ultimate Food Guide: What to Eat Now`);
+    this.titleService.setTitle(
+      $localize`The Ultimate Food Guide: What to Eat Now`
+    );
     this.metaService.updateTag({
       name: 'description',
       content: $localize`Hungry? Discover delicious dishes, restaurant recommendations, and food guides
@@ -42,6 +54,6 @@ export class DishBasicComponent implements OnInit {
   }
 
   onSearch(dto: QueryDishDto) {
-    
+    console.log(dto);
   }
 }

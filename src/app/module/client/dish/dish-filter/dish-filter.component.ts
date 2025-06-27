@@ -106,6 +106,12 @@ export class DishFilterComponent implements OnInit {
         '/assets/icons/preparation_time.svg'
       )
     );
+    this.iconRegistry.addSvgIcon(
+      'search',
+      this.sanitizer.bypassSecurityTrustResourceUrl(
+        '/assets/icons/search.svg'
+      )
+    );
   }
 
   ngOnInit(): void {
@@ -143,11 +149,11 @@ export class DishFilterComponent implements OnInit {
   }
 
   onSearch(): void {
-    this.search.emit(this.filter);
+    this.search.emit(this.filterForm.value as QueryDishDto);
   }
 
   formatLabel(value: number): string {
-    return value + $localize`minute`;
+    return value + $localize`m`;
   }
 
   toggleDifficultyLevel(level: string) {
@@ -160,8 +166,6 @@ export class DishFilterComponent implements OnInit {
         .get('difficultLevels')
         ?.setValue([...this.difficultyLevels?.value!, level]);
     }
-
-    console.log(this.difficultyLevels);
   }
 
   public get difficultyLevels() {
