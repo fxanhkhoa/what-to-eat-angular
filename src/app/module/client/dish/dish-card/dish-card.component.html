@@ -1,0 +1,45 @@
+<!-- dish-card.component.html -->
+<mat-card class="!grid !grid-cols-12 gap-5 !min-h-80 relative slide-in-blurred-right">
+    <span i18n='EASY|MEDIUM|HARD' [ngClass]="{
+                                'neumorphic-easy': dish.difficultLevel === 'EASY',
+                                'neumorphic-medium': dish.difficultLevel === 'MEDIUM',
+                                'neumorphic-hard': dish.difficultLevel === 'HARD'
+                            }" class="text-sm lowercase absolute top-1 left-1">
+        {{ dish.difficultLevel ?? 'N/A' | categoryTranslate }}
+    </span>
+
+    <div class="col-span-12 md:col-span-5">
+        <img [src]="dish.thumbnail" [alt]="dish.slug"
+            class="object-cover object-center rounded-lg w-full h-80 md:h-full" />
+    </div>
+
+
+    <div class="col-span-12 md:col-span-5 flex flex-col justify-between gap-2 p-5">
+        <div class="flex flex-col gap-2">
+            <h4 class="font-bold">
+                {{ (dish.title | multiLanguage: localeId)?.data }}
+            </h4>
+    
+            <span class="hidden md:block text-gray-400 text-left">
+                {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 100) ?? '' }}...
+            </span>
+    
+            <span class="md:hidden text-gray-400 text-left">
+                {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}...
+            </span>
+        </div>
+
+        <div class="flex gap-1">
+            <mat-icon class="my-auto">timer</mat-icon>
+            <span class="ml-1">{{ getTotalTime() }}</span>
+            <span i18n="@@minutes">minutes</span>
+        </div>
+    </div>
+
+
+    <div class="col-span-12 md:col-span-2 w-full h-full min-h-20">
+        <a matButton="elevated" [routerLink]="['/dish',  dish.slug]" class="!h-full !w-full !rounded-lg">
+            <span i18n="@@discover">Discover</span>
+        </a>
+    </div>
+</mat-card>

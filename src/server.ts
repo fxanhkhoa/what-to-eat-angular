@@ -7,11 +7,15 @@ import {
 import express from 'express';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { registerLocaleData } from '@angular/common';
 import localeVi from '@angular/common/locales/vi';
+import localeEn from '@angular/common/locales/en';
+import { registerLocaleData } from '@angular/common';
 
 // Register the Vietnamese locale data
 registerLocaleData(localeVi);
+
+// Register the English locale data
+registerLocaleData(localeEn);
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');

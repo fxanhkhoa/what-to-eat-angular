@@ -1,0 +1,134 @@
+<!-- dish-filter.component.html -->
+<form [formGroup]="filterForm" class="grid grid-cols-12 gap-5 p-1 pb-3">
+    <!-- Search Bar -->
+    <div class="col-span-12">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>{{ 'search' }}</mat-label>
+            <input matInput formControlName="keyword">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="col-span-12">
+        <mat-divider></mat-divider>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+        <div class="flex flex-col gap-3">
+            <!-- Preparation Time -->
+            <div class="font-medium">
+                <span i18n-matTooltip matTooltip="in minute" class="flex items-center">
+                    <span i18n class="mr-3">Preparation Time</span>
+                    <mat-icon svgIcon="preparation_time"></mat-icon>
+                </span>
+            </div>
+            <div>
+                <mat-slider [min]="1" [max]="240" [step]="1" [displayWith]="formatLabel" discrete class="!w-full">
+                    <input matSliderStartThumb formControlName="preparationTimeFrom">
+                    <input matSliderEndThumb formControlName="preparationTimeTo">
+                </mat-slider>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+        <div class="flex flex-col gap-3">
+            <!-- Cooking Time -->
+            <div class="font-medium">
+                <span i18n-matTooltip matTooltip="in minute" class="flex items-center">
+                    <span i18n class="mr-3">Cooking Time</span>
+                    <mat-icon svgIcon="cooking_time"></mat-icon>
+                </span>
+            </div>
+            <div>
+                <mat-slider [min]="1" [max]="240" [step]="1" [displayWith]="formatLabel" discrete class="!w-full">
+                    <input matSliderStartThumb formControlName="cookingTimeFrom">
+                    <input matSliderEndThumb formControlName="cookingTimeTo">
+                </mat-slider>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-12">
+        <!-- Difficulty Levels -->
+        <div class="flex gap-2 flex-wrap items-center h-full">
+            @for(item of difficultLevelsOptions; track item) {
+            <button [matButton]="difficultyLevels?.value?.includes(item) ? 'tonal' : 'outlined'"
+                (click)="toggleDifficultyLevel(item)" [ngClass]="{
+                        'neumorphic-easy': item === 'EASY' && difficultyLevels?.value?.includes(item),
+                        'neumorphic-medium': item === 'MEDIUM' && difficultyLevels?.value?.includes(item),
+                        'neumorphic-hard': item === 'HARD' && difficultyLevels?.value?.includes(item)
+                    }">
+                @if (item === 'EASY') {
+                <mat-icon svgIcon="easy"></mat-icon>
+                } @else if (item === 'MEDIUM') {
+                <mat-icon svgIcon="medium"></mat-icon>
+                }
+                @else if (item === 'HARD') {
+                <mat-icon svgIcon="hard"></mat-icon>
+                }
+                {{ item | categoryTranslate }}
+            </button>
+            }
+        </div>
+    </div>
+
+    <div class="col-span-12">
+        <mat-divider></mat-divider>
+    </div>
+
+    <!-- Meal Categories -->
+    <div class="col-span-12 md:col-span-6">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>Meal Categories</mat-label>
+            <mat-select formControlName="mealCategories" multiple>
+                @for (option of mealCategoriesOptions; track option) {
+                <mat-option [value]="option">
+                    {{ option | categoryTranslate }}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Ingredient Categories -->
+    <div class="col-span-12 md:col-span-6">
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label i18n>Ingredient Categories</mat-label>
+            <mat-select formControlName="ingredientCategories" multiple>
+                @for (option of ingredientCategoriesOptions; track option) {
+                <mat-option *ngFor="let option of ingredientCategoriesOptions" [value]="option">
+                    {{ option }}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Tags -->
+    <div class="col-span-12">
+        <div class="flex flex-col gap-3">
+            <mat-form-field appearance="fill" class="w-full">
+                <mat-label i18n>{{ 'tags' }}</mat-label>
+                <mat-chip-grid #chipGrid aria-label="Tag selection">
+                    <mat-chip-row *ngFor="let tag of tags" [removable]="true" (removed)="removeTag(tag)">
+                        {{tag.value}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                    <input i18n-placeholder placeholder="{{ 'add-tag' }}" [matChipInputFor]="chipGrid"
+                        (matChipInputTokenEnd)="addTag($event.value); $event.chipInput.clear()">
+                </mat-chip-grid>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <!-- Search Button -->
+    <div class="col-span-12">
+        <button matButton="filled" (click)="onSearch()">
+            <span i18n>Search</span>
+            <mat-icon svgIcon="search"></mat-icon>
+        </button>
+    </div>
+</form>

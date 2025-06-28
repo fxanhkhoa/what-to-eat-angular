@@ -18,10 +18,22 @@ export const routes: Routes = [
       },
       {
         path: 'dish',
-        loadComponent: () =>
-          import('./module/client/dish/dish.component').then(
-            (m) => m.DishComponent
-          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./module/client/dish/dish.component').then(
+                (m) => m.DishComponent
+              ),
+          },
+          {
+            path: 'basic',
+            loadComponent: () =>
+              import('./module/client/dish/dish-basic/dish-basic.component').then(
+                (m) => m.DishBasicComponent
+              ),
+          }
+        ]
       },
     ],
   },

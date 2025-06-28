@@ -1,4 +1,8 @@
-import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  LOCALE_ID,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -14,6 +18,8 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { bearerInterceptor } from './interceptor/bearer.interceptor';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from './shared/paginator/custom-paginator-intl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,5 +39,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAuth(() => getAuth()),
     provideHttpClient(withFetch(), withInterceptors([bearerInterceptor])),
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],
 };
