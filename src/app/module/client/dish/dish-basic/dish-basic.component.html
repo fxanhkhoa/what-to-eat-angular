@@ -38,41 +38,27 @@
             </mat-accordion>
         </div>
         <div class="col-span-12">
-            <div class="grid grid-cols-12 gap-5">
-                @if (!rows.length) {
+            <div class="grid grid-cols-12 gap-5 max-h-[80vh] overflow-auto">
+                @if (loading()) {
+                <div class="col-span-12 mx-auto">
+                    <mat-spinner></mat-spinner>
+                </div>
+                } @else {
+                @if (!dishes().length) {
                 <div class="col-span-12">
                     <app-empty></app-empty>
                 </div>
                 }
-                <!-- <app-dish-card *ngFor="let dish of rows; let i = index" [dish]="dish"
-                        [selectedLanguage]="selectedLanguage"></app-dish-card> -->
+                @for (dish of dishes(); track dish) {
+                <div class="col-span-12 md:col-span-12 lg:col-span-6 xl:col-span-4">
+                    <app-dish-card [dish]="dish"></app-dish-card>
+                </div>
+                }
+                }
             </div>
+            <mat-paginator [length]="total()" [pageSizeOptions]="[10, 25, 50, 100]" [pageIndex]="currentPage()"
+                [pageSize]="limit()" (page)="paginatorChange($event)" showFirstLastButtons aria-label="Select page">
+            </mat-paginator>
         </div>
     </div>
-    <!-- <nav class="flex flex-col items-center gap-4 mt-3" aria-label="pagination">
-        <div class="flex items-center gap-2">
-            <button
-                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
-                [ngClass]="{'bg-purple-900 text-white': false}" [disabled]="currentPage === 1"
-                (click)="goToPreviousPage()">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-
-            <ng-container *ngFor="let page of pages">
-                <span *ngIf="page.type === 'ellipsis'">...</span>
-                <button *ngIf="page.type !== 'ellipsis'"
-                    class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
-                    [ngClass]="{'bg-purple-900 text-white': currentPage === page.value}" (click)="goToPage(page.value)">
-                    {{ page.value }}
-                </button>
-            </ng-container>
-
-            <button
-                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
-                [ngClass]="{'bg-purple-900 text-white': false}" [disabled]="currentPage === totalPages"
-                (click)="goToNextPage()">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-    </nav> -->
 </section>
