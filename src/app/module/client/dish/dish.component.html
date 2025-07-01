@@ -1,1 +1,59 @@
-<a [routerLink]="['/dish', 'basic']">basic</a>
+<section id="main" class="p-5 md:p-10 flex flex-col mt-20">
+    <div class="flex justify-between">
+        <button matButton="elevated" (click)="goBack()">
+            <mat-icon>chevron_left</mat-icon>
+            <span i18n>Back</span>
+        </button>
+        <a matButton="outlined" [routerLink]="['/dish', 'basic']" i18n="@@filter">Filter</a>
+    </div>
+    <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 md:col-span-6 p-5">
+            <div class="flex flex-col gap-5">
+                <h3 i18n
+                    class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    {{listMealCategories[0] | categoryTranslate}}</h3>
+                @if (listDishCategory_1().length === 0) {
+                <app-empty></app-empty>
+                }
+                @for(item of listDishCategory_1(); track item) {
+                <app-dish-card-fancy [dish]="item"></app-dish-card-fancy>
+                }
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-6 p-5">
+            <div class="flex flex-col gap-5">
+                <h3 i18n
+                    class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    {{listMealCategories[1] | categoryTranslate}}</h3>
+                @if (listDishCategory_2().length === 0) {
+                <app-empty></app-empty>
+                }
+                @for(item of listDishCategory_2(); track item) {
+                <app-dish-card-fancy [dish]="item"></app-dish-card-fancy>
+                }
+            </div>
+            <div class="flex flex-col gap-5">
+                <h3 i18n
+                    class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    {{listMealCategories[2] | categoryTranslate}}</h3>
+                @if (listDishCategory_3().length === 0) {
+                <app-empty></app-empty>
+                }
+                @for(item of listDishCategory_3(); track item) {
+                <app-dish-card-fancy [dish]="item"></app-dish-card-fancy>
+                }
+            </div>
+            <div class="flex flex-col gap-5">
+                <h3 i18n
+                    class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    {{listMealCategories[3] | categoryTranslate}}</h3>
+                @if (listDishCategory_4().length === 0) {
+                <app-empty></app-empty>
+                }
+                @for(item of listDishCategory_4(); track item) {
+                <app-dish-card-fancy [dish]="item"></app-dish-card-fancy>
+                }
+            </div>
+        </div>
+    </div>
+</section>
