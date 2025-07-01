@@ -6,17 +6,17 @@
                 <span [matTooltip]="(dish.title | multiLanguage: localeId)?.data"
                     class="text-2xl font-bold tracking-wider bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
                     {{(dish.title | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}
-                    {{(dish.title | multiLanguage: localeId)?.data?.length! > 30 && '...'}}
+                    {{(dish.title | multiLanguage: localeId)?.data?.length! > 30 ? '...' : ''}}
                 </span>
 
                 <span class="hidden md:block text-left tracking-wide">
                     {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 100) ?? '' }}
-                    {{(dish.shortDescription | multiLanguage: localeId)?.data?.length! > 100 && '...'}}
+                    {{(dish.shortDescription | multiLanguage: localeId)?.data?.length! > 100 ? '...' : ''}}
                 </span>
 
                 <span class="md:hidden text-left tracking-wide">
                     {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}
-                    {{(dish.shortDescription | multiLanguage: localeId)?.data?.length! > 30 && '...'}}
+                    {{(dish.shortDescription | multiLanguage: localeId)?.data?.length! > 30 ? '...' : ''}}
                 </span>
 
                 <div class="grid grid-cols-12 gap-3 mt-3">
