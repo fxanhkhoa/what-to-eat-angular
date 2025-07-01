@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DishCardFancyComponent } from './dish-card-fancy/dish-card-fancy.component';
-import { EmptyComponent } from "../../../components/empty/empty.component";
+import { EmptyComponent } from '../../../components/empty/empty.component';
 
 @Component({
   selector: 'app-dish',
@@ -19,8 +19,8 @@ import { EmptyComponent } from "../../../components/empty/empty.component";
     MatIconModule,
     CategoryTranslatePipe,
     DishCardFancyComponent,
-    EmptyComponent
-],
+    EmptyComponent,
+  ],
   templateUrl: './dish.component.html',
   styleUrl: './dish.component.scss',
 })
@@ -51,7 +51,9 @@ export class DishComponent implements OnInit {
         mealCategories: [this.listMealCategories[0]],
       })
       .subscribe((res) => {
-        this.listDishCategory_1.set(res.data);
+        if (res.data) {
+          this.listDishCategory_1.set(res.data);
+        }
       });
   }
 
@@ -63,7 +65,9 @@ export class DishComponent implements OnInit {
         mealCategories: [this.listMealCategories[1]],
       })
       .subscribe((res) => {
-        this.listDishCategory_2.set(res.data);
+        if (res.data) {
+          this.listDishCategory_2.set(res.data);
+        }
       });
   }
 
@@ -75,7 +79,9 @@ export class DishComponent implements OnInit {
         mealCategories: [this.listMealCategories[2]],
       })
       .subscribe((res) => {
-        this.listDishCategory_3.set(res.data);
+        if (res.data) {
+          this.listDishCategory_3.set(res.data);
+        }
       });
   }
 
@@ -87,7 +93,9 @@ export class DishComponent implements OnInit {
         mealCategories: [this.listMealCategories[3]],
       })
       .subscribe((res) => {
-        this.listDishCategory_4.set(res.data);
+        if (res.data) {
+          this.listDishCategory_4.set(res.data);
+        }
       });
   }
 

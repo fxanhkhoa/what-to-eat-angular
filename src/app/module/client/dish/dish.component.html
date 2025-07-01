@@ -12,7 +12,7 @@
                 <h3 i18n
                     class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
                     {{listMealCategories[0] | categoryTranslate}}</h3>
-                @if (listDishCategory_1().length === 0) {
+                @if (listDishCategory_1() && listDishCategory_1().length === 0) {
                 <app-empty></app-empty>
                 }
                 @for(item of listDishCategory_1(); track item) {
@@ -25,7 +25,7 @@
                 <h3 i18n
                     class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
                     {{listMealCategories[1] | categoryTranslate}}</h3>
-                @if (listDishCategory_2().length === 0) {
+                @if (listDishCategory_2() && listDishCategory_2().length === 0) {
                 <app-empty></app-empty>
                 }
                 @for(item of listDishCategory_2(); track item) {
@@ -36,7 +36,7 @@
                 <h3 i18n
                     class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
                     {{listMealCategories[2] | categoryTranslate}}</h3>
-                @if (listDishCategory_3().length === 0) {
+                @if (listDishCategory_3() && listDishCategory_3().length === 0) {
                 <app-empty></app-empty>
                 }
                 @for(item of listDishCategory_3(); track item) {
@@ -47,7 +47,7 @@
                 <h3 i18n
                     class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
                     {{listMealCategories[3] | categoryTranslate}}</h3>
-                @if (listDishCategory_4().length === 0) {
+                @if (listDishCategory_4() && listDishCategory_4().length === 0) {
                 <app-empty></app-empty>
                 }
                 @for(item of listDishCategory_4(); track item) {
