@@ -1,42 +1,102 @@
+import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
 import { DishService } from '@/app/service/dish.service';
 import { MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { Dish, QueryDishDto } from '@/types/dish.type';
 import { CommonModule } from '@angular/common';
-import { Component, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, inject, LOCALE_ID, OnInit, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { DishCardFancyComponent } from './dish-card-fancy/dish-card-fancy.component';
+import { EmptyComponent } from '../../../components/empty/empty.component';
 
 @Component({
   selector: 'app-dish',
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    CategoryTranslatePipe,
+    DishCardFancyComponent,
+    EmptyComponent,
+  ],
   templateUrl: './dish.component.html',
   styleUrl: './dish.component.scss',
 })
 export class DishComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
   localeId = inject<string>(LOCALE_ID);
   private dishService = inject(DishService);
   Math = Math;
 
-  rows: Dish[] = [];
-  keyword: string = '';
-  lang: string = '';
-  limit: number = 10;
-  page: number = 1;
-  total: number = 0;
-  filter: QueryDishDto = {};
-  selectedLanguage: string = '';
-  pages: any[] = [];
-
   listMealCategories: string[] = [];
+  listDishCategory_1 = signal<Dish[]>([]);
+  listDishCategory_2 = signal<Dish[]>([]);
+  listDishCategory_3 = signal<Dish[]>([]);
+  listDishCategory_4 = signal<Dish[]>([]);
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.page = Number(params['page']) || 1;
-      this.limit = Number(params['limit']) || 10;
-      this.keyword = params['keyword'] || '';
-      this.filter = {};
-    });
+    this.listMealCategories = this.getRandomMealCategories(4);
+    this.getDishes_1();
+    this.getDishes_2();
+    this.getDishes_3();
+    this.getDishes_4();
+  }
+
+  getDishes_1() {
+    this.dishService
+      .findAll({
+        page: 1,
+        limit: 10,
+        mealCategories: [this.listMealCategories[0]],
+      })
+      .subscribe((res) => {
+        if (res.data) {
+          this.listDishCategory_1.set(res.data);
+        }
+      });
+  }
+
+  getDishes_2() {
+    this.dishService
+      .findAll({
+        page: 1,
+        limit: 1,
+        mealCategories: [this.listMealCategories[1]],
+      })
+      .subscribe((res) => {
+        if (res.data) {
+          this.listDishCategory_2.set(res.data);
+        }
+      });
+  }
+
+  getDishes_3() {
+    this.dishService
+      .findAll({
+        page: 1,
+        limit: 4,
+        mealCategories: [this.listMealCategories[2]],
+      })
+      .subscribe((res) => {
+        if (res.data) {
+          this.listDishCategory_3.set(res.data);
+        }
+      });
+  }
+
+  getDishes_4() {
+    this.dishService
+      .findAll({
+        page: 1,
+        limit: 3,
+        mealCategories: [this.listMealCategories[3]],
+      })
+      .subscribe((res) => {
+        if (res.data) {
+          this.listDishCategory_4.set(res.data);
+        }
+      });
   }
 
   getRandomMealCategories(count: number): string[] {
@@ -60,5 +120,9 @@ export class DishComponent implements OnInit {
     }
 
     return randomCategories;
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

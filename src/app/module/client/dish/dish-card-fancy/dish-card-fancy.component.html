@@ -1,0 +1,96 @@
+<div [style]="selectedBackground()"
+    class="neumorphic-container_dark rounded-lg relative bg-no-repeat bg-cover max-w-2xl slide-in-blurred-right">
+    <div class="grid grid-cols-12 gap-3 relative z-10 backdrop-brightness-50 backdrop-blur-xs md:backdrop-blur-[2px]">
+        <div class="col-span-12 md:col-span-9 p-3">
+            <div class="flex flex-col gap-1">
+                <span [matTooltip]="(dish.title | multiLanguage: localeId)?.data"
+                    class="text-2xl font-bold tracking-wider bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                    {{(dish.title | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}
+                    {{(dish.title | multiLanguage: localeId)?.data?.length! > 30 && '...'}}
+                </span>
+
+                <span class="hidden md:block text-left tracking-wide">
+                    {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 100) ?? '' }}
+                    {{(dish.shortDescription | multiLanguage: localeId)?.data?.length! > 100 && '...'}}
+                </span>
+
+                <span class="md:hidden text-left tracking-wide">
+                    {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}
+                    {{(dish.shortDescription | multiLanguage: localeId)?.data?.length! > 30 && '...'}}
+                </span>
+
+                <div class="grid grid-cols-12 gap-3 mt-3">
+                    <div class="col-span-5">
+                        <div class="flex flex-col gap-1 justify-between">
+                            <div class="flex gap-1">
+                                <span
+                                    class="tracking-wider bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text"
+                                    i18n="@@preparation">
+                                    Preparation
+                                </span>
+                                <mat-icon svgIcon="preparation_time"></mat-icon>
+                            </div>
+                            <div class="flex gap-1 text-lg mt-1">
+                                <span>{{dish.preparationTime}}</span>
+                                <span i18n="@@minutes">Minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="flex flex-col gap-1 justify-between">
+                            <div class="flex gap-1">
+                                <span
+                                    class="tracking-wider bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text"
+                                    i18n="@@preparation">
+                                    Cooking
+                                </span>
+                                <mat-icon svgIcon="cooking_time"></mat-icon>
+                            </div>
+                            <div class="flex gap-1 text-lg mt-1">
+                                <span>{{dish.cookingTime}}</span>
+                                <span i18n="@@minutes">Minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-3">
+                        <div class="flex flex-col gap-1 justify-between">
+                            <div class="mx-auto">
+                                @if (dish.difficultLevel === 'HARD') {
+                                <mat-icon svgIcon="hard"></mat-icon>
+                                } @else if (dish.difficultLevel === 'MEDIUM') {
+                                <mat-icon svgIcon="medium"></mat-icon>
+                                } @else if (dish.difficultLevel === 'EASY') {
+                                <mat-icon svgIcon="easy"></mat-icon>
+                                }
+                            </div>
+                            <span i18n='EASY|MEDIUM|HARD' [ngClass]="{
+                                'neumorphic-inset-easy': dish.difficultLevel === 'EASY',
+                                'neumorphic-inset-medium': dish.difficultLevel === 'MEDIUM',
+                                'neumorphic-inset-hard': dish.difficultLevel === 'HARD'
+                            }" class="text-sm lowercase w-fit mx-auto">
+                                {{ dish.difficultLevel ?? 'N/A' | categoryTranslate }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 md:col-span-3 p-5 md:p-0">
+            <div class="md:hidden relative aspect-square">
+                <img [src]="dish.thumbnail"
+                    class="absolute bottom-0 aspect-square z-10 object-cover object-center w-full h-auto rounded-full" />
+                <div class="absolute bottom-0 w-full h-full aspect-square rounded-full blur-md bg-gray-300"></div>
+            </div>
+
+            <div class="hidden md:block w-auto h-auto">
+                <div
+                    class="absolute lg:-right-16 aspect-square object-cover object-center w-auto h-full rounded-fullabsolute aspect-square object-cover object-center w-auto h-full rounded-full">
+                    <div class="absolute w-full h-full aspect-square rounded-full blur-md bg-gray-300">
+                    </div>
+                    <img [src]="dish.thumbnail"
+                        class="absolute z-10 aspect-square object-cover object-center w-auto h-full rounded-full" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
