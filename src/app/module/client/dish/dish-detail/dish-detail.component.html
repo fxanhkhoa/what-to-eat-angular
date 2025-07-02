@@ -1,0 +1,136 @@
+<section id="main" class="p-5 md:p-10">
+    <div class="flex justify-start">
+        <button matButton="elevated" (click)="goBack()">
+            <mat-icon>chevron_left</mat-icon>
+            <span i18n>Back</span>
+        </button>
+    </div>
+    @if (dish() === null) {
+    <div class="flex justify-center items-center h-96">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+    } @else {
+    <div class="flex flex-col gap-5 md:gap-10">
+        <div class="grid grid-cols-12 gap-5 md:gap-10">
+            <div class="col-span-12 md:col-span-6 flex flex-col justify-center p-3">
+                <h1 class="font-bold drop-shadow-lg">
+                    {{ (dish()!.title | multiLanguage: localeId)?.data}}
+                </h1>
+            </div>
+            <div class="col-span-12 md:col-span-6 flex flex-col gap-2 text-gray-500 p-3">
+                <!-- DifficultyLevelComponent should be implemented separately -->
+                <span i18n='EASY|MEDIUM|HARD' [ngClass]="{
+                                    'neumorphic-easy': dish()!.difficultLevel === 'EASY',
+                                    'neumorphic-medium': dish()!.difficultLevel === 'MEDIUM',
+                                    'neumorphic-hard': dish()!.difficultLevel === 'HARD'
+                                }" class="text-sm lowercase absolute top-1 left-1">
+                    {{ dish()!.difficultLevel ?? 'N/A' | categoryTranslate }}
+                </span>
+                <h5 class="text-gray-500">
+                    {{ (dish()!.shortDescription | multiLanguage: localeId)?.data}}
+                </h5>
+                <div class="flex justify-start gap-5">
+                    <div class="flex gap-4 cursor-default" i18n-matTooltip="@@preparation_time"
+                        [matTooltip]="'Preparation Time'">
+                        <mat-icon svgIcon="preparation_time"></mat-icon>
+                        <div class="flex gap-1 text-lg mt-1">
+                            <span>{{dish()?.preparationTime}}</span>
+                            <span i18n="@@minutes">Minutes</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 cursor-default" i18n-matTooltip="@@cooking_time"
+                        [matTooltip]="'Cooking Time'">
+                        <mat-icon svgIcon="cooking_time"></mat-icon>
+                        <div class="flex gap-1 text-lg mt-1">
+                            <span>{{dish()?.cookingTime}}</span>
+                            <span i18n="@@minutes">Minutes</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- CategoryComponent should be implemented separately -->
+                <app-category-badges [categories]="categories()"></app-category-badges>
+            </div>
+        </div>
+        <div class="grid grid-cols-12 gap-5 md:gap-10 mt-5">
+            <div class="col-span-12 md:col-span-6 p-3">
+                <!-- YoutubeFrameComponent should be implemented separately -->
+                <app-youtube-frame [id]="dish()?.videos?.[0] || ''"></app-youtube-frame>
+            </div>
+            <div class="col-span-12 md:col-span-6 p-3">
+                <div class="flex">
+                    <h4 class="text-gray-500">{{ 'ingredients' | i18n }}</h4>
+                </div>
+                <ul class="list-none">
+                    @for (ingredient of dish()?.ingredients?.slice().reverse(); track ingredient.slug) {
+                    <div class="inline-flex md:flex items-center w-full">
+                        <mat-checkbox [id]="ingredient?.slug"></mat-checkbox>
+                        <label class="flex-1 mt-px font-light text-gray-500 cursor-pointer select-none"
+                            [for]="ingredient?.slug">
+                            <div class="grid grid-cols-12 gap-2">
+                                <div class="col-span-2 font-bold my-auto">
+                                    {{ ingredient?.quantity }}
+                                    {{ ingredients().find(i => i.slug === ingredient?.slug)?.measure }}
+                                </div>
+                                <div class="col-span-4 my-auto">
+                                    {{ ingredients().find(i => i.slug === ingredient?.slug)?.title.find(t => t?.lang ===
+                                    selectedLanguage())?.data }}
+                                </div>
+                                <div class="col-span-6 text-gray-400 my-auto">
+                                    @if (ingredient?.note !== '') {
+                                    ({{ ingredient?.note }})
+                                    }
+                                </div>
+                            </div>
+                        </label>
+                        <div>
+                            <a [href]="'/ingredient?keyword=' + (ingredient?.slug?.replaceAll('-', ' '))"
+                                class="bg-transparent hover:bg-gray-300 text-gray-700 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded transition duration-300">
+                                <mat-icon>open_in_new</mat-icon>
+                            </a>
+                        </div>
+                    </div>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="grid grid-cols-12 gap-5 md:gap-10 mt-5">
+            <div class="col-span-12 p-3">
+                <div class="dish-html-wrapper" [innerHTML]="getContent()"></div>
+            </div>
+        </div>
+        <div class="flex justify-center gap-3">
+            <button mat-stroked-button color="primary" (click)="copyLink()">
+                <mat-icon>link</mat-icon>
+            </button>
+            <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl()" target="_blank">
+                <button mat-stroked-button color="primary">
+                    <mat-icon svgIcon="facebook"></mat-icon>
+                </button>
+            </a>
+            <a [href]="'http://twitter.com/intent/tweet?text=' + getShortDescription() + '&url=' + pageUrl() + '&hashtags=' + (dish()?.tags?.join(','))"
+                target="_blank">
+                <button mat-stroked-button color="primary">
+                    <mat-icon svgIcon="twitter"></mat-icon>
+                </button>
+            </a>
+            <a [href]="'mailto:?subject=' + getTitle() + '&body=' + getShortDescription() + ' ' + pageUrl()"
+                target="_blank">
+                <button mat-stroked-button color="primary">
+                    <mat-icon>mail</mat-icon>
+                </button>
+            </a>
+        </div>
+        <hr />
+        <div class="rounded-lg p-3">
+            <div class="flex justify-center mb-3">
+                <h2 class="text-purple-400 font-semibold">{{ 'related-dishes' | i18n }}</h2>
+            </div>
+            <div class="grid grid-cols-12 gap-5">
+                @for (dish of relatedDishes(); track dish.slug) {
+                <app-dish-card [selectedLanguage]="selectedLanguage()" [dish]="dish"></app-dish-card>
+                }
+            </div>
+        </div>
+    </div>
+    }
+</section>

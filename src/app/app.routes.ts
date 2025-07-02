@@ -32,6 +32,13 @@ export const routes: Routes = [
               import('./module/client/dish/dish-basic/dish-basic.component').then(
                 (m) => m.DishBasicComponent
               ),
+          },
+          {
+            path: ':slug',
+            loadComponent: () => 
+              import('./module/client/dish/dish-detail/dish-detail.component').then(
+                (m) => m.DishDetailComponent
+              ),
           }
         ]
       },

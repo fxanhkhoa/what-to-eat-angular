@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dish-card-fancy',
@@ -24,6 +25,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     MatIconModule,
     MatTooltipModule,
     CategoryTranslatePipe,
+    RouterModule,
   ],
   templateUrl: './dish-card-fancy.component.html',
   styleUrl: './dish-card-fancy.component.scss',
@@ -73,6 +75,8 @@ export class DishCardFancyComponent implements OnInit {
 
   ngOnInit(): void {
     const randomIndex = Math.floor(Math.random() * this.backgroundList.length);
-    this.selectedBackground.set(`background-image: url("${this.backgroundList[randomIndex]}") !important;`);
+    this.selectedBackground.set(
+      `background-image: url("${this.backgroundList[randomIndex]}") !important;`
+    );
   }
 }
