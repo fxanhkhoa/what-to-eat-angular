@@ -1,0 +1,36 @@
+.dish-html-wrapper > h2 {
+  @apply text-gray-500 py-3;
+}
+
+.dish-html-wrapper > ul {
+  @apply list-disc pl-5;
+}
+
+.dish-html-wrapper > p {
+  @apply py-1 leading-loose flex gap-2 flex-wrap;
+}
+
+.dish-html-wrapper > p > img {
+  @apply object-cover h-auto w-96 transition-all delay-500 duration-300 ease-in-out rounded-2xl border-solid border border-purple-200;
+}
+
+.dish-html-wrapper > p > code {
+  @apply p-3 font-serif text-purple-400 rounded-lg bg-slate-50 text-base;
+  &::before {
+    content: "_🌟";
+  }
+}
+
+.dish-html-wrapper > p > a {
+  text-decoration: underline !important;
+  text-decoration-color: #e9d5ff !important;
+  text-decoration-thickness: 1px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 300ms;
+}
+.dish-html-wrapper > p > a:hover {
+  --tw-text-opacity: 1 !important;
+  color: rgb(168 85 247 / var(--tw-text-opacity)) !important;
+}
