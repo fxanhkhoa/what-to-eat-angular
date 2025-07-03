@@ -26,6 +26,10 @@ export class DishService {
     );
   }
 
+  findBySlug(slug: string) {
+    return this.http.get<Dish>(`${environment.API_URL}/${prefix}/slug/${slug}`);
+  }
+
   findRandom(limit: number) {
     return this.http.get<Dish[]>(`${environment.API_URL}/${prefix}/random`, {
       params: { limit: limit },

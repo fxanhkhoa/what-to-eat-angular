@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .dish-html-wrapper > h2 {
   @apply text-gray-500 py-3;
 }
@@ -21,6 +23,54 @@
   }
 }
 
+:host ::ng-deep img {
+  @apply object-cover h-auto w-full hover:scale-[1.1] duration-300 ease-in-out rounded-2xl;
+
+  @media screen and (min-width: 640px) {
+    @apply w-1/2;
+  }
+}
+
+.dish-html-wrapper {
+  overflow-x: auto;
+  word-break: break-word;
+  max-width: 100%;
+
+  > * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+
+  pre,
+  code {
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+
 .dish-html-wrapper > p > a {
   text-decoration: underline !important;
   text-decoration-color: #e9d5ff !important;
@@ -33,4 +83,17 @@
 .dish-html-wrapper > p > a:hover {
   --tw-text-opacity: 1 !important;
   color: rgb(168 85 247 / var(--tw-text-opacity)) !important;
+}
+
+:host ::ng-deep .youtube-player-placeholder {
+  aspect-ratio: 16 / 9;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 2rem;
+}
+
+:host ::ng-deep iframe {
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 2rem;
 }

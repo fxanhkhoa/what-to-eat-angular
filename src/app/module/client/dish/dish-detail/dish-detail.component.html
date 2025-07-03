@@ -1,36 +1,47 @@
-<section id="main" class="p-5 md:p-10">
-    <div class="flex justify-start">
+@if (!loading() && dish()) {
+<section id="banner" class="h-[20rem] md:h-[40rem] relative bg-center bg-no-repeat bg-cover"
+    [style]="'background-image:' + dishThumbUrl()"></section>
+}
+
+
+<section id="main" class="p-5 md:p-10 mt-20">
+    <div class="flex justify-start mb-5">
         <button matButton="elevated" (click)="goBack()">
             <mat-icon>chevron_left</mat-icon>
             <span i18n>Back</span>
         </button>
     </div>
-    @if (dish() === null) {
+    @if (loading()) {
     <div class="flex justify-center items-center h-96">
         <mat-spinner diameter="50"></mat-spinner>
     </div>
-    } @else {
+    } @else if (dish() === null) {
+    <app-empty></app-empty>
+    }
+    @else {
     <div class="flex flex-col gap-5 md:gap-10">
         <div class="grid grid-cols-12 gap-5 md:gap-10">
             <div class="col-span-12 md:col-span-6 flex flex-col justify-center p-3">
-                <h1 class="font-bold drop-shadow-lg">
+                <h1
+                    class="font-bold drop-shadow-lg text-5xl tracking-wider bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
                     {{ (dish()!.title | multiLanguage: localeId)?.data}}
                 </h1>
             </div>
-            <div class="col-span-12 md:col-span-6 flex flex-col gap-2 text-gray-500 p-3">
+            <div
+                class="col-span-12 md:col-span-6 flex flex-col gap-2 p-3 glassmorphic-container_dark rounded-lg text-gray-200">
                 <!-- DifficultyLevelComponent should be implemented separately -->
-                <span i18n='EASY|MEDIUM|HARD' [ngClass]="{
+                <span i18n=' EASY|MEDIUM|HARD' [ngClass]="{
                                     'neumorphic-easy': dish()!.difficultLevel === 'EASY',
                                     'neumorphic-medium': dish()!.difficultLevel === 'MEDIUM',
                                     'neumorphic-hard': dish()!.difficultLevel === 'HARD'
-                                }" class="text-sm lowercase absolute top-1 left-1">
+                                }" class="text-xl uppercase w-fit">
                     {{ dish()!.difficultLevel ?? 'N/A' | categoryTranslate }}
                 </span>
-                <h5 class="text-gray-500">
+                <h5 class="font-light text-lg">
                     {{ (dish()!.shortDescription | multiLanguage: localeId)?.data}}
                 </h5>
-                <div class="flex justify-start gap-5">
-                    <div class="flex gap-4 cursor-default" i18n-matTooltip="@@preparation_time"
+                <div class="flex justify-start gap-5 mb-2">
+                    <div class="flex items-center gap-4 cursor-default" i18n-matTooltip="@@preparation_time"
                         [matTooltip]="'Preparation Time'">
                         <mat-icon svgIcon="preparation_time"></mat-icon>
                         <div class="flex gap-1 text-lg mt-1">
@@ -38,7 +49,7 @@
                             <span i18n="@@minutes">Minutes</span>
                         </div>
                     </div>
-                    <div class="flex gap-4 cursor-default" i18n-matTooltip="@@cooking_time"
+                    <div class="flex items-center gap-4 cursor-default" i18n-matTooltip="@@cooking_time"
                         [matTooltip]="'Cooking Time'">
                         <mat-icon svgIcon="cooking_time"></mat-icon>
                         <div class="flex gap-1 text-lg mt-1">
@@ -47,44 +58,39 @@
                         </div>
                     </div>
                 </div>
-                <!-- CategoryComponent should be implemented separately -->
-                <app-category-badges [categories]="categories()"></app-category-badges>
+                <div class="w-full overflow-auto flex flex-no-wrap">
+                    <app-category-badges [categories]="categories()"></app-category-badges>
+                </div>
             </div>
         </div>
         <div class="grid grid-cols-12 gap-5 md:gap-10 mt-5">
             <div class="col-span-12 md:col-span-6 p-3">
-                <!-- YoutubeFrameComponent should be implemented separately -->
-                <app-youtube-frame [id]="dish()?.videos?.[0] || ''"></app-youtube-frame>
+                <div class="relative w-full max-w-2xl mx-auto">
+                    <youtube-player class="youtube w-full h-auto" [videoId]="youtubeId()"></youtube-player>
+                </div>
             </div>
-            <div class="col-span-12 md:col-span-6 p-3">
+            <div class="col-span-12 md:col-span-6 p-3 text-gray-200 glassmorphic-container_dark rounded-lg">
                 <div class="flex">
-                    <h4 class="text-gray-500">{{ 'ingredients' | i18n }}</h4>
+                    <h4 i18n="@@ingredients">ingredients</h4>
                 </div>
                 <ul class="list-none">
-                    @for (ingredient of dish()?.ingredients?.slice().reverse(); track ingredient.slug) {
-                    <div class="inline-flex md:flex items-center w-full">
-                        <mat-checkbox [id]="ingredient?.slug"></mat-checkbox>
-                        <label class="flex-1 mt-px font-light text-gray-500 cursor-pointer select-none"
-                            [for]="ingredient?.slug">
+                    @for (item of ingredients(); track item._id) {
+                    <div class="inline-flex md:flex gap-2 items-center w-full">
+                        <mat-checkbox [id]="item?.slug || newUUID"></mat-checkbox>
+                        <label class="flex-1 mt-px font-light cursor-pointer select-none" [for]="item?.slug">
                             <div class="grid grid-cols-12 gap-2">
-                                <div class="col-span-2 font-bold my-auto">
-                                    {{ ingredient?.quantity }}
-                                    {{ ingredients().find(i => i.slug === ingredient?.slug)?.measure }}
+                                <div class="col-span-4 font-bold my-auto">
+                                    {{ getQuantity(item) }}
+                                    {{ item.measure }}
+                                    ( {{ getNote(item) }} )
                                 </div>
-                                <div class="col-span-4 my-auto">
-                                    {{ ingredients().find(i => i.slug === ingredient?.slug)?.title.find(t => t?.lang ===
-                                    selectedLanguage())?.data }}
-                                </div>
-                                <div class="col-span-6 text-gray-400 my-auto">
-                                    @if (ingredient?.note !== '') {
-                                    ({{ ingredient?.note }})
-                                    }
+                                <div class="col-span-8 my-auto">
+                                    {{ (item.title| multiLanguage: localeId)?.data }}
                                 </div>
                             </div>
                         </label>
                         <div>
-                            <a [href]="'/ingredient?keyword=' + (ingredient?.slug?.replaceAll('-', ' '))"
-                                class="bg-transparent hover:bg-gray-300 text-gray-700 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded transition duration-300">
+                            <a matIconButton target="_blank" [href]="'/ingredient?keyword=' + (item?.slug?.replaceAll('-', ' '))">
                                 <mat-icon>open_in_new</mat-icon>
                             </a>
                         </div>
@@ -93,7 +99,7 @@
                 </ul>
             </div>
         </div>
-        <div class="grid grid-cols-12 gap-5 md:gap-10 mt-5">
+        <div class="grid grid-cols-12 gap-5 md:gap-10 mt-5 glassmorphic-container_dark rounded-lg">
             <div class="col-span-12 p-3">
                 <div class="dish-html-wrapper" [innerHTML]="getContent()"></div>
             </div>
@@ -101,33 +107,38 @@
         <div class="flex justify-center gap-3">
             <button mat-stroked-button color="primary" (click)="copyLink()">
                 <mat-icon>link</mat-icon>
+                <span i18n>Copy</span>
             </button>
             <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + pageUrl()" target="_blank">
                 <button mat-stroked-button color="primary">
                     <mat-icon svgIcon="facebook"></mat-icon>
+                    <span>Facebook</span>
                 </button>
             </a>
-            <a [href]="'http://twitter.com/intent/tweet?text=' + getShortDescription() + '&url=' + pageUrl() + '&hashtags=' + (dish()?.tags?.join(','))"
-                target="_blank">
+            <a [href]="'https://tiktok.com'" target="_blank">
                 <button mat-stroked-button color="primary">
-                    <mat-icon svgIcon="twitter"></mat-icon>
+                    <mat-icon svgIcon="tiktok"></mat-icon>
+                    <span>Tiktok</span>
                 </button>
             </a>
-            <a [href]="'mailto:?subject=' + getTitle() + '&body=' + getShortDescription() + ' ' + pageUrl()"
+            <a [href]="'mailto:?subject=' + (dish()?.title! | multiLanguage: localeId)?.data + '&body=' + (dish()?.shortDescription! | multiLanguage: localeId)?.data + ' ' + pageUrl()"
                 target="_blank">
                 <button mat-stroked-button color="primary">
                     <mat-icon>mail</mat-icon>
+                    <span i18n>Mail</span>
                 </button>
             </a>
         </div>
         <hr />
         <div class="rounded-lg p-3">
             <div class="flex justify-center mb-3">
-                <h2 class="text-purple-400 font-semibold">{{ 'related-dishes' | i18n }}</h2>
+                <h2 class="text-purple-400 font-semibold" i18n="@@related_dishes">Related Dishes</h2>
             </div>
             <div class="grid grid-cols-12 gap-5">
                 @for (dish of relatedDishes(); track dish.slug) {
-                <app-dish-card [selectedLanguage]="selectedLanguage()" [dish]="dish"></app-dish-card>
+                <div class="col-span-12 xl:col-span-6 mx-auto xl:mx-0">
+                    <app-dish-card-fancy [dish]="dish"></app-dish-card-fancy>
+                </div>
                 }
             </div>
         </div>
