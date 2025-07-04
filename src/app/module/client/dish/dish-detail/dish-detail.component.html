@@ -1,5 +1,5 @@
 @if (!loading() && dish()) {
-<section id="banner" class="h-[20rem] md:h-[40rem] relative bg-center bg-no-repeat bg-cover"
+<section id="banner" class="h-[20rem] md:h-[40rem] relative bg-center bg-no-repeat bg-cover rounded-b-2xl"
     [style]="'background-image:' + dishThumbUrl()"></section>
 }
 
@@ -132,7 +132,7 @@
         <hr />
         <div class="rounded-lg p-3">
             <div class="flex justify-center mb-3">
-                <h2 class="text-purple-400 font-semibold" i18n="@@related_dishes">Related Dishes</h2>
+                <h2 class="text-3xl font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text" i18n="@@related_dishes">Related Dishes</h2>
             </div>
             <div class="grid grid-cols-12 gap-5">
                 @for (dish of relatedDishes(); track dish.slug) {

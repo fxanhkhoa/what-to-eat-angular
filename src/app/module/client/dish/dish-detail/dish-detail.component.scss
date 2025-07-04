@@ -23,7 +23,7 @@
   }
 }
 
-:host ::ng-deep img {
+:host ::ng-deep .dish-html-wrapper img {
   @apply object-cover h-auto w-full hover:scale-[1.1] duration-300 ease-in-out rounded-2xl;
 
   @media screen and (min-width: 640px) {
