@@ -1,0 +1,13 @@
+<mat-card class="shadow-md rounded-lg p-4 flex flex-col items-center bg-white">
+    <mat-card-header>
+        <mat-card-title class="font-bold text-lg">
+            {{ ingredient?.name[selectedLanguage] || ingredient?.name?.en || ingredient?.name }}
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p class="text-gray-700">
+            {{ ingredient?.description?.[selectedLanguage] || ingredient?.description?.en || ingredient?.description }}
+        </p>
+        <!-- Add more fields as needed -->
+    </mat-card-content>
+</mat-card>
