@@ -26,9 +26,13 @@ export class DishService {
     );
   }
 
-  findRandom(limit: number) {
+  findBySlug(slug: string) {
+    return this.http.get<Dish>(`${environment.API_URL}/${prefix}/slug/${slug}`);
+  }
+
+  findRandom(limit: number, mealCategories?: string[]) {
     return this.http.get<Dish[]>(`${environment.API_URL}/${prefix}/random`, {
-      params: { limit: limit },
+      params: { limit: limit, mealCategories: mealCategories ?? [] },
     });
   }
 

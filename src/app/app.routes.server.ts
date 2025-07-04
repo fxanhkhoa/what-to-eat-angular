@@ -13,4 +13,8 @@ export const serverRoutes: ServerRoute[] = [
     path: 'admin/dish/:id',
     renderMode: RenderMode.Client,
   },
+  {
+    path: 'dish/:slug',
+    renderMode: RenderMode.Server,
+  },
 ];

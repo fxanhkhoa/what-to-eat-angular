@@ -15,14 +15,14 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-4">
-                        <a mat-button routerLink="/" routerLinkActive="!text-gray-300 !underline"
+                        <a mat-button [routerLink]="['/']" routerLinkActive="!text-gray-300 !underline"
                             [routerLinkActiveOptions]="{exact: true}"
                             class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                             i18n>Home</a>
                         <a mat-button [routerLink]="['/dish']" routerLinkActive="!text-gray-300 !underline"
                             class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                             i18n>Dish</a>
-                        <a mat-button routerLink="/ingredient" routerLinkActive="!text-gray-300 !underline"
+                        <a mat-button [routerLink]="['/ingredient']" routerLinkActive="!text-gray-300 !underline"
                             class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                             i18n>Ingredient</a>
 

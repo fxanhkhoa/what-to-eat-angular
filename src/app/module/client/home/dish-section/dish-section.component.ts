@@ -19,7 +19,7 @@ import { finalize } from 'rxjs';
 import { CategoryBadgesComponent } from '@/app/shared/component/category-badges/category-badges.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
+import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
 
 @Component({
   selector: 'app-dish-section',
@@ -37,8 +37,8 @@ import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
     DecimalPipe,
     CommonModule,
     RouterModule,
-    CategoryTranslatePipe
-],
+    CategoryTranslatePipe,
+  ],
   templateUrl: './dish-section.component.html',
   styleUrl: './dish-section.component.scss',
 })
@@ -52,17 +52,23 @@ export class DishSectionComponent implements OnInit {
   dishes: Dish[] = [];
 
   mealCategoryForm: FormGroup = this.fb.group({
-    mealCategory: [''],
+    mealCategory: [[]],
   });
 
   ngOnInit(): void {
     this.getDishes();
+
+    this.mealCategoryForm.valueChanges.subscribe((value) => {
+      const selectedCategories = value.mealCategory;
+      this.isLoading = true;
+      this.getDishes(selectedCategories);
+    });
   }
 
-  getDishes() {
+  getDishes(mealCategories?: string[]) {
     this.isLoading = true;
     this.dishService
-      .findRandom(8)
+      .findRandom(8, mealCategories)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((res) => {
         this.dishes = res;
