@@ -1,46 +1,34 @@
-<section id="banner" class="flex flex-col justify-center items-center gap-5 p-5 md:p-10">
-    <h1 class="font-bold">{{ 'metadata.ingredient.title' | translate }}</h1>
-    <h4>{{ 'metadata.ingredient.description' | translate }}</h4>
-</section>
-
-<form id="filter">
-    <div class="mx-5 flex justify-center gap-2 bg-gray-100 rounded-lg">
-        <app-search-bar [selectedLanguage]="selectedLanguage" (onResult)="onSearch($event)"
-            [value]="keyword ?? ''"></app-search-bar>
-    </div>
-</form>
-
-<section id="main" class="p-5 bg-gradient-to-b from-white to-gray-100 md:p-10">
-    <div class="flex justify-between">
+<section id="main" class="p-5 md:p-10 mt-20 flex flex-col gap-5">
+    <div class="flex justify-between gap-5 items-center">
         <button matButton="elevated" (click)="goBack()">
             <mat-icon>chevron_left</mat-icon>
             <span i18n>Back</span>
         </button>
-        <a matButton="outlined" [routerLink]="['/dish', 'basic']" i18n="@@filter">Filter</a>
+        <div class="flex-1">
+            <app-search-bar class="w-full" [keyword]="keyword()" (onResult)="onSearch($event)"></app-search-bar>
+        </div>
     </div>
-    <div class="grid grid-cols-12 gap-5 overflow-auto h-[45vh]">
-        <div *ngIf="!total" class="col-span-12">
+
+    <div class="grid grid-cols-12 gap-5 max-h-[80vh] overflow-auto">
+        @if (loading()) {
+        <div class="col-span-12 flex justify-center items-center">
+            <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+        </div>
+        } @else {
+        @if (rows().length === 0) {
+        <div class="col-span-12">
             <app-empty></app-empty>
         </div>
-        <div *ngFor="let ingredient of rows" class="col-span-12 md:col-span-4 gap-3">
-            <app-ingredient-card [ingredient]="ingredient" [selectedLanguage]="selectedLanguage"></app-ingredient-card>
+        } @else {
+        @for(ingredient of rows(); track ingredient) {
+        <div class="col-span-12 md:col-span-4">
+            <app-ingredient-card [ingredient]="ingredient"></app-ingredient-card>
         </div>
+        }
+        }
+        }
     </div>
-    <nav class="flex flex-col items-center gap-4 mt-3" aria-label="pagination">
-        <div class="flex items-center gap-2">
-            <button (click)="prevPage()"
-                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <span *ngFor="let page of pages"
-                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75">
-                <button *ngIf="page.type !== 'ellipsis'" (click)="goToPage(page.value)">{{ page.value }}</button>
-                <span *ngIf="page.type === 'ellipsis'">...</span>
-            </span>
-            <button (click)="nextPage()"
-                class="grid h-8 items-center rounded-md bg-white px-3 text-sm text-purple-900 shadow-sm hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-    </nav>
+    <mat-paginator [length]="total()" [pageSizeOptions]="[10, 25, 50, 100]" [pageIndex]="currentPage() - 1"
+        [pageSize]="limit()" (page)="paginatorChange($event)" showFirstLastButtons aria-label="Select page">
+    </mat-paginator>
 </section>

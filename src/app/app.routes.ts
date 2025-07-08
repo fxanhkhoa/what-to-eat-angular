@@ -29,18 +29,25 @@ export const routes: Routes = [
           {
             path: 'basic',
             loadComponent: () =>
-              import('./module/client/dish/dish-basic/dish-basic.component').then(
-                (m) => m.DishBasicComponent
-              ),
+              import(
+                './module/client/dish/dish-basic/dish-basic.component'
+              ).then((m) => m.DishBasicComponent),
           },
           {
             path: ':slug',
-            loadComponent: () => 
-              import('./module/client/dish/dish-detail/dish-detail.component').then(
-                (m) => m.DishDetailComponent
-              ),
-          }
-        ]
+            loadComponent: () =>
+              import(
+                './module/client/dish/dish-detail/dish-detail.component'
+              ).then((m) => m.DishDetailComponent),
+          },
+        ],
+      },
+      {
+        path: 'ingredient',
+        loadComponent: () =>
+          import('./module/client/ingredient/ingredient.component').then(
+            (m) => m.IngredientComponent
+          ),
       },
     ],
   },

@@ -1,13 +1,89 @@
-<mat-card class="shadow-md rounded-lg p-4 flex flex-col items-center bg-white">
-    <mat-card-header>
-        <mat-card-title class="font-bold text-lg">
-            {{ ingredient?.name[selectedLanguage] || ingredient?.name?.en || ingredient?.name }}
-        </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p class="text-gray-700">
-            {{ ingredient?.description?.[selectedLanguage] || ingredient?.description?.en || ingredient?.description }}
-        </p>
-        <!-- Add more fields as needed -->
-    </mat-card-content>
-</mat-card>
+<div class="group perspective w-full glassmorphic-container_dark slide-in-blurred-right">
+    <div class="relative preserve-3d duration-1000 w-full h-72" [class.my-rotate-y-180]="flipCard()"
+        (click)="toggleFlipCard()">
+        <!-- Front Side -->
+        <div class="absolute inset-0 backface-hidden flex flex-col justify-end items-start overflow-hidden px-4 pb-4">
+            <img [src]="ingredient.images[0]" [alt]="(ingredient.title | multiLanguage: localeId)?.data"
+                class="absolute inset-0 h-full w-full object-contain z-1" />
+            <h3 class="z-10 mt-3 text-3xl font-bold text-white">
+                {{(ingredient.title | multiLanguage: localeId)?.data}}
+            </h3>
+            <div class="z-10 gap-y-1 overflow-y-hidden text-sm leading-6 flex flex-nowrap overflow-x-auto w-full">
+                <app-category-badges [categories]="ingredient.ingredientCategory"></app-category-badges>
+            </div>
+        </div>
+        <!-- Back Side -->
+        <div
+            class="absolute inset-0 my-rotate-y-180 backface-hidden flex flex-col gap-3 justify-end overflow-hidden px-4 pb-4 rounded-2xl">
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 rounded-2xl"></div>
+            <div class="z-10 flex flex-wrap gap-2">
+                @for(image of ingredient.images; track image) {
+                <div class="col-span-1 mt-3">
+                    <img alt="" [src]="image" class="rounded-lg w-auto h-20 w-auto" />
+                </div>
+                }
+            </div>
+            <div class="z-10 flex gap-1 text-gray-400">
+                <span class="text-md font-bold drop-shadow-lg" i18n>
+                    Reference Over
+                </span>
+                <span class="text-md font-bold drop-shadow-lg">
+                    {{ingredient.weight}}
+                </span>
+                <span class="text-md font-bold drop-shadow-lg">
+                    {{ingredient.measure}}
+                </span>
+            </div>
+            <div class="z-10 grid grid-cols-12 gap-2 text-white">
+                <div class="col-span-6 md:col-span-6 text-left flex gap-1">
+                    <span i18n>
+                        Calories
+                    </span>
+                    <span>
+                        {{ingredient.calories}}
+                    </span>
+                </div>
+                <div class="col-span-6 md:col-span-6 text-left">
+                    <span i18n>
+                        Carbohydrate
+                    </span>
+                    <span>
+                        {{ingredient.carbohydrate}}
+                    </span>
+                </div>
+                <div class="col-span-6 md:col-span-6 text-left">
+                    <span i18n>
+                        Fat
+                    </span>
+                    <span>
+                        {{ingredient.fat}}
+                    </span>
+                </div>
+                <div class="col-span-6 md:col-span-6 text-left">
+                    <span i18n>
+                        Protein
+                    </span>
+                    <span>
+                        {{ingredient.protein}}
+                    </span>
+                </div>
+                <div class="col-span-6 md:col-span-6 text-left">
+                    <span i18n>
+                        Cholesterol
+                    </span>
+                    <span>
+                        {{ingredient.cholesterol}}
+                    </span>
+                </div>
+                <div class="col-span-6 md:col-span-6 text-left">
+                    <span i18n>
+                        Sodium
+                    </span>
+                    <span>
+                        {{ingredient.sodium}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
