@@ -5,6 +5,7 @@
 @use "styles/neumorphism.scss";
 @use "styles/glassmorphism.scss";
 @use "styles/animista.scss";
+@use "styles/my_animation.scss";
 
 html {
   @include mat.theme(

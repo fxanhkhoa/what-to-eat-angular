@@ -1,0 +1,16 @@
+<div class="max-w-md rounded-lg ml-auto overflow-hidden md:max-w-2xl w-full">
+	<div class="w-full">
+		<div class="relative">
+			<mat-icon class="absolute top-5 left-4">search</mat-icon>
+			<input type="text"
+				class="bg-gradient-to-r from-[#F3A446] to-[#A06235] w-full py-5 px-12 rounded-lg focus:outline-none hover:cursor-pointer text-white"
+				name="" (keypress)="keyPress($event)" [(ngModel)]="finalTranscript" />
+			<span class="absolute top-3 right-1 rounded-lg">
+				<button matIconButton type="button" (click)="startSpeechRecognition()"
+					[class.!animate-bounce]="recognizing()">
+					<mat-icon>mic</mat-icon>
+				</button>
+			</span>
+		</div>
+	</div>
+</div>

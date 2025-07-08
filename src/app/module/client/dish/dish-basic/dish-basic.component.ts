@@ -82,7 +82,6 @@ export class DishBasicComponent implements OnInit {
   }
 
   onSearch(dto: QueryDishDto) {
-    console.log(dto);
     this.dto = dto;
     this.getDishes();
   }

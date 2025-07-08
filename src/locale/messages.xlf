@@ -305,7 +305,15 @@
           <context context-type="linenumber">25,26</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient.component.html</context>
           <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
@@ -363,6 +371,14 @@
           <context context-type="sourcefile">src/app/module/client/dish/dish-card/dish-card.component.html</context>
           <context context-type="linenumber">35,36</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="4794173083546045790" datatype="html">
         <source> <x id="INTERPOLATION" equiv-text="{{ dish.difficultLevel ?? &apos;N/A&apos; | categoryTranslate }}"/> </source>
@@ -373,6 +389,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-card/dish-card.component.html</context>
           <context context-type="linenumber">8,11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
@@ -386,6 +406,41 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-card/dish-card.component.html</context>
           <context context-type="linenumber">42,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ingredients" datatype="html">
+        <source>ingredients</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4323470180912194028" datatype="html">
+        <source>Copy</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">110,111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1292737233370901804" datatype="html">
+        <source>Mail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">128,129</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="related_dishes" datatype="html">
+        <source>Related Dishes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">135,137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="copied" datatype="html">
+        <source>Copied!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.ts</context>
+          <context context-type="linenumber">176</context>
         </context-group>
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
@@ -693,6 +748,55 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/quote-section/quote-section.component.html</context>
           <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3971883724092437363" datatype="html">
+        <source> Reference Over </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3466952925524265667" datatype="html">
+        <source> Calories </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3720059266430183248" datatype="html">
+        <source> Carbohydrate </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="709107837932523316" datatype="html">
+        <source> Fat </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7103047972773170999" datatype="html">
+        <source> Protein </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28896822465480078" datatype="html">
+        <source> Cholesterol </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7543364879166437317" datatype="html">
+        <source> Sodium </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
+          <context context-type="linenumber">80</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6951548623472701943" datatype="html">
