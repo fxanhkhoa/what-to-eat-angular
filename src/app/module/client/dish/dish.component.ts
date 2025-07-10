@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { DishCardFancyComponent } from './dish-card-fancy/dish-card-fancy.component';
-import { EmptyComponent } from '../../../components/empty/empty.component';
+import { EmptyComponent } from '@/app/components/empty/empty.component';
 
 @Component({
   selector: 'app-dish',

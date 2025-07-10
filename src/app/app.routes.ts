@@ -49,6 +49,23 @@ export const routes: Routes = [
             (m) => m.IngredientComponent
           ),
       },
+      {
+        path: 'game',
+        children: [
+          {
+            path: '',
+            redirectTo: 'wheel-of-fortune',
+            pathMatch: 'full',
+          },
+          {
+            path: 'wheel-of-fortune',
+            loadComponent: () =>
+              import(
+                './module/client/game/wheel-of-fortune/wheel-of-fortune.component'
+              ).then((m) => m.WheelOfFortuneComponent),
+          },
+        ],
+      },
     ],
   },
   {
