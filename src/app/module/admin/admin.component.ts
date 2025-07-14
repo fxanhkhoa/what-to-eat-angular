@@ -12,7 +12,6 @@ import { map, Observable, shareReplay } from 'rxjs';
 import cookies from 'js-cookie';
 import { Cookies_Key } from '@/enum/cookies.enum';
 import { jwtDecode } from 'jwt-decode';
-import { BreadcrumbService } from '@/app/service/breadcrumb.service';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 
 @Component({

@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 })
 export class DishCardComponent {
   @Input() dish!: Dish;
+  @Input() newTab = false;
 
   localeId = inject<string>(LOCALE_ID);
 
