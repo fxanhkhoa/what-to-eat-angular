@@ -35,7 +35,7 @@ export class WheelPlayerComponent implements AfterViewInit {
       return {
         color:
           COLOR_PALETTE[
-            (i >= COLOR_PALETTE.length ? i + 1 : i) % COLOR_PALETTE.length
+            i % COLOR_PALETTE.length
           ],
         item: opts,
       };
