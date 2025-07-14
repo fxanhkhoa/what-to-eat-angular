@@ -29,6 +29,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
 import { MatMenuModule } from '@angular/material/menu';
+import cookies from 'js-cookie';
+import { Cookies_Key } from '@/enum/cookies.enum';
+import { JWTTokenPayload } from '@/types/auth.type';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-client',
@@ -81,6 +85,8 @@ export class ClientComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
   });
 
+  payload?: JWTTokenPayload;
+
   constructor() {
     this.iconRegistry.addSvgIcon(
       'tiktok',
@@ -92,6 +98,19 @@ export class ClientComponent implements OnInit {
     this.renderer.addClass(this.document.body, 'dark-theme');
     this.renderer.addClass(this.document.body, 'client-body');
     this.getRandomMealCategories(4);
+
+    const token = cookies.get(Cookies_Key.TOKEN);
+
+    if (token) {
+      this.payload = jwtDecode<JWTTokenPayload>(token ?? '');
+    }
+  }
+
+  avatarFromPlaceholder() {
+    if (this.payload) {
+      return `https://ui-avatars.com/api/?name=${this.payload.name}&background=random&color=fff&size=128`;
+    }
+    return 'https://ui-avatars.com/api/?name=Guest&background=random&color=fff&size=128';
   }
 
   changeLanguage(langCode: string) {

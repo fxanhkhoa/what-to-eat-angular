@@ -19,11 +19,11 @@
             <h4 class="font-bold">
                 {{ (dish.title | multiLanguage: localeId)?.data }}
             </h4>
-    
+
             <span class="hidden md:block text-gray-400 text-left">
                 {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 100) ?? '' }}...
             </span>
-    
+
             <span class="md:hidden text-gray-400 text-left">
                 {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}...
             </span>
@@ -38,7 +38,8 @@
 
 
     <div class="col-span-12 md:col-span-2 w-full h-full min-h-20">
-        <a matButton="elevated" [routerLink]="['/dish',  dish.slug]" class="!h-full !w-full !rounded-lg">
+        <a matButton="elevated" [routerLink]="['/dish',  dish.slug]" class="!h-full !w-full !rounded-lg"
+            [target]="newTab ? '_blank' : '_self'">
             <span i18n="@@discover">Discover</span>
         </a>
     </div>

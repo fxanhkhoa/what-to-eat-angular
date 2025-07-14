@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformServer } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
@@ -14,6 +15,7 @@ import {
 import { DishCardFancyComponent } from '@/app/module/client/dish/dish-card-fancy/dish-card-fancy.component';
 import { COLOR_PALETTE } from '@/constant/color.constant';
 import { Dish } from '@/types/dish.type';
+import { GameStateService } from '@/app/state/game-state.service';
 
 type Sector = {
   color: string;
@@ -27,7 +29,7 @@ type Sector = {
   styleUrl: './wheel-player.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class WheelPlayerComponent {
+export class WheelPlayerComponent implements AfterViewInit {
   @Input() set options(values: Dish[]) {
     this.sectors = values.map((opts, i) => {
       return {
@@ -41,6 +43,7 @@ export class WheelPlayerComponent {
 
     if (this.wheel) {
       this.createWheel();
+      this.engine();
     }
   }
 
@@ -48,6 +51,7 @@ export class WheelPlayerComponent {
 
   private platformId = inject(PLATFORM_ID);
   localeId = inject(LOCALE_ID);
+  private gameStateService = inject(GameStateService);
 
   @ViewChild('wheel') wheel!: ElementRef<HTMLCanvasElement>;
   @ViewChild('spin') spin!: ElementRef;
@@ -66,16 +70,10 @@ export class WheelPlayerComponent {
   TAU: number = 0;
   arc0: number = 0;
 
-  modeDelete = true;
-
   friction = 0.995; // 0.995=soft, 0.99=mid, 0.98=hard
   angVel = 0; // Angular velocity
   ang = 0; // Angle in radians
   lastSelection: number = 0;
-
-  ngDoCheck(): void {
-    this.engine();
-  }
 
   ngOnInit() {
     // Initial rotation
@@ -86,6 +84,7 @@ export class WheelPlayerComponent {
       return;
     }
     this.createWheel();
+    this.engine();
   }
 
   createWheel() {
@@ -109,6 +108,7 @@ export class WheelPlayerComponent {
 
   spinner() {
     if (!this.angVel) this.angVel = this.rand(0.25, 0.35);
+    this.engine();
   }
 
   getIndex = () =>
@@ -150,11 +150,12 @@ export class WheelPlayerComponent {
     this.ctx.canvas.style.transform = `rotate(${this.ang - this.PI / 2}rad)`;
     this.spin.nativeElement.textContent = !this.angVel
       ? $localize`spin`
-      : sector.item.title.find((e) => e.lang === this.localeId)?.data || '';
+      : sector.item.title
+          .find((e) => e.lang === this.localeId)
+          ?.data.slice(0, 10) + '...' || '';
     if (!first) {
       this.lastSelection = !this.angVel ? this.lastSelection : this.getIndex();
-      // this.deleteOption();
-      this.optionSelected.emit(this.sectors[this.lastSelection].item._id);
+      this.selectOption();
     }
     this.spin.nativeElement.style.background = sector.color;
   }
@@ -173,19 +174,28 @@ export class WheelPlayerComponent {
     if (isPlatformServer(this.platformId)) {
       return;
     }
-    requestAnimationFrame(this.frame.bind(this));
+    if (this.angVel) {
+      this.frame();
+      requestAnimationFrame(() => this.engine());
+    }
+    // requestAnimationFrame(this.frame.bind(this));
   }
 
-  deleteOption() {
-    if (this.modeDelete && !this.angVel) {
+  selectOption() {
+    if (!this.angVel) {
       this.spin.nativeElement.textContent =
-        this.sectors[this.lastSelection].item.title.find(
-          (e) => e.lang === this.localeId
-        )?.data || '';
-      this.sectors.splice(this.lastSelection, 1);
+        this.sectors[this.lastSelection].item.title
+          .find((e) => e.lang === this.localeId)
+          ?.data.slice(0, 10) + '...' || '';
+      this.optionSelected.emit(this.sectors[this.lastSelection].item._id);
+      this.gameStateService.updateWheelOfFortuneSelectedItem({
+        selectedItem: this.sectors[this.lastSelection].item,
+        items: this.sectors.map((s) => s.item),
+      });
+
       setTimeout(() => {
         this.createWheel();
-      }, 1200);
+      }, 1500);
     }
   }
 
@@ -193,6 +203,12 @@ export class WheelPlayerComponent {
     this.popoverDish = sector.item;
     this.popoverX = event.clientX;
     this.popoverY = event.clientY;
+
+    const thresholdX = 750;
+
+    if (window.innerWidth - this.popoverX < thresholdX) {
+      this.popoverX -= thresholdX - (window.innerWidth - this.popoverX);
+    }
   }
 
   onSectorMouseLeave() {
@@ -211,8 +227,18 @@ export class WheelPlayerComponent {
     }
     let angle = Math.atan2(y, x);
     if (angle < 0) angle += this.TAU;
-    const sectorIndex = Math.floor(angle / this.arc0);
-    const sector = this.sectors[sectorIndex];
+
+    // Adjust angle by current rotation
+    let adjustedAngle = angle - (this.ang - this.PI / 2);
+    if (adjustedAngle < 0) adjustedAngle += this.TAU;
+    const sectorIndex = Math.floor(adjustedAngle / this.arc0);
+
+    let selectedIndex = sectorIndex;
+    if (selectedIndex >= this.sectors.length) {
+      selectedIndex -= this.sectors.length;
+    }
+
+    const sector = this.sectors[selectedIndex];
     if (sector) {
       this.onSectorMouseEnter(event, sector);
     } else {

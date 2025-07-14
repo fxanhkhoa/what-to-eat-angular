@@ -56,7 +56,6 @@ export class ContactSectionComponent {
   onSubmit(): void {
     if (this.contactForm.valid) {
       // TODO: Implement your form submission logic here
-      console.log('Form submitted:', this.contactForm.value);
       this.isSending = true;
 
       this.contactService

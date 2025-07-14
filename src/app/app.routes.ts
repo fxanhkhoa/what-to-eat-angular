@@ -54,8 +54,10 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            redirectTo: 'wheel-of-fortune',
-            pathMatch: 'full',
+            loadComponent: () =>
+              import(
+                './module/client/game/game.component'
+              ).then((m) => m.GameComponent),
           },
           {
             path: 'wheel-of-fortune',

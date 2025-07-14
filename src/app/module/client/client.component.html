@@ -26,6 +26,21 @@
                             class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                             i18n>Ingredient</a>
 
+                        <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300">
+                            <div class="flex items-center">
+                                <mat-icon>gamepad</mat-icon>
+                                <span class="ml-1" i18n>Game</span>
+                            </div>
+                        </button>
+                        <mat-menu #gameMenu="matMenu">
+                            <button mat-menu-item [routerLink]="['/game', 'wheel-of-fortune']">
+                                <div class="flex gap-3">
+                                    <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
+                                    <span i18n>Food Wheel</span>
+                                </div>
+                            </button>
+                        </mat-menu>
+
                         <!-- Language Selector -->
                         <button mat-button [matMenuTriggerFor]="languageMenu" class="text-white hover:text-gray-300">
                             <div class="flex items-center">
@@ -34,23 +49,30 @@
                             </div>
                         </button>
                         <mat-menu #languageMenu="matMenu">
-                            <button mat-menu-item *ngFor="let lang of availableLanguages"
-                                (click)="changeLanguage(lang.code)">
+                            @for (lang of availableLanguages; track lang) {
+                            <button mat-menu-item (click)="changeLanguage(lang.code)">
                                 <div class="flex gap-3">
                                     <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" />
                                     <span>{{ lang.name }}</span>
                                 </div>
                             </button>
+                            }
                         </mat-menu>
                     </div>
                 </div>
 
                 <!-- Login Button -->
                 <div class="hidden md:block">
+                    @if (payload) {
+                    <button matIconButton>
+                        <img class="rounded-lg" [src]="avatarFromPlaceholder()" />
+                    </button>
+                    } @else {
                     <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300"
                         aria-label="Login button">
                         <mat-icon>account_circle</mat-icon>
                     </button>
+                    }
                 </div>
 
                 <!-- Mobile menu button -->
