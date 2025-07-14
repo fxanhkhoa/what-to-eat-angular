@@ -19,7 +19,7 @@ export class GameStateService {
 
   updateWheelOfFortuneSelectedItem(state: WheelOfFortuneState) {
     const currentState = this.gameState.getValue();
-    currentState.wheelOfFortune = state;
-    this.gameState.next(currentState);
+    const newState = { ...currentState, wheelOfFortune: state };
+    this.gameState.next(newState);
   }
 }
