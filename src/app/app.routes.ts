@@ -66,6 +66,13 @@ export const routes: Routes = [
                 './module/client/game/wheel-of-fortune/wheel-of-fortune.component'
               ).then((m) => m.WheelOfFortuneComponent),
           },
+          {
+            path: 'flipping-card',
+            loadComponent: () =>
+              import(
+                './module/client/game/flipping-card/flipping-card.component'
+              ).then((m) => m.FlippingCardComponent),
+          },
         ],
       },
     ],

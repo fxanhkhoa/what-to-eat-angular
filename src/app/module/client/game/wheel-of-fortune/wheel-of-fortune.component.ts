@@ -38,7 +38,7 @@ export class WheelOfFortuneComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(null);
 
-    this.gameStateService.updateWheelOfFortuneSelectedItem({
+    this.gameStateService.updateWheelOfFortuneState({
       selectedItem: null,
       items: this.dishes(),
     });
@@ -75,15 +75,17 @@ export class WheelOfFortuneComponent implements OnInit, OnDestroy {
               width: '80vw',
             });
 
-            if (result) {
-              const newItems = state.wheelOfFortune.items.filter(
-                (e) => e._id !== state.wheelOfFortune.selectedItem?._id
-              );
-              this.gameStateService.updateWheelOfFortuneSelectedItem({
-                selectedItem: null,
-                items: newItems,
-              });
-            }
+            result.afterClosed().subscribe((result) => {
+              if (result) {
+                const newItems = state.wheelOfFortune.items.filter(
+                  (e) => e._id !== state.wheelOfFortune.selectedItem?._id
+                );
+                this.gameStateService.updateWheelOfFortuneState({
+                  selectedItem: null,
+                  items: newItems,
+                });
+              }
+            });
           }
           if (state.wheelOfFortune.items.length > 0) {
             this.dishes.set(state.wheelOfFortune.items);
@@ -98,7 +100,7 @@ export class WheelOfFortuneComponent implements OnInit, OnDestroy {
         if (!res) return;
         this.dishes.set(res);
         this.loading.set(false);
-        this.gameStateService.updateWheelOfFortuneSelectedItem({
+        this.gameStateService.updateWheelOfFortuneState({
           selectedItem: null,
           items: res,
         });

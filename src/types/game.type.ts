@@ -10,6 +10,12 @@ export type WheelOfFortuneState = {
   items: Dish[];
 };
 
+export type FlippingCardState = {
+  selectedItem: Dish | null;
+  items: Dish[];
+};
+
 export type GameState = {
   wheelOfFortune: WheelOfFortuneState;
+  flippingCard: FlippingCardState;
 };

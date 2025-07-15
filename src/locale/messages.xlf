@@ -146,7 +146,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">101,103</context>
+          <context context-type="linenumber">107,109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5720565592371269148" datatype="html">
@@ -161,7 +161,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">100</context>
+          <context context-type="linenumber">106</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3797778920049399855" datatype="html">
@@ -179,7 +179,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="linenumber">104</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4643591148728960560" datatype="html">
@@ -188,6 +188,10 @@
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
           <context context-type="linenumber">32,33</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+          <context context-type="linenumber">114,115</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="7114918604387351177" datatype="html">
         <source>Food Wheel</source>
@@ -195,121 +199,136 @@
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
           <context context-type="linenumber">39,40</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+          <context context-type="linenumber">121,122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6040083914594871898" datatype="html">
+        <source>Food Flip</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+          <context context-type="linenumber">45,46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+          <context context-type="linenumber">127,128</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="5061253618491773519" datatype="html">
         <source> Discover delicious recipes and meal ideas tailored to your preferences and dietary needs. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">174</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1140327701924892323" datatype="html">
         <source>Quick Links</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">157,158</context>
+          <context context-type="linenumber">192,193</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8364309938383915497" datatype="html">
         <source> Home </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">160</context>
+          <context context-type="linenumber">195</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2901742111381174549" datatype="html">
         <source> All Dishes </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">165</context>
+          <context context-type="linenumber">200</context>
         </context-group>
       </trans-unit>
       <trans-unit id="197423074150198657" datatype="html">
         <source> About Us </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">205</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7922989125096435449" datatype="html">
         <source>Contact</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">174,175</context>
+          <context context-type="linenumber">209,210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1902100407096396858" datatype="html">
         <source>Categories</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">182,183</context>
+          <context context-type="linenumber">217,218</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2157848596136722181" datatype="html">
         <source>Stay Updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">193,194</context>
+          <context context-type="linenumber">228,229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4645357838085106517" datatype="html">
         <source>Subscribe to our newsletter for the latest recipes and tips.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">194,195</context>
+          <context context-type="linenumber">229,230</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1769661379068269645" datatype="html">
         <source>Your email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">234</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">201</context>
+          <context context-type="linenumber">236</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8552587679160911578" datatype="html">
         <source>Email is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">238</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8134695558272106554" datatype="html">
         <source>Please enter a valid email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">204,205</context>
+          <context context-type="linenumber">239,240</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1144407473317535723" datatype="html">
         <source>Subscribe</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">212,213</context>
+          <context context-type="linenumber">247,248</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8439955599488894226" datatype="html">
         <source>Privacy Policy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">262</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2029980907058777630" datatype="html">
         <source>Terms of Service</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">230</context>
+          <context context-type="linenumber">265</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8031435937841016824" datatype="html">
         <source>Cookie Policy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">233</context>
+          <context context-type="linenumber">268</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8890553633144307762" datatype="html">
@@ -327,6 +346,10 @@
           <context context-type="linenumber">5,6</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card.component.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-of-fortune.component.html</context>
           <context context-type="linenumber">5,6</context>
         </context-group>
@@ -342,6 +365,10 @@
           <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
@@ -351,6 +378,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
           <context context-type="linenumber">34</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.html</context>
@@ -574,8 +605,26 @@
           <context context-type="linenumber">49,50</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="3132570339312618665" datatype="html">
+        <source>Card Deck</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/card-deck/card-deck.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1758749689724496397" datatype="html">
+        <source> Shuffle Deck </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/card-deck/card-deck.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1505732662649536333" datatype="html">
         <source>Pick a dish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.html</context>
           <context context-type="linenumber">11,12</context>
@@ -584,12 +633,20 @@
       <trans-unit id="3249513483374643425" datatype="html">
         <source>Add</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.html</context>
           <context context-type="linenumber">29,30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4648900870671159218" datatype="html">
         <source>Success</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.ts</context>
           <context context-type="linenumber">60</context>
@@ -598,8 +655,19 @@
       <trans-unit id="5620114162133982317" datatype="html">
         <source>Dish added!</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.ts</context>
           <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1863000588570928532" datatype="html">
+        <source>Flipping Card Game</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card.component.html</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3267980817910457845" datatype="html">
