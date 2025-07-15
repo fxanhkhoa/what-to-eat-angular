@@ -39,6 +39,12 @@
                                     <span i18n>Food Wheel</span>
                                 </div>
                             </button>
+                            <button mat-menu-item [routerLink]="['/game', 'flipping-card']">
+                                <div class="flex gap-3">
+                                    <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
+                                    <span i18n>Food Flip</span>
+                                </div>
+                            </button>
                         </mat-menu>
 
                         <!-- Language Selector -->
@@ -100,6 +106,29 @@
                 <a mat-button routerLink="/ingredient" routerLinkActive="!text-gray-300 !underline"
                     class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Ingredient</a>
 
+                <mat-divider></mat-divider>
+
+                <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300 !mr-auto">
+                    <div class="flex items-center justify-start w-full">
+                        <mat-icon>gamepad</mat-icon>
+                        <span class="ml-1" i18n>Game</span>
+                    </div>
+                </button>
+                <mat-menu #gameMenu="matMenu">
+                    <button mat-menu-item [routerLink]="['/game', 'wheel-of-fortune']">
+                        <div class="flex gap-3">
+                            <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
+                            <span i18n>Food Wheel</span>
+                        </div>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/game', 'flipping-card']">
+                        <div class="flex gap-3">
+                            <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
+                            <span i18n>Food Flip</span>
+                        </div>
+                    </button>
+                </mat-menu>
+
                 <!-- Language Selector for Mobile -->
                 <button mat-button [matMenuTriggerFor]="mobileLanguageMenu"
                     class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
@@ -114,10 +143,16 @@
                     </button>
                 </mat-menu>
 
-                <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300 mx-auto"
+                @if (payload) {
+                <button matIconButton>
+                    <img class="rounded-lg" [src]="avatarFromPlaceholder()" />
+                </button>
+                } @else {
+                <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300"
                     aria-label="Login button">
                     <mat-icon>account_circle</mat-icon>
                 </button>
+                }
             </div>
         </div>
     </nav>

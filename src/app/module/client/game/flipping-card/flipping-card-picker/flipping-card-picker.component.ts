@@ -1,21 +1,21 @@
-import { Component, inject, Input, OnInit, signal } from '@angular/core';
-import { DishFilterComponent } from '@/app/module/client/dish/dish-filter/dish-filter.component';
-import { Dish, QueryDishDto } from '@/types/dish.type';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { DishFilterComponent } from '../../../dish/dish-filter/dish-filter.component';
 import { CommonModule } from '@angular/common';
-import { DishCardComponent } from '@/app/module/client/dish/dish-card/dish-card.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { GameStateService } from '@/app/state/game-state.service';
+import { DishCardComponent } from '../../../dish/dish-card/dish-card.component';
 import { EmptyComponent } from '@/app/components/empty/empty.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { DishService } from '@/app/service/dish.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { finalize, take } from 'rxjs';
+import { GameStateService } from '@/app/state/game-state.service';
 import { ToastService } from '@/app/shared/service/toast.service';
+import { DishService } from '@/app/service/dish.service';
+import { Dish, QueryDishDto } from '@/types/dish.type';
+import { finalize, take } from 'rxjs';
 
 @Component({
-  selector: 'app-wheel-dish-picker',
+  selector: 'app-flipping-card-picker',
   imports: [
     DishFilterComponent,
     CommonModule,
@@ -27,10 +27,10 @@ import { ToastService } from '@/app/shared/service/toast.service';
     MatExpansionModule,
     MatPaginatorModule,
   ],
-  templateUrl: './wheel-dish-picker.component.html',
-  styleUrl: './wheel-dish-picker.component.scss',
+  templateUrl: './flipping-card-picker.component.html',
+  styleUrl: './flipping-card-picker.component.scss',
 })
-export class WheelDishPickerComponent implements OnInit {
+export class FlippingCardPickerComponent implements OnInit {
   private gameStateService = inject(GameStateService);
   private dishService = inject(DishService);
   private toastService = inject(ToastService);
@@ -51,9 +51,9 @@ export class WheelDishPickerComponent implements OnInit {
       .getGameState()
       .pipe(take(1))
       .subscribe((state) => {
-        this.gameStateService.updateWheelOfFortuneState({
-          ...state.wheelOfFortune,
-          items: [...state.wheelOfFortune.items, dish],
+        this.gameStateService.updateFlippingCardState({
+          ...state.flippingCard,
+          items: [...state.flippingCard.items, dish],
         });
 
         this.toastService.showSuccess(

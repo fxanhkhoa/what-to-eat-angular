@@ -188,7 +188,7 @@ export class WheelPlayerComponent implements AfterViewInit {
           .find((e) => e.lang === this.localeId)
           ?.data.slice(0, 10) + '...' || '';
       this.optionSelected.emit(this.sectors[this.lastSelection].item._id);
-      this.gameStateService.updateWheelOfFortuneSelectedItem({
+      this.gameStateService.updateWheelOfFortuneState({
         selectedItem: this.sectors[this.lastSelection].item,
         items: this.sectors.map((s) => s.item),
       });

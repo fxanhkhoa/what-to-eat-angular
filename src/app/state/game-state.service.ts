@@ -1,5 +1,9 @@
 import { Dish } from '@/types/dish.type';
-import { GameState, WheelOfFortuneState } from '@/types/game.type';
+import {
+  FlippingCardState,
+  GameState,
+  WheelOfFortuneState,
+} from '@/types/game.type';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 export class GameStateService {
   private gameState = new BehaviorSubject<GameState>({
     wheelOfFortune: { selectedItem: null, items: [] },
+    flippingCard: { selectedItem: null, items: [] },
   });
 
   constructor() {}
@@ -16,10 +21,16 @@ export class GameStateService {
   getGameState() {
     return this.gameState.asObservable();
   }
-
-  updateWheelOfFortuneSelectedItem(state: WheelOfFortuneState) {
+  
+  updateWheelOfFortuneState(state: WheelOfFortuneState) {
     const currentState = this.gameState.getValue();
     const newState = { ...currentState, wheelOfFortune: state };
+    this.gameState.next(newState);
+  }
+
+  updateFlippingCardState(state: FlippingCardState) {
+    const currentState = this.gameState.getValue();
+    const newState = { ...currentState, flippingCard: state };
     this.gameState.next(newState);
   }
 }
