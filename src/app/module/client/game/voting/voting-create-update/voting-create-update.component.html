@@ -1,0 +1,28 @@
+<div class="grid grid-cols-12 gap-5">
+    <div class="col-span-12 md:col-span-8">
+        <section id="main" class="min-h-screen p-5 md:p-10 flex flex-col mt-20">
+            <div class="flex justify-between">
+                <button matButton="elevated" (click)="goBack()">
+                    <mat-icon>chevron_left</mat-icon>
+                    <span i18n>Back</span>
+                </button>
+            </div>
+        </section>
+    </div>
+    <div class="col-span-12 md:col-span-4 glassmorphic-container_dark">
+        <div class="flex flex-col gap-5 p-5 mt-10">
+            <div class="card">
+                <h3 class="text-lg font-semibold">Voting</h3>
+                <p class="text-sm text-gray-600">
+                    Create or update a voting session.
+                </p>
+            </div>
+            <div class="card">
+                <button class="btn btn-primary" [routerLink]="['/game/voting']">
+                    Go to Voting
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

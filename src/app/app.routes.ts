@@ -55,9 +55,9 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import(
-                './module/client/game/game.component'
-              ).then((m) => m.GameComponent),
+              import('./module/client/game/game.component').then(
+                (m) => m.GameComponent
+              ),
           },
           {
             path: 'wheel-of-fortune',
@@ -72,6 +72,25 @@ export const routes: Routes = [
               import(
                 './module/client/game/flipping-card/flipping-card.component'
               ).then((m) => m.FlippingCardComponent),
+          },
+          {
+            path: 'flipping-card',
+            loadComponent: () =>
+              import(
+                './module/client/game/flipping-card/flipping-card.component'
+              ).then((m) => m.FlippingCardComponent),
+          },
+          {
+            path: 'voting',
+            children: [
+              {
+                path: ':id',
+                loadComponent: () =>
+                  import(
+                    './module/client/game/voting/voting-create-update/voting-create-update.component'
+                  ).then((m) => m.VotingCreateUpdateComponent),
+              },
+            ],
           },
         ],
       },
