@@ -1,28 +1,187 @@
-<div class="grid grid-cols-12 gap-5">
-    <div class="col-span-12 md:col-span-8">
-        <section id="main" class="min-h-screen p-5 md:p-10 flex flex-col mt-20">
-            <div class="flex justify-between">
+<mat-drawer-container autosize class="!bg-transparent">
+    <section id="main" class="p-5 md:p-10 flex flex-col mt-20">
+        <mat-toolbar class="glassmorphic-container_dark !rounded-lg">
+            <div class="flex justify-between w-full">
                 <button matButton="elevated" (click)="goBack()">
                     <mat-icon>chevron_left</mat-icon>
                     <span i18n>Back</span>
                 </button>
+                <div class="flex gap-2">
+                    <button matButton="tonal" color="primary" type="submit" [disabled]="dishVoteForm.invalid">
+                        <mat-icon>save</mat-icon>
+                        <span i18n>Create Voting</span>
+                    </button>
+                    <button matIconButton (click)="openSidenav.set(!openSidenav())"
+                        [ngClass]="{'duration-300 rotate-180': openSidenav()}">
+                        <mat-icon>chevron_left</mat-icon>
+                    </button>
+                </div>
             </div>
-        </section>
-    </div>
-    <div class="col-span-12 md:col-span-4 glassmorphic-container_dark">
-        <div class="flex flex-col gap-5 p-5 mt-10">
-            <div class="card">
-                <h3 class="text-lg font-semibold">Voting</h3>
-                <p class="text-sm text-gray-600">
-                    Create or update a voting session.
-                </p>
+        </mat-toolbar>
+
+        <!-- Drag and Drop Area -->
+        <div class="flex gap-6 mt-6 h-[80vh]">
+            <!-- Available Dishes -->
+            <div class="flex-1">
+                <mat-card class="glassmorphic-container_dark !h-full">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <span
+                                class="bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">Available
+                                Dishes</span>
+                        </mat-card-title>
+                        <mat-card-subtitle>Drag dishes to add them to voting</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-accordion class="p-2">
+                        <mat-expansion-panel class="glassmorphic-container_dark">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title i18n> Filter </mat-panel-title>
+                                <mat-panel-description i18n>Let's find your favorite dishes!</mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div class="max-h-40 overflow-y-auto mb-2 p-2">
+                                <app-dish-filter (search)="onSearch($event)"></app-dish-filter>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-card-content class="!h-full max-h-full overflow-y-auto">
+                        <div id="available-dishes" class="list h-full min-h-20 p-4 rounded-lg" cdkDropList
+                            [cdkDropListData]="availableDishes()" [cdkDropListConnectedTo]="['selected-dishes']"
+                            (cdkDropListDropped)="drop($event)">
+                            @if (loading()) {
+                            <div class="flex items-center justify-center h-full">
+                                <mat-spinner diameter="30" class="text-gray-400"></mat-spinner>
+                            </div>
+                            }
+                            @for (dish of availableDishes(); track dish) {
+                            <div class="box bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-3 mb-2 cursor-move hover:bg-white/20 transition-colors"
+                                cdkDrag>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <mat-icon class="text-gray-400">drag_indicator</mat-icon>
+                                        <div>
+                                            <div class="font-medium">{{ (dish.title | multiLanguage :
+                                                localeID)?.data}}
+                                            </div>
+                                            <div class="text-sm text-gray-400">{{ (dish.shortDescription | multiLanguage
+                                                :
+                                                localeID)?.data?.slice(0, 30)}}...</div>
+                                        </div>
+                                    </div>
+                                    <button mat-icon-button
+                                        class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity"
+                                        (mouseenter)="showDishPreview($event, dish)" (mouseleave)="hideDishPreview()"
+                                        matTooltip="Preview dish" matTooltipPosition="above">
+                                        <mat-icon class="text-gray-400">visibility</mat-icon>
+                                    </button>
+                                </div>
+                                <div *cdkDragPlaceholder class="bg-gray-200/50 rounded-lg h-16"></div>
+                            </div>
+                            }
+                            @if (availableDishes().length === 0) {
+                            <div class="text-center text-gray-500 mt-8">
+                                No dishes available
+                            </div>
+                            }
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <mat-paginator [length]="total()" [pageSizeOptions]="[10, 25, 50, 100]"
+                            [pageIndex]="currentPage() - 1" [pageSize]="limit()" (page)="paginatorChange($event)"
+                            showFirstLastButtons aria-label="Select page">
+                        </mat-paginator>
+                    </mat-card-actions>
+                </mat-card>
             </div>
-            <div class="card">
-                <button class="btn btn-primary" [routerLink]="['/game/voting']">
-                    Go to Voting
-                </button>
+
+            <!-- Selected Dishes for Voting -->
+            <div class="flex-1">
+                <mat-card class="glassmorphic-container_dark !h-full">
+                    <mat-card-header>
+                        <mat-card-title>
+                            <span class="bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+                                Voting Dishes
+                            </span>
+                        </mat-card-title>
+                        <mat-card-subtitle>Dishes included in the voting</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="!h-full max-h-full overflow-y-auto">
+                        <div id="selected-dishes" class="list h-full p-4 rounded-lg" cdkDropList
+                            [cdkDropListData]="selectedDishes()" [cdkDropListConnectedTo]="['available-dishes']"
+                            (cdkDropListDropped)="drop($event)">
+                            @for (dish of selectedDishes(); track dish) {
+                            <div class="box bg-green-500/10 backdrop-blur-sm border border-green-500/20 rounded-lg p-3 mb-2 cursor-move hover:bg-green-500/20 transition-colors"
+                                cdkDrag>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <mat-icon class="text-green-400">drag_indicator</mat-icon>
+                                        <div>
+                                            <div class="font-medium">{{ (dish.title | multiLanguage :
+                                                localeID)?.data}}</div>
+                                            <div class="text-sm text-gray-400">{{ (dish.shortDescription | multiLanguage
+                                                :
+                                                localeID)?.data?.slice(0, 30)}}...</div>
+                                        </div>
+                                    </div>
+                                    <button mat-icon-button
+                                        class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity"
+                                        (mouseenter)="showDishPreview($event, dish)" (mouseleave)="hideDishPreview()"
+                                        matTooltip="Preview dish" matTooltipPosition="above">
+                                        <mat-icon class="text-green-400">visibility</mat-icon>
+                                    </button>
+                                </div>
+                                <div *cdkDragPlaceholder class="bg-green-200/50 rounded-lg h-16"></div>
+                            </div>
+                            }
+                            @if (selectedDishes().length === 0) {
+                            <div class="text-center text-gray-500 mt-8">
+                                Drop dishes here to add to voting
+                            </div>
+                            }
+                        </div>
+                    </mat-card-content>
+                </mat-card>
             </div>
         </div>
+    </section>
+    <mat-drawer mode="side" [opened]="openSidenav()" position="end" class="glassmorphic-container_dark !rounded-lg">
+        <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="mt-10">
+            <mat-tab label="Voting Details" i18n-label>
+                <div class="flex flex-col gap-5 p-5">
+                    <div class="flex-1 mt-5">
+                        <form [formGroup]="dishVoteForm" (ngSubmit)="onSubmit()" class="space-y-6">
+                            <!-- Title and Description -->
+                            <mat-card class="glassmorphic-container_dark">
+                                <mat-card-header>
+                                    <mat-card-title>Voting Details</mat-card-title>
+                                </mat-card-header>
+                                <mat-card-content class="space-y-4 mt-2">
+                                    <mat-form-field appearance="outline" class="w-full">
+                                        <mat-label>Title</mat-label>
+                                        <input matInput required formControlName="title"
+                                            placeholder="Enter voting title">
+                                        <mat-error *ngIf="dishVoteForm.get('title')?.hasError('required')">
+                                            Title is required
+                                        </mat-error>
+                                    </mat-form-field>
 
+                                    <mat-form-field appearance="outline" class="w-full">
+                                        <mat-label>Description</mat-label>
+                                        <textarea matInput formControlName="description"
+                                            placeholder="Enter voting description" rows="3"></textarea>
+                                    </mat-form-field>
+                                </mat-card-content>
+                            </mat-card>
+                        </form>
+                    </div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-drawer>
+</mat-drawer-container>
+
+<!-- Overlay Template for Dish Preview -->
+<ng-template #dishPreviewTemplate>
+    <div class="slide-in-blurred-right">
+        <app-dish-card-fancy [dish]="selectedDishForPreview"></app-dish-card-fancy>
     </div>
-</div>
+</ng-template>
