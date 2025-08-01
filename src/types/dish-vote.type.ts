@@ -1,22 +1,22 @@
-import { BaseType } from './base.type';
+import { BaseType, PagingDto } from './base.type';
 
 export type DishVoteItem = {
   slug: string;
+  customTitle?: string;
   voteUser: string[];
   voteAnonymous: string[];
   isCustom: boolean;
 };
 
 export type DishVote = {
-  _id: string;
   title: string;
   description: string;
   dishVoteItems: DishVoteItem[];
 } & BaseType;
 
 export type DishVoteFilter = {
-  keyword?: string | null;
-};
+  keyword?: string;
+} & PagingDto;
 
 export type CreateDishVoteDto = {
   title?: string;

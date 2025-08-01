@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,7 +23,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CreateDishVoteDto } from '@/types/dish-vote.type';
+import { CreateDishVoteDto, DishVoteItem } from '@/types/dish-vote.type';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -39,12 +39,17 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { DishCardFancyComponent } from '@/app/module/client/dish/dish-card-fancy/dish-card-fancy.component';
 import { Dish, QueryDishDto } from '@/types/dish.type';
-import { finalize } from 'rxjs';
+import { finalize, timeout } from 'rxjs';
 import { MultiLanguagePipe } from '@/app/pipe/multi-language.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { DishFilterComponent } from '../../../dish/dish-filter/dish-filter.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AddCustomDishComponent } from './add-custom-dish/add-custom-dish.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { DishVoteService } from '@/app/service/dish-vote.service';
 
 @Component({
   selector: 'app-voting-create-update',
@@ -68,6 +73,9 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     MatExpansionModule,
     DishFilterComponent,
     MatPaginatorModule,
+    MatTooltipModule,
+    MatDialogModule,
+    MatDividerModule,
   ],
   templateUrl: './voting-create-update.component.html',
   styleUrl: './voting-create-update.component.scss',
@@ -80,6 +88,9 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   private overlay = inject(Overlay);
   private viewContainerRef = inject(ViewContainerRef);
   localeID = inject(LOCALE_ID);
+  private dialog = inject(MatDialog);
+  private dishVoteService = inject(DishVoteService);
+  private router = inject(Router);
 
   openSidenav = signal(true);
   selectedDishForPreview: any = null;
@@ -87,17 +98,22 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   dishVoteForm: FormGroup = this.fb.group({
     title: ['', [Validators.required]],
     description: [''],
-    dishVoteItems: this.fb.array([]),
+    dishVoteItems: this.fb.array(
+      [],
+      [Validators.required, Validators.minLength(1)]
+    ),
   });
 
   availableDishes = signal<Dish[]>([]);
 
   selectedDishes = signal<Dish[]>([]);
+  customDishes = signal<DishVoteItem[]>([]);
   currentPage = signal(1);
   limit = signal(10);
   total = signal(0);
   loading = signal(false);
   dto: QueryDishDto = {};
+  creatingLoading = signal(false);
 
   ngOnInit(): void {
     this.getDishes();
@@ -136,6 +152,7 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   createDishVoteItem(): FormGroup {
     return this.fb.group({
       slug: ['', Validators.required],
+      customTitle: [''],
       voteUser: this.fb.array([]),
       voteAnonymous: this.fb.array([]),
       isCustom: [false],
@@ -150,11 +167,90 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
     this.dishVoteItems.removeAt(index);
   }
 
+  clearSelectedDishes() {
+    this.selectedDishes.set([]);
+    this.dishVoteItems.clear();
+  }
+
+  removeDish(dish: Dish) {
+    const index = this.selectedDishes().findIndex((d) => d._id === dish._id);
+    if (index !== -1) {
+      this.selectedDishes.update((dishes) => {
+        const newDishes = [...dishes];
+        newDishes.splice(index, 1);
+        return newDishes;
+      });
+      this.dishVoteItems.removeAt(index);
+    }
+  }
+
+  removeCustomDish(customDish: DishVoteItem) {
+    const index = this.customDishes().findIndex(
+      (d) =>
+        d.slug === customDish.slug && d.customTitle === customDish.customTitle
+    );
+    if (index !== -1) {
+      this.customDishes.update((dishes) => {
+        const newDishes = [...dishes];
+        newDishes.splice(index, 1);
+        return newDishes;
+      });
+      this.dishVoteItems.removeAt(
+        this.dishVoteItems.controls.findIndex(
+          (item) => item.value.slug === customDish.slug
+        )
+      );
+    }
+  }
+
+  addCustomDish() {
+    this.dialog
+      .open(AddCustomDishComponent, {
+        width: '40vw',
+        data: {
+          title: 'Add Custom Dish',
+          description: 'Create a custom dish for voting',
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          const dishVoteItem = this.createDishVoteItem();
+          dishVoteItem.patchValue({
+            slug: result.slug,
+            customTitle: result.customTitle,
+            isCustom: true,
+            voteUser: [],
+            voteAnonymous: [],
+          });
+          this.dishVoteItems.push(dishVoteItem);
+          this.customDishes.update((dishes) => [
+            ...dishes,
+            {
+              slug: result.slug,
+              customTitle: result.customTitle,
+              isCustom: true,
+              voteUser: [],
+              voteAnonymous: [],
+            },
+          ]);
+        }
+      });
+  }
+
   onSubmit() {
     if (this.dishVoteForm.valid) {
       const formValue: CreateDishVoteDto = this.dishVoteForm.value;
-      console.log('Form submitted:', formValue);
-      // Handle form submission
+      this.creatingLoading.set(true);
+      this.dishVoteService
+        .create(formValue)
+        .pipe(
+          finalize(() => this.creatingLoading.set(false)),
+          timeout(10000)
+        )
+        .subscribe((res) => {
+          this.router.navigate(['/game/voting', res._id]);
+        });
     }
   }
 

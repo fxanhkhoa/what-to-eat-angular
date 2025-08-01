@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatListModule } from '@angular/material/list';
@@ -33,6 +33,7 @@ import cookies from 'js-cookie';
 import { Cookies_Key } from '@/enum/cookies.enum';
 import { JWTTokenPayload } from '@/types/auth.type';
 import { jwtDecode } from 'jwt-decode';
+import { AuthService } from '@/app/service/auth.service';
 
 @Component({
   selector: 'app-client',
@@ -60,6 +61,8 @@ export class ClientComponent implements OnInit {
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
   private fb: FormBuilder = inject(FormBuilder);
+  private router = inject(Router);
+  private authService = inject(AuthService);
   localeId = inject<string>(LOCALE_ID);
 
   mealCategories: string[] = [];
@@ -167,6 +170,25 @@ export class ClientComponent implements OnInit {
       //   error => console.error('Subscription failed', error)
       // );
     }
+  }
+
+  logout(): void {
+    // Clear authentication tokens
+    cookies.remove(Cookies_Key.TOKEN);
+    cookies.remove(Cookies_Key.REFRESH_TOKEN);
+    
+    // Clear user payload
+    this.payload = undefined;
+    
+    // Navigate to login page
+    this.router.navigate(['/']);
+
+    this.authService.logout();
+  }
+
+  goToProfile(): void {
+    // Navigate to user profile page
+    this.router.navigate(['/profile']);
   }
 
   getRandomMealCategories(count: number): void {

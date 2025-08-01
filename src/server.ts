@@ -48,16 +48,16 @@ app.use(
   })
 );
 
-app.use('/:locale/*', (req, res, next) => {
-  const locale = req.params.locale;
-  if (SUPPORTED_LOCALES.includes(locale)) {
-    next();
-  } else {
-    // If URL doesn't have a valid locale, redirect to default locale
-    const redirectPath = `/en${req.originalUrl}`;
-    res.redirect(302, redirectPath);
-  }
-});
+// app.use('/:locale/*', (req, res, next) => {
+//   const locale = req.params.locale;
+//   if (SUPPORTED_LOCALES.includes(locale)) {
+//     next();
+//   } else {
+//     // If URL doesn't have a valid locale, redirect to default locale
+//     const redirectPath = `/en${req.originalUrl}`;
+//     res.redirect(302, redirectPath);
+//   }
+// });
 
 app.use('/**', (req, res, next) => {
   angularApp

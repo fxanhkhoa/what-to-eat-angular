@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  API_URL: 'https://api.eatwhat.io.vn',
+  API_URL: 'http://localhost:1323',
+  SOCKET_ENDPOINT: 'http://localhost:1323',
 };

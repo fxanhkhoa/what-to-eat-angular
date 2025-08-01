@@ -83,12 +83,28 @@ export const routes: Routes = [
           {
             path: 'voting',
             children: [
+              { path: '', redirectTo: 'create', pathMatch: 'full' },
               {
-                path: ':id',
+                path: 'create',
+                canActivate: [authenticationGuard, authorizationGuard],
+                data: {
+                  permissions: [Permissions.CREATE_DISH_VOTE],
+                },
                 loadComponent: () =>
                   import(
                     './module/client/game/voting/voting-create-update/voting-create-update.component'
                   ).then((m) => m.VotingCreateUpdateComponent),
+              },
+              {
+                path: ':id',
+                canActivate: [authenticationGuard, authorizationGuard],
+                data: {
+                  permissions: [Permissions.FIND_ONE_DISH_VOTE],
+                },
+                loadComponent: () =>
+                  import('./module/client/game/voting/voting.component').then(
+                    (m) => m.VotingComponent
+                  ),
               },
             ],
           },
@@ -196,5 +212,10 @@ export const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'forbidden',
+    loadComponent: () =>
+      import('./module/forbidden/forbidden.component').then((m) => m.ForbiddenComponent),
   },
 ];

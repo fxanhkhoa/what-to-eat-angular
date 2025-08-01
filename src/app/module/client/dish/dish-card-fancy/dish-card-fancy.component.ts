@@ -32,6 +32,7 @@ import { RouterModule } from '@angular/router';
 })
 export class DishCardFancyComponent implements OnInit {
   @Input() dish!: Dish;
+  @Input() isWinner: boolean = false;
 
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);

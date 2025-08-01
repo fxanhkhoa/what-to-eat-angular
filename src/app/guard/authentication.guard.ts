@@ -5,7 +5,6 @@ import {
   CanActivateFn,
   RedirectCommand,
   Router,
-  UrlTree,
 } from '@angular/router';
 import cookies from 'js-cookie';
 
@@ -17,8 +16,10 @@ export const authenticationGuard: CanActivateFn = (route, state) => {
 
   if (!isRunningInBrowser) return true;
   const token = cookies.get(Cookies_Key.TOKEN);
-  
+
   if (token) return true;
-  const loginPath = router.parseUrl('/login');
-  return new RedirectCommand(loginPath, { skipLocationChange: true });
+  const loginPath = router.parseUrl(
+    '/login?redirect=' + encodeURIComponent(state.url)
+  );
+  return new RedirectCommand(loginPath);
 };

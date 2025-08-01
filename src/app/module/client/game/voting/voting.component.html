@@ -1,0 +1,156 @@
+<section id="main" class="p-5 md:p-10 flex flex-col mt-20">
+    <div class="flex justify-between">
+        <button matButton="elevated" (click)="goBack()">
+            <mat-icon>chevron_left</mat-icon>
+            <span i18n>Back</span>
+        </button>
+    </div>
+
+    <div class="flex flex-col gap-1 p-5" *ngIf="!loading && !error">
+        <!-- Title -->
+        <h1 class="text-center bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+            Welcome to <span class="font-bold">{{ dishVote?.title }}</span>
+        </h1>
+
+        <span class="text-center">({{ myName() }})</span>
+
+        <!-- Results Popover -->
+        <div class="my-3 w-full h-full cursor-pointer mx-auto">
+            <div class="flex justify-center items-center">
+                <button [matMenuTriggerFor]="resultMenu" #trigger="matMenuTrigger" matFab extended class="mx-auto">
+                    <mat-icon>poll</mat-icon>
+                    <span i18n>Result</span>
+                </button>
+            </div>
+        </div>
+
+        <mat-menu #resultMenu="matMenu" class="popover-menu">
+            <div class="flex flex-col gap-3 p-5">
+                <h3 class="font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">The
+                    Result</h3>
+                @for (vote of dishVote?.dishVoteItems; track vote) {
+                <div class="flex justify-between gap-5">
+                    <span>
+                        {{ getDishTitleBySlug(vote.slug) }}
+                    </span>
+                    <div class="font-semibold">
+                        <span>{{ getTotalVotesBySlug(vote.slug) }}</span>
+                    </div>
+                </div>
+                }
+                <mat-divider></mat-divider>
+                <div class="flex gap-2 flex-wrap">
+                    <span>The Winner:</span>
+                    <span
+                        class="font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">{{
+                        getWinnerNames() }}</span>
+                </div>
+            </div>
+        </mat-menu>
+
+        <!-- Dishes Grid -->
+        <div class="grid grid-cols-12 gap-3">
+            @for (dish of dishes; track dish) {
+            <div class="col-span-12 md:col-span-9">
+                <app-dish-card-fancy [dish]="dish" [isWinner]="isWinnerDish(dish.slug)"></app-dish-card-fancy>
+            </div>
+            <div class="col-span-12 md:col-span-3">
+                <div class="flex flex-col gap-3 justify-between h-full">
+                    <div class="flex flex-col gap-2">
+                        <div class="flex items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
+                            @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
+                            <app-voting-user-badge [voterName]="voter"
+                                [ngStyle]="{'transform': 'translateX(' + (i * -12) + 'px)'}"></app-voting-user-badge>
+                            }
+                            <span class="ml-auto text-xl neumorphic-inset_dark rounded-lg p-3">{{
+                                getTotalVotes(dish.slug) }}</span>
+                        </div>
+                    </div>
+                    <button matButton="elevated" (click)="onVote(dish)">
+                        @if (isVotedByMe(dish.slug)) {
+                        <mat-icon>thumb_down</mat-icon>
+                        } @else {
+                        <mat-icon>thumb_up</mat-icon>
+                        }
+                        @if (isVotedByMe(dish.slug)) {
+                        <span i18n>Downvote</span>
+                        } @else {
+                        <span i18n>Vote</span>
+                        }
+                    </button>
+                </div>
+            </div>
+            }
+            <mat-divider class="col-span-12"></mat-divider>
+            <span class="font-bold col-span-12 text-xl" i18n>Custom Dishes</span>
+            @for (dish of getCustomDish(); track dish) {
+            <div class="col-span-12 md:col-span-4">
+                <mat-card class="!relative">
+                    @if (isWinnerDish(dish.slug)) {
+                    <div
+                        class="duration-300 winner-badge absolute top-0 -left-4 z-20 text-black px-3 py-1 rounded-full text-xs font-bold heartbeat">
+                        <span class="winner-crown mr-1">👑</span>
+                        <span i18n="@@winner">WINNER</span>
+                    </div>
+                    }
+                    <mat-card-header>
+                        <mat-card-title>{{ dish.customTitle }}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="flex flex-col gap-3 mt-3">
+                            <a matButton="outlined" [href]="dish.slug" target="_blank" rel="noopener noreferrer">
+                                <span i18n>Preview</span>
+                                <mat-icon>link</mat-icon>
+                            </a>
+                            <div class="flex flex-col gap-2">
+                                <div class="flex items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
+                                    @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
+                                    <app-voting-user-badge [voterName]="voter"
+                                        [ngStyle]="{'transform': 'translateX(' + (i * -12) + 'px)'}"></app-voting-user-badge>
+                                    }
+                                    <span class="ml-auto text-xl neumorphic-inset_dark rounded-lg p-3">{{
+                                        getTotalVotes(dish.slug) }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button matButton="elevated" (click)="onCustomVote(dish.slug)">
+                            @if (isVotedByMe(dish.slug)) {
+                            <mat-icon>thumb_down</mat-icon>
+                            } @else {
+                            <mat-icon>thumb_up</mat-icon>
+                            }
+                            @if (isVotedByMe(dish.slug)) {
+                            <span i18n>Downvote</span>
+                            } @else {
+                            <span i18n>Vote</span>
+                            }
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex justify-center items-center min-h-screen">
+        <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-500"></div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="flex flex-col justify-center items-center min-h-screen">
+        <div class="text-red-500 text-xl mb-4">{{ error }}</div>
+        <button (click)="loadData()" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+            Try Again
+        </button>
+    </div>
+</section>
+
+<!-- Overlay Template for Dish Preview -->
+<ng-template #dishPreviewTemplate>
+    <div class="slide-in-blurred-right" *ngIf="selectedDishForPreview">
+        <app-dish-card-fancy [dish]="selectedDishForPreview"></app-dish-card-fancy>
+    </div>
+</ng-template>

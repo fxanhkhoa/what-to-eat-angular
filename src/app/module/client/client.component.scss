@@ -7,6 +7,16 @@
   border-radius: 10px;
 }
 
+// Avatar hover effect
+.account-avatar {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(251, 146, 60, 0.3);
+  }
+}
+
 footer {
   position: relative;
   z-index: 10;

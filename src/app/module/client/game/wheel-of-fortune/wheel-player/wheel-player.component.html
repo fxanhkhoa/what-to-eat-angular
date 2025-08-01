@@ -1,10 +1,12 @@
 <div id="wheelOfFortune">
   <canvas #wheel id="wheel" width="500" height="500" (mousemove)="onCanvasMouseMove($event)"
-    (mouseleave)="onSectorMouseLeave()"></canvas>
+    (mouseleave)="onSectorMouseLeave()" cdkOverlayOrigin #trigger="cdkOverlayOrigin"></canvas>
   <div #spin id="spin" (click)="spinner()">SPIN</div>
 </div>
 
-<div *ngIf="popoverDish" [style.position]="'fixed'" [style.left.px]="popoverX + 10" [style.top.px]="popoverY + 10"
-  style="z-index: 1000;">
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="popoverDish !== null"
+  (detach)="!popoverDish">
+  @if (popoverDish) {
   <app-dish-card-fancy [dish]="popoverDish"></app-dish-card-fancy>
-</div>
+  }
+</ng-template>

@@ -7,11 +7,18 @@
                     <span i18n>Back</span>
                 </button>
                 <div class="flex gap-2">
-                    <button matButton="tonal" color="primary" type="submit" [disabled]="dishVoteForm.invalid">
+                    <button matButton="tonal" color="primary" type="button" (click)="onSubmit()"
+                        [disabled]="dishVoteForm.invalid  || creatingLoading()">
+                        @if (creatingLoading()) {
+                        <mat-icon class="!animate-spin">av_timer</mat-icon>
+                        }
+                        @else {
                         <mat-icon>save</mat-icon>
+                        }
                         <span i18n>Create Voting</span>
                     </button>
-                    <button matIconButton (click)="openSidenav.set(!openSidenav())"
+                    <button [matTooltip]="openSidenav() ? 'Close side' : 'Open side'" i18n-matTooltip matIconButton
+                        (click)="openSidenav.set(!openSidenav())"
                         [ngClass]="{'duration-300 rotate-180': openSidenav()}">
                         <mat-icon>chevron_left</mat-icon>
                     </button>
@@ -97,20 +104,42 @@
             <div class="flex-1">
                 <mat-card class="glassmorphic-container_dark !h-full">
                     <mat-card-header>
-                        <mat-card-title>
-                            <span class="bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
-                                Voting Dishes
-                            </span>
-                        </mat-card-title>
-                        <mat-card-subtitle>Dishes included in the voting</mat-card-subtitle>
+                        <mat-card-title-group>
+                            <mat-card-title>
+                                <span class="bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text"
+                                    i18n>
+                                    Voting Dishes
+                                </span>
+                            </mat-card-title>
+                            <mat-card-subtitle>
+                                <span i18n>
+                                    Dishes included in the voting
+                                </span>
+                            </mat-card-subtitle>
+                            <div class="flex gap-2">
+                                <button matIconButton (click)="clearSelectedDishes()"
+                                    [disabled]="selectedDishes().length === 0" matTooltip="Clear all selected dishes"
+                                    i18n-matTooltip matTooltipPosition="above">
+                                    <mat-icon class="text-red-400">delete</mat-icon>
+                                </button>
+                                <button matIconButton (click)="addCustomDish()" matTooltip="Add custom dish"
+                                    i18n-matTooltip matTooltipPosition="above">
+                                    <mat-icon class="text-green-400">control_point_duplicate</mat-icon>
+                                </button>
+                            </div>
+                        </mat-card-title-group>
                     </mat-card-header>
                     <mat-card-content class="!h-full max-h-full overflow-y-auto">
-                        <div id="selected-dishes" class="list h-full p-4 rounded-lg" cdkDropList
+                        <div id="selected-dishes" class="list p-4 min-h-50 rounded-lg" cdkDropList
                             [cdkDropListData]="selectedDishes()" [cdkDropListConnectedTo]="['available-dishes']"
                             (cdkDropListDropped)="drop($event)">
                             @for (dish of selectedDishes(); track dish) {
-                            <div class="box bg-green-500/10 backdrop-blur-sm border border-green-500/20 rounded-lg p-3 mb-2 cursor-move hover:bg-green-500/20 transition-colors"
+                            <div class="group box bg-green-500/10 backdrop-blur-sm border border-green-500/20 rounded-lg p-3 mb-2 cursor-move hover:bg-green-500/20 transition-colors"
                                 cdkDrag>
+                                <button matIconButton
+                                    class="!absolute !-top-4 !-left-4 opacity-0 group-hover:!opacity-100 !transition-opacity">
+                                    <mat-icon class="!text-red-400" (click)="removeDish(dish)">close</mat-icon>
+                                </button>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
                                         <mat-icon class="text-green-400">drag_indicator</mat-icon>
@@ -138,6 +167,34 @@
                             </div>
                             }
                         </div>
+                        <mat-divider></mat-divider>
+                        @if (customDishes().length > 0) {
+                        <div class="list p-4 rounded-lg">
+                            <h3 class="text-lg font-semibold text-gray-300" i18n>Custom Dishes</h3>
+                            @for (customDish of customDishes(); track customDish) {
+                            <div
+                                class="group box bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 rounded-lg p-3 mb-2 hover:bg-blue-500/20 transition-colors">
+                                <button matIconButton
+                                    class="!absolute !-top-4 !-left-4 opacity-0 group-hover:!opacity-100 !transition-opacity">
+                                    <mat-icon class="!text-red-400"
+                                        (click)="removeCustomDish(customDish)">close</mat-icon>
+                                </button>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <mat-icon class="text-blue-400">restaurant</mat-icon>
+                                        <div>
+                                            <div class="font-medium">{{ customDish.customTitle }}</div>
+                                        </div>
+                                    </div>
+                                    <a mat-icon-button [href]="customDish.slug" target="_blank"
+                                        class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <mat-icon class="text-blue-400">visibility</mat-icon>
+                                    </a>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                        }
                     </mat-card-content>
                 </mat-card>
             </div>

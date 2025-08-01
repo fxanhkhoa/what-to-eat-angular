@@ -14,6 +14,10 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client,
   },
   {
+    path: 'game/voting/:id',
+    renderMode: RenderMode.Client,
+  },
+  {
     path: 'dish/:slug',
     renderMode: RenderMode.Server,
   },
