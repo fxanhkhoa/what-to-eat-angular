@@ -32,7 +32,6 @@ import {
   DragDropModule,
   CdkDragDrop,
   moveItemInArray,
-  transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { DishService } from '@/app/service/dish.service';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -50,6 +49,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddCustomDishComponent } from './add-custom-dish/add-custom-dish.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { DishVoteService } from '@/app/service/dish-vote.service';
+import { VOTING_SESSION_TIMEOUT } from '@/constant/general.constant';
 
 @Component({
   selector: 'app-voting-create-update',

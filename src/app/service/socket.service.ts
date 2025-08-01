@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from '@/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SocketService {
   private socket: Socket | null = null;
+  private connectionState$: Subject<string> | null = null;
 
   connect(): void {
     if (!this.socket) {
       this.socket = io(environment.SOCKET_ENDPOINT, {
-        transports: ['websocket', 'polling']
+        transports: ['websocket', 'polling'],
       });
     }
   }
@@ -30,25 +31,28 @@ export class SocketService {
     }
   }
 
-  emitDishVoteUpdate(data: {
-    slug: string;
-    myName: string;
-    userID: string | null;
-    isVoting: boolean;
-  }, options: { roomID: string }): void {
+  emitDishVoteUpdate(
+    data: {
+      slug: string;
+      myName: string;
+      userID: string | null;
+      isVoting: boolean;
+    },
+    options: { roomID: string }
+  ): void {
     if (this.socket) {
       this.socket.emit('dish-vote-update', data, options);
     }
   }
 
   onDishVoteUpdate(): Observable<any> {
-    return new Observable(observer => {
+    return new Observable((observer) => {
       if (this.socket) {
         this.socket.on('dish-vote-update-client', (data) => {
           observer.next(data);
         });
       }
-      
+
       return () => {
         if (this.socket) {
           this.socket.off('dish-vote-update-client');
