@@ -251,7 +251,7 @@ export class VotingComponent implements OnInit, OnDestroy {
   }
 
   isVotedByMe(slug: string): boolean {
-    if (!this.dishVote || !this.myName) return false;
+    if (!this.dishVote || !this.myName()) return false;
     const dishVoteItem = this.dishVote.dishVoteItems.find(
       (e) => e.slug === slug
     );
