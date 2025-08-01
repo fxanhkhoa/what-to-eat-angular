@@ -1,5 +1,5 @@
 import { inject, PLATFORM_ID } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router, RedirectCommand } from '@angular/router';
 import { AuthorizationService } from '../service/authorization.service';
 import { firstValueFrom } from 'rxjs';
 import cookies from 'js-cookie';
@@ -11,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 export const authorizationGuard: CanActivateFn = async (route, state) => {
   const authorizationService = inject(AuthorizationService);
   const platformId = inject<string>(PLATFORM_ID);
+  const router = inject(Router);
 
   const isRunningInBrowser = isPlatformBrowser(platformId);
 
@@ -32,12 +33,16 @@ export const authorizationGuard: CanActivateFn = async (route, state) => {
       if (!role?.permission.includes(e)) result = false;
     });
 
+    // If user has valid token but insufficient permissions, redirect to forbidden page
+    if (!result) {
+      const forbiddenPath = router.parseUrl('/forbidden');
+      return new RedirectCommand(forbiddenPath);
+    }
+
     return result;
   } catch (error) {
     cookies.remove(Cookies_Key.TOKEN);
-    location.href = '/login';
-    return false;
+    const loginPath = router.parseUrl('/login?redirect=' + encodeURIComponent(state.url));
+    return new RedirectCommand(loginPath);
   }
-
-  return false;
 };

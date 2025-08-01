@@ -35,14 +35,17 @@
                         <mat-menu #gameMenu="matMenu">
                             <button mat-menu-item [routerLink]="['/game', 'wheel-of-fortune']">
                                 <div class="flex gap-3">
-                                    <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
                                     <span i18n>Food Wheel</span>
                                 </div>
                             </button>
                             <button mat-menu-item [routerLink]="['/game', 'flipping-card']">
                                 <div class="flex gap-3">
-                                    <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
                                     <span i18n>Food Flip</span>
+                                </div>
+                            </button>
+                            <button mat-menu-item [routerLink]="['/game', 'voting']">
+                                <div class="flex gap-3">
+                                    <span i18n>Food Voting</span>
                                 </div>
                             </button>
                         </mat-menu>
@@ -70,9 +73,23 @@
                 <!-- Login Button -->
                 <div class="hidden md:block">
                     @if (payload) {
-                    <button matIconButton>
-                        <img class="rounded-lg" [src]="avatarFromPlaceholder()" />
+                    <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+                        <img class="rounded-full" [src]="avatarFromPlaceholder()" [alt]="payload.name" />
                     </button>
+                    <mat-menu #accountMenu="matMenu" class="mt-2">
+                        <div class="px-4 py-3 border-b border-gray-700">
+                            <p class="text-sm font-medium text-white">{{ payload.name }}</p>
+                            <p class="text-xs text-gray-400">{{ payload.email }}</p>
+                        </div>
+                        <button mat-menu-item (click)="goToProfile()" class="flex items-center space-x-3 px-4 py-3 text-white hover:bg-white/10 transition-colors">
+                            <mat-icon class="text-blue-400">person</mat-icon>
+                            <span i18n>Profile</span>
+                        </button>
+                        <button mat-menu-item (click)="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-white/10 transition-colors">
+                            <mat-icon class="text-red-400">logout</mat-icon>
+                            <span i18n>Logout</span>
+                        </button>
+                    </mat-menu>
                     } @else {
                     <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300"
                         aria-label="Login button">
@@ -95,7 +112,7 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div [ngClass]="{'max-h-[300px] overflow-auto': isMenuOpen}"
+        <div [ngClass]="{'max-h-[300px] !overflow-auto': isMenuOpen}"
             class="md:hidden glassmorphic_dark w-fit ml-auto !p-0 !border-0 h-full max-h-0 overflow-hidden duration-300">
             <div class="px-2 pt-2 pb-3 flex flex-col">
                 <a mat-button routerLink="/" routerLinkActive="!text-gray-300 !underline"
@@ -108,8 +125,8 @@
 
                 <mat-divider></mat-divider>
 
-                <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300 !mr-auto">
-                    <div class="flex items-center justify-start w-full">
+                <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300">
+                    <div class="flex items-center justify-center w-full">
                         <mat-icon>gamepad</mat-icon>
                         <span class="ml-1" i18n>Game</span>
                     </div>
@@ -117,14 +134,17 @@
                 <mat-menu #gameMenu="matMenu">
                     <button mat-menu-item [routerLink]="['/game', 'wheel-of-fortune']">
                         <div class="flex gap-3">
-                            <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
                             <span i18n>Food Wheel</span>
                         </div>
                     </button>
                     <button mat-menu-item [routerLink]="['/game', 'flipping-card']">
                         <div class="flex gap-3">
-                            <!-- <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" /> -->
                             <span i18n>Food Flip</span>
+                        </div>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/game', 'voting']">
+                        <div class="flex gap-3">
+                            <span i18n>Food Voting</span>
                         </div>
                     </button>
                 </mat-menu>
@@ -143,14 +163,33 @@
                     </button>
                 </mat-menu>
 
+                <mat-divider class="my-2"></mat-divider>
+
+                <!-- Mobile Account Section -->
                 @if (payload) {
-                <button matIconButton>
-                    <img class="rounded-lg" [src]="avatarFromPlaceholder()" />
-                </button>
+                <div class="px-3 py-2">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <img class="w-10 h-10 rounded-full object-cover border-2 border-white/20" [src]="avatarFromPlaceholder()" [alt]="payload.name" />
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-white">{{ payload.name }}</p>
+                            <p class="text-xs text-gray-400">{{ payload.email }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col space-y-1">
+                        <button mat-button (click)="goToProfile()" class="text-white hover:text-gray-300 justify-start">
+                            <mat-icon class="mr-2">person</mat-icon>
+                            <span i18n>Profile</span>
+                        </button>
+                        <button mat-button (click)="logout()" class="text-red-400 hover:text-red-300 justify-start">
+                            <mat-icon class="mr-2">logout</mat-icon>
+                            <span i18n>Logout</span>
+                        </button>
+                    </div>
+                </div>
                 } @else {
-                <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300"
-                    aria-label="Login button">
-                    <mat-icon>account_circle</mat-icon>
+                <button mat-button routerLink="/login" class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
+                    <mat-icon class="mr-2">account_circle</mat-icon>
+                    <span i18n>Login</span>
                 </button>
                 }
             </div>

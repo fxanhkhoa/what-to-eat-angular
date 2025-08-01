@@ -25,6 +25,7 @@ html {
 @import "tailwindcss/theme.css" layer(theme);
 // @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
+@import '@angular/cdk/overlay-prebuilt.css';
 
 html {
   height: 100%;

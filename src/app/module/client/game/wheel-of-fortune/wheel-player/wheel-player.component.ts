@@ -16,6 +16,7 @@ import { DishCardFancyComponent } from '@/app/module/client/dish/dish-card-fancy
 import { COLOR_PALETTE } from '@/constant/color.constant';
 import { Dish } from '@/types/dish.type';
 import { GameStateService } from '@/app/state/game-state.service';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 type Sector = {
   color: string;
@@ -24,7 +25,7 @@ type Sector = {
 
 @Component({
   selector: 'app-wheel-player',
-  imports: [CommonModule, DishCardFancyComponent],
+  imports: [CommonModule, DishCardFancyComponent, OverlayModule],
   templateUrl: './wheel-player.component.html',
   styleUrl: './wheel-player.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

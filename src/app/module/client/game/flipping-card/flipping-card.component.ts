@@ -62,7 +62,6 @@ export class FlippingCardComponent implements OnDestroy, OnInit {
       this.cards.set([]);
       return;
     }
-    console.log('Initializing Flipping Card Game');
     this.loading.set(true);
     this.gameStateService
       .getGameState()

@@ -55,9 +55,9 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import(
-                './module/client/game/game.component'
-              ).then((m) => m.GameComponent),
+              import('./module/client/game/game.component').then(
+                (m) => m.GameComponent
+              ),
           },
           {
             path: 'wheel-of-fortune',
@@ -72,6 +72,41 @@ export const routes: Routes = [
               import(
                 './module/client/game/flipping-card/flipping-card.component'
               ).then((m) => m.FlippingCardComponent),
+          },
+          {
+            path: 'flipping-card',
+            loadComponent: () =>
+              import(
+                './module/client/game/flipping-card/flipping-card.component'
+              ).then((m) => m.FlippingCardComponent),
+          },
+          {
+            path: 'voting',
+            children: [
+              { path: '', redirectTo: 'create', pathMatch: 'full' },
+              {
+                path: 'create',
+                canActivate: [authenticationGuard, authorizationGuard],
+                data: {
+                  permissions: [Permissions.CREATE_DISH_VOTE],
+                },
+                loadComponent: () =>
+                  import(
+                    './module/client/game/voting/voting-create-update/voting-create-update.component'
+                  ).then((m) => m.VotingCreateUpdateComponent),
+              },
+              {
+                path: ':id',
+                canActivate: [authenticationGuard, authorizationGuard],
+                data: {
+                  permissions: [Permissions.FIND_ONE_DISH_VOTE],
+                },
+                loadComponent: () =>
+                  import('./module/client/game/voting/voting.component').then(
+                    (m) => m.VotingComponent
+                  ),
+              },
+            ],
           },
         ],
       },
@@ -177,5 +212,10 @@ export const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'forbidden',
+    loadComponent: () =>
+      import('./module/forbidden/forbidden.component').then((m) => m.ForbiddenComponent),
   },
 ];

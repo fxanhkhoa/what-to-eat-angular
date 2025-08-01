@@ -17,4 +17,6 @@ export class AuthService {
       { token }
     );
   }
+
+  logout() {}
 }

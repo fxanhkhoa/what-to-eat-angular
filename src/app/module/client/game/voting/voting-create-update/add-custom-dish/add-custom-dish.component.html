@@ -1,0 +1,56 @@
+<div class="max-w-lg mx-auto p-6">
+  <mat-card class="glassmorphic-container_dark shadow-lg">
+    <mat-card-header class="pb-4">
+      <mat-card-title>
+        <span class="text-xl font-semibold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text"
+          i18n>Add Custom Dish</span>
+      </mat-card-title>
+      <mat-card-subtitle class="!text-gray-400 !mt-2">
+        <span i18n>Create a custom dish for voting</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="!pt-4">
+      <form [formGroup]="dishVoteItemForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+        <!-- Title Field -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label class="text-gray-300">Dish Title</mat-label>
+          <input matInput formControlName="customTitle" placeholder="Enter dish title" maxlength="100"
+            class="text-white placeholder-gray-400">
+          <mat-icon matSuffix class="text-orange-400">restaurant</mat-icon>
+          <mat-hint class="text-gray-400">Enter a descriptive name for the dish</mat-hint>
+          <mat-error *ngIf="dishVoteItemForm.get('customTitle')?.hasError('required')" class="text-red-400">
+            Title is required
+          </mat-error>
+          <mat-error *ngIf="dishVoteItemForm.get('customTitle')?.hasError('minlength')" class="text-red-400">
+            Title must be at least 2 characters long
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Slug Field -->
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label class="text-gray-300">Slug (URL identifier)</mat-label>
+          <input matInput formControlName="url" i18n-placeholder placeholder="Enter dish URL"
+            class="text-white placeholder-gray-400">
+          <mat-icon matSuffix class="text-orange-400">link</mat-icon>
+          <mat-hint class="text-gray-400" i18n>Reference link to dish</mat-hint>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="flex justify-end gap-3 p-6 pt-4">
+      <button mat-button type="button" (click)="onCancel()" class="text-gray-400 hover:text-gray-200 transition-colors">
+        <mat-icon class="mr-2">cancel</mat-icon>
+        Cancel
+      </button>
+
+      <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="dishVoteItemForm.invalid"
+        class="bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-medium px-6 py-2 rounded-lg shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200">
+        <mat-icon class="mr-2">add</mat-icon>
+        Add Dish
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

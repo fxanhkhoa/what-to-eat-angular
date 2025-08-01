@@ -26,8 +26,8 @@
 
 .neumorphic-container-inset_dark {
   box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.7),
-    inset -3px -3px 5px rgba(255, 255, 255, 0.05);
-  background: #222222; /* Slightly darker background for inset effect */
+    inset -3px -3px 5px rgba(255, 255, 255, 0.05) !important;
+  background: #222222 !important; /* Slightly darker background for inset effect */
 }
 
 /* Base neumorphic styles for dark theme */

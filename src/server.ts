@@ -54,7 +54,7 @@ app.use('/:locale/*', (req, res, next) => {
     next();
   } else {
     // If URL doesn't have a valid locale, redirect to default locale
-    const redirectPath = `/en${req.originalUrl}`;
+    const redirectPath = `/en${req.originalUrl.replace(`/${locale}`, '')}`;
     res.redirect(302, redirectPath);
   }
 });
