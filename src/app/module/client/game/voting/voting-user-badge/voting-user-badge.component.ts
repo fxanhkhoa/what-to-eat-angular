@@ -13,6 +13,15 @@ export class VotingUserBadgeComponent {
   colors = COLOR_PALETTE.slice(0, 9);
 
   randomColor = signal(
-    this.colors[Math.floor(Math.random() * this.colors.length)]
+    this.colors[this.hashString(this.voterName) % this.colors.length]
   );
+
+  private hashString(input: string): number {
+    let hash = 0;
+    for (let i = 0; i < input.length; i++) {
+      hash = (hash << 5) - hash + input.charCodeAt(i);
+      hash |= 0; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+  }
 }
