@@ -1,5 +1,9 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import {
@@ -14,11 +18,20 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { bearerInterceptor } from './interceptor/bearer.interceptor';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomPaginatorIntl } from './shared/paginator/custom-paginator-intl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideAnimations(),
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled', // or 'top'
+        anchorScrolling: 'enabled',
+      })
+    ),
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() =>
       initializeApp({
@@ -33,5 +46,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAuth(() => getAuth()),
     provideHttpClient(withFetch(), withInterceptors([bearerInterceptor])),
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],
 };

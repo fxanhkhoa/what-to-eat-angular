@@ -4,5 +4,16 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+import { registerLocaleData } from '@angular/common';
+import localeVi from '@angular/common/locales/vi';
+import localeEn from '@angular/common/locales/en';
+
+// Register the Vietnamese locale data
+registerLocaleData(localeVi);
+
+// Register the English locale data
+registerLocaleData(localeEn);
+
+bootstrapApplication(AppComponent, appConfig).catch((err) =>
+  console.error(err)
+);

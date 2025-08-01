@@ -1,0 +1,48 @@
+.title-gradient {
+  background: linear-gradient(to bottom, #8b5cf6 0%, #a855f7 100%);
+}
+
+.card-hover {
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+}
+
+.voted-card {
+  transform: translateY(-20px);
+  border: 2px solid #8b5cf6;
+}
+
+.button-gradient {
+  background: linear-gradient(to right, #8b5cf6 0%, #a855f7 100%);
+}
+
+.button-gradient:hover {
+  background: linear-gradient(to right, #7c3aed 0%, #9333ea 100%);
+}
+
+.result-popover {
+  z-index: 1000;
+}
+
+.winner-badge {
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  animation: winner-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes winner-glow {
+  0% {
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.7);
+  }
+}
+
+.winner-crown {
+  font-size: 14px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}

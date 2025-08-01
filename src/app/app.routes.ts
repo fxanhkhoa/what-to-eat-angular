@@ -7,7 +7,110 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./module/home/home.component').then((m) => m.HomeComponent),
+      import('./module/client/client.component').then((m) => m.ClientComponent),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./module/client/home/home.component').then(
+            (m) => m.HomeComponent
+          ),
+      },
+      {
+        path: 'dish',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./module/client/dish/dish.component').then(
+                (m) => m.DishComponent
+              ),
+          },
+          {
+            path: 'basic',
+            loadComponent: () =>
+              import(
+                './module/client/dish/dish-basic/dish-basic.component'
+              ).then((m) => m.DishBasicComponent),
+          },
+          {
+            path: ':slug',
+            loadComponent: () =>
+              import(
+                './module/client/dish/dish-detail/dish-detail.component'
+              ).then((m) => m.DishDetailComponent),
+          },
+        ],
+      },
+      {
+        path: 'ingredient',
+        loadComponent: () =>
+          import('./module/client/ingredient/ingredient.component').then(
+            (m) => m.IngredientComponent
+          ),
+      },
+      {
+        path: 'game',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./module/client/game/game.component').then(
+                (m) => m.GameComponent
+              ),
+          },
+          {
+            path: 'wheel-of-fortune',
+            loadComponent: () =>
+              import(
+                './module/client/game/wheel-of-fortune/wheel-of-fortune.component'
+              ).then((m) => m.WheelOfFortuneComponent),
+          },
+          {
+            path: 'flipping-card',
+            loadComponent: () =>
+              import(
+                './module/client/game/flipping-card/flipping-card.component'
+              ).then((m) => m.FlippingCardComponent),
+          },
+          {
+            path: 'flipping-card',
+            loadComponent: () =>
+              import(
+                './module/client/game/flipping-card/flipping-card.component'
+              ).then((m) => m.FlippingCardComponent),
+          },
+          {
+            path: 'voting',
+            children: [
+              { path: '', redirectTo: 'create', pathMatch: 'full' },
+              {
+                path: 'create',
+                canActivate: [authenticationGuard, authorizationGuard],
+                data: {
+                  permissions: [Permissions.CREATE_DISH_VOTE],
+                },
+                loadComponent: () =>
+                  import(
+                    './module/client/game/voting/voting-create-update/voting-create-update.component'
+                  ).then((m) => m.VotingCreateUpdateComponent),
+              },
+              {
+                path: ':id',
+                canActivate: [authenticationGuard, authorizationGuard],
+                data: {
+                  permissions: [Permissions.FIND_ONE_DISH_VOTE],
+                },
+                loadComponent: () =>
+                  import('./module/client/game/voting/voting.component').then(
+                    (m) => m.VotingComponent
+                  ),
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     path: 'login',
@@ -109,5 +212,10 @@ export const routes: Routes = [
         ],
       },
     ],
+  },
+  {
+    path: 'forbidden',
+    loadComponent: () =>
+      import('./module/forbidden/forbidden.component').then((m) => m.ForbiddenComponent),
   },
 ];

@@ -11,6 +11,7 @@ export type JWTTokenPayload = {
   role_name: string;
   google_id: string;
   name: string;
+  exp: number; // JWT expiration time (Unix timestamp)
 };
 
 export type RetrievedTokenFromRefreshToken = Omit<ResultToken, 'refreshToken'>;

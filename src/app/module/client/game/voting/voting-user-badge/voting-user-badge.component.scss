@@ -1,0 +1,47 @@
+.voting-user-badge {
+  display: inline-block;
+  min-width: 80px;
+  max-width: 120px;
+  padding: 8px 16px;
+  margin: 4px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #e5e7eb;
+  background: #2a2a2a;
+  cursor: pointer;
+  user-select: none;
+
+  // Enhanced neumorphism with inset shadow
+  box-shadow: inset 3px 3px 8px rgba(0, 0, 0, 0.8),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  // Hover effects - expand to show full text
+  &:hover {
+    max-width: 300px;
+    transform: translateY(-1px);
+    z-index: 10;
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.9),
+      inset -2px -2px 6px rgba(255, 255, 255, 0.15),
+      0 4px 12px rgba(0, 0, 0, 0.5);
+
+    span {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .voting-user-badge {
+    font-size: 12px;
+    padding: 6px 12px;
+    min-width: 60px;
+    max-width: 100px;
+
+    &:hover {
+      max-width: 250px;
+    }
+  }
+}

@@ -26,6 +26,16 @@ export class DishService {
     );
   }
 
+  findBySlug(slug: string) {
+    return this.http.get<Dish>(`${environment.API_URL}/${prefix}/slug/${slug}`);
+  }
+
+  findRandom(limit: number, mealCategories?: string[]) {
+    return this.http.get<Dish[]>(`${environment.API_URL}/${prefix}/random`, {
+      params: { limit: limit, mealCategories: mealCategories ?? [] },
+    });
+  }
+
   create(dto: CreateDishDto) {
     return this.http.post<Dish>(`${environment.API_URL}/${prefix}`, dto);
   }

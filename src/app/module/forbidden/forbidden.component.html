@@ -1,0 +1,33 @@
+<div class="forbidden-container">
+  <div class="forbidden-content">
+    <div class="forbidden-icon">
+      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="#ef4444" stroke-width="2" fill="none"/>
+        <path d="M15 9l-6 6" stroke="#ef4444" stroke-width="2"/>
+        <path d="M9 9l6 6" stroke="#ef4444" stroke-width="2"/>
+      </svg>
+    </div>
+    
+    <h1 class="forbidden-title">403</h1>
+    <h2 class="forbidden-subtitle">Access Forbidden</h2>
+    <p class="forbidden-message">
+      You don't have permission to access this resource. 
+      Please contact your administrator if you believe this is an error.
+    </p>
+    
+    <div class="forbidden-actions">
+      <button 
+        type="button" 
+        class="btn btn-primary" 
+        (click)="goBack()">
+        Go Back
+      </button>
+      <button 
+        type="button" 
+        class="btn btn-secondary" 
+        (click)="goHome()">
+        Go Home
+      </button>
+    </div>
+  </div>
+</div>

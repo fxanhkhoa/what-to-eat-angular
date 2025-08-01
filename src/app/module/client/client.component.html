@@ -1,0 +1,313 @@
+<!-- nav.component.html -->
+<div (wheel)="onScroll($event)" class="h-full">
+    <nav class="fixed top-0 w-[95%] left-1/2 transform -translate-x-1/2 mx-auto mt-2 bg-transparent z-50 rounded-lg"
+        [ngClass]="{'md:nav-glassmorphic duration-500': isScrolled}">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 pt-2">
+                    <a routerLink="/" class="text-white font-bold text-xl" id="nav-logo">
+                        <img src="/assets/logo/what-to-eat-high-resolution-logo-white-transparent.png" alt="logo"
+                            class="w-20 h-auto object-cover object-center shadow brightness-200" />
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4">
+                        <a mat-button [routerLink]="['/']" routerLinkActive="!text-gray-300 !underline"
+                            [routerLinkActiveOptions]="{exact: true}"
+                            class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                            i18n>Home</a>
+                        <a mat-button [routerLink]="['/dish']" routerLinkActive="!text-gray-300 !underline"
+                            class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                            i18n>Dish</a>
+                        <a mat-button [routerLink]="['/ingredient']" routerLinkActive="!text-gray-300 !underline"
+                            class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                            i18n>Ingredient</a>
+
+                        <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300">
+                            <div class="flex items-center">
+                                <mat-icon>gamepad</mat-icon>
+                                <span class="ml-1" i18n>Game</span>
+                            </div>
+                        </button>
+                        <mat-menu #gameMenu="matMenu">
+                            <button mat-menu-item [routerLink]="['/game', 'wheel-of-fortune']">
+                                <div class="flex gap-3">
+                                    <span i18n>Food Wheel</span>
+                                </div>
+                            </button>
+                            <button mat-menu-item [routerLink]="['/game', 'flipping-card']">
+                                <div class="flex gap-3">
+                                    <span i18n>Food Flip</span>
+                                </div>
+                            </button>
+                            <button mat-menu-item [routerLink]="['/game', 'voting']">
+                                <div class="flex gap-3">
+                                    <span i18n>Food Voting</span>
+                                </div>
+                            </button>
+                        </mat-menu>
+
+                        <!-- Language Selector -->
+                        <button mat-button [matMenuTriggerFor]="languageMenu" class="text-white hover:text-gray-300">
+                            <div class="flex items-center">
+                                <mat-icon>language</mat-icon>
+                                <span class="ml-1">{{ currentLanguage.toUpperCase() }}</span>
+                            </div>
+                        </button>
+                        <mat-menu #languageMenu="matMenu">
+                            @for (lang of availableLanguages; track lang) {
+                            <button mat-menu-item (click)="changeLanguage(lang.code)">
+                                <div class="flex gap-3">
+                                    <img [src]="lang.image" [alt]="lang.name" class="w-6 h-auto object-contain" />
+                                    <span>{{ lang.name }}</span>
+                                </div>
+                            </button>
+                            }
+                        </mat-menu>
+                    </div>
+                </div>
+
+                <!-- Login Button -->
+                <div class="hidden md:block">
+                    @if (payload) {
+                    <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+                        <img class="rounded-full" [src]="avatarFromPlaceholder()" [alt]="payload.name" />
+                    </button>
+                    <mat-menu #accountMenu="matMenu" class="mt-2">
+                        <div class="px-4 py-3 border-b border-gray-700">
+                            <p class="text-sm font-medium text-white">{{ payload.name }}</p>
+                            <p class="text-xs text-gray-400">{{ payload.email }}</p>
+                        </div>
+                        <button mat-menu-item (click)="goToProfile()" class="flex items-center space-x-3 px-4 py-3 text-white hover:bg-white/10 transition-colors">
+                            <mat-icon class="text-blue-400">person</mat-icon>
+                            <span i18n>Profile</span>
+                        </button>
+                        <button mat-menu-item (click)="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-white/10 transition-colors">
+                            <mat-icon class="text-red-400">logout</mat-icon>
+                            <span i18n>Logout</span>
+                        </button>
+                    </mat-menu>
+                    } @else {
+                    <button mat-icon-button routerLink="/login" class="text-white hover:text-gray-300"
+                        aria-label="Login button">
+                        <mat-icon>account_circle</mat-icon>
+                    </button>
+                    }
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button mat-icon-button (click)="toggleMenu()" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div [ngClass]="{'max-h-[300px] !overflow-auto': isMenuOpen}"
+            class="md:hidden glassmorphic_dark w-fit ml-auto !p-0 !border-0 h-full max-h-0 overflow-hidden duration-300">
+            <div class="px-2 pt-2 pb-3 flex flex-col">
+                <a mat-button routerLink="/" routerLinkActive="!text-gray-300 !underline"
+                    [routerLinkActiveOptions]="{exact: true}"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Home</a>
+                <a mat-button routerLink="/dish" routerLinkActive="!text-gray-300 !underline"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Dish</a>
+                <a mat-button routerLink="/ingredient" routerLinkActive="!text-gray-300 !underline"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Ingredient</a>
+
+                <mat-divider></mat-divider>
+
+                <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300">
+                    <div class="flex items-center justify-center w-full">
+                        <mat-icon>gamepad</mat-icon>
+                        <span class="ml-1" i18n>Game</span>
+                    </div>
+                </button>
+                <mat-menu #gameMenu="matMenu">
+                    <button mat-menu-item [routerLink]="['/game', 'wheel-of-fortune']">
+                        <div class="flex gap-3">
+                            <span i18n>Food Wheel</span>
+                        </div>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/game', 'flipping-card']">
+                        <div class="flex gap-3">
+                            <span i18n>Food Flip</span>
+                        </div>
+                    </button>
+                    <button mat-menu-item [routerLink]="['/game', 'voting']">
+                        <div class="flex gap-3">
+                            <span i18n>Food Voting</span>
+                        </div>
+                    </button>
+                </mat-menu>
+
+                <!-- Language Selector for Mobile -->
+                <button mat-button [matMenuTriggerFor]="mobileLanguageMenu"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
+                    <div class="flex items-center">
+                        <mat-icon>language</mat-icon>
+                        <span class="ml-1">Language: {{ currentLanguage.toUpperCase() }}</span>
+                    </div>
+                </button>
+                <mat-menu #mobileLanguageMenu="matMenu">
+                    <button mat-menu-item *ngFor="let lang of availableLanguages" (click)="changeLanguage(lang.code)">
+                        <span>{{ lang.name }}</span>
+                    </button>
+                </mat-menu>
+
+                <mat-divider class="my-2"></mat-divider>
+
+                <!-- Mobile Account Section -->
+                @if (payload) {
+                <div class="px-3 py-2">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <img class="w-10 h-10 rounded-full object-cover border-2 border-white/20" [src]="avatarFromPlaceholder()" [alt]="payload.name" />
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-white">{{ payload.name }}</p>
+                            <p class="text-xs text-gray-400">{{ payload.email }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col space-y-1">
+                        <button mat-button (click)="goToProfile()" class="text-white hover:text-gray-300 justify-start">
+                            <mat-icon class="mr-2">person</mat-icon>
+                            <span i18n>Profile</span>
+                        </button>
+                        <button mat-button (click)="logout()" class="text-red-400 hover:text-red-300 justify-start">
+                            <mat-icon class="mr-2">logout</mat-icon>
+                            <span i18n>Logout</span>
+                        </button>
+                    </div>
+                </div>
+                } @else {
+                <button mat-button routerLink="/login" class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium">
+                    <mat-icon class="mr-2">account_circle</mat-icon>
+                    <span i18n>Login</span>
+                </button>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <router-outlet></router-outlet>
+
+    <!-- footer.component.html -->
+    <footer class="neumorphic-container-inset_dark">
+        <div class="mx-auto px-4 py-12 sm:px-6 lg:px-8">
+            <!-- Top Section with Logo and Links -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo and About -->
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <img src="/assets/logo/what-to-eat-high-resolution-logo-transparent.png" alt="What To Eat Logo"
+                            class="h-12 w-auto brightness-200 mr-2" />
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4" i18n>
+                        Discover delicious recipes and meal ideas tailored to your preferences and dietary needs.
+                    </p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <button matIconButton href="#">
+                            <mat-icon>facebook</mat-icon>
+                        </button>
+                        <button matIconButton href="#">
+                            <mat-icon svgIcon="tiktok"></mat-icon>
+                        </button>
+                        <button matIconButton href="#">
+                            <mat-icon>photo_camera</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-span-1">
+                    <mat-list role="list">
+                        <h3 mat-subheader class="text-lg font-semibold" i18n>Quick Links</h3>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/" i18n>
+                                Home
+                            </a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/dish" i18n>
+                                All Dishes
+                            </a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/about" i18n>
+                                About Us
+                            </a>
+                        </mat-list-item>
+                        <mat-list-item role="listItem">
+                            <a matButton routerLink="/contact" i18n>Contact</a>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
+                <!-- Categories -->
+                <div class=" col-span-1">
+                    <mat-list role="list">
+                        <h3 mat-subheader class="text-lg font-semibold" i18n>Categories</h3>
+                        @for (item of mealCategories; track item) {
+                        <mat-list-item role="listItem">
+                            <a matButton href="#">{{item | categoryTranslate}}</a>
+                        </mat-list-item>
+                        }
+                    </mat-list>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="col-span-1">
+                    <h3 class="text-lg font-semibold mb-4" i18n>Stay Updated</h3>
+                    <p class="text-gray-400 text-sm mb-4" i18n>Subscribe to our newsletter for the latest recipes and
+                        tips.</p>
+
+                    <form [formGroup]="newsletterForm" (ngSubmit)="subscribeToNewsletter()" class="flex flex-wrap">
+                        <mat-form-field appearance="fill" class="w-full bg-transparent">
+                            <mat-label class="text-gray-300" i18n>Your email</mat-label>
+                            <input matInput formControlName="email" type="email" i18n-placeholder
+                                placeholder="Your email" class="text-white">
+                            <mat-error *ngIf="newsletterForm.get('email')?.hasError('required')" i18n>Email is
+                                required</mat-error>
+                            <mat-error *ngIf="newsletterForm.get('email')?.hasError('email')" i18n>Please enter a valid
+                                email</mat-error>
+                            <mat-icon matSuffix class="text-green-500">email</mat-icon>
+                        </mat-form-field>
+
+                        <button mat-raised-button color="primary" type="submit" class="w-full"
+                            [disabled]="newsletterForm.invalid">
+                            <mat-icon>send</mat-icon>
+                            <span i18n>Subscribe</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Section with Copyright -->
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        © {{currentYear}} What To Eat. All rights reserved.
+                    </p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a i18n href="#"
+                            class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Privacy
+                            Policy</a>
+                        <a i18n href="#"
+                            class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Terms
+                            of Service</a>
+                        <a i18n href="#"
+                            class="text-gray-400 hover:text-white text-sm transition-colors duration-300">Cookie
+                            Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

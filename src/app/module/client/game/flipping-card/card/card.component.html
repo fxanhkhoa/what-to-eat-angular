@@ -1,0 +1,14 @@
+<div class="card duration-300" (click)="flipCard()" [ngClass]="{'!absolute': isShuffling(), 'flipped': isFlipped}">
+    <div class="card-inner">
+        <div class="card-front glassmorphic-container_dark">
+            <img [src]="card.thumbnail" [alt]="(card.title | multiLanguage: localeId)?.data" class="card-image" />
+        </div>
+        <div class="card-back neumorphic-container_dark">
+            <img src="/assets/logo/what-to-eat-high-resolution-logo-white-transparent.png" alt="Card Back"
+                class="w-2/3 h-auto" />
+        </div>
+    </div>
+    <div *ngIf="!isFlipped" class="card-result">
+        <p>{{(card.title | multiLanguage: localeId)?.data}}</p>
+    </div>
+</div>

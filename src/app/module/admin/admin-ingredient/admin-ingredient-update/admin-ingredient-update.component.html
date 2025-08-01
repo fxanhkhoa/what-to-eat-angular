@@ -1,194 +1,227 @@
 <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md overflow-auto max-h-[80vh]">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800">Create New Ingredient</h2>
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Create New Ingredient</h2>
 
-    <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()" class="space-y-6">
+  <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit()" class="space-y-6">
 
-        <!-- Slug -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Slug</mat-label>
-                <input matInput formControlName="slug" placeholder="ingredient-slug">
-                <mat-hint>Use lowercase letters, numbers, and hyphens only</mat-hint>
-                <mat-error *ngIf="ingredientForm.get('slug')?.hasError('required')">
-                    Slug is required
+    <!-- Slug -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Slug</mat-label>
+        <input matInput formControlName="slug" placeholder="ingredient-slug">
+        <mat-hint>Use lowercase letters, numbers, and hyphens only</mat-hint>
+        @if (ingredientForm.get('slug')?.hasError('required')) {
+          <mat-error>
+            Slug is required
+          </mat-error>
+        }
+        @if (ingredientForm.get('slug')?.hasError('pattern')) {
+          <mat-error>
+            Slug must contain only lowercase letters, numbers, and hyphens
+          </mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <!-- Title (Multi-language) -->
+    <div class="border rounded-lg p-4 bg-gray-50">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-700">Title Translations</h3>
+        <button type="button" mat-raised-button color="primary" (click)="addLanguage()" class="h-10">
+          Add Language
+        </button>
+      </div>
+
+      <div formArrayName="title" class="space-y-4">
+        @for (lang of titleArray.controls; track lang; let i = $index) {
+          <div [formGroupName]="i"
+            class="grid grid-cols-12 gap-4 items-center">
+            <mat-form-field appearance="outline" class="w-full col-span-12 md:col-span-3">
+              <mat-label>Language</mat-label>
+              <mat-select formControlName="lang">
+                @for (lang of availableLanguages; track lang) {
+                  <mat-option [value]="lang">
+                    {{ lang.toUpperCase() }}
+                  </mat-option>
+                }
+              </mat-select>
+              @if (lang.get('lang')?.hasError('required')) {
+                <mat-error>
+                  Language is required
                 </mat-error>
-                <mat-error *ngIf="ingredientForm.get('slug')?.hasError('pattern')">
-                    Slug must contain only lowercase letters, numbers, and hyphens
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full col-span-12 md:col-span-8">
+              <mat-label>Title</mat-label>
+              <input matInput formControlName="data" placeholder="Ingredient name">
+              @if (lang.get('data')?.hasError('required')) {
+                <mat-error>
+                  Title is required
                 </mat-error>
+              }
             </mat-form-field>
-        </div>
+            <button type="button" mat-icon-button color="warn" (click)="removeLanguage(i)"
+              class="col-span-12 md:col-span-1">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    </div>
 
-        <!-- Title (Multi-language) -->
-        <div class="border rounded-lg p-4 bg-gray-50">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Title Translations</h3>
-                <button type="button" mat-raised-button color="primary" (click)="addLanguage()" class="h-10">
-                    Add Language
-                </button>
-            </div>
+    <!-- Measure -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Measure</mat-label>
+        <input matInput formControlName="measure" placeholder="e.g., gram, ml, oz">
+      </mat-form-field>
+    </div>
 
-            <div formArrayName="title" class="space-y-4">
-                <div *ngFor="let lang of titleArray.controls; let i = index" [formGroupName]="i"
-                    class="grid grid-cols-12 gap-4 items-center">
-                    <mat-form-field appearance="outline" class="w-full col-span-12 md:col-span-3">
-                        <mat-label>Language</mat-label>
-                        <mat-select formControlName="lang">
-                            <mat-option *ngFor="let lang of availableLanguages" [value]="lang">
-                                {{ lang.toUpperCase() }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="lang.get('lang')?.hasError('required')">
-                            Language is required
-                        </mat-error>
-                    </mat-form-field>
+    <!-- Nutritional Information -->
+    <div class="border rounded-lg p-4 bg-gray-50">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Nutritional Information</h3>
 
-                    <mat-form-field appearance="outline" class="w-full col-span-12 md:col-span-8">
-                        <mat-label>Title</mat-label>
-                        <input matInput formControlName="data" placeholder="Ingredient name">
-                        <mat-error *ngIf="lang.get('data')?.hasError('required')">
-                            Title is required
-                        </mat-error>
-                    </mat-form-field>
-
-                    <button type="button" mat-icon-button color="warn" (click)="removeLanguage(i)"
-                        class="col-span-12 md:col-span-1">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Measure -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <mat-form-field appearance="outline" class="w-full">
-                <mat-label>Measure</mat-label>
-                <input matInput formControlName="measure" placeholder="e.g., gram, ml, oz">
-            </mat-form-field>
-        </div>
-
-        <!-- Nutritional Information -->
-        <div class="border rounded-lg p-4 bg-gray-50">
-            <h3 class="text-lg font-semibold text-gray-700 mb-4">Nutritional Information</h3>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Calories</mat-label>
-                    <input matInput type="number" formControlName="calories" min="0">
-                    <mat-error *ngIf="ingredientForm.get('calories')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Carbohydrate (g)</mat-label>
-                    <input matInput type="number" formControlName="carbohydrate" min="0">
-                    <mat-error *ngIf="ingredientForm.get('carbohydrate')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Fat (g)</mat-label>
-                    <input matInput type="number" formControlName="fat" min="0">
-                    <mat-error *ngIf="ingredientForm.get('fat')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Protein (g)</mat-label>
-                    <input matInput type="number" formControlName="protein" min="0">
-                    <mat-error *ngIf="ingredientForm.get('protein')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Weight (g)</mat-label>
-                    <input matInput type="number" formControlName="weight" min="0">
-                    <mat-error *ngIf="ingredientForm.get('weight')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Cholesterol (mg)</mat-label>
-                    <input matInput type="number" formControlName="cholesterol" min="0">
-                    <mat-error *ngIf="ingredientForm.get('cholesterol')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label>Sodium (mg)</mat-label>
-                    <input matInput type="number" formControlName="sodium" min="0">
-                    <mat-error *ngIf="ingredientForm.get('sodium')?.hasError('min')">
-                        Must be a positive number
-                    </mat-error>
-                </mat-form-field>
-            </div>
-        </div>
-
-        <!-- Ingredient Category -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Ingredient Categories</mat-label>
-            <mat-select formControlName="ingredientCategory" multiple>
-                <mat-option *ngFor="let category of ingredientCategoriesArray" [value]="category">
-                    {{ category }}
-                </mat-option>
-                <!-- Add more categories as needed -->
-            </mat-select>
-            <mat-error *ngIf="ingredientForm.get('ingredientCategory')?.hasError('required')">
-                At least one category is required
+          <mat-label>Calories</mat-label>
+          <input matInput type="number" formControlName="calories" min="0">
+          @if (ingredientForm.get('calories')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
             </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Carbohydrate (g)</mat-label>
+          <input matInput type="number" formControlName="carbohydrate" min="0">
+          @if (ingredientForm.get('carbohydrate')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
+            </mat-error>
+          }
         </mat-form-field>
 
-        <!-- Images -->
-        <div class="border rounded-lg p-4 bg-gray-50">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-gray-700">Images</h3>
-                <button type="button" mat-raised-button color="primary" (click)="addImage()" class="h-10">
-                    Add Image URL
-                </button>
-            </div>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Fat (g)</mat-label>
+          <input matInput type="number" formControlName="fat" min="0">
+          @if (ingredientForm.get('fat')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
+            </mat-error>
+          }
+        </mat-form-field>
 
-            <div formArrayName="images" class="space-y-4">
-                <div *ngFor="let image of imagesArray.controls; let i = index" class="flex items-center gap-4">
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-label>Image URL</mat-label>
-                        <input matInput [formControlName]="i" placeholder="[https://example.com/image.jpg">
-                        <mat-error *ngIf="image.hasError('required')">
-                            Image URL is required
-                        </mat-error>
-                    </mat-form-field>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Protein (g)</mat-label>
+          <input matInput type="number" formControlName="protein" min="0">
+          @if (ingredientForm.get('protein')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
+            </mat-error>
+          }
+        </mat-form-field>
 
-                    <button type="button" mat-icon-button color="warn" (click)="removeImage(i)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </div>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Weight (g)</mat-label>
+          <input matInput type="number" formControlName="weight" min="0">
+          @if (ingredientForm.get('weight')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
+            </mat-error>
+          }
+        </mat-form-field>
 
-                <div *ngIf="imagesArray.length === 0" class="text-center p-4 text-gray-500 italic">
-                    No images added yet. Click "Add Image URL" to add one.
-                </div>
-            </div>
-        </div>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Cholesterol (mg)</mat-label>
+          <input matInput type="number" formControlName="cholesterol" min="0">
+          @if (ingredientForm.get('cholesterol')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
+            </mat-error>
+          }
+        </mat-form-field>
 
-        <!-- Form Actions -->
-        <div class="flex justify-end space-x-4 pt-4">
-            <button type="button" mat-stroked-button color="warn" class="h-12" (click)="onCancel()">
-                Cancel
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Sodium (mg)</mat-label>
+          <input matInput type="number" formControlName="sodium" min="0">
+          @if (ingredientForm.get('sodium')?.hasError('min')) {
+            <mat-error>
+              Must be a positive number
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Ingredient Category -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Ingredient Categories</mat-label>
+      <mat-select formControlName="ingredientCategory" multiple>
+        @for (category of ingredientCategoriesArray; track category) {
+          <mat-option [value]="category">
+            {{ category }}
+          </mat-option>
+        }
+        <!-- Add more categories as needed -->
+      </mat-select>
+      @if (ingredientForm.get('ingredientCategory')?.hasError('required')) {
+        <mat-error>
+          At least one category is required
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Images -->
+    <div class="border rounded-lg p-4 bg-gray-50">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-700">Images</h3>
+        <button type="button" mat-raised-button color="primary" (click)="addImage()" class="h-10">
+          Add Image URL
+        </button>
+      </div>
+
+      <div formArrayName="images" class="space-y-4">
+        @for (image of imagesArray.controls; track image; let i = $index) {
+          <div class="flex items-center gap-4">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Image URL</mat-label>
+              <input matInput [formControlName]="i" placeholder="[https://example.com/image.jpg">
+              @if (image.hasError('required')) {
+                <mat-error>
+                  Image URL is required
+                </mat-error>
+              }
+            </mat-form-field>
+            <button type="button" mat-icon-button color="warn" (click)="removeImage(i)">
+              <mat-icon>delete</mat-icon>
             </button>
-            <button type="submit" mat-raised-button color="primary" class="h-12" [disabled]="ingredientForm.invalid">
-                <div class="flex gap-3 items-center">
-                    @if (ingredientId && ingredientId !== 'create') {
-                    <span>Update Ingredient</span>
-                    } @else {
-                    <span>Create Ingredient</span>
-                    }
-                    @if (isLoading) {
-                    <mat-spinner diameter="20"></mat-spinner>
-                    }
-                </div>
-            </button>
+          </div>
+        }
+
+        @if (imagesArray.length === 0) {
+          <div class="text-center p-4 text-gray-500 italic">
+            No images added yet. Click "Add Image URL" to add one.
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex justify-end space-x-4 pt-4">
+      <button type="button" mat-stroked-button color="warn" class="h-12" (click)="onCancel()">
+        Cancel
+      </button>
+      <button type="submit" mat-raised-button color="primary" class="h-12" [disabled]="ingredientForm.invalid">
+        <div class="flex gap-3 items-center">
+          @if (ingredientId && ingredientId !== 'create') {
+            <span>Update Ingredient</span>
+          } @else {
+            <span>Create Ingredient</span>
+          }
+          @if (isLoading) {
+            <mat-spinner diameter="20"></mat-spinner>
+          }
         </div>
-    </form>
+      </button>
+    </div>
+  </form>
 </div>

@@ -1,12 +1,12 @@
 import { BreadcrumbService } from '@/app/service/breadcrumb.service';
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
-  imports: [CommonModule, RouterModule, MatButtonModule],
+  imports: [RouterModule, MatButtonModule],
   templateUrl: './breadcrumb.component.html',
   styleUrl: './breadcrumb.component.scss',
 })

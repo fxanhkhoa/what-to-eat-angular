@@ -253,7 +253,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   }
 
   handleImageError(event: any): void {
-    event.target.src = '/images/placeholder.png';
+    event.target.src = '/assets/images/placeholder.png';
     event.target.classList.add('error-image'); // Optional: add a class to style error images
   }
 }

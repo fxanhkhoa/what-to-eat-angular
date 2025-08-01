@@ -5,11 +5,22 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
-import { dirname, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import localeVi from '@angular/common/locales/vi';
+import localeEn from '@angular/common/locales/en';
+import { registerLocaleData } from '@angular/common';
+
+// Register the Vietnamese locale data
+registerLocaleData(localeVi);
+
+// Register the English locale data
+registerLocaleData(localeEn);
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
+
+const SUPPORTED_LOCALES = ['en', 'vi'];
 
 const app = express();
 const angularApp = new AngularNodeAppEngine();
@@ -34,17 +45,25 @@ app.use(
     maxAge: '1y',
     index: false,
     redirect: false,
-  }),
+  })
 );
 
-/**
- * Handle all other requests by rendering the Angular application.
- */
+app.use('/:locale/*', (req, res, next) => {
+  const locale = req.params.locale;
+  if (SUPPORTED_LOCALES.includes(locale)) {
+    next();
+  } else {
+    // If URL doesn't have a valid locale, redirect to default locale
+    const redirectPath = `/en${req.originalUrl.replace(`/${locale}`, '')}`;
+    res.redirect(302, redirectPath);
+  }
+});
+
 app.use('/**', (req, res, next) => {
   angularApp
     .handle(req)
     .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
+      response ? writeResponseToNodeResponse(response, res) : next()
     )
     .catch(next);
 });

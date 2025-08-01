@@ -1,0 +1,19 @@
+/* carousel.component.scss */
+
+// Slide animation styles
+.slide-item {
+  position: absolute;
+  width: 100%;
+
+  &.active {
+    opacity: 1;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  &.inactive {
+    display: none;
+    z-index: 0;
+    pointer-events: none;
+  }
+}

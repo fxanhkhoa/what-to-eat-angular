@@ -1,14 +1,22 @@
 .icon {
-    color: #ffffff;
-    font-size: 30px;
-    width: 30px;
-    height: 30px;
+  color: #ffffff;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 h2 {
-    color: #00c749;
+  color: #00c749;
 }
 
 .mat-mdc-snack-bar-container .mdc-snackbar__surface {
-    background-color: #18a71dc3 !important;
+  background-color: rgba(
+    0,
+    255,
+    0,
+    0.3
+  ) !important; // Darker background with transparency
+  backdrop-filter: blur(10px) !important; // Same blur effect
+  border: 1px solid rgba(255, 255, 255, 0.1); // Very subtle white border for definition
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important; // Slightly stronger shadow for depth against dark backgrounds
 }

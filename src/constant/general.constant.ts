@@ -1,0 +1,1 @@
+export const VOTING_SESSION_TIMEOUT = 30 * 1000; // 30 seconds in milliseconds

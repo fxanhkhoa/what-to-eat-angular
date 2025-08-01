@@ -1,0 +1,12 @@
+<div class="grid grid-cols-1 gap-4">
+    <h2 class="text-center text-2xl font-bold" i18n>Card Deck</h2>
+    <div id="card-deck" class="flex flex-wrap justify-center gap-5 min-h-60 transition-all duration-300"
+        [ngClass]="{'!flex-nowrap w-40': shuffling()}">
+        @for (card of cards(); track card) {
+        <app-card [card]="card" (click)="flipCard(card)" [shuffling]="shuffling()"></app-card>
+        }
+    </div>
+    <button mat-raised-button color="primary" (click)="shuffleDeck()" class="mx-auto mt-4" i18n>
+        Shuffle Deck
+    </button>
+</div>
