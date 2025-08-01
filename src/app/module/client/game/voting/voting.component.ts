@@ -176,7 +176,7 @@ export class VotingComponent implements OnInit, OnDestroy {
   }
 
   onCustomVote(slug: string): void {
-    if (!this.myName || !this.dishVote) return;
+    if (!this.myName() || !this.dishVote) return;
 
     const dishVoteItem = this.dishVote.dishVoteItems.find(
       (e) => e.slug === slug
