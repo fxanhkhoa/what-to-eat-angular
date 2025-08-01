@@ -56,4 +56,18 @@ export class SocketService {
       };
     });
   }
+
+  private emitConnectionState(state: string): void {
+    if (!this.connectionState$) {
+      this.connectionState$ = new Subject<string>();
+    }
+    (this.connectionState$ as Subject<string>).next(state);
+  }
+
+  getConnectionState(): Observable<string> {
+    if (!this.connectionState$) {
+      this.connectionState$ = new Subject<string>();
+    }
+    return this.connectionState$.asObservable();
+  }
 }
