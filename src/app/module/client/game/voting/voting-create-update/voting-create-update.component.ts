@@ -246,7 +246,7 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
         .create(formValue)
         .pipe(
           finalize(() => this.creatingLoading.set(false)),
-          timeout(10000)
+          timeout(VOTING_SESSION_TIMEOUT)
         )
         .subscribe((res) => {
           this.router.navigate(['/game/voting', res._id]);
