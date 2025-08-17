@@ -26,6 +26,12 @@
                             class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
                             i18n>Ingredient</a>
 
+                        @if (hasAdminDashboardPermission) {
+                        <a mat-button [routerLink]="['/admin']" routerLinkActive="!text-gray-300 !underline"
+                            class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium"
+                            i18n>Admin</a>
+                        }
+
                         <button mat-button [matMenuTriggerFor]="gameMenu" class="text-white hover:text-gray-300">
                             <div class="flex items-center">
                                 <mat-icon>gamepad</mat-icon>
@@ -85,6 +91,12 @@
                             <mat-icon class="text-blue-400">person</mat-icon>
                             <span i18n>Profile</span>
                         </button>
+                        @if (hasAdminDashboardPermission) {
+                        <button mat-menu-item routerLink="/admin" class="flex items-center space-x-3 px-4 py-3 text-white hover:bg-white/10 transition-colors">
+                            <mat-icon class="text-green-400">admin_panel_settings</mat-icon>
+                            <span i18n>Admin Dashboard</span>
+                        </button>
+                        }
                         <button mat-menu-item (click)="logout()" class="flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-white/10 transition-colors">
                             <mat-icon class="text-red-400">logout</mat-icon>
                             <span i18n>Logout</span>
@@ -122,6 +134,11 @@
                     class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Dish</a>
                 <a mat-button routerLink="/ingredient" routerLinkActive="!text-gray-300 !underline"
                     class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Ingredient</a>
+
+                @if (hasAdminDashboardPermission) {
+                <a mat-button routerLink="/admin" routerLinkActive="!text-gray-300 !underline"
+                    class="text-white hover:text-gray-300 px-3 py-2 rounded-md text-sm font-medium" i18n>Admin</a>
+                }
 
                 <mat-divider></mat-divider>
 
@@ -180,6 +197,12 @@
                             <mat-icon class="mr-2">person</mat-icon>
                             <span i18n>Profile</span>
                         </button>
+                        @if (hasAdminDashboardPermission) {
+                        <button mat-button routerLink="/admin" class="text-white hover:text-gray-300 justify-start">
+                            <mat-icon class="mr-2">admin_panel_settings</mat-icon>
+                            <span i18n>Admin Dashboard</span>
+                        </button>
+                        }
                         <button mat-button (click)="logout()" class="text-red-400 hover:text-red-300 justify-start">
                             <mat-icon class="mr-2">logout</mat-icon>
                             <span i18n>Logout</span>

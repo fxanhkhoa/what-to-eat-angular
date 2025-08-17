@@ -1,12 +1,9 @@
 <div class="flex justify-center items-center h-screen">
-    <div
-        class="flex flex-col gap-5 p-5 shadow bg-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-50">
-        <h1
-            class="text-4xl font-bold text-center bg-gradient-to-r from-gray-900 to-stone-400 bg-clip-text text-transparent">
+    <div class="flex flex-col gap-5 p-5 shadow bg-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-50">
+        <h1 class="text-4xl font-bold text-center bg-gradient-to-r from-gray-900 to-stone-400 bg-clip-text text-transparent">
             Login
         </h1>
-        <button type="button" class="login-with-google-btn" type="button" (click)="loginWithGoogle()">
-            Sign in with Google
-        </button>
+        <div id="google-signin-btn" class="flex justify-center"></div>
+        <div class="text-center text-xs text-gray-500 mt-2">or use Google One Tap</div>
     </div>
 </div>

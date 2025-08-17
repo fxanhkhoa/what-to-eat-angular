@@ -9,6 +9,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  LOCALE_ID,
   OnChanges,
   OnInit,
   PLATFORM_ID,
@@ -26,15 +27,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import {
-  MatPaginator,
-  MatPaginatorModule,
-  PageEvent,
-} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { debounceTime, distinctUntilChanged, finalize } from 'rxjs';
+import { distinctUntilChanged, finalize } from 'rxjs';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { DishService } from '@/app/service/dish.service';
@@ -42,6 +39,7 @@ import { RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
 import { ToastService } from '@/app/shared/service/toast.service';
+import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
 
 @Component({
   selector: 'app-admin-dish-list',
@@ -62,6 +60,7 @@ import { ToastService } from '@/app/shared/service/toast.service';
     RouterModule,
     MatProgressSpinnerModule,
     MatSliderModule,
+    CategoryTranslatePipe,
   ],
   templateUrl: './admin-dish-list.component.html',
   styleUrl: './admin-dish-list.component.scss',
@@ -72,6 +71,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   private dishService = inject(DishService);
   private toastService = inject(ToastService);
   private platformId = inject<string>(PLATFORM_ID);
+  localeId = inject(LOCALE_ID);
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -161,7 +161,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
       })
       .pipe(
         distinctUntilChanged(),
-        finalize(() => (this.isLoading.set(false)))
+        finalize(() => this.isLoading.set(false))
       )
       .subscribe((res) => {
         if (res.count === 0) {

@@ -6,9 +6,6 @@ import {
   Renderer2,
   DOCUMENT,
   NgZone,
-  PLATFORM_ID,
-  OnDestroy,
-  HostListener,
   LOCALE_ID,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -34,6 +31,8 @@ import { Cookies_Key } from '@/enum/cookies.enum';
 import { JWTTokenPayload } from '@/types/auth.type';
 import { jwtDecode } from 'jwt-decode';
 import { AuthService } from '@/app/service/auth.service';
+import { AuthorizationService } from '@/app/service/authorization.service';
+import { Permissions } from '@/constant/permission.constant';
 
 @Component({
   selector: 'app-client',
@@ -63,6 +62,7 @@ export class ClientComponent implements OnInit {
   private fb: FormBuilder = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
+  private authorizationService = inject(AuthorizationService);
   localeId = inject<string>(LOCALE_ID);
 
   mealCategories: string[] = [];
@@ -89,6 +89,7 @@ export class ClientComponent implements OnInit {
   });
 
   payload?: JWTTokenPayload;
+  hasAdminDashboardPermission = false;
 
   constructor() {
     this.iconRegistry.addSvgIcon(
@@ -106,7 +107,35 @@ export class ClientComponent implements OnInit {
 
     if (token) {
       this.payload = jwtDecode<JWTTokenPayload>(token ?? '');
+      this.checkAdminPermission();
     }
+  }
+
+  checkAdminPermission() {
+    if (this.payload && this.payload.role_name) {
+      this.authorizationService.findByName(this.payload.role_name).subscribe({
+        next: (rolePermission) => {
+          this.hasAdminDashboardPermission = rolePermission.permission.includes(Permissions.ADMIN_DASHBOARD);
+        },
+        error: (error) => {
+          console.error('Error fetching role permissions:', error);
+          this.hasAdminDashboardPermission = false;
+        }
+      });
+    } else {
+      this.hasAdminDashboardPermission = false;
+    }
+  }
+
+  hasPermission(permission: string): boolean {
+    // This method can be used for other permissions in the future
+    if (!this.payload || !this.payload.role_name) {
+      return false;
+    }
+    
+    // For now, we'll just check the admin dashboard permission
+    // In a real implementation, you might want to cache all permissions
+    return this.hasAdminDashboardPermission && permission === Permissions.ADMIN_DASHBOARD;
   }
 
   avatarFromPlaceholder() {
@@ -177,8 +206,9 @@ export class ClientComponent implements OnInit {
     cookies.remove(Cookies_Key.TOKEN);
     cookies.remove(Cookies_Key.REFRESH_TOKEN);
     
-    // Clear user payload
+    // Clear user payload and permissions
     this.payload = undefined;
+    this.hasAdminDashboardPermission = false;
     
     // Navigate to login page
     this.router.navigate(['/']);

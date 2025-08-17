@@ -1,6 +1,6 @@
 import { COLOR_PALETTE } from '@/constant/color.constant';
 import { CommonModule } from '@angular/common';
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 
 @Component({
   selector: 'app-voting-user-badge',
@@ -8,20 +8,14 @@ import { Component, Input, signal } from '@angular/core';
   templateUrl: './voting-user-badge.component.html',
   styleUrl: './voting-user-badge.component.scss',
 })
-export class VotingUserBadgeComponent {
+export class VotingUserBadgeComponent implements OnInit {
   @Input() voterName: string = '';
+  @Input() index: number = 0;
   colors = COLOR_PALETTE.slice(0, 9);
 
-  randomColor = signal(
-    this.colors[this.hashString(this.voterName) % this.colors.length]
-  );
+  randomColor = signal(this.colors[this.index % this.colors.length]);
 
-  private hashString(input: string): number {
-    let hash = 0;
-    for (let i = 0; i < input.length; i++) {
-      hash = (hash << 5) - hash + input.charCodeAt(i);
-      hash |= 0; // Convert to 32-bit integer
-    }
-    return Math.abs(hash);
+  ngOnInit() {
+    this.randomColor.set(this.colors[this.index % this.colors.length]);
   }
 }
