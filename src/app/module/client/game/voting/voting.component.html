@@ -51,22 +51,22 @@
         <!-- Dishes Grid -->
         <div class="grid grid-cols-12 gap-3">
             @for (dish of dishes; track dish) {
-            <div class="col-span-12 md:col-span-9">
+            <div class="col-span-12 md:col-span-8">
                 <app-dish-card-fancy [dish]="dish" [isWinner]="isWinnerDish(dish.slug)"></app-dish-card-fancy>
             </div>
-            <div class="col-span-12 md:col-span-3">
-                <div class="flex flex-col gap-3 justify-between h-full">
+            <div class="col-span-12 md:col-span-4 neumorphic-container_dark rounded-lg !bg-white/10">
+                <div class="flex flex-col gap-3 justify-between h-full p-3">
                     <div class="flex flex-col gap-2">
-                        <div class="flex items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
+                        <div class="flex flex-wrap items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
                             @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
-                            <app-voting-user-badge [voterName]="voter"
+                            <app-voting-user-badge [voterName]="voter" [index]="i"
                                 [ngStyle]="{'transform': 'translateX(' + (i * -12) + 'px)'}"></app-voting-user-badge>
                             }
                             <span class="ml-auto text-xl neumorphic-inset_dark rounded-lg p-3">{{
                                 getTotalVotes(dish.slug) }}</span>
                         </div>
                     </div>
-                    <button matButton="elevated" (click)="onVote(dish)">
+                    <button matButton="elevated" (click)="onVote(dish)" class="!mb-3">
                         @if (isVotedByMe(dish.slug)) {
                         <mat-icon>thumb_down</mat-icon>
                         } @else {
@@ -103,9 +103,9 @@
                                 <mat-icon>link</mat-icon>
                             </a>
                             <div class="flex flex-col gap-2">
-                                <div class="flex items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
+                                <div class="flex flex-wrap items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
                                     @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
-                                    <app-voting-user-badge [voterName]="voter"
+                                    <app-voting-user-badge [voterName]="voter" [index]="i"
                                         [ngStyle]="{'transform': 'translateX(' + (i * -12) + 'px)'}"></app-voting-user-badge>
                                     }
                                     <span class="ml-auto text-xl neumorphic-inset_dark rounded-lg p-3">{{

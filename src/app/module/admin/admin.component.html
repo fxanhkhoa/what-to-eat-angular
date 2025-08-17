@@ -18,7 +18,15 @@
         <div class="border-t border-gray-50 opacity-50 mx-3 mt-2"></div>
         <div i18n class="flex text-white mt-2 justify-center font-semibold">Menu</div>
         <mat-nav-list>
-            <a mat-list-item href="#">
+            <a mat-list-item [routerLink]="['/']">
+                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
+                    <mat-icon class="!text-white min-w-5">home</mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white text-sm font-light">Go to Client</span>
+                    }
+                </div>
+            </a>
+            <a mat-list-item [routerLink]="['/admin']">
                 <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
                     <mat-icon class="!text-white min-w-5">
                         dashboard

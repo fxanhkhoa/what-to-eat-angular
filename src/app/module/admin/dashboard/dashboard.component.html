@@ -1,1 +1,65 @@
-<p>dashboard works!</p>
+<div class="p-6 max-w-4xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <mat-card class="!bg-blue-50 !border-l-4 !border-blue-400">
+            <mat-card-header>
+                <mat-card-title class="!text-lg !font-semibold !text-blue-800" i18n>Total Dishes</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="text-3xl font-bold text-blue-700">{{ dishCount !== null ? dishCount : '—' }}</div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="!bg-green-50 !border-l-4 !border-green-400">
+            <mat-card-header>
+                <mat-card-title class="text-lg font-semibold text-green-800" i18n>Total Ingredients</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="text-3xl font-bold text-green-700">{{ ingredientCount !== null ? ingredientCount : '—' }}
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <mat-card class="shadow-lg">
+        <mat-card-header>
+            <mat-card-title class="text-2xl font-bold" i18n>Admin Dashboard</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            @if (loading) {
+                <div class="flex justify-center my-8">
+                    <mat-spinner></mat-spinner>
+                </div>
+            }
+            @if (error) {
+            <div class="text-red-500 my-4">{{ error }}</div>
+            }
+            @if (!loading && !error) {
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Roles & Permissions</h2>
+                <table mat-table [dataSource]="roles" class="min-w-full bg-white rounded border border-gray-200">
+                    <!-- Role Name Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef class="px-4 py-2 border-b" i18n>Role Name</th>
+                        <td mat-cell *matCellDef="let role" class="px-4 py-2 border-b font-medium">{{ role.name }}</td>
+                    </ng-container>
+
+                    <!-- Permissions Column -->
+                    <ng-container matColumnDef="permission">
+                        <th mat-header-cell *matHeaderCellDef class="px-4 py-2 border-b" i18n>Permissions</th>
+                        <td mat-cell *matCellDef="let role" class="px-4 py-2 border-b">
+                            <div class="flex flex-wrap gap-2">
+                                @for (perm of role.permission; track perm) {
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    {{ perm }}
+                                </span>
+                                }
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="['name', 'permission']"></tr>
+                    <tr mat-row *matRowDef="let row; columns: ['name', 'permission'];"></tr>
+                </table>
+            </div>
+            }
+        </mat-card-content>
+    </mat-card>
+</div>

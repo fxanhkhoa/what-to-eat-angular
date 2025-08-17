@@ -51,7 +51,7 @@ import {
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
 import { MultiLanguagePipe } from '@/app/pipe/multi-language.pipe';
-import { QuillModule } from 'ngx-quill';
+import { QuillModule, QuillModules } from 'ngx-quill';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-viewer.component';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -109,7 +109,7 @@ export class AdminDishUpdateComponent {
   @ViewChild('relatedDishInput')
   relatedDishInput?: ElementRef<HTMLInputElement>;
 
-  quillModules = {
+  quillModules: QuillModules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'], // toggled buttons
       ['blockquote', 'code-block'],
@@ -130,6 +130,9 @@ export class AdminDishUpdateComponent {
 
       ['clean'], // remove formatting button
     ],
+    clipboard: {
+      matchVisual: false, // Disable visual matching for better performance
+    },
   };
 
   dishId?: string;
@@ -355,9 +358,7 @@ export class AdminDishUpdateComponent {
 
   onSubmit(): void {
     if (this.dishForm.valid) {
-      const relatedDishes = this.dishForm
-        .get('relatedDishes')
-        ?.value.map((e: Dish) => e._id);
+      const relatedDishes = this.selectedRelatedDishes.map((e: Dish) => e._id);
 
       const ingredients: IngredientsInDish[] = this.dishForm
         .get('ingredients')
@@ -377,19 +378,20 @@ export class AdminDishUpdateComponent {
           relatedDishes,
           ingredients,
         };
-        this.dishService
-          .update(this.dishId, dto)
-          .pipe(finalize(() => (this.isLoading = false)))
-          .subscribe((res) => {
-            this.toastService.showSuccess(
-              $localize`Updated`,
-              $localize`Dish ${
-                res.title.find((e) => e.lang === 'en')?.data
-              } updated successfully`,
-              1500
-            );
-            this.router.navigate(['admin', 'dish']);
-          });
+        console.log(dto);
+        // this.dishService
+        //   .update(this.dishId, dto)
+        //   .pipe(finalize(() => (this.isLoading = false)))
+        //   .subscribe((res) => {
+        //     this.toastService.showSuccess(
+        //       $localize`Updated`,
+        //       $localize`Dish ${
+        //         res.title.find((e) => e.lang === 'en')?.data
+        //       } updated successfully`,
+        //       1500
+        //     );
+        //     this.router.navigate(['admin', 'dish']);
+        //   });
       } else {
         const dto: CreateDishDto = {
           ...this.dishForm.value,
