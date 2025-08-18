@@ -8,7 +8,9 @@ import {
   TemplateRef,
   ViewChild,
   ViewContainerRef,
+  DOCUMENT,
 } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
@@ -83,6 +85,9 @@ import { VOTING_SESSION_TIMEOUT } from '@/constant/general.constant';
 export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   @ViewChild('dishPreviewTemplate') dishPreviewTemplate!: TemplateRef<any>;
 
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private document = inject(DOCUMENT);
   private fb = inject(FormBuilder);
   private dishService = inject(DishService);
   private overlay = inject(Overlay);
@@ -116,6 +121,7 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   creatingLoading = signal(false);
 
   ngOnInit(): void {
+    this.setupSEO();
     this.getDishes();
   }
 
@@ -360,8 +366,113 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   }
 
   ngOnDestroy() {
+    this.removeCanonicalLink();
     if (this.overlayRef) {
       this.overlayRef.dispose();
+    }
+  }
+
+  private setupSEO(): void {
+    const isVietnamese = this.localeID === 'vi';
+    
+    if (isVietnamese) {
+      this.titleService.setTitle('Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm | What to Eat');
+      
+      this.metaService.updateTag({ 
+        name: 'description', 
+        content: 'Tạo phiên bình chọn món ăn mới cho nhóm bạn bè và gia đình. Chọn món ăn, tùy chỉnh danh sách và chia sẻ để cùng nhau quyết định món ăn hôm nay.' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'keywords', 
+        content: 'tạo bình chọn món ăn, tổ chức vote nhóm, chọn món ăn nhóm, tạo phiên vote, chia sẻ bình chọn, quyết định món ăn' 
+      });
+      
+      // Open Graph tags
+      this.metaService.updateTag({ 
+        property: 'og:title', 
+        content: 'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm' 
+      });
+      
+      this.metaService.updateTag({ 
+        property: 'og:description', 
+        content: 'Tạo phiên bình chọn món ăn cho nhóm. Chọn món ăn, tùy chỉnh và chia sẻ để cùng quyết định món ăn hôm nay.' 
+      });
+      
+      // Twitter Card tags
+      this.metaService.updateTag({ 
+        name: 'twitter:title', 
+        content: 'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'twitter:description', 
+        content: 'Tạo phiên bình chọn món ăn cho nhóm. Chọn món và chia sẻ để cùng quyết định.' 
+      });
+    } else {
+      this.titleService.setTitle('Create Food Voting Session - Organize Group Voting | What to Eat');
+      
+      this.metaService.updateTag({ 
+        name: 'description', 
+        content: 'Create a new food voting session for your friends and family. Select dishes, customize the list and share to decide what to eat together today.' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'keywords', 
+        content: 'create food voting, organize group poll, group food selection, create voting session, share food poll, food decision maker' 
+      });
+      
+      // Open Graph tags
+      this.metaService.updateTag({ 
+        property: 'og:title', 
+        content: 'Create Food Voting Session - Organize Group Voting' 
+      });
+      
+      this.metaService.updateTag({ 
+        property: 'og:description', 
+        content: 'Create food voting session for your group. Select dishes, customize and share to decide what to eat together.' 
+      });
+      
+      // Twitter Card tags
+      this.metaService.updateTag({ 
+        name: 'twitter:title', 
+        content: 'Create Food Voting Session - Organize Group Voting' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'twitter:description', 
+        content: 'Create food voting session for your group. Select dishes and share to decide together.' 
+      });
+    }
+    
+    // Common meta tags
+    this.metaService.updateTag({ property: 'og:type', content: 'website' });
+    this.metaService.updateTag({ property: 'og:site_name', content: 'What to Eat' });
+    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
+    
+    this.addOrUpdateCanonicalLink();
+  }
+
+  private addOrUpdateCanonicalLink(): void {
+    const head = this.document.querySelector('head');
+    if (!head) return;
+
+    // Remove existing canonical link
+    this.removeCanonicalLink();
+
+    // Create new canonical link
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', `${this.document.location.origin}/game/voting/create`);
+    head.appendChild(link);
+  }
+
+  private removeCanonicalLink(): void {
+    const head = this.document.querySelector('head');
+    const existingCanonical = head?.querySelector('link[rel="canonical"]');
+    if (existingCanonical) {
+      head?.removeChild(existingCanonical);
     }
   }
 }

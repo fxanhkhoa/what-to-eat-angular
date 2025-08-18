@@ -8,7 +8,9 @@ import {
   TemplateRef,
   ViewContainerRef,
   LOCALE_ID,
+  DOCUMENT,
 } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -55,6 +57,9 @@ import { VotingUserBadgeComponent } from './voting-user-badge/voting-user-badge.
 export class VotingComponent implements OnInit, OnDestroy {
   @ViewChild('dishPreviewTemplate') dishPreviewTemplate!: TemplateRef<any>;
 
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private document = inject(DOCUMENT);
   private destroy$ = new Subject<void>();
   private route = inject(ActivatedRoute);
   private dialog = inject(MatDialog);
@@ -73,11 +78,13 @@ export class VotingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.dishVoteID = this.route.snapshot.params['id'];
+    this.setupSEO();
     this.loadData();
     this.setupSocketConnection();
   }
 
   ngOnDestroy(): void {
+    this.removeCanonicalLink();
     this.destroy$.next();
     this.destroy$.complete();
     this.socketService.disconnect();
@@ -321,5 +328,109 @@ export class VotingComponent implements OnInit, OnDestroy {
 
   goBack() {
     window.history.back();
+  }
+
+  private setupSEO(): void {
+    const isVietnamese = this.localeID === 'vi';
+    
+    if (isVietnamese) {
+      this.titleService.setTitle('Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích | What to Eat');
+      
+      this.metaService.updateTag({ 
+        name: 'description', 
+        content: 'Tham gia bình chọn món ăn cùng bạn bè và gia đình. Chọn món ăn yêu thích từ danh sách và xem kết quả bình chọn theo thời gian thực.' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'keywords', 
+        content: 'bình chọn món ăn, vote món ăn, chọn món ăn, game ẩm thực, bình chọn trực tuyến, tương tác nhóm, món ăn yêu thích' 
+      });
+      
+      // Open Graph tags
+      this.metaService.updateTag({ 
+        property: 'og:title', 
+        content: 'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích' 
+      });
+      
+      this.metaService.updateTag({ 
+        property: 'og:description', 
+        content: 'Tham gia bình chọn món ăn cùng bạn bè và gia đình. Chọn món ăn yêu thích và xem kết quả theo thời gian thực.' 
+      });
+      
+      // Twitter Card tags
+      this.metaService.updateTag({ 
+        name: 'twitter:title', 
+        content: 'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'twitter:description', 
+        content: 'Tham gia bình chọn món ăn cùng bạn bè. Chọn món yêu thích và xem kết quả bình chọn trực tuyến.' 
+      });
+    } else {
+      this.titleService.setTitle('Food Voting - Find Your Favorite Dish | What to Eat');
+      
+      this.metaService.updateTag({ 
+        name: 'description', 
+        content: 'Join food voting with friends and family. Choose your favorite dishes from the list and see real-time voting results together.' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'keywords', 
+        content: 'food voting, dish voting, food poll, culinary game, online voting, group interaction, favorite dishes, food selection' 
+      });
+      
+      // Open Graph tags
+      this.metaService.updateTag({ 
+        property: 'og:title', 
+        content: 'Food Voting - Find Your Favorite Dish' 
+      });
+      
+      this.metaService.updateTag({ 
+        property: 'og:description', 
+        content: 'Join food voting with friends and family. Choose your favorite dishes and see real-time voting results together.' 
+      });
+      
+      // Twitter Card tags
+      this.metaService.updateTag({ 
+        name: 'twitter:title', 
+        content: 'Food Voting - Find Your Favorite Dish' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'twitter:description', 
+        content: 'Join food voting with friends. Choose favorite dishes and see real-time voting results.' 
+      });
+    }
+    
+    // Common meta tags
+    this.metaService.updateTag({ property: 'og:type', content: 'website' });
+    this.metaService.updateTag({ property: 'og:site_name', content: 'What to Eat' });
+    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
+    
+    this.addOrUpdateCanonicalLink();
+  }
+
+  private addOrUpdateCanonicalLink(): void {
+    const head = this.document.querySelector('head');
+    if (!head) return;
+
+    // Remove existing canonical link
+    this.removeCanonicalLink();
+
+    // Create new canonical link
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', `${this.document.location.origin}/game/voting/${this.dishVoteID}`);
+    head.appendChild(link);
+  }
+
+  private removeCanonicalLink(): void {
+    const head = this.document.querySelector('head');
+    const existingCanonical = head?.querySelector('link[rel="canonical"]');
+    if (existingCanonical) {
+      head?.removeChild(existingCanonical);
+    }
   }
 }

@@ -5,7 +5,10 @@ import {
   OnInit,
   PLATFORM_ID,
   signal,
+  DOCUMENT,
+  LOCALE_ID,
 } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { CardDeckComponent } from './card-deck/card-deck.component';
 import { Dish } from '@/types/dish.type';
 import { DishService } from '@/app/service/dish.service';
@@ -32,7 +35,13 @@ import { FlippingCardPickerComponent } from './flipping-card-picker/flipping-car
   styleUrl: './flipping-card.component.scss',
 })
 export class FlippingCardComponent implements OnDestroy, OnInit {
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private document = inject(DOCUMENT);
+  private localeId = inject(LOCALE_ID);
+  
   ngOnDestroy(): void {
+    this.removeCanonicalLink();
     this.destroy$.next(null);
 
     this.gameStateService.updateFlippingCardState({
@@ -54,6 +63,7 @@ export class FlippingCardComponent implements OnDestroy, OnInit {
   loading = signal<boolean>(false);
 
   ngOnInit(): void {
+    this.setupSEO();
     this.initializeGame();
   }
 
@@ -160,5 +170,109 @@ export class FlippingCardComponent implements OnDestroy, OnInit {
 
   goBack() {
     window.history.back();
+  }
+
+  private setupSEO(): void {
+    const isVietnamese = this.localeId === 'vi';
+    
+    if (isVietnamese) {
+      this.titleService.setTitle('Trò Chơi Lật Thẻ - Tìm Món Ăn Ngẫu Nhiên | What to Eat');
+      
+      this.metaService.updateTag({ 
+        name: 'description', 
+        content: 'Chơi trò lật thẻ thú vị để khám phá món ăn mới. Thử thách trí nhớ và tìm ra những món ăn ngon được giấu sau các lá bài.' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'keywords', 
+        content: 'trò chơi lật thẻ, game món ăn, trò chơi ẩm thực, game tìm món ăn, lật bài, trò chơi trí nhớ, game việt nam' 
+      });
+      
+      // Open Graph tags
+      this.metaService.updateTag({ 
+        property: 'og:title', 
+        content: 'Trò Chơi Lật Thẻ - Tìm Món Ăn Ngẫu Nhiên' 
+      });
+      
+      this.metaService.updateTag({ 
+        property: 'og:description', 
+        content: 'Chơi trò lật thẻ thú vị để khám phá món ăn mới. Thử thách trí nhớ và tìm ra những món ăn ngon được giấu sau các lá bài.' 
+      });
+      
+      // Twitter Card tags
+      this.metaService.updateTag({ 
+        name: 'twitter:title', 
+        content: 'Trò Chơi Lật Thẻ - Tìm Món Ăn Ngẫu Nhiên' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'twitter:description', 
+        content: 'Chơi trò lật thẻ thú vị để khám phá món ăn mới. Thử thách trí nhớ và tìm ra những món ăn ngon.' 
+      });
+    } else {
+      this.titleService.setTitle('Flipping Card Game - Discover Random Dishes | What to Eat');
+      
+      this.metaService.updateTag({ 
+        name: 'description', 
+        content: 'Play the exciting card flipping game to discover new dishes. Challenge your memory and find delicious foods hidden behind the cards.' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'keywords', 
+        content: 'flipping card game, food game, culinary game, dish discovery game, card matching, memory game, food finder' 
+      });
+      
+      // Open Graph tags
+      this.metaService.updateTag({ 
+        property: 'og:title', 
+        content: 'Flipping Card Game - Discover Random Dishes' 
+      });
+      
+      this.metaService.updateTag({ 
+        property: 'og:description', 
+        content: 'Play the exciting card flipping game to discover new dishes. Challenge your memory and find delicious foods hidden behind the cards.' 
+      });
+      
+      // Twitter Card tags
+      this.metaService.updateTag({ 
+        name: 'twitter:title', 
+        content: 'Flipping Card Game - Discover Random Dishes' 
+      });
+      
+      this.metaService.updateTag({ 
+        name: 'twitter:description', 
+        content: 'Play the exciting card flipping game to discover new dishes. Challenge your memory and find delicious foods.' 
+      });
+    }
+    
+    // Common meta tags
+    this.metaService.updateTag({ property: 'og:type', content: 'website' });
+    this.metaService.updateTag({ property: 'og:site_name', content: 'What to Eat' });
+    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
+    
+    this.addOrUpdateCanonicalLink();
+  }
+
+  private addOrUpdateCanonicalLink(): void {
+    const head = this.document.querySelector('head');
+    if (!head) return;
+
+    // Remove existing canonical link
+    this.removeCanonicalLink();
+
+    // Create new canonical link
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', `${this.document.location.origin}/game/flipping-card`);
+    head.appendChild(link);
+  }
+
+  private removeCanonicalLink(): void {
+    const head = this.document.querySelector('head');
+    const existingCanonical = head?.querySelector('link[rel="canonical"]');
+    if (existingCanonical) {
+      head?.removeChild(existingCanonical);
+    }
   }
 }

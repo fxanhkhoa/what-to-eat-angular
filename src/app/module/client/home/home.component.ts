@@ -1,14 +1,20 @@
-import { Component, inject, LOCALE_ID, OnInit } from '@angular/core';
-import { Title, Meta } from '@angular/platform-browser';
+import {
+  Component,
+  inject,
+  LOCALE_ID,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title, Meta } from '@angular/platform-browser';
+import { ContactSectionComponent } from './contact-section/contact-section.component';
 import { DishSectionComponent } from './dish-section/dish-section.component';
 import { GameSectionComponent } from './game-section/game-section.component';
 import { IngredientSectionComponent } from './ingredient-section/ingredient-section.component';
 import { QuoteSectionComponent } from './quote-section/quote-section.component';
-import { ContactSectionComponent } from './contact-section/contact-section.component';
-
 @Component({
   selector: 'app-home',
   imports: [
@@ -21,15 +27,17 @@ import { ContactSectionComponent } from './contact-section/contact-section.compo
     ContactSectionComponent,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
   private titleService = inject(Title);
   private metaService = inject(Meta);
+  private document = inject(DOCUMENT);
 
   localeId = inject(LOCALE_ID);
+  platformId = inject(PLATFORM_ID);
 
   constructor() {
     this.iconRegistry.addSvgIcon(
@@ -48,6 +56,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // @ts-ignore
     const locale = this.localeId;
+    if (isPlatformBrowser(this.platformId)) {
+      this.addOrUpdateCanonicalLink();
+    }
     if (locale.startsWith('vi')) {
       this.titleService.setTitle(
         'Ăn gì hôm nay - Khám phá bữa ăn tiếp theo của bạn'
@@ -73,8 +84,7 @@ export class HomeComponent implements OnInit {
       });
       this.metaService.updateTag({
         property: 'og:image',
-        content:
-          'https://eatwhat.io.vn/assets/logo/what-to-eat-high-resolution-logo-black-transparent.webp',
+        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
       });
       this.metaService.updateTag({
         property: 'og:url',
@@ -95,8 +105,7 @@ export class HomeComponent implements OnInit {
       });
       this.metaService.updateTag({
         name: 'twitter:image',
-        content:
-          'https://eatwhat.io.vn/assets/logo/what-to-eat-high-resolution-logo-black-transparent.webp',
+        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
       });
     } else {
       this.titleService.setTitle('What To Eat - Discover Your Next Meal');
@@ -121,8 +130,7 @@ export class HomeComponent implements OnInit {
       });
       this.metaService.updateTag({
         property: 'og:image',
-        content:
-          'https://eatwhat.io.vn/assets/logo/what-to-eat-high-resolution-logo-black-transparent.webp',
+        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
       });
       this.metaService.updateTag({
         property: 'og:url',
@@ -143,9 +151,40 @@ export class HomeComponent implements OnInit {
       });
       this.metaService.updateTag({
         name: 'twitter:image',
-        content:
-          'https://eatwhat.io.vn/assets/logo/what-to-eat-high-resolution-logo-black-transparent.webp',
+        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
       });
+    }
+  }
+
+  private addOrUpdateCanonicalLink() {
+    // Remove existing canonical link if it exists
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
+    if (existingCanonical) {
+      existingCanonical.remove();
+    }
+
+    // Add new canonical link
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', window.location.href);
+    this.document.head.appendChild(link);
+  }
+
+  ngOnDestroy() {
+    // Clean up structured data when component is destroyed
+    const existingScript = this.document.getElementById('dish-structured-data');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    // Clean up canonical link
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
+    if (existingCanonical) {
+      existingCanonical.remove();
     }
   }
 }
