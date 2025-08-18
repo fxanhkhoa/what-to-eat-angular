@@ -5,10 +5,12 @@ import {
   computed,
   effect,
   LOCALE_ID,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule, Location } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CommonModule, Location, DOCUMENT } from '@angular/common';
+import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -49,7 +51,7 @@ import { DishCardFancyComponent } from '../dish-card-fancy/dish-card-fancy.compo
   standalone: true,
   // Add imports for Angular Material, child components, etc.
 })
-export class DishDetailComponent {
+export class DishDetailComponent implements OnDestroy, OnInit {
   private route = inject(ActivatedRoute);
   private location = inject(Location);
   private sanitizer = inject(DomSanitizer);
@@ -57,6 +59,9 @@ export class DishDetailComponent {
   private iconRegistry = inject(MatIconRegistry);
   private ingredientService = inject(IngredientService);
   private dishService = inject(DishService);
+  private titleService = inject(Title);
+  private metaService = inject(Meta);
+  private document = inject(DOCUMENT);
   localeId = inject(LOCALE_ID);
 
   dish = signal<Dish | null>(null);
@@ -103,6 +108,9 @@ export class DishDetailComponent {
   }
 
   ngOnInit() {
+    // Set default SEO meta tags
+    this.setDefaultSEO();
+
     const data = this.route.snapshot.data;
     this.pageUrl.set(data['pageUrl']);
     this.route.paramMap.subscribe((params) => {
@@ -160,8 +168,200 @@ export class DishDetailComponent {
       .subscribe((dish) => {
         if (dish) {
           this.dish.set(dish);
+          this.updateSEOWithDishData(dish);
+          this.addStructuredData(dish);
+          this.addOrUpdateCanonicalLink();
         }
       });
+  }
+
+  private setDefaultSEO() {
+    this.titleService.setTitle('Chi tiết món ăn | What To Eat');
+    this.metaService.updateTag({
+      name: 'description',
+      content:
+        'Xem chi tiết món ăn, thành phần, cách chế biến và đánh giá tại What To Eat.',
+    });
+    this.metaService.updateTag({
+      name: 'keywords',
+      content:
+        'chi tiết món ăn, công thức nấu ăn, thành phần, what to eat, món ngon',
+    });
+    this.metaService.updateTag({
+      property: 'og:title',
+      content: 'Chi tiết món ăn | What To Eat',
+    });
+    this.metaService.updateTag({
+      property: 'og:description',
+      content:
+        'Xem chi tiết món ăn, thành phần, cách chế biến và đánh giá tại What To Eat.',
+    });
+    this.metaService.updateTag({
+      property: 'og:type',
+      content: 'article',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:title',
+      content: 'Chi tiết món ăn | What To Eat',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:description',
+      content:
+        'Xem chi tiết món ăn, thành phần, cách chế biến và đánh giá tại What To Eat.',
+    });
+    this.metaService.updateTag({
+      name: 'robots',
+      content: 'index, follow',
+    });
+  }
+
+  private updateSEOWithDishData(dish: Dish) {
+    const dishName = this.getDishName(dish);
+    const dishDescription = this.getDishDescription(dish);
+
+    if (dishName) {
+      const title = `${dishName} | What To Eat`;
+      this.titleService.setTitle(title);
+      this.metaService.updateTag({ property: 'og:title', content: title });
+    }
+
+    if (dishDescription) {
+      this.metaService.updateTag({
+        name: 'description',
+        content: dishDescription,
+      });
+      this.metaService.updateTag({
+        property: 'og:description',
+        content: dishDescription,
+      });
+    }
+
+    if (dish.thumbnail) {
+      this.metaService.updateTag({
+        property: 'og:image',
+        content: dish.thumbnail,
+      });
+      this.metaService.updateTag({
+        name: 'twitter:image',
+        content: dish.thumbnail,
+      });
+    }
+
+    // Update Twitter card title and description
+    if (dishName) {
+      this.metaService.updateTag({
+        name: 'twitter:title',
+        content: `${dishName} | What To Eat`,
+      });
+    }
+
+    if (dishDescription) {
+      this.metaService.updateTag({
+        name: 'twitter:description',
+        content: dishDescription,
+      });
+    }
+
+    // Add structured data keywords from categories
+    const categories = [
+      ...(dish.mealCategories || []),
+      ...(dish.ingredientCategories || []),
+    ];
+    if (categories.length > 0) {
+      const keywords = `${dishName}, ${categories.join(
+        ', '
+      )}, công thức nấu ăn, what to eat, món ngon`;
+      this.metaService.updateTag({ name: 'keywords', content: keywords });
+    }
+  }
+
+  private getDishName(dish: Dish): string {
+    if (!dish.title) return '';
+    const nameObj = dish.title.find((n: any) => n.lang === this.localeId);
+    return nameObj?.data || dish.title[0]?.data || '';
+  }
+
+  private getDishDescription(dish: Dish): string {
+    if (!dish.shortDescription) return '';
+    const descObj = dish.shortDescription.find(
+      (d: any) => d.lang === this.localeId
+    );
+    const description = descObj?.data || dish.shortDescription[0]?.data || '';
+    // Limit description length for meta tags
+    return description.length > 160
+      ? description.substring(0, 157) + '...'
+      : description;
+  }
+
+  private addStructuredData(dish: Dish) {
+    const dishName = this.getDishName(dish);
+    const dishDescription = this.getDishDescription(dish);
+
+    // Remove existing structured data script if it exists
+    const existingScript = this.document.getElementById('dish-structured-data');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'Recipe',
+      name: dishName,
+      description: dishDescription,
+      image: dish.thumbnail ? [dish.thumbnail] : [],
+      author: {
+        '@type': 'Organization',
+        name: 'What To Eat',
+      },
+      prepTime: dish.preparationTime ? `PT${dish.preparationTime}M` : undefined,
+      cookTime: dish.cookingTime ? `PT${dish.cookingTime}M` : undefined,
+      totalTime:
+        dish.preparationTime && dish.cookingTime
+          ? `PT${dish.preparationTime + dish.cookingTime}M`
+          : undefined,
+      recipeCategory: dish.mealCategories,
+      recipeCuisine: 'Vietnamese',
+      keywords: [...dish.mealCategories, ...dish.ingredientCategories].join(
+        ', '
+      ),
+      recipeIngredient: this.ingredients().map((ingredient) => {
+        const dishIngredient = dish.ingredients.find(
+          (di) => di.ingredientId === ingredient._id
+        );
+        const ingredientName =
+          ingredient.title?.find((n: any) => n.lang === this.localeId)?.data ||
+          ingredient.title?.[0]?.data ||
+          '';
+        return dishIngredient
+          ? `${dishIngredient.quantity} ${ingredientName}`
+          : ingredientName;
+      }),
+      recipeInstructions:
+        dish.content?.find((c: any) => c.lang === this.localeId)?.data ||
+        dish.content?.[0]?.data ||
+        '',
+      video: dish.videos?.map((video) => ({
+        '@type': 'VideoObject',
+        embedUrl: video,
+      })),
+    };
+
+    // Remove undefined values
+    Object.keys(structuredData).forEach((key) => {
+      if (structuredData[key as keyof typeof structuredData] === undefined) {
+        delete structuredData[key as keyof typeof structuredData];
+      }
+    });
+
+    const script = this.document.createElement('script');
+    script.id = 'dish-structured-data';
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(structuredData);
+    this.document.head.appendChild(script);
   }
 
   getContent(): SafeHtml {
@@ -212,5 +412,37 @@ export class DishDetailComponent {
     );
     if (!found) return '';
     return found.note;
+  }
+
+  private addOrUpdateCanonicalLink() {
+    // Remove existing canonical link if it exists
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
+    if (existingCanonical) {
+      existingCanonical.remove();
+    }
+
+    // Add new canonical link
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    link.setAttribute('href', window.location.href);
+    this.document.head.appendChild(link);
+  }
+
+  ngOnDestroy() {
+    // Clean up structured data when component is destroyed
+    const existingScript = this.document.getElementById('dish-structured-data');
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    // Clean up canonical link
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
+    if (existingCanonical) {
+      existingCanonical.remove();
+    }
   }
 }
