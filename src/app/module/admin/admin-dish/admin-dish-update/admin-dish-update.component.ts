@@ -378,20 +378,19 @@ export class AdminDishUpdateComponent {
           relatedDishes,
           ingredients,
         };
-        console.log(dto);
-        // this.dishService
-        //   .update(this.dishId, dto)
-        //   .pipe(finalize(() => (this.isLoading = false)))
-        //   .subscribe((res) => {
-        //     this.toastService.showSuccess(
-        //       $localize`Updated`,
-        //       $localize`Dish ${
-        //         res.title.find((e) => e.lang === 'en')?.data
-        //       } updated successfully`,
-        //       1500
-        //     );
-        //     this.router.navigate(['admin', 'dish']);
-        //   });
+        this.dishService
+          .update(this.dishId, dto)
+          .pipe(finalize(() => (this.isLoading = false)))
+          .subscribe((res) => {
+            this.toastService.showSuccess(
+              $localize`Updated`,
+              $localize`Dish ${
+                res.title.find((e) => e.lang === 'en')?.data
+              } updated successfully`,
+              1500
+            );
+            this.router.navigate(['admin', 'dish']);
+          });
       } else {
         const dto: CreateDishDto = {
           ...this.dishForm.value,
