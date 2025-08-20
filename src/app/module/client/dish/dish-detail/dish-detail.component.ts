@@ -7,9 +7,10 @@ import {
   LOCALE_ID,
   OnDestroy,
   OnInit,
+  PLATFORM_ID,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule, Location, DOCUMENT } from '@angular/common';
+import { CommonModule, Location, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -63,6 +64,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
   private metaService = inject(Meta);
   private document = inject(DOCUMENT);
   localeId = inject(LOCALE_ID);
+  private platformId = inject(PLATFORM_ID);
 
   dish = signal<Dish | null>(null);
   ingredients = signal<Ingredient[]>([]);
@@ -426,7 +428,9 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     // Add new canonical link
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', window.location.href);
+    if (isPlatformBrowser(this.platformId)) {
+      link.setAttribute('href', window.location.href);
+    }
     this.document.head.appendChild(link);
   }
 

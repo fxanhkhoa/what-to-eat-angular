@@ -1,7 +1,14 @@
 import { JWTTokenPayload } from '@/types/auth.type';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, Renderer2, DOCUMENT } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+  OnInit,
+  Renderer2,
+  DOCUMENT,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -13,6 +20,8 @@ import cookies from 'js-cookie';
 import { Cookies_Key } from '@/enum/cookies.enum';
 import { jwtDecode } from 'jwt-decode';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
+import { AuthService } from '@/app/service/auth.service';
+import { ToastService } from '@/app/shared/service/toast.service';
 
 @Component({
   selector: 'app-admin',
@@ -34,6 +43,8 @@ export class AdminComponent implements OnInit {
   private breakpointObserver = inject(BreakpointObserver);
   private document = inject(DOCUMENT);
   private renderer = inject(Renderer2);
+  private authService = inject(AuthService);
+  private toastService = inject(ToastService);
 
   payload?: JWTTokenPayload;
 
@@ -55,8 +66,30 @@ export class AdminComponent implements OnInit {
   }
 
   logout() {
-    cookies.remove(Cookies_Key.TOKEN);
-    cookies.remove(Cookies_Key.REFRESH_TOKEN);
-    window.location.reload();
+    const refreshToken = cookies.get(Cookies_Key.REFRESH_TOKEN);
+    if (!refreshToken) {
+      this.toastService.showError(
+        $localize`Failed`,
+        $localize`Can not log out`,
+        1500
+      );
+      return;
+    }
+    this.authService.logout(refreshToken).subscribe({
+      next: () => {
+        // Clear authentication tokens
+        cookies.remove(Cookies_Key.TOKEN);
+        cookies.remove(Cookies_Key.REFRESH_TOKEN);
+
+        // Clear user payload and permissions
+        this.payload = undefined;
+
+        // Navigate to login page
+        window.location.reload();
+      },
+      error: (error) => {
+        console.error('Logout failed', error);
+      },
+    });
   }
 }
