@@ -1,7 +1,4 @@
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
@@ -18,6 +15,7 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { bearerInterceptor } from './interceptor/bearer.interceptor';
+import { tokenRefreshInterceptor } from './interceptor/token-refresh.interceptor';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './shared/paginator/custom-paginator-intl';
 
@@ -45,7 +43,10 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAuth(() => getAuth()),
-    provideHttpClient(withFetch(), withInterceptors([bearerInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([bearerInterceptor, tokenRefreshInterceptor])
+    ),
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],
 };

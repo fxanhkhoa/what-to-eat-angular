@@ -18,5 +18,17 @@ export class AuthService {
     );
   }
 
-  logout() {}
+  refreshToken(refreshToken: string) {
+    return this.http.post<ResultToken>(
+      `${environment.API_URL}/${prefix}/refresh-token`,
+      { refreshToken }
+    );
+  }
+
+  logout(refreshToken: string) {
+    return this.http.post<any>(
+      `${environment.API_URL}/${prefix}/logout`,
+      { refreshToken }
+    );
+  }
 }
