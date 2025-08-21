@@ -1,0 +1,59 @@
+# Robots.txt for What To Eat - Food Discovery Platform
+# https://eatwhat.io.vn
+
+# Allow all web crawlers to access all content
+User-agent: *
+Allow: /
+
+# Disallow crawling of admin/private areas (if any in the future)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Allow crawling of assets and static files
+Allow: /assets/
+Allow: /favicon.ico
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /*.ico$
+
+# Sitemap location
+Sitemap: https://eatwhat.io.vn/en/sitemap.xml
+
+# Crawl delay (optional - adjust based on server capacity)
+# Crawl-delay: 1
+
+# Additional directives for better SEO
+# Allow social media crawlers
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Google-specific directives
+User-agent: Googlebot
+Allow: /
+# No crawl delay for Google as they are efficient
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /assets/icons/
+Allow: /assets/logo/
+
+# Bing crawler
+User-agent: bingbot
+Allow: /
+
+# Host directive (helps with canonicalization)
+Host: https://eatwhat.io.vn

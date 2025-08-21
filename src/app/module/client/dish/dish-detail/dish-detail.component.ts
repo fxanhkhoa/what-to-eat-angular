@@ -172,7 +172,10 @@ export class DishDetailComponent implements OnDestroy, OnInit {
           this.dish.set(dish);
           this.updateSEOWithDishData(dish);
           this.addStructuredData(dish);
-          this.addOrUpdateCanonicalLink();
+          if (isPlatformBrowser(this.platformId)) {
+            this.addOrUpdateCanonicalLink();
+            this.addHrefLangLinks();
+          }
         }
       });
   }
@@ -425,13 +428,60 @@ export class DishDetailComponent implements OnDestroy, OnInit {
       existingCanonical.remove();
     }
 
-    // Add new canonical link
+    // Add new canonical link with proper URL based on locale and dish slug
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    if (isPlatformBrowser(this.platformId)) {
-      link.setAttribute('href', window.location.href);
+    
+    // Get dish slug from current route
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      const baseUrl = 'https://eatwhat.io.vn';
+      let canonicalUrl = baseUrl;
+      
+      if (this.localeId.startsWith('vi')) {
+        canonicalUrl = `${baseUrl}/dish/${slug}`;
+      } else {
+        canonicalUrl = `${baseUrl}/en/dish/${slug}`;
+      }
+      
+      link.setAttribute('href', canonicalUrl);
+      this.document.head.appendChild(link);
     }
-    this.document.head.appendChild(link);
+  }
+
+  private addHrefLangLinks() {
+    // Remove existing hreflang links if they exist
+    const existingHrefLangs = this.document.querySelectorAll(
+      'link[rel="alternate"][hreflang]'
+    );
+    existingHrefLangs.forEach(link => link.remove());
+
+    // Get dish slug from current route
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (!slug) return;
+
+    const baseUrl = 'https://eatwhat.io.vn';
+    
+    // Add Vietnamese version
+    const viLink = this.document.createElement('link');
+    viLink.setAttribute('rel', 'alternate');
+    viLink.setAttribute('hreflang', 'vi');
+    viLink.setAttribute('href', `${baseUrl}/dish/${slug}`);
+    this.document.head.appendChild(viLink);
+
+    // Add English version
+    const enLink = this.document.createElement('link');
+    enLink.setAttribute('rel', 'alternate');
+    enLink.setAttribute('hreflang', 'en');
+    enLink.setAttribute('href', `${baseUrl}/en/dish/${slug}`);
+    this.document.head.appendChild(enLink);
+
+    // Add x-default for default language
+    const defaultLink = this.document.createElement('link');
+    defaultLink.setAttribute('rel', 'alternate');
+    defaultLink.setAttribute('hreflang', 'x-default');
+    defaultLink.setAttribute('href', `${baseUrl}/dish/${slug}`);
+    this.document.head.appendChild(defaultLink);
   }
 
   ngOnDestroy() {
@@ -448,5 +498,11 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     if (existingCanonical) {
       existingCanonical.remove();
     }
+
+    // Clean up hreflang links
+    const existingHrefLangs = this.document.querySelectorAll(
+      'link[rel="alternate"][hreflang]'
+    );
+    existingHrefLangs.forEach(link => link.remove());
   }
 }
