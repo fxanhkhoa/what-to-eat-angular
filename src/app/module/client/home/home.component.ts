@@ -54,10 +54,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    // @ts-ignore
     const locale = this.localeId;
     if (isPlatformBrowser(this.platformId)) {
       this.addOrUpdateCanonicalLink();
+      this.addHrefLangLinks();
     }
     if (locale.startsWith('vi')) {
       this.titleService.setTitle(
@@ -165,11 +165,54 @@ export class HomeComponent implements OnInit, OnDestroy {
       existingCanonical.remove();
     }
 
-    // Add new canonical link
+    // Add new canonical link with proper URL based on locale
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', window.location.href);
+    
+    // Set canonical URL based on locale
+    const baseUrl = 'https://eatwhat.io.vn';
+    let canonicalUrl = baseUrl;
+    
+    if (this.localeId.startsWith('vi')) {
+      canonicalUrl = `${baseUrl}/`;
+    } else {
+      canonicalUrl = `${baseUrl}/en/`;
+    }
+    
+    link.setAttribute('href', canonicalUrl);
     this.document.head.appendChild(link);
+  }
+
+  private addHrefLangLinks() {
+    // Remove existing hreflang links if they exist
+    const existingHrefLangs = this.document.querySelectorAll(
+      'link[rel="alternate"][hreflang]'
+    );
+    existingHrefLangs.forEach(link => link.remove());
+
+    // Add hreflang links for language alternatives
+    const baseUrl = 'https://eatwhat.io.vn';
+    
+    // Add Vietnamese version
+    const viLink = this.document.createElement('link');
+    viLink.setAttribute('rel', 'alternate');
+    viLink.setAttribute('hreflang', 'vi');
+    viLink.setAttribute('href', `${baseUrl}/`);
+    this.document.head.appendChild(viLink);
+
+    // Add English version
+    const enLink = this.document.createElement('link');
+    enLink.setAttribute('rel', 'alternate');
+    enLink.setAttribute('hreflang', 'en');
+    enLink.setAttribute('href', `${baseUrl}/en/`);
+    this.document.head.appendChild(enLink);
+
+    // Add x-default for default language
+    const defaultLink = this.document.createElement('link');
+    defaultLink.setAttribute('rel', 'alternate');
+    defaultLink.setAttribute('hreflang', 'x-default');
+    defaultLink.setAttribute('href', `${baseUrl}/`);
+    this.document.head.appendChild(defaultLink);
   }
 
   ngOnDestroy() {
@@ -186,5 +229,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (existingCanonical) {
       existingCanonical.remove();
     }
+
+    // Clean up hreflang links
+    const existingHrefLangs = this.document.querySelectorAll(
+      'link[rel="alternate"][hreflang]'
+    );
+    existingHrefLangs.forEach(link => link.remove());
   }
 }
