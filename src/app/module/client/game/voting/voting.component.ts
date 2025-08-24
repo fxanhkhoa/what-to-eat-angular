@@ -137,7 +137,7 @@ export class VotingComponent implements OnInit, OnDestroy {
 
   private setupSocketConnection(): void {
     this.socketService.connect();
-    this.socketService.joinRoom(this.dishVoteID);
+    this.socketService.joinRoom(`vote_game_${this.dishVoteID}`);
 
     this.socketService
       .onDishVoteUpdate()
@@ -178,7 +178,7 @@ export class VotingComponent implements OnInit, OnDestroy {
         userID: null,
         isVoting: !isCurrentlyVoted,
       },
-      { roomID: this.dishVoteID }
+      { roomID: `vote_game_${this.dishVoteID}` }
     );
   }
 
@@ -198,7 +198,7 @@ export class VotingComponent implements OnInit, OnDestroy {
         userID: null,
         isVoting: !isCurrentlyVoted,
       },
-      { roomID: this.dishVoteID }
+      { roomID: `vote_game_${this.dishVoteID}` }
     );
   }
 
