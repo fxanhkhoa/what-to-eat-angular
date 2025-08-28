@@ -36,7 +36,7 @@
         } @else {
 
         <!-- Empty State -->
-        @if (votingSessions().length === 0) {
+        @if (!votingSessions() || votingSessions().length === 0) {
         <div class="text-center py-20">
             <app-empty></app-empty>
             <div class="mt-6">

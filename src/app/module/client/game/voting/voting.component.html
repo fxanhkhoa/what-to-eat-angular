@@ -8,7 +8,7 @@
 
     <!-- Chat Widget - Draggable position -->
     @if (!loading && !error && (connectionState() ) === 'connected' && profile()) {
-    <div #chatWidget class="fixed bottom-16 right-5 w-80 md:w-96 h-96 rounded-lg z-50 cursor-grab">
+    <div #chatWidget>
         <app-voting-chat [roomId]="dishVoteID" (resetPosition)="resetChatWidgetPosition()">
         </app-voting-chat>
     </div>
@@ -18,7 +18,7 @@
 
     <div class="flex flex-col gap-1 p-5">
         <!-- Title -->
-        <h1 class="text-center bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
+        <h1 class="text-center bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text">
             Welcome to <span class="font-bold">{{ dishVote?.title }}</span>
         </h1>
 
@@ -34,9 +34,9 @@
             </div>
         </div>
 
-        <mat-menu #resultMenu="matMenu" class="popover-menu">
+        <mat-menu #resultMenu="matMenu" class="z-[1000]">
             <div class="flex flex-col gap-3 p-5">
-                <h3 class="font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">The
+                <h3 class="font-bold bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text">The
                     Result</h3>
                 @for (vote of dishVote?.dishVoteItems; track vote) {
                 <div class="flex justify-between gap-5">
@@ -52,93 +52,209 @@
                 <div class="flex gap-2 flex-wrap">
                     <span>The Winner:</span>
                     <span
-                        class="font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">{{
+                        class="font-bold bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text">{{
                         getWinnerNames() }}</span>
                 </div>
             </div>
         </mat-menu>
 
         <!-- Dishes Grid -->
-        <div class="grid grid-cols-12 gap-3">
+        <div class="grid grid-cols-12 gap-5">
             @for (dish of dishes; track dish) {
-            <div class="col-span-12 md:col-span-8">
+            <div class="col-span-12 lg:col-span-8 my-auto h-full">
                 <app-dish-card-fancy [dish]="dish" [isWinner]="isWinnerDish(dish.slug)"></app-dish-card-fancy>
             </div>
-            <div class="col-span-12 md:col-span-4 neumorphic-container_dark rounded-lg !bg-white/10">
-                <div class="flex flex-col gap-3 justify-between h-full p-3">
-                    <div class="flex flex-col gap-2">
-                        <div class="flex flex-wrap items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
-                            @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
-                            <app-voting-user-badge [voterName]="voter" [index]="i"
-                                [ngStyle]="{'transform': 'translateX(' + (i * -12) + 'px)'}"></app-voting-user-badge>
-                            }
-                            <span class="ml-auto text-xl neumorphic-inset_dark rounded-lg p-3">{{
-                                getTotalVotes(dish.slug) }}</span>
-                        </div>
-                    </div>
-                    <button matButton="elevated" (click)="onVote(dish)" class="!mb-3">
-                        @if (isVotedByMe(dish.slug)) {
-                        <mat-icon>thumb_down</mat-icon>
-                        } @else {
-                        <mat-icon>thumb_up</mat-icon>
-                        }
-                        @if (isVotedByMe(dish.slug)) {
-                        <span i18n>Downvote</span>
-                        } @else {
-                        <span i18n>Vote</span>
-                        }
-                    </button>
-                </div>
-            </div>
-            }
-            <mat-divider class="col-span-12"></mat-divider>
-            <span class="font-bold col-span-12 text-xl" i18n>Custom Dishes</span>
-            @for (dish of getCustomDish(); track dish) {
-            <div class="col-span-12 md:col-span-4">
-                <mat-card class="!relative">
-                    @if (isWinnerDish(dish.slug)) {
-                    <div
-                        class="duration-300 winner-badge absolute top-0 -left-4 z-20 text-black px-3 py-1 rounded-full text-xs font-bold heartbeat">
-                        <span class="winner-crown mr-1">👑</span>
-                        <span i18n="@@winner">WINNER</span>
-                    </div>
-                    }
-                    <mat-card-header>
-                        <mat-card-title>{{ dish.customTitle }}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div class="flex flex-col gap-3 mt-3">
-                            <a matButton="outlined" [href]="dish.slug" target="_blank" rel="noopener noreferrer">
-                                <span i18n>Preview</span>
-                                <mat-icon>link</mat-icon>
-                            </a>
-                            <div class="flex flex-col gap-2">
-                                <div
-                                    class="flex flex-wrap items-center gap-0 ml-5 transition-all duration-300 ease-in-out">
-                                    @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
-                                    <app-voting-user-badge [voterName]="voter" [index]="i"
-                                        [ngStyle]="{'transform': 'translateX(' + (i * -12) + 'px)'}"></app-voting-user-badge>
-                                    }
-                                    <span class="ml-auto text-xl neumorphic-inset_dark rounded-lg p-3">{{
-                                        getTotalVotes(dish.slug) }}</span>
+            <div
+                class="col-span-12 lg:col-span-4 glassmorphic-container_dark rounded-lg border border-white/20 overflow-auto group voting-card">
+                <div class="flex flex-col justify-between py-3 min-h-40">
+                    <!-- Voting Stats Section -->
+                    <div class="flex flex-col gap-4">
+                        <!-- Vote Count Display -->
+                        <div class="flex items-center justify-center">
+                            <div
+                                class="relative bg-gradient-to-br from-orange-400/20 to-orange-600/20 backdrop-blur-sm rounded-2xl py-2 px-4 border border-orange-300/30 group-hover:scale-105 transition-transform duration-300">
+                                <div class="text-center">
+                                    <div
+                                        class="text-3xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+                                        {{ getTotalVotes(dish.slug) }}
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1" i18n>
+                                        {{ getTotalVotes(dish.slug) === 1 ? 'vote' : 'votes' }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Voters List -->
+                        @if (getVotersList(dish.slug).length > 0) {
+                        <div class="flex gap-2 items-center px-3">
+                            <div class="text-xs text-center" i18n>Voted by:</div>
+                            <div
+                                class="flex flex-wrap justify-center items-center gap-1 transition-all duration-500 ease-in-out">
+                                @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
+                                <div class="transform transition-all duration-300 hover:scale-110 hover:z-10 hover:-translate-y-0.5 hover:brightness-110"
+                                    [ngStyle]="{'transform': 'translateX(' + (i * -8) + 'px)', 'z-index': getVotersList(dish.slug).length - i}">
+                                    <app-voting-user-badge [voterName]="voter" [index]="i" class="drop-shadow-lg">
+                                    </app-voting-user-badge>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="px-3 mt-auto mx-auto">
+                        <button matButton="elevated" (click)="onVote(dish)" [class.!bg-red-500]="isVotedByMe(dish.slug)"
+                            [class.!bg-green-500]="!isVotedByMe(dish.slug)"
+                            [class.hover:!bg-red-600]="isVotedByMe(dish.slug)"
+                            [class.hover:!bg-green-600]="!isVotedByMe(dish.slug)" [class.!text-white]="true">
+
+                            <div
+                                class="flex items-center gap-2 transition-transform duration-200 group-hover/btn:scale-110">
+                                @if (isVotedByMe(dish.slug)) {
+                                <mat-icon class="!text-xl">thumb_down</mat-icon>
+                                <span i18n class="font-bold">Remove Vote</span>
+                                } @else {
+                                <mat-icon class="!text-xl group-hover/btn:animate-bounce">thumb_up</mat-icon>
+                                <span i18n class="font-bold">Vote Now!</span>
+                                }
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                @if (isWinnerDish(dish.slug)) {
+                <div
+                    class="absolute inset-0 rounded-xl bg-gradient-to-br from-yellow-400/10 to-orange-500/10 pointer-events-none">
+                </div>
+                }
+            </div>
+            }
+            <mat-divider class="col-span-12 my-6"></mat-divider>
+
+            <!-- Custom Dishes Header -->
+            <div class="col-span-12 flex items-center gap-3 mb-4">
+                <div class="w-2 h-8 bg-gradient-to-b from-[#F3A446] to-[#A06235] rounded-full"></div>
+                <h2 class="font-bold text-2xl bg-gradient-to-r from-[#F3A446] to-[#A06235] bg-clip-text text-transparent"
+                    i18n>Custom Dishes</h2>
+                <div class="flex-1 h-px bg-gradient-to-r from-[#F3A446]/50 to-transparent"></div>
+            </div>
+
+            @for (dish of getCustomDish(); track dish) {
+            <div class="col-span-12 md:col-span-6 lg:col-span-4 relative">
+                <!-- Winner Badge -->
+                @if (isWinnerDish(dish.slug)) {
+                <div
+                    class="absolute -top-4 -left-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-bounce animate-winner-glow">
+                    <span class="mr-2">👑</span>
+                    <span i18n="@@winner">WINNER</span>
+                </div>
+                }
+                <mat-card
+                    class="!relative !border-0 !bg-white/5 !backdrop-blur-sm hover:!bg-white/10 transition-all duration-300 group/card overflow-hidden voting-card">
+                    <!-- Card Header -->
+                    <mat-card-header class="!pb-2">
+                        <mat-card-title class="!text-lg !font-bold !text-white line-clamp-2">
+                            {{ dish.customTitle }}
+                        </mat-card-title>
+                    </mat-card-header>
+
+                    <!-- Card Content -->
+                    <mat-card-content class="!pt-2">
+                        <div class="flex flex-col gap-4">
+
+                            <!-- Preview Button -->
+                            <a matButton="outlined" [href]="dish.slug" target="_blank" rel="noopener noreferrer"
+                                class="!w-full !rounded-lg !border-white/30 !text-white hover:!bg-white/10 transition-all duration-300 group/link">
+                                <div class="flex items-center gap-2">
+                                    <span i18n>Preview Dish</span>
+                                    <mat-icon
+                                        class="!text-lg group-hover/link:translate-x-1 transition-transform duration-200">launch</mat-icon>
+                                </div>
+                            </a>
+
+                            <!-- Voting Stats -->
+                            <div class="flex flex-col gap-3">
+
+                                <!-- Vote Count -->
+                                <div class="flex items-center justify-center">
+                                    <div class="bg-gradient-to-br from-orange-400/20 to-orange-600/20 backdrop-blur-sm rounded-xl p-3 border border-purple-300/30 group-hover/card:scale-105 transition-transform duration-300 relative"
+                                        [class.animate-bounce-in]="getTotalVotes(dish.slug) > 0">
+                                        <div class="text-center">
+                                            <div
+                                                class="text-2xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+                                                {{ getTotalVotes(dish.slug) }}
+                                            </div>
+                                            <div class="text-xs text-gray-400" i18n>
+                                                {{ getTotalVotes(dish.slug) === 1 ? 'vote' : 'votes' }}
+                                            </div>
+                                        </div>
+                                        @if (getTotalVotes(dish.slug) > 0) {
+                                        <div
+                                            class="absolute -top-1 -right-1 w-2 h-2 bg-green-400 rounded-full animate-pulse">
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+
+                                <!-- Voters List -->
+                                @if (getVotersList(dish.slug).length > 0) {
+                                <div class="flex flex-col gap-2">
+                                    <div class="text-xs text-gray-400 text-center" i18n>Voted by:</div>
+                                    <div
+                                        class="flex flex-wrap items-center justify-center gap-1 transition-all duration-500 ease-in-out">
+                                        @for (voter of getVotersList(dish.slug); track voter; let i = $index) {
+                                        <div class="transform transition-all duration-300 hover:scale-110 hover:z-10 hover:-translate-y-0.5 hover:brightness-110"
+                                            [ngStyle]="{'transform': 'translateX(' + (i * -6) + 'px)', 'z-index': getVotersList(dish.slug).length - i}">
+                                            <app-voting-user-badge [voterName]="voter" [index]="i"
+                                                class="drop-shadow-lg !scale-90">
+                                            </app-voting-user-badge>
+                                        </div>
+                                        }
+                                        @if (getVotersList(dish.slug).length > 3) {
+                                        <div class="text-xs text-gray-400 ml-2 animate-fade-in-up">
+                                            +{{ getVotersList(dish.slug).length - 3 }}
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
                     </mat-card-content>
+
+                    <!-- Card Actions -->
                     <mat-card-actions>
-                        <button matButton="elevated" (click)="onCustomVote(dish.slug)">
-                            @if (isVotedByMe(dish.slug)) {
-                            <mat-icon>thumb_down</mat-icon>
-                            } @else {
-                            <mat-icon>thumb_up</mat-icon>
-                            }
-                            @if (isVotedByMe(dish.slug)) {
-                            <span i18n>Downvote</span>
-                            } @else {
-                            <span i18n>Vote</span>
-                            }
+                        <button matButton="elevated" class="mx-auto" (click)="onCustomVote(dish.slug)"
+                            [class.!bg-red-500]="isVotedByMe(dish.slug)"
+                            [class.!bg-purple-500]="!isVotedByMe(dish.slug)"
+                            [class.hover:!bg-red-600]="isVotedByMe(dish.slug)"
+                            [class.hover:!bg-purple-600]="!isVotedByMe(dish.slug)" [class.!text-white]="true">
+
+                            <div class="flex items-center gap-2 transition-transform duration-200">
+                                @if (isVotedByMe(dish.slug)) {
+                                <mat-icon class="!text-xl">thumb_down</mat-icon>
+                                <span i18n class="font-bold">Remove Vote</span>
+                                } @else {
+                                <mat-icon class="!text-xl">thumb_up</mat-icon>
+                                <span i18n class="font-bold">Vote Now!</span>
+                                }
+                            </div>
+
+                            <!-- Ripple effect overlay -->
+                            <div
+                                class="absolute inset-0 rounded-xl opacity-0 group-hover/btn:opacity-20 bg-white transition-opacity duration-300">
+                            </div>
                         </button>
                     </mat-card-actions>
+
+                    <!-- Subtle glow effect for winners -->
+                    @if (isWinnerDish(dish.slug)) {
+                    <div
+                        class="absolute inset-0 rounded-xl bg-gradient-to-br from-yellow-400/10 to-orange-500/10 pointer-events-none">
+                    </div>
+                    }
                 </mat-card>
             </div>
             }
@@ -157,7 +273,8 @@
     @if (error) {
     <div class="flex flex-col justify-center items-center min-h-screen">
         <div class="text-red-500 text-xl mb-4">{{ error }}</div>
-        <button (click)="loadData()" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+        <button (click)="loadData()"
+            class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors duration-200">
             Try Again
         </button>
     </div>
@@ -166,7 +283,8 @@
     @if(!profile()) {
     <div class="flex flex-col justify-center items-center min-h-screen">
         <div class="text-gray-500 text-xl mb-4">You are not logged in</div>
-        <button (click)="loadData()" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+        <button (click)="loadData()"
+            class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors duration-200">
             Try Again
         </button>
     </div>
@@ -175,7 +293,7 @@
 
 <!-- Overlay Template for Dish Preview -->
 <ng-template #dishPreviewTemplate>
-    <div class="slide-in-blurred-right" *ngIf="selectedDishForPreview">
+    <div class="slide-in-blurred-right animate-fade-in-up" *ngIf="selectedDishForPreview">
         <app-dish-card-fancy [dish]="selectedDishForPreview"></app-dish-card-fancy>
     </div>
 </ng-template>

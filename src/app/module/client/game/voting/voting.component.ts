@@ -15,7 +15,6 @@ import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil, forkJoin, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
 
@@ -40,6 +39,7 @@ import { VotingUserBadgeComponent } from './voting-user-badge/voting-user-badge.
 import { VotingChatComponent } from './voting-chat/voting-chat.component';
 import { AuthService } from '@/app/service/auth.service';
 import { User } from '@/types/user.type';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-voting',
@@ -55,6 +55,7 @@ import { User } from '@/types/user.type';
     MatDividerModule,
     VotingUserBadgeComponent,
     VotingChatComponent,
+    MatBadgeModule,
   ],
   templateUrl: './voting.component.html',
   styleUrl: './voting.component.scss',

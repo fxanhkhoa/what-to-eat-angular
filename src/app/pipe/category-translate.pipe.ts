@@ -27,20 +27,50 @@ export class CategoryTranslatePipe implements PipeTransform {
       HARD: $localize`Hard`,
       MEDIUM: $localize`Medium`,
       EASY: $localize`Easy`,
+      // Time-based meals
       BREAKFAST: $localize`Breakfast`,
       LUNCH: $localize`Lunch`,
       BRUNCH: $localize`Brunch`,
       DINNER: $localize`Dinner`,
+      SNACK: $localize`Snack`,
+
+      // Dish types  
       BURGER: $localize`Burger`,
       SALAD: $localize`Salad`,
       SOUP: $localize`Soup`,
       APPETIZER: $localize`Appetizer`,
       DESSERT: $localize`Dessert`,
       HOTPOT: $localize`Hotpot`,
+      SWEET_SOUP: $localize`Sweet soup`,
+      
+      // Main dish categories
+      NOODLE: $localize`Noodle`,
+      RICE: $localize`Rice dish`,
+      SEAFOOD: $localize`Seafood`,
+      MEAT: $localize`Meat`,
+      VEGETARIAN: $localize`Vegetarian`,
+      VEGAN: $localize`Vegan`,
+      
+      // Preparation styles
+      GRILLED: $localize`Grilled`,
+      FRIED: $localize`Fried`,
+      STEAMED: $localize`Steamed`,
+      BAKED: $localize`Baked`,
+      
+      // Food styles/origins
+      STREET_FOOD: $localize`Street food`,
+      FAST_FOOD: $localize`Fast food`,
+      TRADITIONAL: $localize`Traditional`,
+      FUSION: $localize`Fusion`,
+      
+      // Regional Vietnamese
       NORTH_VN: $localize`North Vietnam`,
       CENTRAL_VN: $localize`Central Vietnam`,
       SOUTH_VN: $localize`South Vietnam`,
-      SWEET_SOUP: $localize`Sweet soup`,
+      
+      // Beverages & Others
+      BEVERAGE: $localize`Beverage`,
+      SMOOTHIE: $localize`Smoothie`,
       VITAMIN: $localize`Vitamin`,
     };
     return translations[category] || category;

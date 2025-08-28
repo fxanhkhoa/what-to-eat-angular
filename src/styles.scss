@@ -25,7 +25,7 @@ html {
 @import "tailwindcss/theme.css" layer(theme);
 // @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
-@import '@angular/cdk/overlay-prebuilt.css';
+@import "@angular/cdk/overlay-prebuilt.css";
 
 html {
   height: 100%;
@@ -107,7 +107,8 @@ body {
   );
   @include mat.button-overrides(
     (
-      protected-container-elevation-shadow: "5px 5px 10px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.05)",
+      protected-container-elevation-shadow:
+        "5px 5px 10px rgba(0, 0, 0, 0.5), -5px -5px 10px rgba(255, 255, 255, 0.05)",
     )
   );
 }

@@ -90,6 +90,7 @@ export class VotingChatComponent
   typingUsers = signal<string[]>([]);
   isMinimized = signal(false);
   profile = signal<User | null>(null);
+  dragPosition = { x: 0, y: 0 };
 
   // Computed properties
   onlineCount = computed(() => this.onlineUsers().length);
@@ -97,11 +98,13 @@ export class VotingChatComponent
     const typing = this.typingUsers();
     const users = this.onlineUsers();
     return typing
-      .map((id) => {
-        const user = users.find((u) => u.id === id);
-        return user?.name || 'Someone';
-      })
-      .filter((name) => name !== this.profile.name);
+      ? typing
+          .map((id) => {
+            const user = users.find((u) => u.id === id);
+            return user?.name || 'Someone';
+          })
+          .filter((name) => name !== this.profile.name)
+      : [];
   });
 
   typingText = computed(() => {
@@ -125,6 +128,10 @@ export class VotingChatComponent
   ];
 
   constructor(private chatService: ChatSocketService) {
+    this.iconRegistry.setDefaultFontSetClass(
+      'material-symbols-outlined',
+      'mat-ligature-font'
+    );
     this.iconRegistry.addSvgIcon(
       'drag',
       this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/drag.svg')
@@ -223,9 +230,9 @@ export class VotingChatComponent
       .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
       .subscribe(() => {
         if (this.messageText().trim()) {
-          this.chatService.startTyping();
+          this.chatService.startTyping(this.profile()?._id ?? '');
         } else {
-          this.chatService.stopTyping();
+          this.chatService.stopTyping(this.profile()?._id ?? '');
         }
       });
   }
@@ -255,7 +262,7 @@ export class VotingChatComponent
       senderAvatar: this.profile()!.avatar,
     });
     this.messageText.set('');
-    this.chatService.stopTyping();
+    this.chatService.stopTyping(this.profile()?._id ?? '');
 
     // Focus back to input
     setTimeout(() => {

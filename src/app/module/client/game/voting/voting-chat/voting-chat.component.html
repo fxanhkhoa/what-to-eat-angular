@@ -1,5 +1,6 @@
 <!-- Chat Container -->
-<div cdkDrag>
+<div cdkDrag [cdkDragFreeDragPosition]="dragPosition"
+    class="fixed bottom-16 right-5 w-80 md:w-96 h-96 rounded-lg z-50 cursor-grab">
     <div class="flex w-full justify-end pb-2">
         <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
     </div>
@@ -64,8 +65,8 @@
                         @for (message of messages(); track trackByMessageId($index, message)) {
                         <div class="flex" [class.justify-end]="isOwnMessage(message)">
                             <!-- Message Bubble -->
-                            <mat-card class="!max-w-xs p-3 !relative"
-                                [ngClass]="{'bg-gradient-to-br from-indigo-500 to-purple-700 text-white ml-auto border-indigo-500': isOwnMessage(message)}">
+                            <mat-card class="!max-w-xs p-3 !relative !h-auto group !relative"
+                                [ngClass]="{'bg-gradient-to-br from-[#F3A446] to-[#A06235] ml-auto mr-2': isOwnMessage(message)}">
                                 <!-- Sender Info (only for others' messages) -->
                                 @if (!isOwnMessage(message)) {
                                 <div class="flex items-center gap-2 mb-2">
@@ -74,12 +75,12 @@
                                         class="w-6 h-6 rounded-full object-cover" />
                                     } @else {
                                     <div
-                                        class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-gray-300 text-gray-800">
+                                        class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-gray-300 text-gray-400">
                                         {{ message.senderName.charAt(0).toUpperCase() }}
                                     </div>
                                     }
-                                    <span class="text-xs font-medium text-gray-600"
-                                        [ngClass]="{'text-blue-100/80': isOwnMessage(message)}">{{
+                                    <span class="text-xs font-medium text-gray-400"
+                                        [ngClass]="{'text-gray-400/80': isOwnMessage(message)}">{{
                                         message.senderName }}</span>
                                 </div>
                                 }
@@ -87,8 +88,8 @@
                                 <!-- Message Content -->
                                 <div>
                                     <div class="text-sm leading-snug break-words">{{ message.content }}</div>
-                                    <div class="text-xs text-gray-500 mt-1"
-                                        [ngClass]="{'text-blue-100/80': isOwnMessage(message)}">
+                                    <div class="text-xs text-gray-200 mt-1"
+                                        [ngClass]="{'text-gray-100/80': isOwnMessage(message)}">
                                         {{ formatMessageTime(message.timestamp) }}
                                     </div>
                                 </div>
@@ -113,9 +114,9 @@
 
                                 <!-- Reaction Menu Button -->
                                 <button mat-icon-button [matMenuTriggerFor]="reactionMenu"
-                                    class="absolute top-[-8px] right-[-8px] opacity-0 transition-opacity scale-90"
+                                    class="!absolute -top-4 -right-4 opacity-0 group-hover:opacity-100 transition-opacity scale-90"
                                     matTooltip="Add reaction">
-                                    <mat-icon class="text-[16px]">add_reaction</mat-icon>
+                                    <mat-icon class="material-symbols-outlined">add_reaction</mat-icon>
                                 </button>
 
                                 <!-- Reaction Menu -->

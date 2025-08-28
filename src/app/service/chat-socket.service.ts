@@ -196,11 +196,12 @@ export class ChatSocketService {
   /**
    * Start typing indicator
    */
-  startTyping(): void {
+  startTyping(senderId: string): void {
     const socket = this.socketService.getSocket();
     if (!socket || !this.currentChatRoom) return;
 
     const typingData: TypingIndicatorRequest = {
+      senderId: senderId,
       room: this.currentChatRoom,
     };
 
@@ -211,14 +212,14 @@ export class ChatSocketService {
       clearTimeout(this.typingTimer);
     }
     this.typingTimer = setTimeout(() => {
-      this.stopTyping();
+      this.stopTyping(senderId);
     }, 3000);
   }
 
   /**
    * Stop typing indicator
    */
-  stopTyping(): void {
+  stopTyping(senderId: string): void {
     const socket = this.socketService.getSocket();
     if (!socket || !this.currentChatRoom) return;
 
@@ -228,6 +229,7 @@ export class ChatSocketService {
     }
 
     const typingData: TypingIndicatorRequest = {
+      senderId,
       room: this.currentChatRoom,
     };
 
@@ -246,7 +248,7 @@ export class ChatSocketService {
       room: this.currentChatRoom,
       limit,
       before:
-        currentMessages.length > 0
+        currentMessages && currentMessages.length > 0
           ? currentMessages[0].timestamp
           : Date.now() / 1000,
     };
@@ -290,16 +292,23 @@ export class ChatSocketService {
     const currentMessages = this.messages$.value;
 
     // Filter out duplicates and prepend history messages
-    const uniqueMessages = historyMessages.filter(
-      (historyMsg) => !currentMessages.some((msg) => msg.id === historyMsg.id)
-    );
+    const uniqueMessages = historyMessages
+      ? historyMessages.filter(
+          (historyMsg) =>
+            !currentMessages.some((msg) => msg.id === historyMsg.id)
+        )
+      : [];
 
     const allMessages = [...uniqueMessages, ...currentMessages].sort(
       (a, b) => a.timestamp - b.timestamp
     );
     this.messages$.next(allMessages);
 
-    console.log('Loaded message history:', historyMessages.length, 'messages');
+    console.log(
+      'Loaded message history:',
+      historyMessages ? historyMessages.length : 0,
+      'messages'
+    );
   }
 
   private handleUserJoinedChat(userData: any): void {

@@ -59,6 +59,7 @@ export interface JoinChatRoomRequest {
 }
 
 export interface TypingIndicatorRequest {
+  senderId: string;
   room: string;
 }
 
