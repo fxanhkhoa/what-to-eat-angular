@@ -19,6 +19,79 @@
   background: linear-gradient(to right, #8b5cf6 0%, #a855f7 100%);
 }
 
+// Chat widget drag and drop positioning
+.chat-widget-draggable {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  z-index: 1000;
+  max-height: 80vh;
+  width: 320px;
+  cursor: grab;
+  user-select: none;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+  // Initial position on mobile
+  @media (max-width: 768px) {
+    top: auto;
+    bottom: 20px;
+    right: 20px;
+    left: auto;
+    width: 320px;
+    max-width: calc(100vw - 40px);
+    transform: none;
+  }
+
+  @media (max-width: 640px) {
+    width: 280px;
+    max-width: calc(100vw - 20px);
+    bottom: 10px;
+    right: 10px;
+  }
+
+  // Dragging state
+  &.dragging {
+    cursor: grabbing;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: scale(1.02);
+    z-index: 1001;
+
+    // Disable pointer events on children during drag
+    * {
+      pointer-events: none;
+    }
+  }
+
+  // Hover effect when not dragging
+  &:not(.dragging):hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  // CDK drag handle indicator
+  &::before {
+    content: "⋮⋮";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 14px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.6);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &.dragging::before {
+    opacity: 0;
+  }
+}
+
 .button-gradient:hover {
   background: linear-gradient(to right, #7c3aed 0%, #9333ea 100%);
 }

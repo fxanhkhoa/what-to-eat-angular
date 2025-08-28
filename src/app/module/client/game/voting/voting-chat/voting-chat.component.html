@@ -1,0 +1,211 @@
+<!-- Chat Container -->
+<div cdkDrag>
+    <div class="flex w-full justify-end pb-2">
+        <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header class="!bg-gradient-to-br !from-[#F3A446] !to-[#A06235]">
+                <div class="w-full pr-4">
+                    <div class="flex w-full items-center justify-between w-full">
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-white text-[20px]">chat</mat-icon>
+                            <span class="font-semibold text-sm">Voting Chat</span>
+                            <!-- Connection Status -->
+                            <div class="ml-2 flex items-center" [class.text-green-300]="isConnected()"
+                                [class.text-red-300]="connectionError()">
+                                <mat-icon class="text-[16px] opacity-70">{{ isConnected() ? 'wifi' : 'wifi_off'
+                                    }}</mat-icon>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <!-- Online Users Counter -->
+                            <span class="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-white/20"
+                                matTooltip="{{ formatUserCount(onlineCount()) }}">
+                                <mat-icon class="text-[14px]">people</mat-icon>
+                                <span>{{ onlineCount() }}</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Connection Error Alert -->
+                    @if (connectionError()) {
+                    <div class="mt-2 p-2 bg-red-100 rounded-lg flex items-center gap-2 text-red-700 text-xs">
+                        <mat-icon class="text-[16px]">error_outline</mat-icon>
+                        <span>{{ connectionError() }}</span>
+                        <button mat-button (click)="reconnectChat()"
+                            class="ml-auto text-red-700 min-w-0 px-2 py-1 text-[11px]">
+                            <mat-icon class="text-[14px] mr-1">refresh</mat-icon>
+                            Reconnect
+                        </button>
+                    </div>
+                    }
+                </div>
+            </mat-expansion-panel-header>
+            <!-- Chat Body -->
+            <mat-card class="!flex-1 !flex !flex-col !overflow-hidden !p-0 my-2 glassmorphic-container_dark">
+                <!-- Messages Container -->
+                <div class="flex-1 overflow-y-auto p-3 min-h-30 max-h-52 scrollbar-thin scrollbar-thumb-gray-300"
+                    #messagesContainer>
+                    <!-- Load More Button -->
+                    @if (messages().length > 0) {
+                    <div class="text-center mb-3">
+                        <button mat-button (click)="loadMoreMessages()"
+                            class="text-xs text-gray-500 min-h-[32px] hover:text-gray-700">
+                            <mat-icon class="text-[16px] mr-1">keyboard_arrow_up</mat-icon>
+                            Load earlier messages
+                        </button>
+                    </div>
+                    }
+
+                    <!-- Messages List -->
+                    <div class="flex flex-col gap-3">
+                        @for (message of messages(); track trackByMessageId($index, message)) {
+                        <div class="flex" [class.justify-end]="isOwnMessage(message)">
+                            <!-- Message Bubble -->
+                            <mat-card class="!max-w-xs p-3 !relative"
+                                [ngClass]="{'bg-gradient-to-br from-indigo-500 to-purple-700 text-white ml-auto border-indigo-500': isOwnMessage(message)}">
+                                <!-- Sender Info (only for others' messages) -->
+                                @if (!isOwnMessage(message)) {
+                                <div class="flex items-center gap-2 mb-2">
+                                    @if (message.senderAvatar) {
+                                    <img [src]="message.senderAvatar" [alt]="message.senderName"
+                                        class="w-6 h-6 rounded-full object-cover" />
+                                    } @else {
+                                    <div
+                                        class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-gray-300 text-gray-800">
+                                        {{ message.senderName.charAt(0).toUpperCase() }}
+                                    </div>
+                                    }
+                                    <span class="text-xs font-medium text-gray-600"
+                                        [ngClass]="{'text-blue-100/80': isOwnMessage(message)}">{{
+                                        message.senderName }}</span>
+                                </div>
+                                }
+
+                                <!-- Message Content -->
+                                <div>
+                                    <div class="text-sm leading-snug break-words">{{ message.content }}</div>
+                                    <div class="text-xs text-gray-500 mt-1"
+                                        [ngClass]="{'text-blue-100/80': isOwnMessage(message)}">
+                                        {{ formatMessageTime(message.timestamp) }}
+                                    </div>
+                                </div>
+
+                                <!-- Message Reactions -->
+                                @if (hasReactionKeys(message.reactions)) {
+                                <div class="flex flex-wrap gap-1 mt-2">
+                                    @for (reaction of getObjectKeys(message.reactions); track reaction) {
+                                    @if (getReactionCount(message, reaction) > 0) {
+                                    <div class="flex items-center gap-1 px-2 py-1 rounded-full cursor-pointer transition-all bg-white/10 border border-white/20 hover:scale-105 text-xs"
+                                        [ngClass]="{'bg-green-400/20 border-green-400/40': hasReacted(message, reaction)}"
+                                        (click)="addReaction(message.id, reaction)"
+                                        matTooltip="{{ reaction }} {{ getReactionCount(message, reaction) }}">
+                                        <span class="text-xs">{{ reaction }}</span>
+                                        <span class="font-medium text-xs">{{ getReactionCount(message, reaction)
+                                            }}</span>
+                                    </div>
+                                    }
+                                    }
+                                </div>
+                                }
+
+                                <!-- Reaction Menu Button -->
+                                <button mat-icon-button [matMenuTriggerFor]="reactionMenu"
+                                    class="absolute top-[-8px] right-[-8px] opacity-0 transition-opacity scale-90"
+                                    matTooltip="Add reaction">
+                                    <mat-icon class="text-[16px]">add_reaction</mat-icon>
+                                </button>
+
+                                <!-- Reaction Menu -->
+                                <mat-menu #reactionMenu="matMenu" class="reaction-menu">
+                                    @for (reaction of availableReactions; track reaction) {
+                                    <button mat-menu-item (click)="addReaction(message.id, reaction)">
+                                        <span class="reaction-option">{{ reaction }}</span>
+                                    </button>
+                                    }
+                                </mat-menu>
+                            </mat-card>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Empty State -->
+                    @if (messages().length === 0 && isConnected()) {
+                    <div class="flex flex-col items-center justify-center py-8 text-gray-500">
+                        <mat-icon class="text-[48px] opacity-30 mb-2">chat_bubble_outline</mat-icon>
+                        <p class="text-sm text-center">No messages yet. Start the conversation!</p>
+                    </div>
+                    }
+
+                    <!-- Typing Indicators -->
+                    @if (typingText()) {
+                    <div class="flex items-center gap-2 p-3">
+                        <div class="px-2 py-1 rounded-2xl bg-gray-200">
+                            <div class="flex gap-1">
+                                <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
+                                    style="animation-delay: -0.32s">
+                                </div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"
+                                    style="animation-delay: -0.16s">
+                                </div>
+                                <div class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-gray-500">{{ typingText() }}</div>
+                    </div>
+                    }
+                </div>
+
+                <!-- Online Users List (Optional, can be toggled) -->
+                @if (onlineUsers().length > 0 && false) {
+                <div class="online-users">
+                    <mat-divider></mat-divider>
+                    <div class="users-header">
+                        <mat-icon>people</mat-icon>
+                        <span>Online ({{ onlineCount() }})</span>
+                    </div>
+                    <div class="users-list">
+                        @for (user of onlineUsers(); track trackByUserId($index, user)) {
+                        <div class="user-item">
+                            @if (user.avatar) {
+                            <img [src]="user.avatar" [alt]="user.name" class="user-avatar">
+                            } @else {
+                            <div class="user-avatar-placeholder">
+                                {{ user.name.charAt(0).toUpperCase() }}
+                            </div>
+                            }
+                            <span class="user-name">{{ user.name }}</span>
+                            @if (user.isOnline) {
+                            <div class="online-indicator"></div>
+                            }
+                        </div>
+                        }
+                    </div>
+                </div>
+                }
+            </mat-card>
+
+            <!-- Message Input -->
+            <mat-card class="flex-shrink-0 px-4 py-3 rounded-b-xl bg-gray-50">
+                <div class="flex items-center items-end gap-3 w-full">
+                    <mat-form-field class="flex-1" appearance="outline">
+                        <mat-label>Type a message...</mat-label>
+                        <textarea matInput #messageInput [value]="messageText()" (input)="onMessageInput($event)"
+                            (keydown)="onKeyDown($event)" [disabled]="!isConnected()" placeholder="Type a message..."
+                            rows="1" cdkTextareaAutosize cdkAutosizeMaxRows="4" class="resize-none"></textarea>
+                        @if (messageText().length > 200) {
+                        <mat-hint align="end">{{ messageText().length }}/500</mat-hint>
+                        }
+                    </mat-form-field>
+                    <button mat-fab color="primary" (click)="sendMessage()"
+                        [disabled]="!messageText().trim() || !isConnected()" matTooltip="Send message (Enter)"
+                        class="my-auto flex-shrink-0 bg-gradient-to-br from-[#F3A446] to-[#A06235] scale-90 disabled:opacity-50">
+                        <mat-icon class="text-[20px]">send</mat-icon>
+                    </button>
+                </div>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

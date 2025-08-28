@@ -15,6 +15,19 @@ export class SocketService {
       this.socket = io(environment.SOCKET_ENDPOINT, {
         transports: ['websocket', 'polling'],
       });
+      
+      // Setup connection event handlers
+      this.socket.on('connect', () => {
+        this.emitConnectionState('connected');
+      });
+      
+      this.socket.on('disconnect', () => {
+        this.emitConnectionState('disconnected');
+      });
+      
+      this.socket.on('connect_error', () => {
+        this.emitConnectionState('error');
+      });
     }
   }
 
@@ -25,6 +38,7 @@ export class SocketService {
     }
   }
 
+  // Existing voting functionality
   joinRoom(roomID: string): void {
     if (this.socket) {
       this.socket.emit('join-room', { roomID });
@@ -73,5 +87,15 @@ export class SocketService {
       this.connectionState$ = new Subject<string>();
     }
     return this.connectionState$.asObservable();
+  }
+
+  // Getter for socket instance (for chat service to use)
+  getSocket(): Socket | null {
+    return this.socket;
+  }
+
+  // Check if connected
+  isConnected(): boolean {
+    return this.socket?.connected || false;
   }
 }

@@ -1,0 +1,34 @@
+<div class="p-6 flex flex-col gap-2">
+    <h2 class="text-xl font-bold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text mb-2" i18n>
+        Share Voting Session</h2>
+    <div class="flex items-center gap-2 rounded px-3 py-2">
+        <mat-form-field class="!flex-1">
+            <input matInput type="text" [value]="shareUrl" readonly />
+        </mat-form-field>
+        <button mat-icon-button (click)="copyLink()" [matTooltip]="copied ? 'Copied!' : 'Copy link'" i18n-matTooltip>
+            <mat-icon color="primary">content_copy</mat-icon>
+        </button>
+        <button mat-icon-button (click)="openInNewTab()" matTooltip="Open in new tab" i18n-matTooltip>
+            <mat-icon>open_in_new</mat-icon>
+        </button>
+    </div>
+    <div class="flex gap-3 items-center">
+        <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + (shareUrl | encodeURIComponent)" target="_blank"
+            class="hover:scale-110 duration-300" matTooltip="Share on Facebook" i18n-matTooltip>
+            <mat-icon svgIcon="facebook" class="!w-14 !h-14"></mat-icon>
+        </a>
+        <a [href]="'https://twitter.com/intent/tweet?url=' + (shareUrl | encodeURIComponent)" target="_blank"
+            class="hover:scale-110 duration-300" matTooltip="Share on X" i18n-matTooltip>
+            <mat-icon svgIcon="x-social" class="!w-10 !h-10"></mat-icon>
+        </a>
+        <a [href]="'https://t.me/share/url?url=' + (shareUrl | encodeURIComponent)" target="_blank"
+            class="hover:scale-110 duration-300 ml-2" matTooltip="Share on Telegram" i18n-matTooltip>
+            <mat-icon svgIcon="telegram" class="!w-10 !h-10"></mat-icon>
+        </a>
+    </div>
+    <div class="flex justify-end mt-4">
+        <button mat-stroked-button color="primary" (click)="close()">
+            <span i18n>Close</span>
+        </button>
+    </div>
+</div>

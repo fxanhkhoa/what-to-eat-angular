@@ -8,6 +8,8 @@ import {
 } from '@/types/dish.type';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 const prefix = 'dish';
 
@@ -16,6 +18,7 @@ const prefix = 'dish';
 })
 export class DishService {
   private http = inject(HttpClient);
+  private slugCache = new Map<string, Observable<Dish>>();
 
   findAll(dto: QueryDishDto) {
     return this.http.get<APIPagination<Dish>>(
@@ -27,7 +30,14 @@ export class DishService {
   }
 
   findBySlug(slug: string) {
-    return this.http.get<Dish>(`${environment.API_URL}/${prefix}/slug/${slug}`);
+    if (this.slugCache.has(slug)) {
+      return this.slugCache.get(slug)!;
+    }
+    const obs = this.http
+      .get<Dish>(`${environment.API_URL}/${prefix}/slug/${slug}`)
+      .pipe(shareReplay(1));
+    this.slugCache.set(slug, obs);
+    return obs;
   }
 
   findRandom(limit: number, mealCategories?: string[]) {
