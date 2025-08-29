@@ -8,10 +8,9 @@ import {
   ViewChild,
   ElementRef,
   AfterViewChecked,
-  OnChanges,
-  SimpleChanges,
   signal,
   computed,
+  effect,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,6 +41,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { User } from '@/types/user.type';
 import { AuthService } from '@/app/service/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { UserService } from '@/app/service/user.service';
 
 @Component({
   selector: 'app-voting-chat',
@@ -77,10 +77,11 @@ export class VotingChatComponent
   private authService = inject(AuthService);
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
+  private userService = inject(UserService);
+
   private destroy$ = new Subject<void>();
   private typingSubject = new Subject<string>();
   private shouldScrollToBottom = true;
-
   // Reactive state
   messageText = signal('');
   isConnected = signal(false);
@@ -91,6 +92,9 @@ export class VotingChatComponent
   isMinimized = signal(false);
   profile = signal<User | null>(null);
   dragPosition = { x: 0, y: 0 };
+  isOnlineCountAnimating = signal(false);
+  previousOnlineCount = signal(0);
+  animationType = signal<'increase' | 'decrease' | 'none'>('none');
 
   // Computed properties
   onlineCount = computed(() => this.onlineUsers().length);
@@ -103,7 +107,7 @@ export class VotingChatComponent
             const user = users.find((u) => u.id === id);
             return user?.name || 'Someone';
           })
-          .filter((name) => name !== this.profile.name)
+          .filter((name) => name !== this.profile()?.name)
       : [];
   });
 
@@ -136,12 +140,13 @@ export class VotingChatComponent
       'drag',
       this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/drag.svg')
     );
+    this.setupOnlineCountAnimation();
   }
 
   ngOnInit(): void {
-    this.initializeChat();
     this.setupSubscriptions();
     this.setupTypingDebounce();
+    this.setupBeforeUnloadHandler();
   }
 
   ngAfterViewChecked(): void {
@@ -154,12 +159,18 @@ export class VotingChatComponent
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-    this.chatService.leaveChatRoom();
+    this.removeBeforeUnloadHandler();
+    this.chatService.leaveChatRoom(this.profile()?._id ?? '');
   }
 
   private initializeChat(): void {
     // Join the chat room for this voting session
-    this.chatService.joinChatRoom(this.roomId, ChatRoomType.VOTE_GAME);
+    this.chatService.joinChatRoom(
+      this.roomId,
+      ChatRoomType.VOTE_GAME,
+      this.profile()?._id ?? '',
+      this.profile()?.name ?? ''
+    );
 
     // Load recent message history
     setTimeout(() => {
@@ -174,6 +185,7 @@ export class VotingChatComponent
       .pipe(takeUntil(this.destroy$))
       .subscribe((profile) => {
         this.profile.set(profile);
+        this.initializeChat();
       });
 
     // Connection status
@@ -215,6 +227,13 @@ export class VotingChatComponent
       .pipe(takeUntil(this.destroy$))
       .subscribe((users) => {
         this.onlineUsers.set(users);
+        this.onlineUsers().forEach((user) => {
+          if (!user.name) {
+            this.userService.findOne(user.id).subscribe((res) => {
+              user.name = res.name ?? '';
+            });
+          }
+        });
       });
 
     // Typing indicators
@@ -230,12 +249,60 @@ export class VotingChatComponent
       .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
       .subscribe(() => {
         if (this.messageText().trim()) {
-          this.chatService.startTyping(this.profile()?._id ?? '');
+          this.chatService.startTyping(
+            this.profile()?._id ?? '',
+            this.profile()?.name ?? ''
+          );
         } else {
-          this.chatService.stopTyping(this.profile()?._id ?? '');
+          this.chatService.stopTyping(
+            this.profile()?._id ?? '',
+            this.profile()?.name ?? ''
+          );
         }
       });
   }
+
+  private setupBeforeUnloadHandler(): void {
+    // Handle browser/tab close or page refresh
+    this.beforeUnloadHandler = () => {
+      this.chatService.leaveChatRoom(this.profile()?._id ?? '');
+    };
+    window.addEventListener('beforeunload', this.beforeUnloadHandler);
+  }
+
+  private removeBeforeUnloadHandler(): void {
+    if (this.beforeUnloadHandler) {
+      window.removeEventListener('beforeunload', this.beforeUnloadHandler);
+    }
+  }
+
+  private setupOnlineCountAnimation(): void {
+    // Watch for changes in online count and trigger animation
+    effect(() => {
+      const currentCount = this.onlineCount();
+      const previousCount = this.previousOnlineCount();
+
+      if (currentCount !== previousCount) {
+        // Determine animation type
+        if (currentCount > previousCount) {
+          this.animationType.set('increase');
+        } else if (currentCount < previousCount) {
+          this.animationType.set('decrease');
+        }
+
+        this.isOnlineCountAnimating.set(true);
+        this.previousOnlineCount.set(currentCount);
+
+        // Reset animation state after animation completes
+        setTimeout(() => {
+          this.isOnlineCountAnimating.set(false);
+          this.animationType.set('none');
+        }, 600); // Match the CSS animation duration
+      }
+    });
+  }
+
+  private beforeUnloadHandler: (() => void) | null = null;
 
   // Message handling
   onMessageInput(event: Event): void {
@@ -262,7 +329,10 @@ export class VotingChatComponent
       senderAvatar: this.profile()!.avatar,
     });
     this.messageText.set('');
-    this.chatService.stopTyping(this.profile()?._id ?? '');
+    this.chatService.stopTyping(
+      this.profile()?._id ?? '',
+      this.profile()?.name ?? ''
+    );
 
     // Focus back to input
     setTimeout(() => {
@@ -336,7 +406,12 @@ export class VotingChatComponent
 
   reconnectChat(): void {
     if (this.roomId) {
-      this.chatService.joinChatRoom(this.roomId, ChatRoomType.VOTE_GAME);
+      this.chatService.joinChatRoom(
+        this.roomId,
+        ChatRoomType.VOTE_GAME,
+        this.profile()?._id ?? '',
+        this.profile()?.name ?? ''
+      );
     }
   }
 

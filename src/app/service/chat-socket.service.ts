@@ -4,7 +4,6 @@ import { SocketService } from './socket.service'; // Use existing socket service
 import {
   ChatMessage,
   ChatUser,
-  ChatRoom,
   ChatMessageType,
   ChatRoomType,
   SendMessageRequest,
@@ -12,6 +11,7 @@ import {
   TypingIndicatorRequest,
   MessageHistoryRequest,
   MessageReactionRequest,
+  ChatRoomUpdated,
 } from '@/types/chat.type';
 
 @Injectable({
@@ -90,15 +90,21 @@ export class ChatSocketService {
     );
 
     // Room events
-    socket.on('chat_room_updated', (data: any) => {
-      console.log('Chat room updated:', data);
+    socket.on('chat_room_updated', (data: ChatRoomUpdated) => {
+      data.onlineUsers.forEach((userId) => {
+        if (!this.onlineUsers$.value.find((user) => user.id === userId)) {
+          this.onlineUsers$.next([
+            ...this.onlineUsers$.value,
+            { id: userId, name: '', isOnline: true },
+          ]);
+        }
+      });
     });
   }
 
   // Observe connection status
   private observeConnectionStatus(): void {
     this.socketService.getConnectionState().subscribe((state) => {
-      console.log('Connection state changed 123:', state);
       const isConnected = state === 'connected';
       this.isConnected$.next(isConnected);
 
@@ -121,7 +127,9 @@ export class ChatSocketService {
    */
   joinChatRoom(
     roomId: string,
-    roomType: ChatRoomType = ChatRoomType.VOTE_GAME
+    roomType: ChatRoomType = ChatRoomType.VOTE_GAME,
+    senderId: string,
+    senderName: string
   ): void {
     const socket = this.socketService.getSocket();
     if (!socket) return;
@@ -129,32 +137,33 @@ export class ChatSocketService {
     const roomName = `${roomType}${roomId}`;
 
     if (this.currentChatRoom) {
-      this.leaveChatRoom();
+      this.leaveChatRoom(senderId);
     }
 
     this.currentChatRoom = roomName;
 
     const joinData: JoinChatRoomRequest = {
+      senderId,
+      senderName,
       roomId,
       roomType,
       timestamp: Date.now() / 1000,
     };
 
     socket.emit('join_chat_room', joinData);
-    console.log('Joined chat room:', roomName);
   }
 
   /**
    * Leave current chat room
    */
-  leaveChatRoom(roomName?: string): void {
+  leaveChatRoom(senderId: string, roomName?: string): void {
     const socket = this.socketService.getSocket();
     if (!socket) return;
 
     const room = roomName || this.currentChatRoom;
     if (!room) return;
 
-    socket.emit('leave_chat_room', { room });
+    socket.emit('leave_chat_room', { room, senderId });
 
     if (room === this.currentChatRoom) {
       this.currentChatRoom = null;
@@ -196,12 +205,13 @@ export class ChatSocketService {
   /**
    * Start typing indicator
    */
-  startTyping(senderId: string): void {
+  startTyping(senderId: string, senderName: string): void {
     const socket = this.socketService.getSocket();
     if (!socket || !this.currentChatRoom) return;
 
     const typingData: TypingIndicatorRequest = {
       senderId: senderId,
+      senderName: senderName,
       room: this.currentChatRoom,
     };
 
@@ -212,14 +222,14 @@ export class ChatSocketService {
       clearTimeout(this.typingTimer);
     }
     this.typingTimer = setTimeout(() => {
-      this.stopTyping(senderId);
+      this.stopTyping(senderId, senderName);
     }, 3000);
   }
 
   /**
    * Stop typing indicator
    */
-  stopTyping(senderId: string): void {
+  stopTyping(senderId: string, senderName: string): void {
     const socket = this.socketService.getSocket();
     if (!socket || !this.currentChatRoom) return;
 
@@ -230,6 +240,7 @@ export class ChatSocketService {
 
     const typingData: TypingIndicatorRequest = {
       senderId,
+      senderName,
       room: this.currentChatRoom,
     };
 
@@ -365,7 +376,10 @@ export class ChatSocketService {
     console.log('Updated reactions for message:', messageId);
   }
 
-  private rejoinChatRoomAfterReconnection(): void {
+  private rejoinChatRoomAfterReconnection(
+    senderId: string,
+    senderName: string
+  ): void {
     if (!this.currentChatRoom) return;
 
     // Extract room type and ID from current room name
@@ -375,7 +389,7 @@ export class ChatSocketService {
         (voteGameMatch[1] as ChatRoomType) || ChatRoomType.VOTE_GAME;
       const roomId = voteGameMatch[2];
 
-      this.joinChatRoom(roomId, roomType);
+      this.joinChatRoom(roomId, roomType, senderId, senderName);
       this.loadMessageHistory();
 
       console.log(
@@ -396,14 +410,14 @@ export class ChatSocketService {
   }
 
   // Clean up on destroy
-  disconnect(): void {
+  disconnect(senderId: string): void {
     if (this.typingTimer) {
       clearTimeout(this.typingTimer);
     }
 
     // Leave current chat room if any
     if (this.currentChatRoom) {
-      this.leaveChatRoom();
+      this.leaveChatRoom(senderId);
     }
 
     this.currentChatRoom = null;

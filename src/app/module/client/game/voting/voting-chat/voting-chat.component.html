@@ -11,7 +11,7 @@
                     <div class="flex w-full items-center justify-between w-full">
                         <div class="flex items-center gap-2">
                             <mat-icon class="text-white text-[20px]">chat</mat-icon>
-                            <span class="font-semibold text-sm">Voting Chat</span>
+                            <span class="font-semibold text-sm" i18n>Voting Chat</span>
                             <!-- Connection Status -->
                             <div class="ml-2 flex items-center" [class.text-green-300]="isConnected()"
                                 [class.text-red-300]="connectionError()">
@@ -25,7 +25,10 @@
                             <span class="flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-white/20"
                                 matTooltip="{{ formatUserCount(onlineCount()) }}">
                                 <mat-icon class="text-[14px]">people</mat-icon>
-                                <span>{{ onlineCount() }}</span>
+                                <span class="online-count-number transition-all duration-300 ease-out transform"
+                                    [class.animate-pulse-scale]="isOnlineCountAnimating()"
+                                    [class.bounce-in]="animationType() === 'increase'"
+                                    [class.fade-out]="animationType() === 'decrease'">{{ onlineCount() }}</span>
                             </span>
                         </div>
                     </div>

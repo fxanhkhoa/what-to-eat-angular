@@ -1,3 +1,5 @@
+import { ChatRoom } from "./room.type";
+
 export interface ChatMessage {
   id: string;
   content: string;
@@ -25,24 +27,14 @@ export enum ChatMessageType {
   FILE = 'file',
   SYSTEM = 'system',
   VOTE = 'vote',
-  POLL = 'poll'
+  POLL = 'poll',
 }
 
 export enum ChatRoomType {
   VOTE_GAME = '',
   GENERAL = 'general',
   DIRECT = 'direct',
-  GROUP = 'group'
-}
-
-export interface ChatRoom {
-  id: string;
-  name: string;
-  type: ChatRoomType;
-  roomId: string;
-  participants: string[];
-  onlineUsers: string[];
-  typingUsers: string[];
+  GROUP = 'group',
 }
 
 export interface SendMessageRequest {
@@ -53,6 +45,8 @@ export interface SendMessageRequest {
 }
 
 export interface JoinChatRoomRequest {
+  senderId: string;
+  senderName: string;
   roomId: string;
   roomType: ChatRoomType;
   timestamp: number;
@@ -60,6 +54,7 @@ export interface JoinChatRoomRequest {
 
 export interface TypingIndicatorRequest {
   senderId: string;
+  senderName: string;
   room: string;
 }
 
@@ -75,3 +70,8 @@ export interface MessageReactionRequest {
   room: string;
   timestamp: number;
 }
+
+export type ChatRoomUpdated = {
+  onlineUsers: string[];
+  room: ChatRoom;
+};
