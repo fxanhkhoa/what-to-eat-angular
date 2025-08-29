@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LedListHintComponent } from './led-list-hint.component';
+import { UserInfoComponent } from './user-info.component';
 
-describe('LedListHintComponent', () => {
-  let component: LedListHintComponent;
-  let fixture: ComponentFixture<LedListHintComponent>;
+describe('UserInfoComponent', () => {
+  let component: UserInfoComponent;
+  let fixture: ComponentFixture<UserInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LedListHintComponent]
+      imports: [UserInfoComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(LedListHintComponent);
+
+    fixture = TestBed.createComponent(UserInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

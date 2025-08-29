@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit {
       const scriptId = 'google-signin-client';
       if (document.getElementById(scriptId)) {
         // If script is already being loaded, wait for it to finish
-        (document.getElementById(scriptId) as HTMLScriptElement).addEventListener('load', () => resolve());
+        (
+          document.getElementById(scriptId) as HTMLScriptElement
+        ).addEventListener('load', () => resolve());
         return;
       }
       const script = document.createElement('script');
@@ -105,7 +107,10 @@ export class LoginComponent implements OnInit {
         cookies.set(Cookies_Key.REFRESH_TOKEN, res.refreshToken, {
           expires: expirationRefreshDate,
         });
-        this.ngZone.run(() => this.navigate());
+        this.authService.getProfileAPI().subscribe((user) => {
+          this.authService.setProfile(user);
+          this.ngZone.run(() => this.navigate());
+        });
       }
     });
   }

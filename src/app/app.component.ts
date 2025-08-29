@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from './service/auth.service';
+import cookies from 'js-cookie';
+import { isPlatformServer } from '@angular/common';
+import { Cookies_Key } from '@/enum/cookies.enum';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +11,31 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  private authService = inject(AuthService);
+  private platformId = inject(PLATFORM_ID);
+
   title = 'what-to-eat-angular';
+
+  ngOnInit(): void {
+    this.getProfile();
+  }
+
+  getProfile() {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+    const token = cookies.get(Cookies_Key.TOKEN);
+    if (!token) {
+      return;
+    }
+    this.authService.getProfileAPI().subscribe({
+      next: (profile) => {
+        this.authService.setProfile(profile);
+      },
+      error: (error) => {
+        console.error('Error fetching user profile:', error);
+      },
+    });
+  }
 }

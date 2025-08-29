@@ -9,12 +9,12 @@ import {
   ViewContainerRef,
   LOCALE_ID,
   DOCUMENT,
+  ElementRef,
 } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
 import { Subject, takeUntil, forkJoin, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
 
@@ -36,6 +36,10 @@ import { DishCardFancyComponent } from '../../dish/dish-card-fancy/dish-card-fan
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { VotingUserBadgeComponent } from './voting-user-badge/voting-user-badge.component';
+import { VotingChatComponent } from './voting-chat/voting-chat.component';
+import { AuthService } from '@/app/service/auth.service';
+import { User } from '@/types/user.type';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-voting',
@@ -50,37 +54,49 @@ import { VotingUserBadgeComponent } from './voting-user-badge/voting-user-badge.
     MatCardModule,
     MatDividerModule,
     VotingUserBadgeComponent,
+    VotingChatComponent,
+    MatBadgeModule,
   ],
   templateUrl: './voting.component.html',
   styleUrl: './voting.component.scss',
 })
 export class VotingComponent implements OnInit, OnDestroy {
   @ViewChild('dishPreviewTemplate') dishPreviewTemplate!: TemplateRef<any>;
+  @ViewChild('chatWidget', { static: false })
+  chatWidget!: ElementRef<HTMLDivElement>;
 
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private document = inject(DOCUMENT);
   private destroy$ = new Subject<void>();
   private route = inject(ActivatedRoute);
-  private dialog = inject(MatDialog);
   private socketService = inject(SocketService);
   private dishVoteService = inject(DishVoteService);
   private dishService = inject(DishService);
+  private authService = inject(AuthService);
   localeID = inject(LOCALE_ID);
 
   dishVoteID: string = '';
   dishVote: DishVote | null = null;
   dishes: Dish[] = [];
-  myName = signal<string>('');
+  userAvatar: string | undefined = undefined; // Add user avatar property
   loading: boolean = true;
   error: string | null = null;
   selectedDishForPreview: any = null;
+  connectionState = signal<string>('disconnected');
+  profile = signal<User | null>(null);
+
+  // Chat widget drag position
+  chatWidgetPosition = signal({ x: 0, y: 0 });
+  isDragging = signal(false);
 
   ngOnInit(): void {
     this.dishVoteID = this.route.snapshot.params['id'];
     this.setupSEO();
     this.loadData();
     this.setupSocketConnection();
+    this.loadChatWidgetPosition(); // Load saved chat widget position
+    this.loadProfile();
   }
 
   ngOnDestroy(): void {
@@ -88,6 +104,20 @@ export class VotingComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
     this.socketService.disconnect();
+  }
+
+  loadProfile() {
+    this.authService
+      .getProfile()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (profile) => {
+          this.profile.set(profile);
+        },
+        error: (error) => {
+          console.error('Error loading profile:', error);
+        },
+      });
   }
 
   loadData(): void {
@@ -125,7 +155,6 @@ export class VotingComponent implements OnInit, OnDestroy {
         next: (dishes) => {
           this.dishes = dishes;
           this.loading = false;
-          this.openNameDialog();
         },
         error: (error) => {
           console.error('Error loading data:', error);
@@ -145,36 +174,30 @@ export class VotingComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.dishVote = data;
       });
-  }
 
-  private openNameDialog(): void {
-    if (!this.myName()) {
-      const dialogRef = this.dialog.open(VotingNameDialogComponent, {
-        disableClose: true,
-        width: '400px',
+    this.socketService
+      .getConnectionState()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((state) => {
+        this.connectionState.set(state);
       });
-
-      dialogRef.afterClosed().subscribe((name) => {
-        if (name) {
-          this.myName.set(name);
-        }
-      });
-    }
   }
 
   onVote(dish: Dish): void {
-    if (!this.myName || !this.dishVote) return;
+    if (!this.profile() || !this.dishVote) return;
 
     const dishVoteItem = this.dishVote.dishVoteItems.find(
       (e) => e.slug === dish.slug
     );
     const isCurrentlyVoted =
-      dishVoteItem?.voteAnonymous.includes(this.myName()) || false;
+      dishVoteItem?.voteAnonymous.includes(this.profile()!._id) ||
+      dishVoteItem?.voteUser.includes(this.profile()!._id) ||
+      false;
 
     this.socketService.emitDishVoteUpdate(
       {
         slug: dish.slug,
-        myName: this.myName(),
+        myName: this.profile()!._id,
         userID: null,
         isVoting: !isCurrentlyVoted,
       },
@@ -183,18 +206,20 @@ export class VotingComponent implements OnInit, OnDestroy {
   }
 
   onCustomVote(slug: string): void {
-    if (!this.myName() || !this.dishVote) return;
+    if (!this.profile() || !this.dishVote) return;
 
     const dishVoteItem = this.dishVote.dishVoteItems.find(
       (e) => e.slug === slug
     );
     const isCurrentlyVoted =
-      dishVoteItem?.voteAnonymous.includes(this.myName()) || false;
+      dishVoteItem?.voteAnonymous.includes(this.profile()!._id) ||
+      dishVoteItem?.voteUser.includes(this.profile()!._id) ||
+      false;
 
     this.socketService.emitDishVoteUpdate(
       {
         slug: slug,
-        myName: this.myName(),
+        myName: this.profile()!._id,
         userID: null,
         isVoting: !isCurrentlyVoted,
       },
@@ -258,11 +283,15 @@ export class VotingComponent implements OnInit, OnDestroy {
   }
 
   isVotedByMe(slug: string): boolean {
-    if (!this.dishVote || !this.myName()) return false;
+    if (!this.dishVote || !this.profile()) return false;
     const dishVoteItem = this.dishVote.dishVoteItems.find(
       (e) => e.slug === slug
     );
-    return dishVoteItem?.voteAnonymous.includes(this.myName()) || false;
+    return (
+      dishVoteItem?.voteAnonymous.includes(this.profile()!._id) ||
+      dishVoteItem?.voteUser.includes(this.profile()!._id) ||
+      false
+    );
   }
 
   getVoteUsers(dish: Dish): string[] {
@@ -332,83 +361,101 @@ export class VotingComponent implements OnInit, OnDestroy {
 
   private setupSEO(): void {
     const isVietnamese = this.localeID === 'vi';
-    
+
     if (isVietnamese) {
-      this.titleService.setTitle('Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích | What to Eat');
-      
-      this.metaService.updateTag({ 
-        name: 'description', 
-        content: 'Tham gia bình chọn món ăn cùng bạn bè và gia đình. Chọn món ăn yêu thích từ danh sách và xem kết quả bình chọn theo thời gian thực.' 
+      this.titleService.setTitle(
+        'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích | What to Eat'
+      );
+
+      this.metaService.updateTag({
+        name: 'description',
+        content:
+          'Tham gia bình chọn món ăn cùng bạn bè và gia đình. Chọn món ăn yêu thích từ danh sách và xem kết quả bình chọn theo thời gian thực.',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'keywords', 
-        content: 'bình chọn món ăn, vote món ăn, chọn món ăn, game ẩm thực, bình chọn trực tuyến, tương tác nhóm, món ăn yêu thích' 
+
+      this.metaService.updateTag({
+        name: 'keywords',
+        content:
+          'bình chọn món ăn, vote món ăn, chọn món ăn, game ẩm thực, bình chọn trực tuyến, tương tác nhóm, món ăn yêu thích',
       });
-      
+
       // Open Graph tags
-      this.metaService.updateTag({ 
-        property: 'og:title', 
-        content: 'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích' 
+      this.metaService.updateTag({
+        property: 'og:title',
+        content: 'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích',
       });
-      
-      this.metaService.updateTag({ 
-        property: 'og:description', 
-        content: 'Tham gia bình chọn món ăn cùng bạn bè và gia đình. Chọn món ăn yêu thích và xem kết quả theo thời gian thực.' 
+
+      this.metaService.updateTag({
+        property: 'og:description',
+        content:
+          'Tham gia bình chọn món ăn cùng bạn bè và gia đình. Chọn món ăn yêu thích và xem kết quả theo thời gian thực.',
       });
-      
+
       // Twitter Card tags
-      this.metaService.updateTag({ 
-        name: 'twitter:title', 
-        content: 'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích' 
+      this.metaService.updateTag({
+        name: 'twitter:title',
+        content: 'Bình Chọn Món Ăn - Tìm Món Ăn Yêu Thích',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'twitter:description', 
-        content: 'Tham gia bình chọn món ăn cùng bạn bè. Chọn món yêu thích và xem kết quả bình chọn trực tuyến.' 
+
+      this.metaService.updateTag({
+        name: 'twitter:description',
+        content:
+          'Tham gia bình chọn món ăn cùng bạn bè. Chọn món yêu thích và xem kết quả bình chọn trực tuyến.',
       });
     } else {
-      this.titleService.setTitle('Food Voting - Find Your Favorite Dish | What to Eat');
-      
-      this.metaService.updateTag({ 
-        name: 'description', 
-        content: 'Join food voting with friends and family. Choose your favorite dishes from the list and see real-time voting results together.' 
+      this.titleService.setTitle(
+        'Food Voting - Find Your Favorite Dish | What to Eat'
+      );
+
+      this.metaService.updateTag({
+        name: 'description',
+        content:
+          'Join food voting with friends and family. Choose your favorite dishes from the list and see real-time voting results together.',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'keywords', 
-        content: 'food voting, dish voting, food poll, culinary game, online voting, group interaction, favorite dishes, food selection' 
+
+      this.metaService.updateTag({
+        name: 'keywords',
+        content:
+          'food voting, dish voting, food poll, culinary game, online voting, group interaction, favorite dishes, food selection',
       });
-      
+
       // Open Graph tags
-      this.metaService.updateTag({ 
-        property: 'og:title', 
-        content: 'Food Voting - Find Your Favorite Dish' 
+      this.metaService.updateTag({
+        property: 'og:title',
+        content: 'Food Voting - Find Your Favorite Dish',
       });
-      
-      this.metaService.updateTag({ 
-        property: 'og:description', 
-        content: 'Join food voting with friends and family. Choose your favorite dishes and see real-time voting results together.' 
+
+      this.metaService.updateTag({
+        property: 'og:description',
+        content:
+          'Join food voting with friends and family. Choose your favorite dishes and see real-time voting results together.',
       });
-      
+
       // Twitter Card tags
-      this.metaService.updateTag({ 
-        name: 'twitter:title', 
-        content: 'Food Voting - Find Your Favorite Dish' 
+      this.metaService.updateTag({
+        name: 'twitter:title',
+        content: 'Food Voting - Find Your Favorite Dish',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'twitter:description', 
-        content: 'Join food voting with friends. Choose favorite dishes and see real-time voting results.' 
+
+      this.metaService.updateTag({
+        name: 'twitter:description',
+        content:
+          'Join food voting with friends. Choose favorite dishes and see real-time voting results.',
       });
     }
-    
+
     // Common meta tags
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
-    this.metaService.updateTag({ property: 'og:site_name', content: 'What to Eat' });
-    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaService.updateTag({
+      property: 'og:site_name',
+      content: 'What to Eat',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    });
     this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
-    
+
     this.addOrUpdateCanonicalLink();
   }
 
@@ -422,7 +469,10 @@ export class VotingComponent implements OnInit, OnDestroy {
     // Create new canonical link
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', `${this.document.location.origin}/game/voting/${this.dishVoteID}`);
+    link.setAttribute(
+      'href',
+      `${this.document.location.origin}/game/voting/${this.dishVoteID}`
+    );
     head.appendChild(link);
   }
 
@@ -432,5 +482,35 @@ export class VotingComponent implements OnInit, OnDestroy {
     if (existingCanonical) {
       head?.removeChild(existingCanonical);
     }
+  }
+
+  /**
+   * Save chat widget position to localStorage
+   */
+  private saveChatWidgetPosition(position: { x: number; y: number }): void {
+    localStorage.setItem('chat-widget-position', JSON.stringify(position));
+  }
+
+  /**
+   * Load chat widget position from localStorage
+   */
+  private loadChatWidgetPosition(): void {
+    const saved = localStorage.getItem('chat-widget-position');
+    if (saved) {
+      try {
+        const position = JSON.parse(saved);
+        this.chatWidgetPosition.set(position);
+      } catch (e) {
+        // Ignore invalid JSON
+      }
+    }
+  }
+
+  /**
+   * Reset chat widget position to default
+   */
+  resetChatWidgetPosition(): void {
+    this.chatWidgetPosition.set({ x: 0, y: 0 });
+    this.saveChatWidgetPosition({ x: 0, y: 0 });
   }
 }

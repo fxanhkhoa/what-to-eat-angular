@@ -1,4 +1,9 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
@@ -18,6 +23,7 @@ import { bearerInterceptor } from './interceptor/bearer.interceptor';
 import { tokenRefreshInterceptor } from './interceptor/token-refresh.interceptor';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './shared/paginator/custom-paginator-intl';
+import { MatIconRegistry } from '@angular/material/icon';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -47,6 +53,13 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([bearerInterceptor, tokenRefreshInterceptor])
     ),
+    provideAppInitializer(() => {
+      const iconRegistry = inject(MatIconRegistry);
+      iconRegistry.setDefaultFontSetClass(
+        'material-symbols-outlined',
+        'mat-ligature-font'
+      );
+    }),
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],
 };
