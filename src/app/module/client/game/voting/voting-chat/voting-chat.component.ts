@@ -105,7 +105,7 @@ export class VotingChatComponent
       ? typing
           .map((id) => {
             const user = users.find((u) => u.id === id);
-            return user?.name || 'Someone';
+            return user?.name || $localize`:@@voting-chat.someone:Someone`;
           })
           .filter((name) => name !== this.profile()?.name)
       : [];
@@ -114,9 +114,11 @@ export class VotingChatComponent
   typingText = computed(() => {
     const names = this.typingUserNames();
     if (names.length === 0) return '';
-    if (names.length === 1) return `${names[0]} is typing...`;
-    if (names.length === 2) return `${names[0]} and ${names[1]} are typing...`;
-    return `${names.length} people are typing...`;
+    if (names.length === 1)
+      return $localize`:@@voting-chat.one-typing:${names[0]} is typing...`;
+    if (names.length === 2)
+      return $localize`:@@voting-chat.two-typing:${names[0]} and ${names[1]} are typing...`;
+    return $localize`:@@voting-chat.multiple-typing:${names.length} people are typing...`;
   });
 
   // Available reactions
@@ -383,9 +385,11 @@ export class VotingChatComponent
   }
 
   formatUserCount(count: number): string {
-    if (count === 0) return 'No one online';
-    if (count === 1) return '1 person online';
-    return `${count} people online`;
+    if (count === 0)
+      return $localize`:@@voting-chat.no-one-online:No one online`;
+    if (count === 1)
+      return $localize`:@@voting-chat.one-person-online:1 person online`;
+    return $localize`:@@voting-chat.multiple-people-online:${count} people online`;
   }
 
   getObjectKeys(obj: any): string[] {
