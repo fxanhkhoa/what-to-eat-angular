@@ -53,13 +53,6 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([bearerInterceptor, tokenRefreshInterceptor])
     ),
-    provideAppInitializer(() => {
-      const iconRegistry = inject(MatIconRegistry);
-      iconRegistry.setDefaultFontSetClass(
-        'material-symbols-outlined',
-        'mat-ligature-font'
-      );
-    }),
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],
 };
