@@ -3,7 +3,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 export const serverRoutes: ServerRoute[] = [
   {
     path: '**',
-    renderMode: RenderMode.Prerender,
+    renderMode: RenderMode.Server,
   },
   {
     path: 'admin/ingredient/:id',
@@ -11,6 +11,14 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'admin/dish/:id',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'game/voting',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'game/voting/create',
     renderMode: RenderMode.Client,
   },
   {
