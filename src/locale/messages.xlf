@@ -2110,263 +2110,291 @@
           <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1601655633967957673" datatype="html">
+        <source>Herbs &amp; spices</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5596879958232870419" datatype="html">
+        <source>Nuts &amp; seeds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6974777728423484538" datatype="html">
+        <source>Baking ingredients</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1625714612002770194" datatype="html">
+        <source>Canned &amp; preserved</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="8216610232934279724" datatype="html">
         <source>Infant formula &amp; baby food</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8693603235657020323" datatype="html">
         <source>Other</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6116346225726789838" datatype="html">
         <source>Hard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5982496808088686844" datatype="html">
         <source>Medium</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8037134183854795009" datatype="html">
         <source>Easy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5310530945730171806" datatype="html">
         <source>Breakfast</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7766125218438790242" datatype="html">
         <source>Lunch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7499734983206731562" datatype="html">
         <source>Brunch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4813703461296397215" datatype="html">
         <source>Dinner</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5930163615897546708" datatype="html">
         <source>Snack</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="420931489272556690" datatype="html">
         <source>Burger</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1358961254764688493" datatype="html">
         <source>Salad</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8704582860257325532" datatype="html">
         <source>Soup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">40</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="710211205292228053" datatype="html">
         <source>Appetizer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">41</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5584107564920356978" datatype="html">
         <source>Dessert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6069047560378654483" datatype="html">
         <source>Hotpot</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1527700940748627092" datatype="html">
         <source>Sweet soup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6838208194427890843" datatype="html">
         <source>Noodle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">51</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4635154111117669095" datatype="html">
         <source>Rice dish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8466299950045776643" datatype="html">
         <source>Seafood</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5702626357802443273" datatype="html">
         <source>Meat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="791836343883095823" datatype="html">
         <source>Vegetarian</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8518686941512066717" datatype="html">
         <source>Vegan</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4192044416003236579" datatype="html">
         <source>Grilled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="640363729610563697" datatype="html">
         <source>Fried</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3845514477401866837" datatype="html">
         <source>Steamed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7359663805162447232" datatype="html">
         <source>Baked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">58</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1507373671305394106" datatype="html">
         <source>Street food</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2235451887163585310" datatype="html">
         <source>Fast food</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5146243889958025627" datatype="html">
         <source>Traditional</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5929505490343014465" datatype="html">
         <source>Fusion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">64</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5214487824945146701" datatype="html">
         <source>North Vietnam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1902816665117817922" datatype="html">
         <source>Central Vietnam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="281102520230787005" datatype="html">
         <source>South Vietnam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3982196677108901324" datatype="html">
         <source>Beverage</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3226088354912741446" datatype="html">
         <source>Smoothie</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6656519326134077435" datatype="html">
         <source>Vitamin</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">74</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7977761628594328784" datatype="html">
