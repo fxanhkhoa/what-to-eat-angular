@@ -52,6 +52,7 @@ import { AddCustomDishComponent } from './add-custom-dish/add-custom-dish.compon
 import { MatDividerModule } from '@angular/material/divider';
 import { DishVoteService } from '@/app/service/dish-vote.service';
 import { VOTING_SESSION_TIMEOUT } from '@/constant/general.constant';
+import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-voting-create-update',
@@ -454,19 +455,63 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
     this.addOrUpdateCanonicalLink();
   }
 
-  private addOrUpdateCanonicalLink(): void {
-    const head = this.document.querySelector('head');
-    if (!head) return;
-
-    // Remove existing canonical link
-    this.removeCanonicalLink();
-
-    // Create new canonical link
-    const link = this.document.createElement('link');
-    link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', `${this.document.location.origin}/game/voting/create`);
-    head.appendChild(link);
-  }
+  private addOrUpdateCanonicalLink() {
+      // Remove existing canonical link if it exists
+      const existingCanonical = this.document.querySelector(
+        'link[rel="canonical"]'
+      );
+      if (existingCanonical) {
+        existingCanonical.remove();
+      }
+  
+      // Add new canonical link with proper URL based on locale and dish slug
+      const link = this.document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+  
+      // Get dish slug from current route
+      const baseUrl = environment.BASE_URL;
+      let canonicalUrl = baseUrl;
+  
+      if (this.localeID.startsWith('vi')) {
+        canonicalUrl = `${baseUrl}/vi/voting/create`;
+      } else {
+        canonicalUrl = `${baseUrl}/en/voting/create`;
+      }
+  
+      link.setAttribute('href', canonicalUrl);
+      this.document.head.appendChild(link);
+    }
+  
+    private addHrefLangLinks() {
+      // Remove existing hreflang links if they exist
+      const existingHrefLangs = this.document.querySelectorAll(
+        'link[rel="alternate"][hreflang]'
+      );
+      existingHrefLangs.forEach((link) => link.remove());
+  
+      const baseUrl = environment.BASE_URL;
+  
+      // Add Vietnamese version
+      const viLink = this.document.createElement('link');
+      viLink.setAttribute('rel', 'alternate');
+      viLink.setAttribute('hreflang', 'vi');
+      viLink.setAttribute('href', `${baseUrl}/vi/voting/create`);
+      this.document.head.appendChild(viLink);
+  
+      // Add English version
+      const enLink = this.document.createElement('link');
+      enLink.setAttribute('rel', 'alternate');
+      enLink.setAttribute('hreflang', 'en');
+      enLink.setAttribute('href', `${baseUrl}/en/voting/create`);
+      this.document.head.appendChild(enLink);
+  
+      // Add x-default for default language
+      const defaultLink = this.document.createElement('link');
+      defaultLink.setAttribute('rel', 'alternate');
+      defaultLink.setAttribute('hreflang', 'x-default');
+      defaultLink.setAttribute('href', `${baseUrl}/en/voting/create`);
+      this.document.head.appendChild(defaultLink);
+    }
 
   private removeCanonicalLink(): void {
     const head = this.document.querySelector('head');

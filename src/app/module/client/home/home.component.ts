@@ -15,6 +15,7 @@ import { DishSectionComponent } from './dish-section/dish-section.component';
 import { GameSectionComponent } from './game-section/game-section.component';
 import { IngredientSectionComponent } from './ingredient-section/ingredient-section.component';
 import { QuoteSectionComponent } from './quote-section/quote-section.component';
+import { environment } from '@/environments/environment';
 @Component({
   selector: 'app-home',
   imports: [
@@ -55,10 +56,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const locale = this.localeId;
-    if (isPlatformBrowser(this.platformId)) {
-      this.addOrUpdateCanonicalLink();
-      this.addHrefLangLinks();
-    }
+    this.addOrUpdateCanonicalLink();
+    this.addHrefLangLinks();
     if (locale.startsWith('vi')) {
       this.titleService.setTitle(
         'Ăn gì hôm nay - Khám phá bữa ăn tiếp theo của bạn'
@@ -165,20 +164,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       existingCanonical.remove();
     }
 
-    // Add new canonical link with proper URL based on locale
+    // Add new canonical link with proper URL based on locale and dish slug
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    
-    // Set canonical URL based on locale
-    const baseUrl = 'https://eatwhat.io.vn';
+
+    // Get dish slug from current route
+    const baseUrl = environment.BASE_URL;
     let canonicalUrl = baseUrl;
-    
+
     if (this.localeId.startsWith('vi')) {
-      canonicalUrl = `${baseUrl}/`;
+      canonicalUrl = `${baseUrl}/vi`;
     } else {
-      canonicalUrl = `${baseUrl}/en/`;
+      canonicalUrl = `${baseUrl}/en`;
     }
-    
+
     link.setAttribute('href', canonicalUrl);
     this.document.head.appendChild(link);
   }
@@ -188,30 +187,29 @@ export class HomeComponent implements OnInit, OnDestroy {
     const existingHrefLangs = this.document.querySelectorAll(
       'link[rel="alternate"][hreflang]'
     );
-    existingHrefLangs.forEach(link => link.remove());
+    existingHrefLangs.forEach((link) => link.remove());
 
-    // Add hreflang links for language alternatives
-    const baseUrl = 'https://eatwhat.io.vn';
-    
+    const baseUrl = environment.BASE_URL;
+
     // Add Vietnamese version
     const viLink = this.document.createElement('link');
     viLink.setAttribute('rel', 'alternate');
     viLink.setAttribute('hreflang', 'vi');
-    viLink.setAttribute('href', `${baseUrl}/`);
+    viLink.setAttribute('href', `${baseUrl}/vi`);
     this.document.head.appendChild(viLink);
 
     // Add English version
     const enLink = this.document.createElement('link');
     enLink.setAttribute('rel', 'alternate');
     enLink.setAttribute('hreflang', 'en');
-    enLink.setAttribute('href', `${baseUrl}/en/`);
+    enLink.setAttribute('href', `${baseUrl}/en`);
     this.document.head.appendChild(enLink);
 
     // Add x-default for default language
     const defaultLink = this.document.createElement('link');
     defaultLink.setAttribute('rel', 'alternate');
     defaultLink.setAttribute('hreflang', 'x-default');
-    defaultLink.setAttribute('href', `${baseUrl}/`);
+    defaultLink.setAttribute('href', `${baseUrl}/en`);
     this.document.head.appendChild(defaultLink);
   }
 
@@ -234,6 +232,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     const existingHrefLangs = this.document.querySelectorAll(
       'link[rel="alternate"][hreflang]'
     );
-    existingHrefLangs.forEach(link => link.remove());
+    existingHrefLangs.forEach((link) => link.remove());
   }
 }

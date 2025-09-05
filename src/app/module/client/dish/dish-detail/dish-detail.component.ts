@@ -10,7 +10,12 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule, Location, DOCUMENT, isPlatformBrowser } from '@angular/common';
+import {
+  CommonModule,
+  Location,
+  DOCUMENT,
+  isPlatformBrowser,
+} from '@angular/common';
 import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -30,6 +35,7 @@ import { Ingredient } from '@/types/ingredient.type';
 import { finalize, forkJoin, mergeMap, of } from 'rxjs';
 import { EmptyComponent } from '../../../../components/empty/empty.component';
 import { DishCardFancyComponent } from '../dish-card-fancy/dish-card-fancy.component';
+import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-dish-detail',
@@ -172,10 +178,8 @@ export class DishDetailComponent implements OnDestroy, OnInit {
           this.dish.set(dish);
           this.updateSEOWithDishData(dish);
           this.addStructuredData(dish);
-          if (isPlatformBrowser(this.platformId)) {
-            this.addOrUpdateCanonicalLink();
-            this.addHrefLangLinks();
-          }
+          this.addOrUpdateCanonicalLink();
+          this.addHrefLangLinks();
         }
       });
   }
@@ -431,19 +435,19 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     // Add new canonical link with proper URL based on locale and dish slug
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    
+
     // Get dish slug from current route
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
-      const baseUrl = 'https://eatwhat.io.vn';
+      const baseUrl = environment.BASE_URL;
       let canonicalUrl = baseUrl;
-      
+
       if (this.localeId.startsWith('vi')) {
-        canonicalUrl = `${baseUrl}/dish/${slug}`;
+        canonicalUrl = `${baseUrl}/vi/dish/${slug}`;
       } else {
         canonicalUrl = `${baseUrl}/en/dish/${slug}`;
       }
-      
+
       link.setAttribute('href', canonicalUrl);
       this.document.head.appendChild(link);
     }
@@ -454,19 +458,19 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     const existingHrefLangs = this.document.querySelectorAll(
       'link[rel="alternate"][hreflang]'
     );
-    existingHrefLangs.forEach(link => link.remove());
+    existingHrefLangs.forEach((link) => link.remove());
 
     // Get dish slug from current route
     const slug = this.route.snapshot.paramMap.get('slug');
     if (!slug) return;
 
-    const baseUrl = 'https://eatwhat.io.vn';
-    
+    const baseUrl = environment.BASE_URL;
+
     // Add Vietnamese version
     const viLink = this.document.createElement('link');
     viLink.setAttribute('rel', 'alternate');
     viLink.setAttribute('hreflang', 'vi');
-    viLink.setAttribute('href', `${baseUrl}/dish/${slug}`);
+    viLink.setAttribute('href', `${baseUrl}/vi/dish/${slug}`);
     this.document.head.appendChild(viLink);
 
     // Add English version
@@ -480,7 +484,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     const defaultLink = this.document.createElement('link');
     defaultLink.setAttribute('rel', 'alternate');
     defaultLink.setAttribute('hreflang', 'x-default');
-    defaultLink.setAttribute('href', `${baseUrl}/dish/${slug}`);
+    defaultLink.setAttribute('href', `${baseUrl}/en/dish/${slug}`);
     this.document.head.appendChild(defaultLink);
   }
 
@@ -503,6 +507,6 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     const existingHrefLangs = this.document.querySelectorAll(
       'link[rel="alternate"][hreflang]'
     );
-    existingHrefLangs.forEach(link => link.remove());
+    existingHrefLangs.forEach((link) => link.remove());
   }
 }

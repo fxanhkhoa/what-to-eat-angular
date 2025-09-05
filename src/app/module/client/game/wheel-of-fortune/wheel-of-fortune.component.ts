@@ -21,6 +21,7 @@ import { SelectedDishModalComponent } from '../selected-dish-modal/selected-dish
 import { GameStateService } from '@/app/state/game-state.service';
 import { finalize, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { WheelDishPickerComponent } from './wheel-dish-picker/wheel-dish-picker.component';
+import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'app-wheel-of-fortune',
@@ -53,6 +54,7 @@ export class WheelOfFortuneComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.setupSEO();
     this.addOrUpdateCanonicalLink();
+    this.addHrefLangLinks();
     this.initialize();
   }
 
@@ -65,7 +67,9 @@ export class WheelOfFortuneComponent implements OnInit, OnDestroy {
     });
 
     // Clean up canonical link
-    const existingCanonical = this.document.querySelector('link[rel="canonical"]');
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
     if (existingCanonical) {
       existingCanonical.remove();
     }
@@ -129,40 +133,109 @@ export class WheelOfFortuneComponent implements OnInit, OnDestroy {
     const seo = {
       vi: {
         title: 'Vòng quay may mắn | What To Eat',
-        description: 'Quay vòng may mắn để tìm món ăn ngẫu nhiên hấp dẫn cho bữa ăn tiếp theo của bạn tại What To Eat.',
-        keywords: 'vòng quay may mắn, món ăn ngẫu nhiên, game ẩm thực, what to eat, chọn món ăn, vòng quay'
+        description:
+          'Quay vòng may mắn để tìm món ăn ngẫu nhiên hấp dẫn cho bữa ăn tiếp theo của bạn tại What To Eat.',
+        keywords:
+          'vòng quay may mắn, món ăn ngẫu nhiên, game ẩm thực, what to eat, chọn món ăn, vòng quay',
       },
       en: {
         title: 'Wheel of Fortune | What To Eat',
-        description: 'Spin the wheel of fortune to discover random delicious dishes for your next meal at What To Eat.',
-        keywords: 'wheel of fortune, random food, food game, what to eat, food picker, spin wheel'
-      }
+        description:
+          'Spin the wheel of fortune to discover random delicious dishes for your next meal at What To Eat.',
+        keywords:
+          'wheel of fortune, random food, food game, what to eat, food picker, spin wheel',
+      },
     };
-    
+
     const lang = this.localeId === 'vi' ? 'vi' : 'en';
     this.titleService.setTitle(seo[lang].title);
-    this.metaService.updateTag({ name: 'description', content: seo[lang].description });
-    this.metaService.updateTag({ name: 'keywords', content: seo[lang].keywords });
-    this.metaService.updateTag({ property: 'og:title', content: seo[lang].title });
-    this.metaService.updateTag({ property: 'og:description', content: seo[lang].description });
+    this.metaService.updateTag({
+      name: 'description',
+      content: seo[lang].description,
+    });
+    this.metaService.updateTag({
+      name: 'keywords',
+      content: seo[lang].keywords,
+    });
+    this.metaService.updateTag({
+      property: 'og:title',
+      content: seo[lang].title,
+    });
+    this.metaService.updateTag({
+      property: 'og:description',
+      content: seo[lang].description,
+    });
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
-    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.metaService.updateTag({ name: 'twitter:title', content: seo[lang].title });
-    this.metaService.updateTag({ name: 'twitter:description', content: seo[lang].description });
+    this.metaService.updateTag({
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:title',
+      content: seo[lang].title,
+    });
+    this.metaService.updateTag({
+      name: 'twitter:description',
+      content: seo[lang].description,
+    });
     this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
   }
 
   private addOrUpdateCanonicalLink() {
     // Remove existing canonical link if it exists
-    const existingCanonical = this.document.querySelector('link[rel="canonical"]');
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
     if (existingCanonical) {
       existingCanonical.remove();
     }
 
-    // Add new canonical link
+    // Add new canonical link with proper URL based on locale and dish slug
     const link = this.document.createElement('link');
     link.setAttribute('rel', 'canonical');
-    link.setAttribute('href', window.location.href);
+
+    // Get dish slug from current route
+    const baseUrl = environment.BASE_URL;
+    let canonicalUrl = baseUrl;
+
+    if (this.localeId.startsWith('vi')) {
+      canonicalUrl = `${baseUrl}/vi/wheel-of-fortune`;
+    } else {
+      canonicalUrl = `${baseUrl}/en/wheel-of-fortune`;
+    }
+
+    link.setAttribute('href', canonicalUrl);
     this.document.head.appendChild(link);
+  }
+
+  private addHrefLangLinks() {
+    // Remove existing hreflang links if they exist
+    const existingHrefLangs = this.document.querySelectorAll(
+      'link[rel="alternate"][hreflang]'
+    );
+    existingHrefLangs.forEach((link) => link.remove());
+
+    const baseUrl = environment.BASE_URL;
+
+    // Add Vietnamese version
+    const viLink = this.document.createElement('link');
+    viLink.setAttribute('rel', 'alternate');
+    viLink.setAttribute('hreflang', 'vi');
+    viLink.setAttribute('href', `${baseUrl}/vi/wheel-of-fortune`);
+    this.document.head.appendChild(viLink);
+
+    // Add English version
+    const enLink = this.document.createElement('link');
+    enLink.setAttribute('rel', 'alternate');
+    enLink.setAttribute('hreflang', 'en');
+    enLink.setAttribute('href', `${baseUrl}/en/wheel-of-fortune`);
+    this.document.head.appendChild(enLink);
+
+    // Add x-default for default language
+    const defaultLink = this.document.createElement('link');
+    defaultLink.setAttribute('rel', 'alternate');
+    defaultLink.setAttribute('hreflang', 'x-default');
+    defaultLink.setAttribute('href', `${baseUrl}/en/wheel-of-fortune`);
+    this.document.head.appendChild(defaultLink);
   }
 }
