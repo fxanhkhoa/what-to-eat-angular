@@ -189,7 +189,7 @@
         <mat-select formControlName="mealCategories" multiple>
           @for (category of mealCategoryOptions; track category) {
           <mat-option [value]="category">
-            {{ category }}
+            {{ category | categoryTranslate}}
           </mat-option>
           }
         </mat-select>
@@ -200,7 +200,7 @@
         <mat-select formControlName="ingredientCategories" multiple>
           @for (category of ingredientCategoryOptions; track category) {
           <mat-option [value]="category">
-            {{ category }}
+            {{ category | categoryTranslate }}
           </mat-option>
           }
         </mat-select>
@@ -316,7 +316,7 @@
                   </span>
                   }
                   <span>
-                    {{(ingredient.title | multiLanguage : 'en')?.data}}
+                    {{(ingredient.title | multiLanguage : localeId)?.data}}
                     <small class="text-gray-600 ml-1">{{ingredient.measure}}</small>
                   </span>
                 </div>
@@ -349,7 +349,7 @@
           <div class="flex gap-3 items-center">
             <img [src]="dish.thumbnail" alt="" class="w-6 h-6 object-cover rounded">
             <span>
-              {{(dish.title | multiLanguage : 'en')?.data}}
+              {{(dish.title | multiLanguage : localeId)?.data}}
             </span>
           </div>
           <mat-icon matChipRemove>cancel</mat-icon>
@@ -365,7 +365,7 @@
           <div class="flex gap-3">
             <img [src]="dish.thumbnail" alt="" class="w-8 h-8 object-cover rounded">
             <span>
-              {{(dish.title | multiLanguage : 'en')?.data}}
+              {{(dish.title | multiLanguage : localeId)?.data}}
             </span>
           </div>
         </mat-option>

@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   inject,
+  LOCALE_ID,
   ViewChild,
 } from '@angular/core';
 import {
@@ -61,6 +62,7 @@ import { IngredientService } from '@/app/service/ingredient.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '@/app/shared/service/toast.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
 
 @Component({
   selector: 'app-admin-dish-update',
@@ -79,6 +81,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MultiLanguagePipe,
     QuillModule,
     MatProgressSpinnerModule,
+    CategoryTranslatePipe,
   ],
   templateUrl: './admin-dish-update.component.html',
   styleUrl: './admin-dish-update.component.scss',
@@ -93,6 +96,7 @@ export class AdminDishUpdateComponent {
   private route = inject(ActivatedRoute);
   private toastService = inject(ToastService);
   private router = inject(Router);
+  localeId = inject(LOCALE_ID);
 
   dishForm: FormGroup = new FormGroup([]);
   availableLanguages = AvailableLanguages;

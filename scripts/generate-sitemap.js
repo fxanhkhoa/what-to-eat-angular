@@ -58,9 +58,9 @@ async function fetchAll(apiUrl, key) {
   for (const locale of LOCALES) {
     dishes.forEach(dish => {
       if (dish.slug) {
-        urls.push({ loc: `${BASE_URL}/${locale}/dish/${dish.slug}`, priority: 0.8 });
+        urls.push({ loc: `${BASE_URL}/${locale}/dish/${dish.slug}`, priority: 1 });
       } else if (dish._id) {
-        urls.push({ loc: `${BASE_URL}/${locale}/dish/${dish._id}`, priority: 0.8 });
+        urls.push({ loc: `${BASE_URL}/${locale}/dish/${dish._id}`, priority: 1 });
       }
     });
     // Add dynamic ingredient URLs for each locale
