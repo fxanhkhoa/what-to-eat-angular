@@ -4,7 +4,7 @@ const BASE_URL = 'https://eatwhat.io.vn';
 const LOCALES = ['en', 'vi'];
 const API_DISH = 'https://api.eatwhat.io.vn/dish';
 const API_INGREDIENT = 'https://api.eatwhat.io.vn/ingredient';
-const PAGE_SIZE = 100;
+const PAGE_SIZE = 9000;
 
 
 async function fetchAll(apiUrl, key) {
@@ -29,6 +29,7 @@ async function fetchAll(apiUrl, key) {
 (async () => {
   // Fetch dishes
   const dishes = await fetchAll(API_DISH, 'dishes');
+  console.log(`Fetched ${dishes.length} dishes`);
   // Fetch ingredients
   const ingredients = await fetchAll(API_INGREDIENT, 'ingredients');
 
