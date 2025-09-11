@@ -20,7 +20,7 @@ export class UserInfoComponent implements OnInit {
     this.userService.findOne(this.userId).subscribe((userInfo) => {
       for (const key of this.showingKeys) {
         if (userInfo[key]) {
-          this.info.set(this.info() + userInfo[key] + ' ');
+          this.info.set(this.info() + userInfo[key] + ', ');
         }
       }
     });

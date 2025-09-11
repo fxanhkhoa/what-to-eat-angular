@@ -1,4 +1,4 @@
 export enum Cookies_Key {
-  TOKEN = 'token',
-  REFRESH_TOKEN = 'refreshToken',
+  TOKEN = 'wte_token',
+  REFRESH_TOKEN = 'wte_refreshToken',
 }

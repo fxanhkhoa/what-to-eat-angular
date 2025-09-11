@@ -1,0 +1,38 @@
+<div class="w-full flex flex-col gap-8">
+    <h2 class="text-2xl font-bold mb-2">Dish Analytics</h2>
+
+    <div class="flex flex-wrap gap-4 mb-4">
+        <mat-card class="flex-1 min-w-[220px] bg-blue-50">
+            <div class="flex flex-col items-center py-4">
+                <span class="text-lg font-semibold text-blue-700">Avg Cooking Time</span>
+                <span class="text-3xl font-bold text-blue-900">{{ avgCookingTime }} <span
+                        class="text-base font-normal">min</span></span>
+            </div>
+        </mat-card>
+        <mat-card class="flex-1 min-w-[220px] bg-teal-50">
+            <div class="flex flex-col items-center py-4">
+                <span class="text-lg font-semibold text-teal-700">Avg Preparation Time</span>
+                <span class="text-3xl font-bold text-teal-900">{{ avgPreparationTime }} <span
+                        class="text-base font-normal">min</span></span>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 xl:col-span-6">
+            <mat-card class="flex-1 p-4 bg-gradient-to-r from-slate-400 to-slate-700 text-white">
+                <h3 class="text-lg font-semibold mb-2">Categories</h3>
+                <ngx-charts-advanced-pie-chart [results]="categoryData" [scheme]="colorScheme" [gradient]="true"
+                    class="w-full"></ngx-charts-advanced-pie-chart>
+            </mat-card>
+
+        </div>
+        <div class="col-span-12 xl:col-span-6">
+            <mat-card class="flex-1 p-4 bg-gradient-to-r from-slate-400 to-slate-700 text-white">
+                <h3 class="text-lg font-semibold mb-2">Difficulty Levels</h3>
+                <ngx-charts-pie-chart [results]="difficultyData" [scheme]="colorScheme" [legend]="true" [labels]="true"
+                    [doughnut]="false" [explodeSlices]="false" class="w-full"></ngx-charts-pie-chart>
+            </mat-card>
+        </div>
+    </div>
+</div>

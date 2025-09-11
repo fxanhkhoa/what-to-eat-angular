@@ -1,0 +1,10 @@
+<mat-card class="p-8 flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-white shadow-lg">
+	<h2 class="text-2xl font-bold mb-2">Website Visits</h2>
+	<div class="text-5xl font-extrabold text-blue-600 mb-2">
+		<ng-container *ngIf="visitCount !== null; else loading">{{ visitCount | number }}</ng-container>
+		<ng-template #loading>
+			<span class="text-gray-400 animate-pulse">...</span>
+		</ng-template>
+	</div>
+	<div class="text-gray-500">Total visits recorded</div>
+</mat-card>

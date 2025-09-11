@@ -1,6 +1,6 @@
 import { ChatRoom } from "./room.type";
 
-export interface ChatMessage {
+export type ChatMessage = {
   id: string;
   content: string;
   senderId: string;
@@ -13,7 +13,7 @@ export interface ChatMessage {
   date?: Date;
 }
 
-export interface ChatUser {
+export type ChatUser = {
   id: string;
   name: string;
   avatar?: string;
@@ -37,14 +37,14 @@ export enum ChatRoomType {
   GROUP = 'group',
 }
 
-export interface SendMessageRequest {
+export type SendMessageRequest = {
   content: string;
   type: ChatMessageType;
   room: string;
   timestamp: number;
 }
 
-export interface JoinChatRoomRequest {
+export type JoinChatRoomRequest = {
   senderId: string;
   senderName: string;
   roomId: string;
@@ -52,19 +52,19 @@ export interface JoinChatRoomRequest {
   timestamp: number;
 }
 
-export interface TypingIndicatorRequest {
+export type TypingIndicatorRequest = {
   senderId: string;
   senderName: string;
   room: string;
 }
 
-export interface MessageHistoryRequest {
+export type MessageHistoryRequest = {
   room: string;
   limit: number;
   before: number;
 }
 
-export interface MessageReactionRequest {
+export type MessageReactionRequest = {
   messageId: string;
   reaction: string;
   room: string;

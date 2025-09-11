@@ -303,7 +303,7 @@
           </mat-form-field>
           <mat-form-field appearance="outline" class="col-span-2">
             <mat-label i18n>Ingredient</mat-label>
-            <input matInput [formControlName]="'ingredient'" placeholder="Search ingredient..." i18n-placeholder
+            <input matInput formControlName="ingredient" placeholder="Search ingredient..." i18n-placeholder
               [matAutocomplete]="ingredientAuto">
             <mat-autocomplete #ingredientAuto="matAutocomplete" [displayWith]="displayIngredient"
               (optionSelected)="selectIngredient($event, i)">
