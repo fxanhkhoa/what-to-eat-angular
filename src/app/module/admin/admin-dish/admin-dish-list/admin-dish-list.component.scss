@@ -1,0 +1,46 @@
+// Loading states
+.loading-container {
+  .mat-mdc-progress-spinner {
+    margin: 0 auto;
+  }
+}
+
+// Search mode toggle
+.search-mode-toggle {
+  transition: all 0.3s ease;
+
+  &.enhanced {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+    border: 1px solid #86efac;
+
+    &:hover {
+      background: linear-gradient(135deg, #bbf7d0 0%, #86efac 100%);
+    }
+  }
+
+  &.basic {
+    background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+    border: 1px solid #fb923c;
+
+    &:hover {
+      background: linear-gradient(135deg, #fdba74 0%, #fb923c 100%);
+    }
+  }
+}
+
+// No data state styling
+.no-data-state {
+  .empty-icon {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}

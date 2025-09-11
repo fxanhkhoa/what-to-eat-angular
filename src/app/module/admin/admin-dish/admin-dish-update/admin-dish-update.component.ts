@@ -184,22 +184,37 @@ export class AdminDishUpdateComponent {
                 return this.dishService.findOne(relatedDish);
               });
 
+              // Handle empty arrays for forkJoin
+              const ingredientsObservable = ingredients$.length > 0 
+                ? forkJoin(ingredients$) 
+                : of([]);
+              
+              const relatedDishesObservable = relatedDishes$.length > 0 
+                ? forkJoin(relatedDishes$) 
+                : of([]);
+
               return forkJoin({
-                ingredients: forkJoin(ingredients$),
-                relatedDishes: forkJoin(relatedDishes$),
+                ingredients: ingredientsObservable,
+                relatedDishes: relatedDishesObservable,
               });
             })
           )
-          .subscribe((res) => {
-            this.ingredientsArray.clear();
-            res.ingredients.forEach((ingredient) => {
-              const found = foundDish.ingredients.find(
-                (i) => i.ingredientId === ingredient._id
-              );
-              this.addIngredient(found, ingredient);
-            });
+          .subscribe({
+            next: (res) => {
+              this.ingredientsArray.clear();
+              res.ingredients.forEach((ingredient) => {
+                const found = foundDish.ingredients.find(
+                  (i) => i.ingredientId === ingredient._id
+                );
+                this.addIngredient(found, ingredient);
+              });
 
-            this.selectedRelatedDishes = res.relatedDishes;
+              this.selectedRelatedDishes = res.relatedDishes;
+            },
+            error: (error) => {
+              console.error('Error in forkJoin:', error);
+              this.isLoading = false;
+            }
           });
       }
     });
@@ -257,7 +272,7 @@ export class AdminDishUpdateComponent {
     const filterValue = value.toLowerCase();
 
     return this.dishService
-      .findAll({ keyword: filterValue, page: 1, limit: 25 })
+      .findWithScore({ keyword: filterValue, page: 1, limit: 25 })
       .pipe(map((res) => res.data));
   }
 
@@ -389,8 +404,8 @@ export class AdminDishUpdateComponent {
             this.toastService.showSuccess(
               $localize`Updated`,
               $localize`Dish ${
-                res.title.find((e) => e.lang === 'en')?.data
-              } updated successfully`,
+                res.title.find((e) => e.lang === this.localeId)?.data
+              } ${' '} updated successfully`,
               1500
             );
             this.router.navigate(['admin', 'dish']);
@@ -409,7 +424,7 @@ export class AdminDishUpdateComponent {
             this.toastService.showSuccess(
               $localize`Created`,
               $localize`Dish ${
-                res.title.find((e) => e.lang === 'en')?.data
+                res.title.find((e) => e.lang === this.localeId)?.data
               } created successfully`,
               1500
             );
@@ -605,8 +620,11 @@ export class AdminDishUpdateComponent {
   }
 
   displayIngredient(ingredient: Ingredient): string {
-    return ingredient
-      ? ingredient.title.find((t) => t.lang === 'en')!.data
-      : '';
+    if (!ingredient || !ingredient.title || !Array.isArray(ingredient.title)) {
+      return '';
+    }
+    
+    const title = ingredient.title.find((t) => t.lang === this.localeId);
+    return title?.data || ingredient.title[0]?.data || '';
   }
 }

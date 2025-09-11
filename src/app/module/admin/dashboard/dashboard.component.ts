@@ -7,6 +7,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { DishService } from '@/app/service/dish.service';
 import { IngredientService } from '@/app/service/ingredient.service';
+import { DishAnalyticComponent } from './dish-analytic/dish-analytic.component';
+import { UserLoginTrackingComponent } from './user-login-tracking/user-login-tracking.component';
+import { WebsiteVisitComponent } from './website-visit/website-visit.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +18,9 @@ import { IngredientService } from '@/app/service/ingredient.service';
     MatProgressSpinnerModule,
     MatCardModule,
     MatTableModule,
+    DishAnalyticComponent,
+    UserLoginTrackingComponent,
+    WebsiteVisitComponent,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -62,7 +68,7 @@ export class DashboardComponent implements OnInit {
       },
       error: () => {
         this.dishCount = null;
-      }
+      },
     });
     this.ingredientService.findAll({}).subscribe({
       next: (res) => {
@@ -70,7 +76,7 @@ export class DashboardComponent implements OnInit {
       },
       error: () => {
         this.ingredientCount = null;
-      }
+      },
     });
   }
 }

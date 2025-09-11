@@ -1,295 +1,541 @@
-<div
-  class="p-5 rounded-xl bg-gradient-to-br from-white/80 via-white/70 to-white/60 shadow-lg ring-1 ring-black/5 shadow-lg">
-  <!-- Filter -->
-  <div class="mb-4 flex justify-between items-center">
-    <h1 class="text-xl font-semibold text-gray-800" i18n>Dish Management</h1>
-    <div class="flex gap-5">
-      <button mat-raised-button [routerLink]="['/admin/dish', 'create']">
+<div class="p-6 min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 rounded-lg">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2" i18n>Dish Management</h1>
+        <p class="text-gray-600" i18n>Manage your recipe collection with enhanced search capabilities</p>
+      </div>
+      <button mat-raised-button color="primary" [routerLink]="['/admin/dish', 'create']">
         <mat-icon>add</mat-icon>
-        <span i18n>Create</span>
+        <span i18n>Create New Dish</span>
       </button>
-      <button mat-button color="primary" (click)="toggleFilter()">
-        <mat-icon>filter_list</mat-icon>
-        @if (isFilterExpanded) {
-        <span i18n>Hide Filters</span>
-        } @else {
-        <span i18n>Show Filters</span>
+    </div>
+
+    <!-- Search Header with Quick Stats -->
+    <div class="bg-white rounded-2xl shadow-lg ring-1 ring-black/5 p-6 mb-6">
+      <!-- Enhanced Search Bar -->
+      <div class="relative mb-4" [formGroup]="filterForm">
+        <mat-form-field appearance="outline" class="w-full !text-lg">
+          <mat-label i18n>Search dishes...</mat-label>
+          <input matInput formControlName="keyword" placeholder="Try 'spicy chicken' or 'vegetarian pasta'"
+            i18n-placeholder [matAutocomplete]="auto" class="!text-lg" (keydown.enter)="onSearchEnter()">
+          <mat-icon matPrefix class="mr-2 text-gray-400">search</mat-icon>
+          @if (isLoadingSuggestions()) {
+          <mat-spinner matSuffix [diameter]="20"></mat-spinner>
+          }
+        </mat-form-field>
+
+        <!-- Auto-complete suggestions -->
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSuggestionSelected($event.option.value)">
+          @for (suggestion of searchSuggestions(); track suggestion) {
+          <mat-option [value]="suggestion">
+            <mat-icon class="mr-2 text-gray-400">search</mat-icon>
+            {{ suggestion }}
+          </mat-option>
+          }
+        </mat-autocomplete>
+      </div>
+      <!-- Quick Search Tags -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        <span class="text-sm text-gray-600 mr-2" i18n>Quick search:</span>
+        @for (tag of quickSearchTags; track tag) {
+        <button mat-chip-option (click)="applyQuickSearch(tag)">
+          {{ tag }}
+        </button>
         }
-      </button>
+      </div>
+
+      <!-- Search Mode Toggle & Stats -->
+      <div class="flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <!-- Search Mode Toggle -->
+          <div class="flex items-center gap-2">
+            <span class="text-sm text-gray-600" i18n>Search mode:</span>
+            <button matButton="elevated" (click)="toggleSearchMode()"
+              [class]="useEnhancedSearch() ? '!bg-green-100 !text-green-800' : '!bg-orange-100 !text-orange-800'">
+              @if (useEnhancedSearch()) {
+              <ng-container>
+                <mat-icon inline class="mr-1">auto_awesome</mat-icon>
+                <span i18n>Enhanced</span>
+              </ng-container>
+              } @else {
+              <ng-container>
+                <mat-icon inline class="mr-1">search</mat-icon>
+                <span i18n>Basic</span>
+              </ng-container>
+              }
+            </button>
+          </div>
+
+          <!-- Advanced Filters Toggle -->
+          <button matButton="outlined" (click)="toggleFilter()" matBadge="{{totalResults()}}">
+            <mat-icon>{{isFilterExpanded ? 'filter_list_off' : 'filter_list'}}</mat-icon>
+            <span i18n>{{isFilterExpanded ? 'Hide' : 'Show'}} Filters</span>
+            @if (totalResults() > 0) {
+            <mat-icon class="ml-1"></mat-icon>
+            }
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Filter Panel -->
+  <!-- Enhanced Filter Panel -->
   @if (isFilterExpanded) {
-  <div class="mb-6 p-4 bg-gray-50 rounded-lg transition-all" [formGroup]="filterForm">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- Keyword Search -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Search</mat-label>
-        <input matInput placeholder="Search by keyword" i18n-placeholder formControlName="keyword">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-      <!-- Tags with Chips -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Tags</mat-label>
-        <mat-chip-grid #tagsList aria-label="Tag selection">
-          @for (tag of tags; track tag) {
-          <mat-chip [removable]="true" (removed)="removeChip(tag, 'tags')">
-            {{tag}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          }
-          <input placeholder="New tag..." i18n-placeholder [matChipInputFor]="tagsList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addChip($event, 'tags')">
-        </mat-chip-grid>
-        <mat-hint i18n>Press Enter or comma to add</mat-hint>
-      </mat-form-field>
-      <!-- Difficulty Levels -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Difficulty Levels</mat-label>
-        <mat-select formControlName="difficultLevels" multiple>
-          @for (level of difficultLevelOptions; track level) {
-          <mat-option [value]="level">{{ level }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <!-- Preparation Time Range -->
-      <div class="flex flex-col gap-2">
-        <div class="text-gray-700 flex gap-1">
-          <span i18n>Preparation Time:</span>
-          {{ filterForm.get('preparationTimeFrom')?.value || 0 }} -
-          {{ filterForm.get('preparationTimeTo')?.value || 180 }}
-          <span i18n>min</span>
+  <div class="mb-6">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="!text-gray-800 !font-semibold">
+          <mat-icon class="mr-2">filter_alt</mat-icon>
+          <span i18n>Advanced Filters</span>
+        </mat-panel-title>
+        <mat-panel-description class="!text-gray-600">
+          <span i18n>Refine your search with detailed criteria</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="p-6 bg-white" [formGroup]="filterForm">
+        <div class="grid grid-cols-12 gap-6">
+
+          <!-- Tags Section -->
+          <div class="col-span-12">
+            <div class="bg-slate-200 shadow-lg rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-gray-700 mb-3" i18n>Tags & Keywords</h3>
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label i18n>Tags</mat-label>
+                <mat-chip-grid #tagsList aria-label="Tag selection">
+                  @for (tag of tags; track tag) {
+                  <mat-chip [removable]="true" (removed)="removeChip(tag, 'tags')" class="!bg-blue-100 !text-blue-800">
+                    {{tag}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                  </mat-chip>
+                  }
+                  <input placeholder="Add tags like 'spicy', 'vegetarian'..." i18n-placeholder
+                    [matChipInputFor]="tagsList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="addChip($event, 'tags')" class="!text-sm">
+                </mat-chip-grid>
+                <mat-hint i18n>Press Enter or comma to add tags</mat-hint>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Difficulty & Categories -->
+          <div class="col-span-12">
+            <div class="bg-slate-200 shadow-lg rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-gray-700 mb-3" i18n>Difficulty & Categories</h3>
+              <div class="flex flex-col gap-5">
+                <div class="flex gap-5">
+                  @for(item of difficultLevelOptions; track item) {
+                  <button [matButton]="difficultyLevels?.value?.includes(item) ? 'tonal' : 'outlined'"
+                    (click)="toggleDifficultyLevel(item)" [ngClass]="{
+                        'neumorphic-easy': item === 'EASY' && difficultyLevels?.value?.includes(item),
+                        'neumorphic-medium': item === 'MEDIUM' && difficultyLevels?.value?.includes(item),
+                        'neumorphic-hard': item === 'HARD' && difficultyLevels?.value?.includes(item)
+                    }">
+                    @if (item === 'EASY') {
+                    <mat-icon svgIcon="easy"></mat-icon>
+                    } @else if (item === 'MEDIUM') {
+                    <mat-icon svgIcon="medium"></mat-icon>
+                    }
+                    @else if (item === 'HARD') {
+                    <mat-icon svgIcon="hard"></mat-icon>
+                    }
+                    {{ item | categoryTranslate }}
+                  </button>
+                  }
+                </div>
+
+                <mat-form-field appearance="outline" class="w-full">
+                  <mat-label i18n>Meal Categories</mat-label>
+                  <mat-select formControlName="mealCategories" multiple>
+                    @for (category of mealCategoryOptions; track category) {
+                    <mat-option [value]="category">{{ category | titlecase }}</mat-option>
+                    }
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <!-- Time Ranges -->
+          <div class="col-span-12">
+            <div class="bg-slate-200 rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-gray-700 mb-4" i18n>Cooking Time Filters</h3>
+              <div class="grid grid-cols-12 gap-10">
+
+                <!-- Preparation Time -->
+                <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                  <div class="flex flex-col gap-3">
+                    <!-- Preparation Time -->
+                    <div class="font-medium">
+                      <span i18n-matTooltip matTooltip="in minute" class="flex items-center">
+                        <span i18n class="mr-3">Preparation Time</span>
+                        <mat-icon svgIcon="preparation_time"></mat-icon>
+                      </span>
+                    </div>
+                    <div>
+                      <mat-slider [min]="1" [max]="600" [step]="1" [displayWith]="formatLabel" discrete class="!w-full">
+                        <input matSliderStartThumb formControlName="preparationTimeFrom">
+                        <input matSliderEndThumb formControlName="preparationTimeTo">
+                      </mat-slider>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cooking Time -->
+                <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                  <div class="flex flex-col gap-3">
+                    <!-- Cooking Time -->
+                    <div class="font-medium">
+                      <span i18n-matTooltip matTooltip="in minute" class="flex items-center">
+                        <span i18n class="mr-3">Cooking Time</span>
+                        <mat-icon svgIcon="cooking_time"></mat-icon>
+                      </span>
+                    </div>
+                    <div>
+                      <mat-slider [min]="1" [max]="600" [step]="1" [displayWith]="formatLabel" discrete class="!w-full">
+                        <input matSliderStartThumb formControlName="cookingTimeFrom">
+                        <input matSliderEndThumb formControlName="cookingTimeTo">
+                      </mat-slider>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ingredients & Labels -->
+          <div class="col-span-12">
+            <div class="bg-purple-50 rounded-xl p-4">
+              <h3 class="text-sm font-semibold text-gray-700 mb-3" i18n>Ingredients & Labels</h3>
+
+              <mat-form-field appearance="outline" class="w-full mb-3">
+                <mat-label i18n>Ingredient Categories</mat-label>
+                <mat-select formControlName="ingredientCategories" multiple>
+                  @for (category of ingredientCategoryOptions; track category) {
+                  <mat-option [value]="category">{{ category | titlecase }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <div class="grid grid-cols-1 gap-3">
+                <mat-form-field appearance="outline">
+                  <mat-label i18n>Specific Ingredients</mat-label>
+                  <mat-chip-grid #ingredientsList aria-label="Ingredient selection">
+                    @for (ingredient of ingredients; track ingredient) {
+                    <mat-chip [removable]="true" (removed)="removeChip(ingredient, 'ingredients')"
+                      class="!bg-green-100 !text-green-800">
+                      {{ingredient}}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    }
+                    <input placeholder="e.g., chicken, tomato, basil..." i18n-placeholder
+                      [matChipInputFor]="ingredientsList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      (matChipInputTokenEnd)="addChip($event, 'ingredients')">
+                  </mat-chip-grid>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label i18n>Labels</mat-label>
+                  <mat-chip-grid #labelsList aria-label="Label selection">
+                    @for (label of labels; track label) {
+                    <mat-chip [removable]="true" (removed)="removeChip(label, 'labels')"
+                      class="!bg-purple-100 !text-purple-800">
+                      {{label}}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    }
+                    <input placeholder="e.g., gluten-free, low-carb..." i18n-placeholder [matChipInputFor]="labelsList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      (matChipInputTokenEnd)="addChip($event, 'labels')">
+                  </mat-chip-grid>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
         </div>
-        <mat-slider class="w-full" [min]="0" [max]="180" [step]="5" [discrete]="true">
-          <input matSliderStartThumb formControlName="preparationTimeFrom">
-          <input matSliderEndThumb formControlName="preparationTimeTo">
-        </mat-slider>
-      </div>
-      <!-- Cooking Time Range -->
-      <div class="flex flex-col gap-2">
-        <div class="text-gray-700 flex gap-1">
-          <span i18n>Cooking Time:</span>
-          {{ filterForm.get('cookingTimeFrom')?.value || 0 }} -
-          {{ filterForm.get('cookingTimeTo')?.value || 180 }}
-          <span i18n>min</span>
+
+        <!-- Filter Actions -->
+        <div class="flex justify-between items-center mt-6 pt-4 border-t border-gray-200">
+          <div class="text-sm text-gray-600">
+            @if (totalResults() > 0) {
+            <span i18n>Showing {{totalResults()}} results</span>
+            @if (searchTime() > 0) {
+            <span> • Search completed in {{searchTime()}}ms</span>
+            }
+            }
+          </div>
+
+          <div class="flex gap-3">
+            <button matButton="outlined" color="warn" (click)="clearFilter()">
+              <mat-icon>clear_all</mat-icon>
+              <span i18n>Clear All</span>
+            </button>
+            <button matButton="elevated" color="primary" (click)="applyFilter(cleanFormValue(filterForm.value))">
+              <mat-icon>search</mat-icon>
+              <span i18n>Apply Filters</span>
+            </button>
+          </div>
         </div>
-        <mat-slider class="w-full" [min]="0" [max]="180" [step]="5" [discrete]="true">
-          <input matSliderStartThumb formControlName="cookingTimeFrom">
-          <input matSliderEndThumb formControlName="cookingTimeTo">
-        </mat-slider>
       </div>
-      <!-- Meal Categories -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Meal Categories</mat-label>
-        <mat-select formControlName="mealCategories" multiple>
-          @for (category of mealCategoryOptions; track category) {
-          <mat-option [value]="category">{{ category
-            }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <!-- Ingredient Categories -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Ingredient Categories</mat-label>
-        <mat-select formControlName="ingredientCategories" multiple>
-          @for (category of ingredientCategoryOptions; track category) {
-          <mat-option [value]="category">{{ category
-            }}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-      <!-- Ingredients with Chips -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Ingredients</mat-label>
-        <mat-chip-grid #ingredientsList aria-label="Ingredient selection">
-          @for (ingredient of ingredients; track ingredient) {
-          <mat-chip [removable]="true" (removed)="removeChip(ingredient, 'ingredients')">
-            {{ingredient}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          }
-          <input placeholder="Add ingredient..." i18n-placeholder [matChipInputFor]="ingredientsList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            (matChipInputTokenEnd)="addChip($event, 'ingredients')">
-        </mat-chip-grid>
-        <mat-hint i18n>Enter ingredients to filter recipes</mat-hint>
-      </mat-form-field>
-      <!-- Labels with Chips -->
-      <mat-form-field appearance="outline" class="w-full">
-        <mat-label i18n>Labels</mat-label>
-        <mat-chip-grid #labelsList aria-label="Label selection">
-          @for (label of labels; track label) {
-          <mat-chip [removable]="true" (removed)="removeChip(label, 'labels')">
-            {{label}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          }
-          <input placeholder="Add label..." i18n-placeholder [matChipInputFor]="labelsList"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addChip($event, 'labels')">
-        </mat-chip-grid>
-        <mat-hint i18n>Enter labels to filter recipes</mat-hint>
-      </mat-form-field>
-    </div>
-    <!-- Filter Actions -->
-    <div class="flex justify-end mt-4 gap-2">
-      <button mat-stroked-button color="warn" (click)="clearFilter()">
-        <mat-icon>clear</mat-icon> <span i18n>Clear Filters</span>
-      </button>
-      <button mat-raised-button color="primary" (click)="applyFilter(cleanFormValue(filterForm.value))">
-        <mat-icon>filter_alt</mat-icon> <span i18n>Apply Filters</span>
-      </button>
-    </div>
+    </mat-expansion-panel>
   </div>
   }
 
-  <!-- Results Table (Placeholder - you can integrate with your existing table) -->
-  <div class="mt-4">
-    <!-- Your dish table component or code goes here -->
-    @if (!isFilterExpanded) {
-    <p class="text-gray-500 italic" i18n>Use the filter button above to refine your search</p>
-    }
-  </div>
+  <!-- Enhanced Results Section -->
+  <div class="bg-slate-100 rounded-2xl shadow-lg ring-1 ring-black/5 overflow-hidden">
+    <!-- Results Header -->
+    <div class="px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-lg font-semibold text-gray-900" i18n>Search Results</h2>
+          @if (totalResults() > 0) {
+          <p class="text-sm text-gray-600">
+            <span i18n>Found</span>
+            <span class="font-semibold text-blue-600">{{' ' + totalResults() + ' '}}</span>
+            <span i18n>dishes</span>
+            @if (useEnhancedSearch()) {
+            <span class="ml-2 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full" i18n>Enhanced Search</span>
+            }
+          </p>
+          } @else {
+          <p class="text-sm text-gray-500" i18n>No dishes found. Try adjusting your search criteria.</p>
+          }
+        </div>
 
-  <!-- Table -->
-  <div class="overflow-auto rounded-t-lg mat-elevation-z8 max-h-[70vh]">
-    @if (isLoading()) {
-    <div class="flex justify-center items-center p-5">
-      <mat-spinner></mat-spinner>
+        @if (totalResults() > 0) {
+        <div class="text-sm text-gray-500">
+          @if (searchTime() > 0) {
+          <span>{{searchTime()}}ms</span>
+          }
+        </div>
+        }
+      </div>
     </div>
-    } @else {
-    <table mat-table [dataSource]="dataSource" matSort>
 
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef class="w-24" i18n> Actions </th>
-        <td mat-cell *matCellDef="let dish">
-          <div class="flex gap-2">
-            <a mat-mini-fab [routerLink]="['/admin/dish', dish._id]" matTooltip="Edit dish" i18n-matTooltip>
-              <mat-icon>edit</mat-icon>
-            </a>
-            <button mat-icon-button (click)="deleteDish(dish)" matTooltip="Delete dish" i18n-matTooltip>
-              <mat-icon>delete</mat-icon>
+    <!-- Table Container -->
+    <div class="overflow-x-auto max-h-[70vh]">
+      @if (isLoading()) {
+      <div class="flex justify-center items-center p-12">
+        <div class="text-center">
+          <mat-spinner class="mx-auto mb-4"></mat-spinner>
+          <p class="text-gray-600" i18n>Searching for dishes...</p>
+        </div>
+      </div>
+      } @else {
+      <table mat-table [dataSource]="dataSource" matSort class="w-full">
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="w-24 sticky left-0 bg-white z-10" i18n>Actions</th>
+          <td mat-cell *matCellDef="let dish" class="sticky left-0 bg-white z-10">
+            <div class="flex gap-2">
+              <a mat-mini-fab [routerLink]="['/admin/dish', dish._id]" matTooltip="Edit dish" i18n-matTooltip>
+                <mat-icon>edit</mat-icon>
+              </a>
+              <button mat-mini-fab (click)="deleteDish(dish)" matTooltip="Delete dish" i18n-matTooltip>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Enhanced Thumbnail Column -->
+        <ng-container matColumnDef="thumbnail">
+          <th mat-header-cell *matHeaderCellDef class="w-24" i18n>Image</th>
+          <td mat-cell *matCellDef="let dish" class="!py-3">
+            <div class="relative">
+              <img [src]="dish.thumbnail || '/assets/images/placeholder.png'"
+                class="h-16 w-16 object-cover rounded-lg shadow-sm border border-gray-200" alt="Dish thumbnail"
+                loading="lazy">
+              <!-- Difficulty badge -->
+              @if (dish.difficultLevel) {
+              <span [ngClass]="{
+                      'bg-green-500': dish.difficultLevel === 'EASY',
+                      'bg-yellow-500': dish.difficultLevel === 'MEDIUM',
+                      'bg-red-500': dish.difficultLevel === 'HARD'
+                    }" class="absolute -top-1 -right-1 w-3 h-3 rounded-full ring-2 ring-white">
+              </span>
+              }
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Enhanced Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Dish Details</th>
+          <td mat-cell *matCellDef="let dish" class="!py-4">
+            <div class="space-y-2">
+              <div class="font-semibold text-gray-900 text-base">
+                {{ getDefaultTitle(dish.title) }}
+              </div>
+              <div class="text-sm text-gray-600 max-w-md line-clamp-2">
+                {{ (dish.shortDescription | multiLanguage: localeId)?.data || 'No description available' }}
+              </div>
+              <!-- Tags -->
+              @if (dish.tags && dish.tags.length > 0) {
+              <div class="flex flex-wrap gap-1 mt-2">
+                @for (tag of dish.tags.slice(0, 4); track tag) {
+                <span
+                  class="px-2 py-1 text-xs rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center">
+                  <mat-icon class="mr-1">tag</mat-icon>
+                  {{ tag }}
+                </span>
+                }
+                @if (dish.tags.length > 4) {
+                <span class="text-xs text-gray-500 flex items-center">
+                  +{{ dish.tags.length - 4 }} more
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Cooking Times Column -->
+        <ng-container matColumnDef="preparationTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Time Info</th>
+          <td mat-cell *matCellDef="let dish">
+            <div class="space-y-2">
+              <div class="flex items-center text-sm">
+                <mat-icon class="text-orange-500 mr-2 !text-base">schedule</mat-icon>
+                <span class="text-gray-600" i18n>Prep:</span>
+                <span class="ml-1 font-medium">{{ dish.preparationTime || 'N/A' }}</span>
+                @if (dish.preparationTime) {
+                <span class="ml-1 text-gray-500" i18n>min</span>
+                }
+              </div>
+              <div class="flex items-center text-sm">
+                <mat-icon class="text-red-500 mr-2 !text-base">outdoor_grill</mat-icon>
+                <span class="text-gray-600" i18n>Cook:</span>
+                <span class="ml-1 font-medium">{{ dish.cookingTime || 'N/A' }}</span>
+                @if (dish.cookingTime) {
+                <span class="ml-1 text-gray-500" i18n>min</span>
+                }
+              </div>
+              @if (dish.preparationTime && dish.cookingTime) {
+              <div class="text-xs text-gray-500 border-t pt-1">
+                <span i18n>Total: {{dish.preparationTime + dish.cookingTime}} min</span>
+              </div>
+              }
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Difficulty & Categories Column -->
+        <ng-container matColumnDef="difficultLevel">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Categories</th>
+          <td mat-cell *matCellDef="let dish">
+            <div class="space-y-2">
+              <!-- Difficulty -->
+              @if (dish.difficultLevel) {
+              <div class="flex items-center">
+                <mat-icon [ngClass]="{
+                        'text-green-500': dish.difficultLevel === 'EASY',
+                        'text-yellow-500': dish.difficultLevel === 'MEDIUM',
+                        'text-red-500': dish.difficultLevel === 'HARD'
+                      }" class="mr-2 !text-base">
+                  @switch (dish.difficultLevel) {
+                  @case ('EASY') { sentiment_very_satisfied }
+                  @case ('MEDIUM') { sentiment_neutral }
+                  @case ('HARD') { sentiment_very_dissatisfied }
+                  @default { help_outline }
+                  }
+                </mat-icon>
+                <span [ngClass]="{
+                        'text-green-700': dish.difficultLevel === 'EASY',
+                        'text-yellow-700': dish.difficultLevel === 'MEDIUM',
+                        'text-red-700': dish.difficultLevel === 'HARD'
+                      }" class="text-sm font-medium">
+                  {{ dish.difficultLevel | categoryTranslate }}
+                </span>
+              </div>
+              }
+
+              <!-- Meal Categories -->
+              @if (dish.mealCategories && dish.mealCategories.length > 0) {
+              <div class="flex flex-wrap gap-1">
+                @for (category of dish.mealCategories.slice(0, 2); track category) {
+                <span class="px-2 py-1 text-xs rounded-full bg-purple-50 text-purple-700 border border-purple-200">
+                  {{ category | categoryTranslate }}
+                </span>
+                }
+                @if (dish.mealCategories.length > 2) {
+                <span class="text-xs text-gray-500 flex items-center">
+                  +{{ dish.mealCategories.length - 2 }}
+                </span>
+                }
+              </div>
+              }
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"
+          class="!bg-gradient-to-r !from-gray-100 !to-gray-50 !border-b !border-gray-200"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          class="hover:!bg-blue-50 !transition-all !duration-200 !cursor-pointer border-b border-gray-100"></tr>
+
+        <!-- Enhanced No Data Row -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell !py-12 text-center" [attr.colspan]="displayedColumns.length">
+            <div class="flex flex-col items-center space-y-4">
+              <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
+                <mat-icon class="text-gray-400 !text-2xl">search_off</mat-icon>
+              </div>
+              <div class="text-center">
+                <h3 class="text-lg font-medium text-gray-900 mb-2" i18n>No dishes found</h3>
+                <p class="text-gray-600 mb-4" i18n>Try adjusting your search criteria or clearing filters</p>
+                <button mat-raised-button color="primary" (click)="clearSearch()">
+                  <mat-icon>refresh</mat-icon>
+                  <span i18n>Clear Search</span>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      }
+    </div>
+
+    <!-- Enhanced Pagination -->
+    <div class="px-6 py-4 bg-gray-50 border-t border-gray-200">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <!-- Pagination Info -->
+        <div class="text-sm text-gray-600">
+          @if (totalResults() > 0 && paginator) {
+          <span i18n>
+            Showing {{ (paginator.pageIndex * paginator.pageSize) + 1 }} to
+            {{ Math.min((paginator.pageIndex + 1) * paginator.pageSize, totalResults()) }}
+            of {{ totalResults() }} results
+          </span>
+          }
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="flex items-center gap-4">
+          <!-- Jump to Page -->
+          <div class="flex items-center gap-2">
+            <mat-form-field appearance="outline" class="!w-20 !text-sm">
+              <mat-label i18n>Page</mat-label>
+              <input matInput type="number" min="1" [max]="paginator?.getNumberOfPages() || 1" [(ngModel)]="jumpToPage"
+                (keyup.enter)="onJumpToPage()" class="!text-sm">
+            </mat-form-field>
+            <button mat-icon-button (click)="onJumpToPage()" matTooltip="Jump to page" i18n-matTooltip>
+              <mat-icon>arrow_forward</mat-icon>
             </button>
           </div>
-        </td>
-      </ng-container>
 
-      <!-- Thumbnail Column -->
-      <ng-container matColumnDef="thumbnail">
-        <th mat-header-cell *matHeaderCellDef class="w-24" i18n> Image </th>
-        <td mat-cell *matCellDef="let dish" class="!py-3">
-          <img [src]="dish.thumbnail || '/assets/images/placeholder.png'" class="h-16 w-16 object-cover rounded-md"
-            alt="Dish thumbnail">
-        </td>
-      </ng-container>
-
-      <!-- Title Column -->
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Title </th>
-        <td mat-cell *matCellDef="let dish">
-          <div class="font-medium">{{ getDefaultTitle(dish.title) }}</div>
-          <div class="text-xs text-gray-500 truncate max-w-xs">
-            {{ dish.shortDescription[0]?.data || 'No description' }}
-          </div>
-          <div class="flex flex-wrap gap-1 mt-1">
-            @for (tag of dish.tags.slice(0, 3); track tag) {
-            <span class="px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">
-              {{ tag }}
-            </span>
-            }
-            @if (dish.tags.length > 3) {
-            <span class="text-xs text-gray-500 my-auto">
-              +{{ dish.tags.length - 3 }} more
-            </span>
-            }
-          </div>
-        </td>
-      </ng-container>
-
-      <!-- Preparation Time Column -->
-      <ng-container matColumnDef="preparationTime">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Prep Time </th>
-        <td mat-cell *matCellDef="let dish">
-          <div class="flex items-center flex-nowrap">
-            <mat-icon class="text-gray-400 mr-1 text-sm">schedule</mat-icon>
-            <span class="text-nowrap" i18n>{{ dish.preparationTime || 'N/A' }} min</span>
-          </div>
-        </td>
-      </ng-container>
-
-      <!-- Cooking Time Column -->
-      <ng-container matColumnDef="cookingTime">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Cook Time </th>
-        <td mat-cell *matCellDef="let dish">
-          <div class="flex items-center">
-            <mat-icon class="text-gray-400 mr-1 text-sm">outdoor_grill</mat-icon>
-            <span class="text-nowrap" i18n>{{ dish.cookingTime || 'N/A' }} min</span>
-          </div>
-        </td>
-      </ng-container>
-
-      <!-- Difficulty Level Column -->
-      <ng-container matColumnDef="difficultLevel">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Difficulty </th>
-        <td mat-cell *matCellDef="let dish">
-          <span [ngClass]="{
-                      'bg-green-100 text-green-800': dish.difficultLevel === 'EASY',
-                      'bg-yellow-100 text-yellow-800': dish.difficultLevel === 'MEDIUM',
-                      'bg-red-100 text-red-800': dish.difficultLevel === 'HARD',
-                      'bg-gray-100 text-gray-800': !dish.difficultLevel
-                    }" class="px-2 py-1 text-xs rounded-full">
-            <span i18n>{{ dish.difficultLevel | categoryTranslate }}</span>
-          </span>
-        </td>
-      </ng-container>
-
-      <!-- Meal Categories Column -->
-      <ng-container matColumnDef="mealCategories">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Categories </th>
-        <td mat-cell *matCellDef="let dish">
-          <div class="flex flex-wrap gap-1">
-            @for (category of dish.mealCategories.slice(0, 2); track category) {
-            <span class="px-2 py-0.5 text-xs rounded-full bg-purple-100 text-purple-800">
-              {{ category | categoryTranslate}}
-            </span>
-            }
-            @if (dish.mealCategories.length > 2) {
-            <div cclass="text-xs text-gray-500 flex gap-1">
-              <span>
-                +{{ dish.mealCategories.length - 2 }}
-              </span>
-              <span i18n>more</span>
-            </div>
-            }
-          </div>
-        </td>
-      </ng-container>
-
-      <!-- Header and Row Definitions -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="bg-gray-100"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-        class="hover:bg-gray-50 transition-colors cursor-pointer"></tr>
-
-      <!-- No Data Row -->
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell py-4 text-center text-gray-500" [attr.colspan]="displayedColumns.length">
-          <div class="flex gap-1">
-            <span i18n>
-              No dishes found matching the filter
-            </span>
-            <span>
-              "{{dataSource.filter}}"
-            </span>
-          </div>
-        </td>
-      </tr>
-    </table>
-    }
+          <!-- Standard Paginator -->
+          <mat-paginator #paginator [showFirstLastButtons]="true" [pageSize]="25" [length]="totalResults()"
+            [pageIndex]="0" [pageSizeOptions]="[10, 25, 50, 100]" (page)="loadDishes()"
+            class="!bg-transparent !border-0">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- Paginator -->
-  <mat-paginator class="rounded-b-lg" [pageSize]="25" [length]="0" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 100]"
-    aria-label="Select page of dishes" (page)="loadDishes()">
-  </mat-paginator>
 </div>

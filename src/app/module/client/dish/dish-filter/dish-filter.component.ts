@@ -1,4 +1,5 @@
 import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
+import { DishService } from '@/app/service/dish.service';
 import { DIFFICULT_LEVELS, MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { INGREDIENT_CATEGORIES } from '@/enum/ingredient.enum';
 import { QueryDishDto } from '@/types/dish.type';
@@ -11,18 +12,22 @@ import {
   LOCALE_ID,
   OnInit,
   Output,
+  signal,
 } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
+import { debounceTime, distinctUntilChanged, finalize, startWith, switchMap } from 'rxjs';
 
 type Tag = {
   id: string;
@@ -45,6 +50,8 @@ type Tag = {
     MatButtonModule,
     MatTooltipModule,
     CategoryTranslatePipe,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './dish-filter.component.html',
   styleUrl: './dish-filter.component.scss',
@@ -57,12 +64,15 @@ export class DishFilterComponent implements OnInit {
   private fb = inject(FormBuilder);
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
+  private dishService = inject(DishService);
 
   mealCategoriesOptions: string[] = Object.values(MEAL_CATEGORIES);
   ingredientCategoriesOptions: string[] = Object.values(INGREDIENT_CATEGORIES);
   difficultLevelsOptions: string[] = Object.values(DIFFICULT_LEVELS);
 
   tags: Tag[] = [];
+  isLoadingSuggestions = signal<boolean>(false);
+  searchSuggestions = signal<string[]>([]);
 
   filterForm = this.fb.group({
     keyword: [this.filter.keyword || ''],
@@ -78,21 +88,15 @@ export class DishFilterComponent implements OnInit {
   constructor() {
     this.iconRegistry.addSvgIcon(
       'easy',
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/easy.svg'
-      )
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/easy.svg')
     );
     this.iconRegistry.addSvgIcon(
       'medium',
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/medium.svg'
-      )
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/medium.svg')
     );
     this.iconRegistry.addSvgIcon(
       'hard',
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/hard.svg'
-      )
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/hard.svg')
     );
     this.iconRegistry.addSvgIcon(
       'cooking_time',
@@ -108,9 +112,7 @@ export class DishFilterComponent implements OnInit {
     );
     this.iconRegistry.addSvgIcon(
       'search',
-      this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/search.svg'
-      )
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/search.svg')
     );
   }
 
@@ -119,6 +121,37 @@ export class DishFilterComponent implements OnInit {
     if (this.filter.tags) {
       this.tags = this.filter.tags.map((tag) => ({ id: tag, value: tag }));
     }
+
+    this.setupAutoSuggestions();
+  }
+
+  setupAutoSuggestions(): void {
+    const keywordControl = this.filterForm.get('keyword');
+    if (keywordControl) {
+      keywordControl.valueChanges
+        .pipe(
+          startWith(''),
+          debounceTime(300),
+          distinctUntilChanged(),
+          switchMap((value) => {
+            if (value && value.length >= 2) {
+              this.isLoadingSuggestions.set(true);
+              return this.dishService
+                .getSuggestions(value, 8)
+                .pipe(finalize(() => this.isLoadingSuggestions.set(false)));
+            }
+            return [];
+          })
+        )
+        .subscribe((suggestions) => {
+          this.searchSuggestions.set(suggestions);
+        });
+    }
+  }
+
+  onSuggestionSelected(suggestion: string): void {
+    this.filterForm.patchValue({ keyword: suggestion });
+    this.onSearch();
   }
 
   addTag(tag: string): void {

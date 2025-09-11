@@ -1,4 +1,7 @@
-<div class="p-6 max-w-4xl mx-auto">
+<div class="p-6 mx-auto">
+    <div class="mb-6">
+        <app-website-visit></app-website-visit>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <mat-card class="!bg-blue-50 !border-l-4 !border-blue-400">
             <mat-card-header>
@@ -18,15 +21,15 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <mat-card class="shadow-lg">
+    <mat-card class="shadow-lg mb-6">
         <mat-card-header>
             <mat-card-title class="text-2xl font-bold" i18n>Admin Dashboard</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             @if (loading) {
-                <div class="flex justify-center my-8">
-                    <mat-spinner></mat-spinner>
-                </div>
+            <div class="flex justify-center my-8">
+                <mat-spinner></mat-spinner>
+            </div>
             }
             @if (error) {
             <div class="text-red-500 my-4">{{ error }}</div>
@@ -62,4 +65,14 @@
             }
         </mat-card-content>
     </mat-card>
+
+    <mat-card class="shadow-lg">
+        <mat-card-content>
+            <app-dish-analytic></app-dish-analytic>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="mt-6">
+        <app-user-login-tracking></app-user-login-tracking>
+    </div>
 </div>
