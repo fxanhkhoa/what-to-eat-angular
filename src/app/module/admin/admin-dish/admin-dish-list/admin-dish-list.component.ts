@@ -403,7 +403,44 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
 
   // Handle Enter key press in search input
   onSearchEnter(): void {
+    const keyword = this.filterForm.get('keyword')?.value || '';
+    console.log('Enter key pressed, performing search with keyword:', keyword);
     this.searchWithMode();
+  }
+
+  private searchOnAutocompleteClose = false;
+
+  // Handle key events in the search input
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      // Check if autocomplete panel is open
+      const input = event.target as HTMLInputElement;
+      const autocompletePanel = document.querySelector('mat-autocomplete-panel');
+      
+      if (autocompletePanel && autocompletePanel.clientHeight > 0) {
+        // Autocomplete is open, set flag to search when it closes
+        this.searchOnAutocompleteClose = true;
+        
+        // Close the autocomplete panel
+        if (input && input.blur) {
+          input.blur();
+          setTimeout(() => input.focus(), 100);
+        }
+      } else {
+        // Autocomplete is not open, search immediately
+        this.onSearchEnter();
+      }
+    }
+  }
+
+  // Handle autocomplete close event
+  onAutocompleteClosed(): void {
+    if (this.searchOnAutocompleteClose) {
+      this.searchOnAutocompleteClose = false;
+      setTimeout(() => {
+        this.onSearchEnter();
+      }, 50);
+    }
   }
 
   searchWithMode(): void {
@@ -463,6 +500,8 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   }
 
   onSuggestionSelected(suggestion: string): void {
+    // Reset the search flag since we're selecting a suggestion
+    this.searchOnAutocompleteClose = false;
     this.filterForm.patchValue({ keyword: suggestion });
     this.searchWithMode();
   }

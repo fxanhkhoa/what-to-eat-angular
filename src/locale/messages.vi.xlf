@@ -12,75 +12,145 @@
             </trans-unit>
             <trans-unit id="7446936962086344716" datatype="html">
                 <source>Dish Management</source>
-                <target>Quản Lý Món Ăn</target>
+                <target>Quản lý Món Ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">5,6</context>
+                    <context context-type="linenumber">6,7</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="5674286808255988565" datatype="html">
-                <source>Create</source>
-                <target>Tạo Mới</target>
+            <trans-unit id="2384424892007708132" datatype="html">
+                <source>Manage your recipe collection with enhanced search capabilities</source>
+                <target>Quản lý bộ sưu tập công thức của bạn với khả năng tìm kiếm nâng cao.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">9,10</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-                    <context context-type="linenumber">4,5</context>
+                    <context context-type="linenumber">7,8</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="8898253667808677314" datatype="html">
-                <source>Hide Filters</source>
-                <target>Ẩn Bộ Lọc</target>
+            <trans-unit id="8532650368353123520" datatype="html">
+                <source>Create New Dish</source>
+                <target>Tạo Món Ăn Mới</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">14,15</context>
+                    <context context-type="linenumber">11,12</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+                    <context context-type="linenumber">2,4</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="288867841843589577" datatype="html">
-                <source>Show Filters</source>
-                <target>Hiện Bộ Lọc</target>
+            <trans-unit id="6362395035206911844" datatype="html">
+                <source>Search dishes...</source>
+                <target>Tìm kiếm món ăn...</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">16,17</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="4580988005648117665" datatype="html">
-                <source>Search</source>
-                <target>Tìm Kiếm</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">28</context>
+                    <context context-type="linenumber">20</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">130,131</context>
+                    <context context-type="linenumber">6</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="4966596169828085553" datatype="html">
-                <source>Search by keyword</source>
-                <target>Tìm kiếm theo từ khóa</target>
+            <trans-unit id="2286916911030107189" datatype="html">
+                <source>Try 'spicy chicken' or 'vegetarian pasta'</source>
+                <target>Thử 'gà cay' hoặc 'mì Ý chay'.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">29</context>
+                    <context context-type="linenumber">21,22</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">7,8</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1138305185042607809" datatype="html">
+                <source>Quick search:</source>
+                <target>Tìm kiếm nhanh:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">46,47</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1373869071809669201" datatype="html">
+                <source>Search mode:</source>
+                <target>Chế độ tìm kiếm:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">59,60</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7899751896282337632" datatype="html">
+                <source>Enhanced</source>
+                <target>Nâng Cao</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">65,66</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8643289769990675407" datatype="html">
+                <source>Basic</source>
+                <target>Cơ Bản</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">70,71</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2031322415647201148" datatype="html">
+                <source><x id="INTERPOLATION" equiv-text="{{isFilterExpanded ? 'Hide' : 'Show'}}" />
+                    Filters</source>
+                <target><x id="INTERPOLATION" equiv-text="{{isFilterExpanded ? 'Hide' : 'Show'}}" />Bộ
+                    Lọc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">79,80</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7123490720096247063" datatype="html">
+                <source>Advanced Filters</source>
+                <target>Bộ Lọc Nâng Cao</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">96,97</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6116710028530248600" datatype="html">
+                <source>Refine your search with detailed criteria</source>
+                <target>Tinh chỉnh kết quả tìm kiếm với các tiêu chí chi tiết.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">99,100</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3436206568353706626" datatype="html">
+                <source>Tags &amp; Keywords</source>
+                <target>Nhãn và Từ khóa</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">109,110</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="7886570921510760899" datatype="html">
                 <source>Tags</source>
-                <target>Thẻ Tag</target>
+                <target>Nhãn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">34</context>
+                    <context context-type="linenumber">111</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -88,77 +158,40 @@
                     <context context-type="linenumber">212</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="5570547002581457684" datatype="html">
-                <source>New tag...</source>
-                <target>Thêm thẻ tag...</target>
+            <trans-unit id="1815831447638358087" datatype="html">
+                <source>Add tags like 'spicy', 'vegetarian'...</source>
+                <target>Thêm nhãn như 'cay', 'chay',...</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">42</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-                    <context context-type="linenumber">220</context>
+                    <context context-type="linenumber">119</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="5546475107452069918" datatype="html">
-                <source>Press Enter or comma to add</source>
-                <target>Nhấn Enter hoặc dấu phẩy (,) để thêm</target>
+            <trans-unit id="5203568439209704619" datatype="html">
+                <source>Press Enter or comma to add tags</source>
+                <target>Nhấn Enter hoặc dấu phẩy để thêm nhãn.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">45</context>
+                    <context context-type="linenumber">123</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="5818217688245233505" datatype="html">
-                <source>Difficulty Levels</source>
-                <target>Độ Khó</target>
+            <trans-unit id="7284859064447963740" datatype="html">
+                <source>Difficulty &amp; Categories</source>
+                <target>Độ Khó và Danh Mục</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">49</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="568408876290504834" datatype="html">
-                <source>Preparation Time:</source>
-                <target>Thời Gian Chuẩn Bị:</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">59,60</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="3901733599428143571" datatype="html">
-                <source>min</source>
-                <target>phút</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">62,63</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">75,76</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="4012049182100585393" datatype="html">
-                <source>Cooking Time:</source>
-                <target>Thời Gian Nấu:</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">72,73</context>
+                    <context context-type="linenumber">131,132</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="356484239266148488" datatype="html">
                 <source>Meal Categories</source>
-                <target>Loại Bữa Ăn</target>
+                <target>Danh mục Món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">84</context>
+                    <context context-type="linenumber">155</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -168,16 +201,86 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">83</context>
+                    <context context-type="linenumber">97</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4826635801988566744" datatype="html">
+                <source>Cooking Time Filters</source>
+                <target>Bộ lọc Thời gian Nấu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">169,170</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5933503173619403924" datatype="html">
+                <source>in minute</source>
+                <target>tính bằng phút</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">177</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">196</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">34</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">52</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="635380272893205485" datatype="html">
+                <source>Preparation Time</source>
+                <target>Thời gian Chuẩn bị</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">178,179</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">35,36</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3114412928513670072" datatype="html">
+                <source>Cooking Time</source>
+                <target>Thời gian Nấu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">197,198</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">53,54</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8643766030088118864" datatype="html">
+                <source>Ingredients &amp; Labels</source>
+                <target>Nguyên liệu &amp; Nhãn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">216,218</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="3846432951712482448" datatype="html">
                 <source>Ingredient Categories</source>
-                <target>Loại</target>
+                <target>Danh mục Nguyên liệu</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">94</context>
+                    <context context-type="linenumber">219</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -187,39 +290,25 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">97</context>
+                    <context context-type="linenumber">111</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="9113906794544800679" datatype="html">
-                <source>Ingredients</source>
-                <target>Nguyên Liệu</target>
+            <trans-unit id="3527360827333815044" datatype="html">
+                <source>Specific Ingredients</source>
+                <target>Nguyên liệu Cụ thể</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">104</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-                    <context context-type="linenumber">286,287</context>
+                    <context context-type="linenumber">229</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="1256184581666280140" datatype="html">
-                <source>Add ingredient...</source>
-                <target>Thêm nguyên liệu...</target>
+            <trans-unit id="1692348783850266724" datatype="html">
+                <source>e.g., chicken, tomato, basil...</source>
+                <target>ví dụ: gà, cà chua, rau húng quế...</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">112</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="1415069862061563429" datatype="html">
-                <source>Enter ingredients to filter recipes</source>
-                <target>Nhập nguyên liệu để lọc công thức nấu ăn</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">116</context>
+                    <context context-type="linenumber">238</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="546766753072101168" datatype="html">
@@ -228,7 +317,7 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">120</context>
+                    <context context-type="linenumber">245</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -236,67 +325,117 @@
                     <context context-type="linenumber">226</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="5342185284748704374" datatype="html">
-                <source>Add label...</source>
-                <target>Thêm nhãn...</target>
+            <trans-unit id="1615637592531886602" datatype="html">
+                <source>e.g., gluten-free, low-carb...</source>
+                <target>ví dụ: không chứa gluten, ít carbohydrate...</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">128</context>
+                    <context context-type="linenumber">254</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="4736583417504103510" datatype="html">
-                <source>Enter labels to filter recipes</source>
-                <target>Nhập nhãn để lọc công thức nấu ăn</target>
+            <trans-unit id="8863486533936477699" datatype="html">
+                <source>Showing <x id="INTERPOLATION" equiv-text="{{totalResults()}}" /> results</source>
+                <target>Đang hiển thị<x id="INTERPOLATION" equiv-text="{{totalResults()}}" />kết quả</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">131</context>
+                    <context context-type="linenumber">268,269</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="4359014576353578997" datatype="html">
-                <source>Clear Filters</source>
-                <target>Xóa bộ lọc</target>
+            <trans-unit id="8193912662253833654" datatype="html">
+                <source>Clear All</source>
+                <target>Xóa Tất cả</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">137,138</context>
+                    <context context-type="linenumber">278,279</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="4252274043276232149" datatype="html">
                 <source>Apply Filters</source>
-                <target>Áp dụng bộ lọc</target>
+                <target>Áp dụng Bộ lọc</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">140,141</context>
+                    <context context-type="linenumber">282,283</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="1886139675207239878" datatype="html">
-                <source>Use the filter button above to refine your search</source>
-                <target>Sử dụng nút bộ lọc ở trên để tinh chỉnh kết quả tìm kiếm</target>
+            <trans-unit id="3581390655099769115" datatype="html">
+                <source>Search Results</source>
+                <target>Kết quả Tìm kiếm</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">150,152</context>
+                    <context context-type="linenumber">297,298</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="4360239040231802726" datatype="html">
-                <source> Actions </source>
+            <trans-unit id="602821270955747507" datatype="html">
+                <source>Found</source>
+                <target>Tìm thấy</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">300,301</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8254359863108318582" datatype="html">
+                <source>dishes</source>
+                <target>món ăn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">302,303</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
+                    <context context-type="linenumber">87,88</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3592542515215639125" datatype="html">
+                <source>Enhanced Search</source>
+                <target>Tìm kiếm nâng cao</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">304,305</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6404164944851754048" datatype="html">
+                <source>No dishes found. Try adjusting your search criteria.</source>
+                <target>Không tìm thấy món ăn nào. Vui lòng điều chỉnh tiêu chí tìm kiếm.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">308,309</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6826579746014849795" datatype="html">
+                <source>Searching for dishes...</source>
+                <target>Đang tìm kiếm món ăn...</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">328,329</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3193976279273491157" datatype="html">
+                <source>Actions</source>
                 <target>Thao tác</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">165,166</context>
+                    <context context-type="linenumber">336,337</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="1193793583108173184" datatype="html">
                 <source>Edit dish</source>
-                <target>Sửa món ăn</target>
+                <target>Chỉnh sửa món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">168</context>
+                    <context context-type="linenumber">339</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="4513754435926616457" datatype="html">
@@ -305,128 +444,152 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">171</context>
+                    <context context-type="linenumber">342</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="950338657895578107" datatype="html">
-                <source> Image </source>
+            <trans-unit id="3012906865384504293" datatype="html">
+                <source>Image</source>
                 <target>Hình ảnh</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">180,181</context>
+                    <context context-type="linenumber">351,352</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="9053645969247364433" datatype="html">
-                <source> Title </source>
-                <target>Tiêu đề</target>
+            <trans-unit id="4558748556325628998" datatype="html">
+                <source>Dish Details</source>
+                <target>Chi tiết món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">189,190</context>
+                    <context context-type="linenumber">372,373</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="7362911798696469389" datatype="html">
-                <source> Prep Time </source>
-                <target>Thời gian chuẩn bị</target>
+            <trans-unit id="9145502302672870892" datatype="html">
+                <source>Time Info</source>
+                <target>Thông tin thời gian</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">212,213</context>
+                    <context context-type="linenumber">404,405</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="771135449401995553" datatype="html">
-                <source><x id="INTERPOLATION" equiv-text="{{ dish.preparationTime || 'N/A' }}" />
-                    min</source>
-                <target><x id="INTERPOLATION" equiv-text="{{ dish.preparationTime || 'N/A' }}" />
-                    phút</target>
+            <trans-unit id="4769819979674760984" datatype="html">
+                <source>Prep:</source>
+                <target>Sơ chế:</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">216,217</context>
+                    <context context-type="linenumber">409,410</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3901733599428143571" datatype="html">
+                <source>min</source>
+                <target>phút</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">412,413</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">227,228</context>
+                    <context context-type="linenumber">420,421</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="112638582346099094" datatype="html">
-                <source> Cook Time </source>
-                <target>Thời gian nấu</target>
+            <trans-unit id="1916325295172971341" datatype="html">
+                <source>Cook:</source>
+                <target>Nấu:</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">223,224</context>
+                    <context context-type="linenumber">417,418</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="1325764882377763588" datatype="html">
-                <source> Difficulty </source>
-                <target>Độ khó</target>
+            <trans-unit id="7715704317907481039" datatype="html">
+                <source>Total: <x id="INTERPOLATION"
+                        equiv-text="{{dish.preparationTime + dish.cookingTime}}" /> min</source>
+                <target>Tổng thời gian:<x id="INTERPOLATION"
+                        equiv-text="{{dish.preparationTime + dish.cookingTime}}" />phút</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">234,235</context>
+                    <context context-type="linenumber">425,426</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="187187500641108332" datatype="html">
-                <source>
-                    <x id="INTERPOLATION" equiv-text="{{ dish.difficultLevel | categoryTranslate }}" />
-                </source>
-                <target>
-                    <x id="INTERPOLATION" equiv-text="{{ dish.difficultLevel | categoryTranslate }}" />
-                </target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">242,243</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">112,113</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">120</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/home/game-section/game-section.component.html</context>
-                    <context context-type="linenumber">36,38</context>
-                </context-group>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/home/game-section/game-section.component.html</context>
-                    <context context-type="linenumber">38,39</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="7615200044380578202" datatype="html">
-                <source> Categories </source>
+            <trans-unit id="1902100407096396858" datatype="html">
+                <source>Categories</source>
                 <target>Danh mục</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">249,250</context>
+                    <context context-type="linenumber">434,435</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">279,280</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="7011425206383801543" datatype="html">
-                <source>more</source>
-                <target>thêm</target>
+            <trans-unit id="7893476712378473877" datatype="html">
+                <source>No dishes found</source>
+                <target>Không tìm thấy món ăn nào.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">262,263</context>
+                    <context context-type="linenumber">495,496</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="2885693265701033503" datatype="html">
-                <source> No dishes found matching the filter </source>
-                <target>Không tìm thấy món ăn nào phù hợp với bộ lọc.</target>
+            <trans-unit id="33745007557288932" datatype="html">
+                <source>Try adjusting your search criteria or clearing filters</source>
+                <target>Vui lòng điều chỉnh tiêu chí tìm kiếm hoặc xóa bộ lọc.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
-                    <context context-type="linenumber">279</context>
+                    <context context-type="linenumber">496,497</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1537140690523533729" datatype="html">
+                <source>Clear Search</source>
+                <target>Xóa tìm kiếm</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">499,500</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="820572896232701469" datatype="html">
+                <source> Showing <x id="INTERPOLATION"
+                        equiv-text="{{ (paginator.pageIndex * paginator.pageSize) + 1 }}" /> to <x
+                        id="INTERPOLATION_1"
+                        equiv-text="{{ Math.min((paginator.pageIndex + 1) * paginator.pageSize, totalResults()) }}" />
+                    of <x id="INTERPOLATION_2" equiv-text="{{ totalResults() }}" /> results </source>
+                <target>Đang hiển thị<x id="INTERPOLATION"
+                        equiv-text="{{ (paginator.pageIndex * paginator.pageSize) + 1 }}" />đến<x
+                        id="INTERPOLATION_1"
+                        equiv-text="{{ Math.min((paginator.pageIndex + 1) * paginator.pageSize, totalResults()) }}" />
+                    của<x id="INTERPOLATION_2" equiv-text="{{ totalResults() }}" />kết quả</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">516,520</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1407560924967345762" datatype="html">
+                <source>Page</source>
+                <target>Trang</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">528</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7993183834492108707" datatype="html">
+                <source>Jump to page</source>
+                <target>Chuyển đến trang</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
+                    <context context-type="linenumber">532</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="8010290535775009818" datatype="html">
@@ -435,27 +598,27 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.ts</context>
-                    <context context-type="linenumber">189</context>
+                    <context context-type="linenumber">242</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="2511184210154851416" datatype="html">
                 <source>Are you sure you want to delete "<x id="PH"
-                        equiv-text="dish.title.find((t) => t.lang === 'en')!.data" />"?</source>
+                        equiv-text="dish.title.find((t) => t.lang === this.localeId)!.data" />"?</source>
                 <target>Bạn có chắc chắn muốn xóa "<x id="PH"
-                        equiv-text="dish.title.find((t) => t.lang === 'en')!.data" />"?</target>
+                        equiv-text="dish.title.find((t) => t.lang === this.localeId)!.data" />"?</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.ts</context>
-                    <context context-type="linenumber">190,192</context>
+                    <context context-type="linenumber">243,245</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="6381490568322624964" datatype="html">
                 <source>Deleted</source>
-                <target>Đã Xóa</target>
+                <target>Đã xóa</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.ts</context>
-                    <context context-type="linenumber">199</context>
+                    <context context-type="linenumber">252</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -465,11 +628,11 @@
             </trans-unit>
             <trans-unit id="2859204308676448994" datatype="html">
                 <source>Ingredient deleted successfully</source>
-                <target>Đã xóa nguyên liệu thành công</target>
+                <target>Nguyên liệu đã được xóa thành công</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.ts</context>
-                    <context context-type="linenumber">200</context>
+                    <context context-type="linenumber">253</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -477,13 +640,18 @@
                     <context context-type="linenumber">236</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="8532650368353123520" datatype="html">
-                <source>Create New Dish</source>
-                <target>Tạo Món Mới</target>
+            <trans-unit id="8033953731717586115" datatype="html">
+                <source>m</source>
+                <target>m</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
-                        src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-                    <context context-type="linenumber">2,4</context>
+                        src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.ts</context>
+                    <context context-type="linenumber">522</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-filter/dish-filter.component.ts</context>
+                    <context context-type="linenumber">189</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="2861306361489095884" datatype="html">
@@ -506,7 +674,7 @@
             </trans-unit>
             <trans-unit id="762666927216265292" datatype="html">
                 <source> Slug is required </source>
-                <target>Cần có Slug</target>
+                <target>Slug là bắt buộc</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -515,7 +683,7 @@
             </trans-unit>
             <trans-unit id="3740800358802324441" datatype="html">
                 <source>Thumbnail URL</source>
-                <target>URL Ảnh thu nhỏ</target>
+                <target>URL Hình thu nhỏ</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -533,7 +701,7 @@
             </trans-unit>
             <trans-unit id="5259580604136479408" datatype="html">
                 <source>Preview image</source>
-                <target>Ảnh Xem Trước</target>
+                <target>Xem trước ảnh</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -542,7 +710,7 @@
             </trans-unit>
             <trans-unit id="7316295206355728469" datatype="html">
                 <source>Thumbnail Preview</source>
-                <target>Xem Trước Ảnh thu nhỏ</target>
+                <target>Xem trước hình thu nhỏ</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -580,7 +748,7 @@
             <trans-unit id="1398212496711566831" datatype="html">
                 <source>Click the button above to add another language field to all translation
                     sections.</source>
-                <target>Nhấn nút trên để thêm trường ngôn ngữ vào tất cả các phần dịch.</target>
+                <target>Nhấn nút trên để thêm một trường ngôn ngữ vào tất cả các phần dịch thuật.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -617,7 +785,7 @@
             </trans-unit>
             <trans-unit id="6407708715680632065" datatype="html">
                 <source>Dish Title</source>
-                <target>Tiêu Đề Món Ăn</target>
+                <target>Tên món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -626,7 +794,7 @@
             </trans-unit>
             <trans-unit id="1692809180938956990" datatype="html">
                 <source>Remove language</source>
-                <target>Xóa Ngôn Ngữ</target>
+                <target>Xóa ngôn ngữ</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -645,7 +813,7 @@
             </trans-unit>
             <trans-unit id="1358251450593236167" datatype="html">
                 <source>Short Description Translations</source>
-                <target>Dịch Mô Tả Ngắn</target>
+                <target>Bản dịch</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -654,7 +822,7 @@
             </trans-unit>
             <trans-unit id="327506474392813699" datatype="html">
                 <source>Short Description</source>
-                <target>Mô tả ngắn gọn</target>
+                <target>Mô tả Ngắn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -672,7 +840,7 @@
             </trans-unit>
             <trans-unit id="1425054865678397401" datatype="html">
                 <source>Content Translations</source>
-                <target>Dịch nội dung</target>
+                <target>Bản dịch Nội dung</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -713,6 +881,15 @@
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
                     <context context-type="linenumber">175</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5570547002581457684" datatype="html">
+                <source>New tag...</source>
+                <target>Thẻ mới...</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+                    <context context-type="linenumber">220</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="1909008903506182754" datatype="html">
@@ -762,11 +939,20 @@
             </trans-unit>
             <trans-unit id="7033014824731925315" datatype="html">
                 <source>Remove video</source>
-                <target>Xóa Video</target>
+                <target>Xóa video</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
                     <context context-type="linenumber">264,265</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="9113906794544800679" datatype="html">
+                <source>Ingredients</source>
+                <target>Nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+                    <context context-type="linenumber">286,287</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="6762504134540024018" datatype="html">
@@ -780,7 +966,7 @@
             </trans-unit>
             <trans-unit id="2544699997265019532" datatype="html">
                 <source> Quantity is required </source>
-                <target>Vui lòng nhập số lượng</target>
+                <target>Yêu cầu nhập số lượng</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
@@ -859,7 +1045,7 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-                    <context context-type="linenumber">386</context>
+                    <context context-type="linenumber">405</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -867,15 +1053,17 @@
                     <context context-type="linenumber">150</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="6054902040214128611" datatype="html">
-                <source>Dish <x id="PH" equiv-text="res.title.find((e) => e.lang === 'en')?.data" />
-                    updated successfully</source>
-                <target>Món ăn<x id="PH" equiv-text="res.title.find((e) => e.lang === 'en')?.data" />Cập
-                    nhật thành công</target>
+            <trans-unit id="4367885771380896819" datatype="html">
+                <source>Dish <x id="PH"
+                        equiv-text="res.title.find((e) => e.lang === this.localeId)?.data" /> <x
+                        id="PH_1" equiv-text="' '" /> updated successfully</source>
+                <target>Món ăn<x id="PH"
+                        equiv-text="res.title.find((e) => e.lang === this.localeId)?.data" /> <x
+                        id="PH_1" equiv-text="' '" />Cập nhật thành công món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-                    <context context-type="linenumber">387,389</context>
+                    <context context-type="linenumber">406,408</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="4207916966377787111" datatype="html">
@@ -884,7 +1072,7 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-                    <context context-type="linenumber">406</context>
+                    <context context-type="linenumber">425</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
@@ -893,14 +1081,25 @@
                 </context-group>
             </trans-unit>
             <trans-unit id="72521891125640777" datatype="html">
-                <source>Dish <x id="PH" equiv-text="res.title.find((e) => e.lang === 'en')?.data" />
+                <source>Dish <x id="PH"
+                        equiv-text="res.title.find((e) => e.lang === this.localeId)?.data" />
                     created successfully</source>
-                <target>Món ăn<x id="PH" equiv-text="res.title.find((e) => e.lang === 'en')?.data" />Tạo
-                    thành công</target>
+                <target>Món ăn<x id="PH"
+                        equiv-text="res.title.find((e) => e.lang === this.localeId)?.data" />Tạo
+                    thành công món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-                    <context context-type="linenumber">407,409</context>
+                    <context context-type="linenumber">426,428</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5674286808255988565" datatype="html">
+                <source>Create</source>
+                <target>Tạo</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">4,5</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="2011668245644239562" datatype="html">
@@ -923,7 +1122,7 @@
             </trans-unit>
             <trans-unit id="2102825898069375693" datatype="html">
                 <source>Menu</source>
-                <target>Thực đơn</target>
+                <target>Thực Đơn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/admin/admin.component.html</context>
                     <context context-type="linenumber">19,20</context>
@@ -931,7 +1130,7 @@
             </trans-unit>
             <trans-unit id="2808738194818470208" datatype="html">
                 <source>Go to Client</source>
-                <target>Đến trang khách hàng</target>
+                <target>Đến Trang Khách Hàng</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/admin/admin.component.html</context>
                     <context context-type="linenumber">25,26</context>
@@ -939,7 +1138,7 @@
             </trans-unit>
             <trans-unit id="6570363013146073520" datatype="html">
                 <source>Dashboard</source>
-                <target>Bảng điều khiển</target>
+                <target>Bảng Điều Khiển</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/admin/admin.component.html</context>
                     <context context-type="linenumber">35,36</context>
@@ -963,7 +1162,7 @@
             </trans-unit>
             <trans-unit id="3797778920049399855" datatype="html">
                 <source>Logout</source>
-                <target>Đăng xuất</target>
+                <target>Đăng Xuất</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/admin/admin.component.html</context>
                     <context context-type="linenumber">68,69</context>
@@ -979,7 +1178,7 @@
             </trans-unit>
             <trans-unit id="7256395947475975935" datatype="html">
                 <source>Failed</source>
-                <target>Thất bại</target>
+                <target>Thất Bại</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/admin/admin.component.ts</context>
                     <context context-type="linenumber">72</context>
@@ -991,7 +1190,7 @@
             </trans-unit>
             <trans-unit id="4762453306878245553" datatype="html">
                 <source>Can not log out</source>
-                <target>Không thể đăng xuất</target>
+                <target>Không Thể Đăng Xuất</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/admin/admin.component.ts</context>
                     <context context-type="linenumber">73</context>
@@ -1003,20 +1202,20 @@
             </trans-unit>
             <trans-unit id="450346393270907214" datatype="html">
                 <source>Total Dishes</source>
-                <target>Tổng số món ăn</target>
+                <target>Tổng Số Món Ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/dashboard/dashboard.component.html</context>
-                    <context context-type="linenumber">5</context>
+                    <context context-type="linenumber">8</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="4331958706564637849" datatype="html">
                 <source>Total Ingredients</source>
-                <target>Tổng số nguyên liệu</target>
+                <target>Tổng Số Nguyên Liệu</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/dashboard/dashboard.component.html</context>
-                    <context context-type="linenumber">13</context>
+                    <context context-type="linenumber">16</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="8175342407510654197" datatype="html">
@@ -1025,7 +1224,7 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/dashboard/dashboard.component.html</context>
-                    <context context-type="linenumber">23</context>
+                    <context context-type="linenumber">26</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
@@ -1042,16 +1241,34 @@
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/dashboard/dashboard.component.html</context>
-                    <context context-type="linenumber">40,41</context>
+                    <context context-type="linenumber">43,44</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="7314814725704332646" datatype="html">
                 <source>Permissions</source>
-                <target>Quyền</target>
+                <target>Quyền Hạn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/admin/dashboard/dashboard.component.html</context>
-                    <context context-type="linenumber">46,47</context>
+                    <context context-type="linenumber">49,50</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1737753151350322492" datatype="html">
+                <source>
+                    <x id="PH" equiv-text="item._id" />
+                </source>
+                <target>
+                    <x id="PH" equiv-text="item._id" />
+                </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/dashboard/dish-analytic/dish-analytic.component.ts</context>
+                    <context context-type="linenumber">47</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/admin/dashboard/dish-analytic/dish-analytic.component.ts</context>
+                    <context context-type="linenumber">49</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="2821179408673282599" datatype="html">
@@ -1104,7 +1321,7 @@
             </trans-unit>
             <trans-unit id="6040083914594871898" datatype="html">
                 <source>Food Flip</source>
-                <target>Lật Thẻ Món Ăn</target>
+                <target>Lật Món Ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">49,50</context>
@@ -1140,7 +1357,7 @@
             </trans-unit>
             <trans-unit id="2454050363478003966" datatype="html">
                 <source>Login</source>
-                <target>Đăng Nhập</target>
+                <target>Đăng nhập</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">215,216</context>
@@ -1149,8 +1366,8 @@
             <trans-unit id="5061253618491773519" datatype="html">
                 <source> Discover delicious recipes and meal ideas tailored to your preferences and
                     dietary needs. </source>
-                <target>Khám phá những công thức nấu ăn ngon và ý tưởng bữa ăn được thiết kế riêng
-                    theo sở thích và chế độ ăn uống của bạn.</target>
+                <target>Khám phá các công thức nấu ăn ngon và ý tưởng bữa ăn được thiết kế riêng cho
+                    sở thích và nhu cầu dinh dưỡng của bạn.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">236</context>
@@ -1158,7 +1375,7 @@
             </trans-unit>
             <trans-unit id="1140327701924892323" datatype="html">
                 <source>Quick Links</source>
-                <target>Liên Kết Nhanh</target>
+                <target>Liên kết nhanh</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">254,255</context>
@@ -1174,7 +1391,7 @@
             </trans-unit>
             <trans-unit id="2901742111381174549" datatype="html">
                 <source> All Dishes </source>
-                <target>Tất Cả Món Ăn</target>
+                <target>Tất cả các món ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">262</context>
@@ -1182,7 +1399,7 @@
             </trans-unit>
             <trans-unit id="197423074150198657" datatype="html">
                 <source> About Us </source>
-                <target>Về Chúng Tôi</target>
+                <target>Về chúng tôi</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">267</context>
@@ -1190,23 +1407,15 @@
             </trans-unit>
             <trans-unit id="7922989125096435449" datatype="html">
                 <source>Contact</source>
-                <target>Liên Hệ</target>
+                <target>Liên hệ</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">271,272</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="1902100407096396858" datatype="html">
-                <source>Categories</source>
-                <target>Danh mục</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-                    <context context-type="linenumber">279,280</context>
-                </context-group>
-            </trans-unit>
             <trans-unit id="2157848596136722181" datatype="html">
                 <source>Stay Updated</source>
-                <target>Luôn Cập Nhật Thông Tin</target>
+                <target>Luôn cập nhật thông tin</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">290,291</context>
@@ -1214,8 +1423,7 @@
             </trans-unit>
             <trans-unit id="4645357838085106517" datatype="html">
                 <source>Subscribe to our newsletter for the latest recipes and tips.</source>
-                <target>Đăng ký nhận bản tin của chúng tôi để không bỏ lỡ các công thức và mẹo nấu
-                    ăn mới nhất.</target>
+                <target>Đăng ký nhận bản tin để không bỏ lỡ các công thức và mẹo nấu ăn mới nhất.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">291,292</context>
@@ -1223,7 +1431,7 @@
             </trans-unit>
             <trans-unit id="1769661379068269645" datatype="html">
                 <source>Your email</source>
-                <target>Email của bạn</target>
+                <target>Địa chỉ email</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">296</context>
@@ -1235,7 +1443,7 @@
             </trans-unit>
             <trans-unit id="8552587679160911578" datatype="html">
                 <source>Email is required</source>
-                <target>Cần nhập email</target>
+                <target>Cần có địa chỉ email</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">300</context>
@@ -1259,7 +1467,7 @@
             </trans-unit>
             <trans-unit id="8439955599488894226" datatype="html">
                 <source>Privacy Policy</source>
-                <target>Chính Sách Bảo Mật</target>
+                <target>Chính sách bảo mật</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">324</context>
@@ -1267,7 +1475,7 @@
             </trans-unit>
             <trans-unit id="2029980907058777630" datatype="html">
                 <source>Terms of Service</source>
-                <target>Điều Khoản Dịch Vụ</target>
+                <target>Điều khoản dịch vụ</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">327</context>
@@ -1275,7 +1483,7 @@
             </trans-unit>
             <trans-unit id="8031435937841016824" datatype="html">
                 <source>Cookie Policy</source>
-                <target>Chính Sách Cookie</target>
+                <target>Chính sách cookie</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/module/client/client.component.html</context>
                     <context context-type="linenumber">330</context>
@@ -1332,7 +1540,7 @@
             </trans-unit>
             <trans-unit id="3204898464866793351" datatype="html">
                 <source> Filter </source>
-                <target>Bộ lọc</target>
+                <target>Lọc</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
@@ -1356,7 +1564,7 @@
             </trans-unit>
             <trans-unit id="3097363650198188884" datatype="html">
                 <source>Let's find your favorite dishes!</source>
-                <target>Cùng khám phá những món ăn bạn yêu thích!</target>
+                <target>Cùng tìm món ăn yêu thích của bạn nào!</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
@@ -1380,7 +1588,7 @@
             </trans-unit>
             <trans-unit id="4790349114862451776" datatype="html">
                 <source>The Ultimate Food Guide: What to Eat Now</source>
-                <target>Cẩm Nang Ẩm Thực Tuyệt Đỉnh: Hôm Nay Ăn Gì?</target>
+                <target>Cẩm Nang Ẩm Thực Tuyệt Vời: Nên Ăn Gì Hôm Nay</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-basic/dish-basic.component.ts</context>
@@ -1391,7 +1599,7 @@
                 <source>Hungry? Discover delicious dishes, restaurant recommendations, and food
                     guides for every craving. Find your next meal!</source>
                 <target>Bạn đói bụng? Khám phá những món ăn ngon, gợi ý nhà hàng và cẩm nang ẩm thực
-                    cho mọi nhu cầu. Tìm bữa ăn tiếp theo ngay!</target>
+                    cho mọi nhu cầu. Tìm bữa ăn tiếp theo của bạn!</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-basic/dish-basic.component.ts</context>
@@ -1400,7 +1608,7 @@
             </trans-unit>
             <trans-unit id="winner" datatype="html">
                 <source>WINNER</source>
-                <target>ĐẠT GIẢI</target>
+                <target>NGƯỜI CHIẾN THẮNG</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-card-fancy/dish-card-fancy.component.html</context>
@@ -1414,7 +1622,7 @@
             </trans-unit>
             <trans-unit id="preparation" datatype="html">
                 <source> Preparation </source>
-                <target>Chuẩn bị</target>
+                <target>Chuẩn Bị</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-card-fancy/dish-card-fancy.component.html</context>
@@ -1507,7 +1715,7 @@
             </trans-unit>
             <trans-unit id="4323470180912194028" datatype="html">
                 <source>Copy</source>
-                <target>Sao chép</target>
+                <target>Sao Chép</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
@@ -1525,7 +1733,7 @@
             </trans-unit>
             <trans-unit id="related_dishes" datatype="html">
                 <source>Related Dishes</source>
-                <target>Món ăn liên quan</target>
+                <target>Món Ăn Liên Quan</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
@@ -1534,66 +1742,53 @@
             </trans-unit>
             <trans-unit id="copied" datatype="html">
                 <source>Copied!</source>
-                <target>Đã sao chép!</target>
+                <target>Đã Sao Chép!</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-detail/dish-detail.component.ts</context>
-                    <context context-type="linenumber">381</context>
+                    <context context-type="linenumber">385</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="7158592746571420879" datatype="html">
-                <source>search</source>
-                <target>Tìm kiếm</target>
+            <trans-unit id="187187500641108332" datatype="html">
+                <source>
+                    <x id="INTERPOLATION" equiv-text="{{ 'tags' }}" />
+                </source>
+                <target>
+                    <x id="INTERPOLATION" equiv-text="{{ 'tags' }}" />
+                </target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">6</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="5933503173619403924" datatype="html">
-                <source>in minute</source>
-                <target>trong phút</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">20</context>
+                    <context context-type="linenumber">126,127</context>
                 </context-group>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">38</context>
+                    <context context-type="linenumber">134</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">36,38</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">38,39</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="635380272893205485" datatype="html">
-                <source>Preparation Time</source>
-                <target>Thời gian chuẩn bị</target>
+            <trans-unit id="4580988005648117665" datatype="html">
+                <source>Search</source>
+                <target>Tìm Kiếm</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">21,22</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="3114412928513670072" datatype="html">
-                <source>Cooking Time</source>
-                <target>Thời gian nấu</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-                    <context context-type="linenumber">39,40</context>
-                </context-group>
-            </trans-unit>
-            <trans-unit id="8033953731717586115" datatype="html">
-                <source>m</source>
-                <target>phút</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/dish/dish-filter/dish-filter.component.ts</context>
-                    <context context-type="linenumber">156</context>
+                    <context context-type="linenumber">144,145</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="filter" datatype="html">
                 <source>Filter</source>
-                <target>Bộ lọc</target>
+                <target>Lọc</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish.component.html</context>
@@ -1630,7 +1825,7 @@
             </trans-unit>
             <trans-unit id="3132570339312618665" datatype="html">
                 <source>Card Deck</source>
-                <target>Bộ bài</target>
+                <target>Bộ Bài Món Ăn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/flipping-card/card-deck/card-deck.component.html</context>
@@ -1639,7 +1834,7 @@
             </trans-unit>
             <trans-unit id="1758749689724496397" datatype="html">
                 <source> Shuffle Deck </source>
-                <target>Xáo bài</target>
+                <target>Xáo Bài</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/flipping-card/card-deck/card-deck.component.html</context>
@@ -1648,7 +1843,7 @@
             </trans-unit>
             <trans-unit id="1505732662649536333" datatype="html">
                 <source>Pick a dish</source>
-                <target>Chọn món</target>
+                <target>Chọn Món</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
@@ -1690,7 +1885,7 @@
             </trans-unit>
             <trans-unit id="5620114162133982317" datatype="html">
                 <source>Dish added!</source>
-                <target>Đã thêm món ăn thành công!</target>
+                <target>Đã thêm món ăn!</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.ts</context>
@@ -1704,7 +1899,7 @@
             </trans-unit>
             <trans-unit id="1863000588570928532" datatype="html">
                 <source>Flipping Card Game</source>
-                <target>Trò chơi lật hình</target>
+                <target>Trò chơi Lật Thẻ</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/flipping-card/flipping-card.component.html</context>
@@ -1713,7 +1908,7 @@
             </trans-unit>
             <trans-unit id="2862538738301546048" datatype="html">
                 <source>Voting Chat</source>
-                <target>Bình chọn</target>
+                <target>Trò chuyện Bình chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.html</context>
@@ -1722,7 +1917,7 @@
             </trans-unit>
             <trans-unit id="6070859199120014907" datatype="html">
                 <source>Reconnect</source>
-                <target>Kết Nối Lại</target>
+                <target>Kết nối lại</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.html</context>
@@ -1731,7 +1926,7 @@
             </trans-unit>
             <trans-unit id="2630853861330126688" datatype="html">
                 <source>Load earlier messages</source>
-                <target>Tải Tin Nhắn Cũ Hơn</target>
+                <target>Tải tin nhắn cũ hơn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.html</context>
@@ -1740,7 +1935,7 @@
             </trans-unit>
             <trans-unit id="3527397396272421601" datatype="html">
                 <source>Add reaction</source>
-                <target>Thêm Cảm Xúc</target>
+                <target>Thêm biểu cảm</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.html</context>
@@ -1790,7 +1985,7 @@
             </trans-unit>
             <trans-unit id="voting-chat.someone" datatype="html">
                 <source>Someone</source>
-                <target>Một người</target>
+                <target>Ai đó</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.ts</context>
@@ -1819,8 +2014,7 @@
             </trans-unit>
             <trans-unit id="voting-chat.multiple-typing" datatype="html">
                 <source><x id="PH" equiv-text="names.length" /> people are typing...</source>
-                <target><x id="PH" equiv-text="names.length" />Những người khác đang nhập tin
-                    nhắn...</target>
+                <target><x id="PH" equiv-text="names.length" />người đang nhập tin nhắn...</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.ts</context>
@@ -1829,7 +2023,7 @@
             </trans-unit>
             <trans-unit id="voting-chat.no-one-online" datatype="html">
                 <source>No one online</source>
-                <target>Không có ai trực tuyến</target>
+                <target>Không ai trực tuyến</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.ts</context>
@@ -1847,7 +2041,7 @@
             </trans-unit>
             <trans-unit id="voting-chat.multiple-people-online" datatype="html">
                 <source><x id="PH" equiv-text="count" /> people online</source>
-                <target><x id="PH" equiv-text="count" />Người đang trực tuyến</target>
+                <target><x id="PH" equiv-text="count" />Số người trực tuyến</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-chat/voting-chat.component.ts</context>
@@ -1856,7 +2050,7 @@
             </trans-unit>
             <trans-unit id="826286621791998638" datatype="html">
                 <source>Add Custom Dish</source>
-                <target>Thêm Món Ăn Tùy Chỉnh</target>
+                <target>Thêm Món Tùy Chỉnh</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/add-custom-dish/add-custom-dish.component.html</context>
@@ -1865,7 +2059,7 @@
             </trans-unit>
             <trans-unit id="4214299896064056547" datatype="html">
                 <source>Create a custom dish for voting</source>
-                <target>Tạo món ăn tùy chỉnh để bình chọn</target>
+                <target>Tạo món tùy chỉnh để bình chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/add-custom-dish/add-custom-dish.component.html</context>
@@ -1892,7 +2086,7 @@
             </trans-unit>
             <trans-unit id="6633844693198918708" datatype="html">
                 <source>Create Voting</source>
-                <target>Tạo phiên bình chọn</target>
+                <target>Tạo Phiếu Bình Chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1901,7 +2095,7 @@
             </trans-unit>
             <trans-unit id="1097367550442966922" datatype="html">
                 <source> Voting Dishes </source>
-                <target>Các món ăn trong phiên bình chọn</target>
+                <target>Món Ăn Bình Chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1910,7 +2104,7 @@
             </trans-unit>
             <trans-unit id="8102545941396044035" datatype="html">
                 <source> Dishes included in the voting </source>
-                <target>Các món ăn được chọn để bình chọn</target>
+                <target>Các món ăn trong phiếu bình chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1919,7 +2113,7 @@
             </trans-unit>
             <trans-unit id="8211932369092082563" datatype="html">
                 <source>Clear all selected dishes</source>
-                <target>Bỏ chọn tất cả</target>
+                <target>Xóa toàn bộ món đã chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1928,7 +2122,7 @@
             </trans-unit>
             <trans-unit id="4438531482517679381" datatype="html">
                 <source>Add custom dish</source>
-                <target>Thêm món ăn tự tạo</target>
+                <target>Thêm món ăn tùy chỉnh</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1937,7 +2131,7 @@
             </trans-unit>
             <trans-unit id="61120054011022314" datatype="html">
                 <source>Custom Dishes</source>
-                <target>Món ăn tự tạo</target>
+                <target>Món Ăn Tùy Chỉnh</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1951,7 +2145,7 @@
             </trans-unit>
             <trans-unit id="4754439826789695228" datatype="html">
                 <source>Voting Details</source>
-                <target>Thông tin chi tiết phiên bình chọn</target>
+                <target>Thông Tin Chi Tiết Bình Chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-create-update/voting-create-update.component.html</context>
@@ -1960,7 +2154,7 @@
             </trans-unit>
             <trans-unit id="3079197387526406648" datatype="html">
                 <source> Share Voting Session</source>
-                <target>Chia sẻ phiên bình chọn này</target>
+                <target>Chia Sẻ Phiên Bình Chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/share-dialog/share-dialog.component.html</context>
@@ -2019,7 +2213,7 @@
             </trans-unit>
             <trans-unit id="6088564835030482628" datatype="html">
                 <source> Voting Game List</source>
-                <target>Danh sách các phiên bình chọn</target>
+                <target>Danh Sách Phiên Bầu Chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2028,7 +2222,7 @@
             </trans-unit>
             <trans-unit id="1168198355190394278" datatype="html">
                 <source>Search voting sessions...</source>
-                <target>Tìm kiếm phiên bình chọn...</target>
+                <target>Tìm kiếm phiên bầu chọn...</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2037,7 +2231,7 @@
             </trans-unit>
             <trans-unit id="2622611803442248082" datatype="html">
                 <source>Create New Voting Session</source>
-                <target>Tạo phiên bình chọn mới</target>
+                <target>Tạo Phiên Bầu Chọn Mới</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2046,25 +2240,16 @@
             </trans-unit>
             <trans-unit id="1491199438285328717" datatype="html">
                 <source>Create Your First Voting Session</source>
-                <target>Hãy tạo phiên bình chọn đầu tiên của bạn!</target>
+                <target>Tạo Phiên Bầu Chọn Đầu Tiên</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
                     <context context-type="linenumber">45,46</context>
                 </context-group>
             </trans-unit>
-            <trans-unit id="8254359863108318582" datatype="html">
-                <source>dishes</source>
-                <target>Món ăn</target>
-                <context-group purpose="location">
-                    <context context-type="sourcefile">
-                        src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
-                    <context context-type="linenumber">87,88</context>
-                </context-group>
-            </trans-unit>
             <trans-unit id="4100306273406016007" datatype="html">
                 <source>votes</source>
-                <target>Lượt bình chọn</target>
+                <target>phiếu bầu</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2073,7 +2258,7 @@
             </trans-unit>
             <trans-unit id="3872869255832147776" datatype="html">
                 <source>Winner:</source>
-                <target>Người thắng cuộc:</target>
+                <target>Người thắng:</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2091,7 +2276,7 @@
             </trans-unit>
             <trans-unit id="2509141182388535183" datatype="html">
                 <source>View</source>
-                <target>Xem</target>
+                <target>Xem chi tiết</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2109,7 +2294,7 @@
             </trans-unit>
             <trans-unit id="5536404145004661903" datatype="html">
                 <source>Open Session</source>
-                <target>Mở phiên</target>
+                <target>Mở Phiên</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -2188,7 +2373,7 @@
             </trans-unit>
             <trans-unit id="2915707003336841557" datatype="html">
                 <source>Remove Vote</source>
-                <target>Hủy bình chọn</target>
+                <target>Hủy Bình Chọn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting.component.html</context>
@@ -2202,7 +2387,7 @@
             </trans-unit>
             <trans-unit id="112579235705793654" datatype="html">
                 <source>Vote Now!</source>
-                <target>Bình chọn ngay!</target>
+                <target>Bình Chọn Ngay!</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting.component.html</context>
@@ -2225,7 +2410,7 @@
             </trans-unit>
             <trans-unit id="3267980817910457845" datatype="html">
                 <source>Wheel of Fortune</source>
-                <target>Vòng quay may mắn</target>
+                <target>Vòng Quay May Mắn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/wheel-of-fortune/wheel-of-fortune.component.html</context>
@@ -2234,7 +2419,7 @@
             </trans-unit>
             <trans-unit id="1147053296076676417" datatype="html">
                 <source>Spin the wheel and see what you get!</source>
-                <target>Quay và khám phá điều bất ngờ!</target>
+                <target>Hãy quay vòng quay và xem bạn nhận được gì!</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/wheel-of-fortune/wheel-of-fortune.component.html</context>
@@ -2279,7 +2464,7 @@
             </trans-unit>
             <trans-unit id="4042902315677630519" datatype="html">
                 <source> Name is required </source>
-                <target>Vui lòng nhập tên</target>
+                <target>Yêu cầu nhập tên</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/contact-section/contact-section.component.html</context>
@@ -2315,7 +2500,7 @@
             </trans-unit>
             <trans-unit id="1562002170982087724" datatype="html">
                 <source> Message is required </source>
-                <target>Vui lòng nhập tin nhắn</target>
+                <target>Yêu cầu nhập tin nhắn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/contact-section/contact-section.component.html</context>
@@ -2391,7 +2576,7 @@
             </trans-unit>
             <trans-unit id="2237658586493394247" datatype="html">
                 <source>Let's pick your favorites to enlighten your day</source>
-                <target>Chọn món yêu thích để ngày mới thêm hứng khởi!</target>
+                <target>Hãy chọn những món ăn yêu thích để làm bừng sáng ngày của bạn</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/dish-section/dish-section.component.html</context>
@@ -2445,7 +2630,7 @@
             </trans-unit>
             <trans-unit id="2418383111639969749" datatype="html">
                 <source> Games</source>
-                <target>Trò Chơi</target>
+                <target>Trò chơi</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/game-section/game-section.component.html</context>
@@ -2454,7 +2639,7 @@
             </trans-unit>
             <trans-unit id="5519631700818571246" datatype="html">
                 <source>Hungry? Eat What</source>
-                <target>Đang đói? Ăn gì nhỉ?</target>
+                <target>Đói bụng? Ăn gì?</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/home.component.html</context>
@@ -2464,8 +2649,8 @@
             <trans-unit id="5534329256440961773" datatype="html">
                 <source>Unlock a world of dining options and find your next meal, conveniently and
                     wherever you are.</source>
-                <target>Mở ra thế giới ẩm thực đa dạng, dễ dàng tìm thấy món ăn bạn yêu thích ở mọi
-                    lúc mọi nơi.</target>
+                <target>Khám phá thế giới ẩm thực đa dạng và tìm bữa ăn tiếp theo một cách tiện lợi,
+                    mọi lúc mọi nơi.</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/home.component.html</context>
@@ -2483,7 +2668,7 @@
             </trans-unit>
             <trans-unit id="8637092259318659135" datatype="html">
                 <source> Ingredients</source>
-                <target>Nguyên Liệu</target>
+                <target>Nguyên liệu</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
@@ -2519,7 +2704,7 @@
             </trans-unit>
             <trans-unit id="3971883724092437363" datatype="html">
                 <source> Reference Over </source>
-                <target>Hết tham khảo</target>
+                <target>Tham khảo hết</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -2537,7 +2722,7 @@
             </trans-unit>
             <trans-unit id="3720059266430183248" datatype="html">
                 <source> Carbohydrate </source>
-                <target>Carbohydrate</target>
+                <target>Carbohydrat</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -2546,7 +2731,7 @@
             </trans-unit>
             <trans-unit id="709107837932523316" datatype="html">
                 <source> Fat </source>
-                <target>Fat</target>
+                <target>Chất béo</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -2573,7 +2758,7 @@
             </trans-unit>
             <trans-unit id="7543364879166437317" datatype="html">
                 <source> Sodium </source>
-                <target>Sodium</target>
+                <target>Natri</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -2646,7 +2831,7 @@
             </trans-unit>
             <trans-unit id="3507887667144809646" datatype="html">
                 <source>Mixed dishes</source>
-                <target>Món trộn</target>
+                <target>Món ăn hỗn hợp</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">20</context>
@@ -2662,7 +2847,7 @@
             </trans-unit>
             <trans-unit id="4006450107765993293" datatype="html">
                 <source>Condiments &amp; sauces</source>
-                <target>Gia vị &amp; nước sốt</target>
+                <target>Gia vị &amp; nước chấm</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">22</context>
@@ -2686,7 +2871,7 @@
             </trans-unit>
             <trans-unit id="1601655633967957673" datatype="html">
                 <source>Herbs &amp; spices</source>
-                <target>Thảo mộc &amp; gia vị</target>
+                <target>Herbs &amp; spices</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">25</context>
@@ -2694,7 +2879,7 @@
             </trans-unit>
             <trans-unit id="5596879958232870419" datatype="html">
                 <source>Nuts &amp; seeds</source>
-                <target>Các loại hạt</target>
+                <target>Nuts &amp; seeds</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">26</context>
@@ -2702,7 +2887,7 @@
             </trans-unit>
             <trans-unit id="6974777728423484538" datatype="html">
                 <source>Baking ingredients</source>
-                <target>Nguyên liệu làm bánh</target>
+                <target>Baking ingredients</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">27</context>
@@ -2710,7 +2895,7 @@
             </trans-unit>
             <trans-unit id="1625714612002770194" datatype="html">
                 <source>Canned &amp; preserved</source>
-                <target>Đồ hộp &amp; đồ bảo quản</target>
+                <target>Canned &amp; preserved</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">28</context>
@@ -2718,7 +2903,7 @@
             </trans-unit>
             <trans-unit id="8216610232934279724" datatype="html">
                 <source>Infant formula &amp; baby food</source>
-                <target>Sữa công thức &amp; thức ăn cho trẻ</target>
+                <target>Infant formula &amp; baby food</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">29</context>
@@ -2726,7 +2911,7 @@
             </trans-unit>
             <trans-unit id="8693603235657020323" datatype="html">
                 <source>Other</source>
-                <target>Khác</target>
+                <target>Other</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">30</context>
@@ -2734,7 +2919,7 @@
             </trans-unit>
             <trans-unit id="6116346225726789838" datatype="html">
                 <source>Hard</source>
-                <target>Khó</target>
+                <target>Hard</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">31</context>
@@ -2742,7 +2927,7 @@
             </trans-unit>
             <trans-unit id="5982496808088686844" datatype="html">
                 <source>Medium</source>
-                <target>Trung bình</target>
+                <target>Medium</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">32</context>
@@ -2750,7 +2935,7 @@
             </trans-unit>
             <trans-unit id="8037134183854795009" datatype="html">
                 <source>Easy</source>
-                <target>Dễ</target>
+                <target>Easy</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">33</context>
@@ -2758,7 +2943,7 @@
             </trans-unit>
             <trans-unit id="5310530945730171806" datatype="html">
                 <source>Breakfast</source>
-                <target>Bữa sáng</target>
+                <target>Breakfast</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">35</context>
@@ -2766,7 +2951,7 @@
             </trans-unit>
             <trans-unit id="7766125218438790242" datatype="html">
                 <source>Lunch</source>
-                <target>Bữa trưa</target>
+                <target>Lunch</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">36</context>
@@ -2774,7 +2959,7 @@
             </trans-unit>
             <trans-unit id="7499734983206731562" datatype="html">
                 <source>Brunch</source>
-                <target>Bữa xế</target>
+                <target>Brunch</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">37</context>
@@ -2782,7 +2967,7 @@
             </trans-unit>
             <trans-unit id="4813703461296397215" datatype="html">
                 <source>Dinner</source>
-                <target>Bữa tối</target>
+                <target>Dinner</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">38</context>
@@ -2790,7 +2975,7 @@
             </trans-unit>
             <trans-unit id="5930163615897546708" datatype="html">
                 <source>Snack</source>
-                <target>Món ăn nhẹ</target>
+                <target>Snack</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">39</context>
@@ -2814,7 +2999,7 @@
             </trans-unit>
             <trans-unit id="8704582860257325532" datatype="html">
                 <source>Soup</source>
-                <target>Súp</target>
+                <target>Soup</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">44</context>
@@ -2822,7 +3007,7 @@
             </trans-unit>
             <trans-unit id="710211205292228053" datatype="html">
                 <source>Appetizer</source>
-                <target>Món khai vị</target>
+                <target>Appetizer</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">45</context>
@@ -2830,7 +3015,7 @@
             </trans-unit>
             <trans-unit id="5584107564920356978" datatype="html">
                 <source>Dessert</source>
-                <target>Món tráng miệng</target>
+                <target>Dessert</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">46</context>
@@ -2838,7 +3023,7 @@
             </trans-unit>
             <trans-unit id="6069047560378654483" datatype="html">
                 <source>Hotpot</source>
-                <target>Lẩu</target>
+                <target>Hotpot</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">47</context>
@@ -2846,7 +3031,7 @@
             </trans-unit>
             <trans-unit id="1527700940748627092" datatype="html">
                 <source>Sweet soup</source>
-                <target>Chè</target>
+                <target>Sweet soup</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">48</context>
@@ -2854,7 +3039,7 @@
             </trans-unit>
             <trans-unit id="6838208194427890843" datatype="html">
                 <source>Noodle</source>
-                <target>Mì</target>
+                <target>Noodle</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">51</context>
@@ -2862,7 +3047,7 @@
             </trans-unit>
             <trans-unit id="4635154111117669095" datatype="html">
                 <source>Rice dish</source>
-                <target>Món cơm</target>
+                <target>Rice dish</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">52</context>
@@ -2870,7 +3055,7 @@
             </trans-unit>
             <trans-unit id="8466299950045776643" datatype="html">
                 <source>Seafood</source>
-                <target>Hải sản</target>
+                <target>Seafood</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">53</context>
@@ -2878,7 +3063,7 @@
             </trans-unit>
             <trans-unit id="5702626357802443273" datatype="html">
                 <source>Meat</source>
-                <target>Thịt</target>
+                <target>Meat</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">54</context>
@@ -2886,7 +3071,7 @@
             </trans-unit>
             <trans-unit id="791836343883095823" datatype="html">
                 <source>Vegetarian</source>
-                <target>Món chay</target>
+                <target>Vegetarian</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">55</context>
@@ -2894,7 +3079,7 @@
             </trans-unit>
             <trans-unit id="8518686941512066717" datatype="html">
                 <source>Vegan</source>
-                <target>Món thuần chay</target>
+                <target>Vegan</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">56</context>
@@ -2902,7 +3087,7 @@
             </trans-unit>
             <trans-unit id="4192044416003236579" datatype="html">
                 <source>Grilled</source>
-                <target>Món nướng</target>
+                <target>Grilled</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">59</context>
@@ -2910,7 +3095,7 @@
             </trans-unit>
             <trans-unit id="640363729610563697" datatype="html">
                 <source>Fried</source>
-                <target>Món chiên</target>
+                <target>Fried</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">60</context>
@@ -2918,7 +3103,7 @@
             </trans-unit>
             <trans-unit id="3845514477401866837" datatype="html">
                 <source>Steamed</source>
-                <target>Hấp</target>
+                <target>Steamed</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">61</context>
@@ -2926,7 +3111,7 @@
             </trans-unit>
             <trans-unit id="7359663805162447232" datatype="html">
                 <source>Baked</source>
-                <target>Nướng</target>
+                <target>Baked</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">62</context>
@@ -2934,7 +3119,7 @@
             </trans-unit>
             <trans-unit id="1507373671305394106" datatype="html">
                 <source>Street food</source>
-                <target>Món ăn đường phố</target>
+                <target>Street food</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">65</context>
@@ -2942,7 +3127,7 @@
             </trans-unit>
             <trans-unit id="2235451887163585310" datatype="html">
                 <source>Fast food</source>
-                <target>Thức ăn nhanh</target>
+                <target>Fast food</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">66</context>
@@ -2950,7 +3135,7 @@
             </trans-unit>
             <trans-unit id="5146243889958025627" datatype="html">
                 <source>Traditional</source>
-                <target>Truyền thống</target>
+                <target>Traditional</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">67</context>
@@ -2966,7 +3151,7 @@
             </trans-unit>
             <trans-unit id="5214487824945146701" datatype="html">
                 <source>North Vietnam</source>
-                <target>Bắc Việt Nam</target>
+                <target>North Vietnam</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">71</context>
@@ -2974,7 +3159,7 @@
             </trans-unit>
             <trans-unit id="1902816665117817922" datatype="html">
                 <source>Central Vietnam</source>
-                <target>Trung Việt Nam</target>
+                <target>Central Vietnam</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">72</context>
@@ -2982,7 +3167,7 @@
             </trans-unit>
             <trans-unit id="281102520230787005" datatype="html">
                 <source>South Vietnam</source>
-                <target>Nam Việt Nam</target>
+                <target>South Vietnam</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
                     <context context-type="linenumber">73</context>
@@ -3088,7 +3273,7 @@
                 <source><x id="PH" equiv-text="startIndex + 1" /> - <x id="PH_1"
                         equiv-text="endIndex" /> of <x id="PH_2" equiv-text="length" /></source>
                 <target><x id="PH" equiv-text="startIndex + 1" /> - <x id="PH_1"
-                        equiv-text="endIndex" /> of <x id="PH_2" equiv-text="length" /></target>
+                        equiv-text="endIndex" />của<x id="PH_2" equiv-text="length" /></target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/shared/paginator/custom-paginator-intl.ts</context>
