@@ -52,7 +52,7 @@ export class DishBasicComponent implements OnInit {
   getDishes() {
     this.loading.set(true);
     this.dishService
-      .findWithScore({ ...this.dto, limit: this.limit(), page: this.currentPage() })
+      .findWithFuzzy({ ...this.dto, limit: this.limit(), page: this.currentPage() })
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe((res) => {
         this.dishes.set(res.data);

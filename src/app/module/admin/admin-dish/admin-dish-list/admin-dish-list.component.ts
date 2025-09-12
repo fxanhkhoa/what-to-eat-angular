@@ -405,7 +405,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   onSearchEnter(): void {
     const keyword = this.filterForm.get('keyword')?.value || '';
     console.log('Enter key pressed, performing search with keyword:', keyword);
-    this.searchWithMode();
+    this.searchWithMode(true);
   }
 
   private searchOnAutocompleteClose = false;
@@ -415,12 +415,14 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
     if (event.key === 'Enter') {
       // Check if autocomplete panel is open
       const input = event.target as HTMLInputElement;
-      const autocompletePanel = document.querySelector('mat-autocomplete-panel');
-      
+      const autocompletePanel = document.querySelector(
+        'mat-autocomplete-panel'
+      );
+
       if (autocompletePanel && autocompletePanel.clientHeight > 0) {
         // Autocomplete is open, set flag to search when it closes
         this.searchOnAutocompleteClose = true;
-        
+
         // Close the autocomplete panel
         if (input && input.blur) {
           input.blur();
@@ -443,7 +445,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  searchWithMode(): void {
+  searchWithMode(useFuzzy = false): void {
     const startTime = performance.now();
     this.isLoading.set(true);
 
@@ -453,10 +455,14 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
       limit: this.paginator ? this.paginator.pageSize : 10,
     };
 
-    const searchMethod = this.useEnhancedSearch()
+    let searchMethod = this.useEnhancedSearch()
       ? this.dishService.findWithScore(searchQuery)
       : this.dishService.findAll(searchQuery);
 
+    if (this.useEnhancedSearch() && useFuzzy) {
+      // If fuzzy search is requested, override to use fuzzy method
+      searchMethod = this.dishService.findWithFuzzy(searchQuery);
+    }
     searchMethod
       .pipe(
         distinctUntilChanged(),

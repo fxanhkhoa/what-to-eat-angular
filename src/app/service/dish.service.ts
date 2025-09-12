@@ -40,6 +40,15 @@ export class DishService {
     );
   }
 
+  findWithFuzzy(dto: QueryDishDto) {
+    return this.http.get<APIPagination<Dish>>(
+      `${environment.API_URL}/${prefix}/search/fuzzy`,
+      {
+        params: dto,
+      }
+    );
+  }
+
   // Get search suggestions
   getSuggestions(keyword: string, limit: number = 10) {
     return this.http.get<{suggestions: string[]}>(
