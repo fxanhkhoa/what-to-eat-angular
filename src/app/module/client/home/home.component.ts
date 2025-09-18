@@ -83,11 +83,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
       this.metaService.updateTag({
         property: 'og:image',
-        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
+        content: 'https://an-gi.io.vn/assets/images/og-image.png',
       });
       this.metaService.updateTag({
         property: 'og:url',
-        content: 'https://eatwhat.io.vn/',
+        content: 'https://an-gi.io.vn/',
       });
       this.metaService.updateTag({
         name: 'twitter:card',
@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
       this.metaService.updateTag({
         name: 'twitter:image',
-        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
+        content: 'https://an-gi.io.vn/assets/images/og-image.png',
       });
     } else {
       this.titleService.setTitle('What To Eat - Discover Your Next Meal');
@@ -129,11 +129,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
       this.metaService.updateTag({
         property: 'og:image',
-        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
+        content: 'https://an-gi.io.vn/assets/images/og-image.png',
       });
       this.metaService.updateTag({
         property: 'og:url',
-        content: 'https://eatwhat.io.vn/',
+        content: 'https://an-gi.io.vn/',
       });
       this.metaService.updateTag({
         name: 'twitter:card',
@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
       this.metaService.updateTag({
         name: 'twitter:image',
-        content: 'https://eatwhat.io.vn/assets/images/og-image.png',
+        content: 'https://an-gi.io.vn/assets/images/og-image.png',
       });
     }
   }

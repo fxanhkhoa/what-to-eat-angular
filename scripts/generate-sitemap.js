@@ -1,9 +1,9 @@
 const fs = require('fs');
 
-const BASE_URL = 'https://eatwhat.io.vn';
+const BASE_URL = 'https://an-gi.io.vn';
 const LOCALES = ['en', 'vi'];
-const API_DISH = 'https://api.eatwhat.io.vn/dish';
-const API_INGREDIENT = 'https://api.eatwhat.io.vn/ingredient';
+const API_DISH = 'https://api.an-gi.io.vn/dish';
+const API_INGREDIENT = 'https://api.an-gi.io.vn/ingredient';
 const PAGE_SIZE = 9000;
 
 
