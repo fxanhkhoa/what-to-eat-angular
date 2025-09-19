@@ -64,10 +64,61 @@
             </div>
         </div>
         <div class="grid grid-cols-12 gap-5 md:gap-10 mt-5">
+            <!-- videos part -->
             <div class="col-span-12 md:col-span-6 p-3">
-                <div class="relative w-full max-w-2xl mx-auto">
-                    <youtube-player class="youtube w-full h-auto" [videoId]="youtubeId()"></youtube-player>
+                @if (dish()?.videos && dish()!.videos.length > 0) {
+                <div class="space-y-4">
+                    <!-- Main Video Player -->
+                    <div class="relative w-full max-w-2xl mx-auto bg-black rounded-lg overflow-hidden shadow-2xl">
+                        <youtube-player 
+                            class="w-full aspect-video" 
+                            [videoId]="currentVideoId()"
+                            (ready)="onPlayerReady($event)"
+                            (stateChange)="onPlayerStateChange($event)">
+                        </youtube-player>
+                    </div>
+
+                    <!-- Video Navigation -->
+                    @if (dish()!.videos.length > 1) {
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        @for (video of dish()!.videos; track video; let i = $index) {
+                        <button 
+                            (click)="selectVideo(i)"
+                            [class.active-video]="i === currentVideoIndex()"
+                            class="relative group overflow-hidden rounded-lg border-2 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            [class]="i === currentVideoIndex() ? 'border-blue-500 shadow-lg' : 'border-gray-600 hover:border-gray-400'">
+                            <img 
+                                [src]="getYouTubeThumbnail(video)" 
+                                [alt]="'Video ' + (i + 1)"
+                                class="w-20 h-12 object-cover"
+                                loading="lazy"
+                                (error)="onThumbnailError($event)">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                                <mat-icon class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-2xl">play_arrow</mat-icon>
+                            </div>
+                            @if (i === currentVideoIndex()) {
+                            <div class="absolute top-1 right-1 w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                            }
+                        </button>
+                        }
+                    </div>
+
+                    <!-- Video Counter -->
+                    <div class="text-center text-sm text-gray-400">
+                        {{ currentVideoIndex() + 1 }} / {{ dish()!.videos.length }}
+                    </div>
+                    }
                 </div>
+                } @else {
+                <!-- No videos placeholder -->
+                <div class="relative w-full max-w-2xl mx-auto bg-gray-800 rounded-lg overflow-hidden shadow-2xl aspect-video flex items-center justify-center">
+                    <div class="text-center text-gray-400">
+                        <mat-icon class="text-6xl mb-4">videocam_off</mat-icon>
+                        <p class="text-lg" i18n>No video available</p>
+                        <p class="text-sm" i18n>This dish doesn't have any video tutorials yet</p>
+                    </div>
+                </div>
+                }
             </div>
             <div class="col-span-12 md:col-span-6 p-3 text-gray-200 glassmorphic-container_dark rounded-lg">
                 <div class="flex">

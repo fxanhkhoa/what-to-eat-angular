@@ -161,6 +161,7 @@ export class AdminDishUpdateComponent {
               this.titleArray.clear();
               this.contentArray.clear();
               this.shortDescriptionArray.clear();
+              this.videosArray.clear();
 
               dish.title.forEach((title) => {
                 this.addLanguageField('title', title.lang, title.data);
@@ -175,6 +176,16 @@ export class AdminDishUpdateComponent {
               dish.content.forEach((content) => {
                 this.addLanguageField('content', content.lang, content.data);
               });
+
+              // Handle videos
+              if (dish.videos && dish.videos.length > 0) {
+                dish.videos.forEach((video) => {
+                  this.videosArray.push(this.fb.control(video));
+                });
+              } else {
+                // Ensure at least one empty video field
+                this.videosArray.push(this.fb.control(''));
+              }
 
               const ingredients$ = dish.ingredients.map((ingredient) => {
                 return this.ingredientService.findOne(ingredient.ingredientId);
@@ -390,12 +401,16 @@ export class AdminDishUpdateComponent {
           })
         );
 
+      // Filter out empty video URLs
+      const videos = this.dishForm.get('videos')?.value.filter((video: string) => video.trim() !== '');
+
       if (this.dishId && this.dishId !== 'create') {
         this.isLoading = true;
         const dto: UpdateDishDto = {
           ...this.dishForm.value,
           relatedDishes,
           ingredients,
+          videos,
         };
         this.dishService
           .update(this.dishId, dto)
@@ -415,6 +430,7 @@ export class AdminDishUpdateComponent {
           ...this.dishForm.value,
           relatedDishes,
           ingredients,
+          videos,
         };
         this.isLoading = true;
         this.dishService
