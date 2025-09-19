@@ -164,7 +164,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
               const relatedDishesLength = dishObservables.length;
 
               const relatedDishes = results.slice(0, relatedDishesLength);
-              const ingredients = results.slice(relatedDishesLength);
+              const ingredients = results.slice(relatedDishesLength) as Ingredient[];
 
               this.relatedDishes.set(relatedDishes as Dish[]);
               this.ingredients.set(ingredients as Ingredient[]);
@@ -402,6 +402,57 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     );
     return match ? match[1] : '';
   });
+
+  // Video management signals
+  currentVideoIndex = signal(0);
+
+  currentVideoId = computed(() => {
+    const videos = this.dish()?.videos;
+    if (!videos || videos.length === 0) return '';
+
+    const currentVideo = videos[this.currentVideoIndex()];
+    if (!currentVideo) return '';
+
+    const match = currentVideo.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+    );
+    return match ? match[1] : '';
+  });
+
+  selectVideo(index: number): void {
+    const videos = this.dish()?.videos;
+    if (videos && index >= 0 && index < videos.length) {
+      this.currentVideoIndex.set(index);
+    }
+  }
+
+  onPlayerReady(event: any): void {
+    // Player is ready - can add additional setup here if needed
+  }
+
+  onPlayerStateChange(event: any): void {
+    // Handle player state changes if needed
+  }
+
+  getYouTubeThumbnail(videoUrl: string): string {
+    const videoId = this.extractVideoId(videoUrl);
+    return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '';
+  }
+
+  onThumbnailError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (img) {
+      // Fallback to a simple play button SVG
+      img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA4MCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjQ4IiBmaWxsPSIjMzc0MTUxIi8+CjxwYXRoIGQ9Ik0zMiAyNEwxNiAyNEwxNiAzMkwzMiAzMloiBmaWxsPSIjOWNhM2FmIi8+CjxwYXRoIGQ9Ik0zMiAyNEw0OCAyNEw0OCAzMkwzMiAzMloiIGZpbGw9IiM5Y2EzYWYiLz4KPHBhdGggZD0iTTMyIDI0TDMyIDE2TDMyIDMyTDMyIDI0WiIgZmlsbD0iIzlhYzNhZiIvPgo8L3N2Zz4K';
+    }
+  }
+
+  private extractVideoId(videoUrl: string): string {
+    const match = videoUrl.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+    );
+    return match ? match[1] : '';
+  }
 
   get newUUID() {
     return uuidv4();

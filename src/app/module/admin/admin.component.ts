@@ -8,6 +8,7 @@ import {
   OnInit,
   Renderer2,
   DOCUMENT,
+  LOCALE_ID,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +23,7 @@ import { jwtDecode } from 'jwt-decode';
 import { BreadcrumbComponent } from '../../components/breadcrumb/breadcrumb.component';
 import { AuthService } from '@/app/service/auth.service';
 import { ToastService } from '@/app/shared/service/toast.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-admin',
@@ -34,6 +36,7 @@ import { ToastService } from '@/app/shared/service/toast.service';
     AsyncPipe,
     RouterModule,
     BreadcrumbComponent,
+    MatMenuModule,
   ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
@@ -45,8 +48,23 @@ export class AdminComponent implements OnInit {
   private renderer = inject(Renderer2);
   private authService = inject(AuthService);
   private toastService = inject(ToastService);
+  localeId = inject<string>(LOCALE_ID);
 
   payload?: JWTTokenPayload;
+
+  currentLanguage = this.localeId;
+  availableLanguages = [
+    {
+      code: 'en',
+      name: 'English',
+      image: '/assets/images/Flag_of_the_United_States.svg.webp',
+    },
+    {
+      code: 'vi',
+      name: 'Vietnamese',
+      image: '/assets/images/Flag_of_Vietnam.svg.webp',
+    },
+  ];
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -63,6 +81,30 @@ export class AdminComponent implements OnInit {
     if (token) {
       this.payload = jwtDecode<JWTTokenPayload>(token ?? '');
     }
+  }
+
+  changeLanguage(langCode: string) {
+    if (this.currentLanguage !== langCode) {
+      this.currentLanguage = langCode;
+
+      // Store the selected language in localStorage for persistence
+      localStorage.setItem('preferredLanguage', langCode);
+
+      // Construct the new URL with the language parameter
+      const baseUrl = window.location.origin;
+      const pathWithoutLocale = window.location.pathname.replace(
+        /^\/[a-zA-Z]{2}\//,
+        '/'
+      );
+      const newUrl = `${baseUrl}/${langCode}${pathWithoutLocale}${window.location.search}`;
+
+      // Redirect to the new URL with the selected language
+      window.location.href = newUrl;
+    }
+  }
+
+  get currentLanguageObject() {
+    return this.availableLanguages.find(lang => lang.code === this.currentLanguage);
   }
 
   logout() {
