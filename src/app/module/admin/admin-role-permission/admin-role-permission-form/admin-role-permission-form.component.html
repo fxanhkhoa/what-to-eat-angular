@@ -1,0 +1,138 @@
+<div class="p-6 bg-slate-200 rounded-lg shadow-md">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">
+      {{ isEdit ? 'Edit Role Permission' : 'Create Role Permission' }}
+    </h1>
+    <button mat-raised-button color="warn" (click)="onCancel()">
+      <mat-icon>cancel</mat-icon>
+      <span i18n>Cancel</span>
+    </button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Basic Information -->
+    <mat-card class="p-4">
+      <mat-card-header>
+        <mat-card-title class="text-lg font-semibold" i18n>Basic Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mt-4 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter role permission name" i18n-placeholder>
+            @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                <mat-error>
+                    @if (form.get('name')?.hasError('required')) {
+                        <span i18n>Name is required</span>
+                    }
+                    @if (form.get('name')?.hasError('minlength')) {
+                        <span i18n>Name must be at least 3 characters</span>
+                    }
+                </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Description</mat-label>
+            <input matInput formControlName="description" placeholder="Enter description (optional)" i18n-placeholder>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Permissions Section -->
+    <mat-card class="p-4">
+      <mat-card-header>
+        <mat-card-title class="text-lg font-semibold" i18n>Permissions</mat-card-title>
+        <mat-card-subtitle i18n>Drag permissions from available list to selected list</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="mt-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Available Permissions -->
+          <div>
+            <h3 class="text-md font-medium mb-3 text-gray-700" i18n>Available Permissions</h3>
+            <div
+              cdkDropList
+              #availableList="cdkDropList"
+              [cdkDropListData]="availablePermissions"
+              [cdkDropListConnectedTo]="[selectedList]"
+              class="min-h-64 p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 overflow-y-auto max-h-96"
+              (cdkDropListDropped)="onDrop($event)">
+              @for (permission of availablePermissions; track trackByPermission($index, permission)) {
+              <div
+                cdkDrag
+                class="mb-2 p-2 bg-white rounded border cursor-move hover:shadow-md transition-shadow">
+                <mat-icon class="mr-2 text-gray-500">drag_indicator</mat-icon>
+                <span class="text-sm">{{ permission }}</span>
+              </div>
+              }
+              @if (availablePermissions.length === 0) {
+              <div class="text-center text-gray-500 py-8">
+                <mat-icon class="text-4xl mb-2">check_circle</mat-icon>
+                <p i18n>All permissions have been assigned</p>
+              </div>
+              }
+            </div>
+          </div>
+
+          <!-- Selected Permissions -->
+          <div>
+            <h3 class="text-md font-medium mb-3 text-gray-700">Selected Permissions ({{ selectedPermissions.length }})</h3>
+            <div
+              cdkDropList
+              #selectedList="cdkDropList"
+              [cdkDropListData]="selectedPermissions"
+              [cdkDropListConnectedTo]="[availableList]"
+              class="min-h-64 p-4 border-2 border-solid border-blue-300 rounded-lg bg-blue-50 overflow-y-auto max-h-96"
+              (cdkDropListDropped)="onDrop($event)">
+              @for (permission of selectedPermissions; track trackByPermission($index, permission)) {
+              <div
+                cdkDrag
+                class="mb-2 p-2 bg-white rounded border cursor-move hover:shadow-md transition-shadow">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <mat-icon class="mr-2 text-blue-500">drag_indicator</mat-icon>
+                    <span class="text-sm">{{ permission }}</span>
+                  </div>
+                  <button
+                    mat-icon-button
+                    (click)="removePermission(permission)"
+                    class="ml-2"
+                    matTooltip="Remove permission" i18n-matTooltip>
+                    <mat-icon class="text-red-500">close</mat-icon>
+                  </button>
+                </div>
+              </div>
+              }
+              @if (selectedPermissions.length === 0) {
+              <div class="text-center text-gray-500 py-8">
+                <mat-icon class="text-4xl mb-2">add_circle</mat-icon>
+                <p i18n>Drag permissions here</p>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end space-x-4">
+      <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>
+        <span i18n>Cancel</span>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="loading || form.invalid">
+        <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
+        {{ isEdit ? 'Update' : 'Create' }}
+        @if (loading) {
+        <mat-icon class="animate-spin ml-2">refresh</mat-icon>
+        }
+      </button>
+    </div>
+  </form>
+</div>

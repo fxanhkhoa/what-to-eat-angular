@@ -1,0 +1,86 @@
+<div class="p-6 bg-slate-200 rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold" i18n>Role Permissions</h1>
+        <button mat-raised-button color="primary" routerLink="/admin/role-permission/create">
+            <mat-icon>add</mat-icon>
+            <span i18n>Add Role Permission</span>
+        </button>
+    </div>
+
+    <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Search</mat-label>
+            <input matInput [(ngModel)]="keyword" (keyup.enter)="onSearch()" placeholder="Search by name" i18n-placeholder>
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="mat-elevation-z8 rounded-lg overflow-auto">
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Name</th>
+                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
+
+            <!-- Description Column -->
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Description</th>
+                <td mat-cell *matCellDef="let element">{{ element.description || '-' }}</td>
+            </ng-container>
+
+            <!-- Permissions Column -->
+            <ng-container matColumnDef="permissions">
+                <th mat-header-cell *matHeaderCellDef i18n>Permissions</th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-expansion-panel class="mat-elevation-z0">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="text-sm">
+                                {{ element.permission?.length || 0 }} <span i18n>permissions</span>
+                            </mat-panel-title>
+                            <mat-panel-description class="text-xs text-gray-600" i18n>
+                                Click to view details
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="p-2">
+                            <mat-chip-set>
+                                @for (perm of element.permission; track perm) {
+                                <mat-chip class="mb-1 mr-1">
+                                    {{ perm }}
+                                </mat-chip>
+                                }
+                            </mat-chip-set>
+                            @if (!element.permission || element.permission.length === 0) {
+                            <div class="text-gray-500 text-sm italic" i18n>
+                                No permissions assigned
+                            </div>
+                            }
+                        </div>
+                    </mat-expansion-panel>
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef i18n>Actions</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button [routerLink]="['/admin/role-permission/edit', element._id]"
+                        matTooltip="Edit" i18n-matTooltip>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteRolePermission(element._id)" matTooltip="Delete"
+                        color="warn" i18n-matTooltip>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </div>
+    <mat-paginator [length]="totalCount" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
+        (page)="onPageChange($event)" showFirstLastButtons>
+    </mat-paginator>
+</div>

@@ -1,0 +1,91 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-gray-900" i18n>Contact Details</h2>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="space-y-6">
+    <!-- Contact Info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <mat-card class="shadow-sm">
+        <mat-card-content class="p-4">
+          <div class="flex items-center mb-3">
+            <div class="p-2 bg-blue-100 rounded-full mr-3">
+              <mat-icon class="text-blue-600">person</mat-icon>
+            </div>
+            <div>
+              <p class="text-sm text-gray-600" i18n>Name</p>
+              <p class="font-semibold text-gray-900">{{ data.name }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="shadow-sm">
+        <mat-card-content class="p-4">
+          <div class="flex items-center mb-3">
+            <div class="p-2 bg-green-100 rounded-full mr-3">
+              <mat-icon class="text-green-600">email</mat-icon>
+            </div>
+            <div>
+              <p class="text-sm text-gray-600" i18n>Email</p>
+              <p class="font-semibold text-gray-900">{{ data.email }}</p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Message -->
+    <mat-card class="shadow-sm">
+      <mat-card-header>
+        <mat-card-title class="flex items-center">
+          <mat-icon class="mr-2 text-orange-600">message</mat-icon>
+          <span i18n>Message</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="p-4">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <p class="text-gray-800 whitespace-pre-wrap">{{ data.message }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Metadata -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <mat-card class="shadow-sm">
+        <mat-card-content class="p-4 text-center">
+          <mat-icon class="text-blue-600 mb-2">schedule</mat-icon>
+          <p class="text-sm text-gray-600" i18n>Submitted</p>
+          <p class="font-semibold text-gray-900">{{ formatDate(data.createdAt) }}</p>
+        </mat-card-content>
+      </mat-card>
+
+      @if (data.updatedAt) {
+        <mat-card class="shadow-sm">
+          <mat-card-content class="p-4 text-center">
+            <mat-icon class="text-orange-600 mb-2">update</mat-icon>
+            <p class="text-sm text-gray-600" i18n>Last Updated</p>
+            <p class="font-semibold text-gray-900">{{ formatDate(data.updatedAt) }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+
+      <mat-card class="shadow-sm">
+        <mat-card-content class="p-4 text-center">
+          <mat-icon [class]="data.deleted ? 'text-red-600' : 'text-green-600'">fiber_manual_record</mat-icon>
+          <p class="text-sm text-gray-600" i18n>Status</p>
+          <p class="font-semibold" [class]="data.deleted ? 'text-red-600' : 'text-green-600'">
+            {{ data.deleted ? 'Deleted' : 'Active' }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="flex justify-end gap-3 mt-6">
+    <button mat-button (click)="close()" i18n>Close</button>
+  </div>
+</div>
