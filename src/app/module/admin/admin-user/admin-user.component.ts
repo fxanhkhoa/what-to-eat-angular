@@ -59,7 +59,7 @@ export class AdminUserComponent implements OnInit, AfterViewInit {
   totalCount = 0;
   keyword = '';
   pageIndex = 0;
-  pageSize = 10;
+  pageSize = 5;
   private platformId = inject(PLATFORM_ID);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -73,7 +73,6 @@ export class AdminUserComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
