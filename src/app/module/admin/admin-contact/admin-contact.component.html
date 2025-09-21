@@ -1,0 +1,205 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <!-- Header Section -->
+  <div class="mb-6">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-900" i18n>Contact Management</h1>
+        <p class="text-gray-600 mt-1" i18n>Manage user contact submissions</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button mat-raised-button color="primary" (click)="loadContacts()" [disabled]="loading()">
+          <mat-icon>refresh</mat-icon>
+          <span class="ml-2" i18n>Refresh</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <mat-card class="shadow-sm">
+      <mat-card-content class="p-6">
+        <div class="flex items-center">
+          <div class="p-3 bg-blue-100 rounded-full">
+            <mat-icon class="text-blue-600">contact_mail</mat-icon>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600" i18n>Total Contacts</p>
+            <p class="text-2xl font-bold text-gray-900">{{ dataSource.data.length }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="shadow-sm">
+      <mat-card-content class="p-6">
+        <div class="flex items-center">
+          <div class="p-3 bg-green-100 rounded-full">
+            <mat-icon class="text-green-600">check_circle</mat-icon>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600" i18n>Active Contacts</p>
+            <p class="text-2xl font-bold text-gray-900">{{ activeContacts() }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="shadow-sm">
+      <mat-card-content class="p-6">
+        <div class="flex items-center">
+          <div class="p-3 bg-orange-100 rounded-full">
+            <mat-icon class="text-orange-600">schedule</mat-icon>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600" i18n>This Month</p>
+            <p class="text-2xl font-bold text-gray-900">{{ thisMonthContacts() }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Search and Filters -->
+  <mat-card class="shadow-sm mb-6">
+    <mat-card-content class="p-6">
+      <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        <div class="flex-1">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Search contacts</mat-label>
+            <input matInput
+                   (keyup)="applyFilter($event)"
+                   [value]="searchQuery()"
+                   placeholder="Search by name, email, or message..." i18n-placeholder>
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="flex gap-2">
+          <button mat-stroked-button
+                  (click)="clearSearch()"
+                  [disabled]="!searchQuery()"
+                  color="accent">
+            <mat-icon>clear</mat-icon>
+            <span class="ml-1" i18n>Clear</span>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Contacts Table -->
+  <mat-card class="shadow-sm">
+    <mat-card-content class="p-0">
+      @if (loading()) {
+        <div class="flex justify-center items-center py-12">
+          <mat-spinner diameter="40"></mat-spinner>
+          <span class="ml-3 text-gray-600" i18n>Loading contacts...</span>
+        </div>
+      } @else if (dataSource.data.length === 0) {
+        <div class="flex flex-col items-center justify-center py-12 text-center">
+          <mat-icon class="text-gray-400 text-6xl mb-4">contact_mail</mat-icon>
+          <h3 class="text-lg font-medium text-gray-900 mb-2" i18n>No contacts found</h3>
+          <p class="text-gray-600" i18n>There are no contact submissions yet.</p>
+        </div>
+      } @else {
+        <div class="overflow-x-auto">
+          <table mat-table [dataSource]="dataSource" matSort class="w-full">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span i18n>Name</span>
+              </th>
+              <td mat-cell *matCellDef="let contact" class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 h-10 w-10">
+                    <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center">
+                      <span class="text-sm font-medium text-white">{{ contact.name.charAt(0).toUpperCase() }}</span>
+                    </div>
+                  </div>
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">{{ contact.name }}</div>
+                    @if (contact.deleted) {
+                      <div class="text-sm text-red-600" i18n>Deleted</div>
+                    }
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span i18n>Email</span>
+              </th>
+              <td mat-cell *matCellDef="let contact" class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ contact.email }}</div>
+                <div class="text-sm text-gray-500" i18n>Contact</div>
+              </td>
+            </ng-container>
+
+            <!-- Message Column -->
+            <ng-container matColumnDef="message">
+              <th mat-header-cell *matHeaderCellDef class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span i18n>Message</span>
+              </th>
+              <td mat-cell *matCellDef="let contact" class="px-6 py-4">
+                <div class="text-sm text-gray-900 max-w-xs truncate" [title]="contact.message">
+                  {{ truncateMessage(contact.message) }}
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Created At Column -->
+            <ng-container matColumnDef="createdAt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span i18n>Submitted</span>
+              </th>
+              <td mat-cell *matCellDef="let contact" class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ formatDate(contact.createdAt) }}</div>
+                <div class="text-sm text-gray-500" i18n>Date</div>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="px-6 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <span i18n>Actions</span>
+              </th>
+              <td mat-cell *matCellDef="let contact" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <div class="flex justify-end gap-2">
+                  <button mat-icon-button
+                          (click)="viewContactDetails(contact)"
+                          matTooltip="View full details" i18n-matTooltip
+                          color="primary">
+                    <mat-icon>visibility</mat-icon>
+                  </button>
+                  <button mat-icon-button
+                          (click)="deleteContact(contact)"
+                          matTooltip="Delete contact" i18n-matTooltip
+                          color="warn">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-gray-50"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                class="hover:bg-gray-50 transition-colors"
+                [class.bg-red-50]="row.deleted"></tr>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="px-6 py-4 border-t border-gray-200">
+          <mat-paginator
+            [pageSizeOptions]="[10, 25, 50, 100]"
+            [pageSize]="10"
+            showFirstLastButtons
+            aria-label="Select page of contacts" i18n-aria-label>
+          </mat-paginator>
+        </div>
+      }
+    </mat-card-content>
+  </mat-card>
+</div>

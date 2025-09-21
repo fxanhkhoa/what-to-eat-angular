@@ -1,0 +1,51 @@
+// Drag and drop styles
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  transform: rotate(2deg);
+  opacity: 0.8;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.4;
+  border: 2px dashed #797676; // neutral-50 from theme
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  min-height: 40px;
+  transition: all 200ms ease;
+}
+
+.cdk-drag {
+  transition: transform 200ms ease;
+}
+
+.cdk-drag-dragging {
+  transform: rotate(5deg);
+  opacity: 0.5;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.cdk-drop-list-dragging {
+  .cdk-drag {
+    transition: transform 300ms ease;
+  }
+}
+
+// Hover effects for better UX
+.cdk-drag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+// Smooth transitions for drop zones
+.cdk-drop-list {
+  transition: background-color 200ms ease;
+}
+
+.cdk-drop-list.cdk-drop-list-dragging {
+  background-color: rgba(243, 164, 70, 0.1); // primary-80 with opacity
+  border-color: #F3A446; // primary color
+}

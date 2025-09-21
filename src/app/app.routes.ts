@@ -221,6 +221,102 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'contact',
+        loadComponent: () =>
+          import('./module/admin/admin-contact/admin-contact.component').then(
+            (m) => m.AdminContactComponent
+          ),
+        data: {
+          breadcrumb: 'Contact',
+        },
+      },
+      {
+        path: 'role-permission',
+        data: {
+          breadcrumb: 'Role Permission',
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
+          },
+          {
+            path: 'list',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-role-permission/admin-role-permission.component'
+              ).then((m) => m.AdminRolePermissionComponent),
+            data: {
+              breadcrumb: 'List',
+            },
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-role-permission/admin-role-permission-form/admin-role-permission-form.component'
+              ).then((m) => m.AdminRolePermissionFormComponent),
+            data: {
+              breadcrumb: 'Create',
+            },
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-role-permission/admin-role-permission-form/admin-role-permission-form.component'
+              ).then((m) => m.AdminRolePermissionFormComponent),
+            data: {
+              breadcrumb: 'Edit',
+            },
+          },
+        ],
+      },
+      {
+        path: 'user',
+        data: {
+          breadcrumb: 'User Management',
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
+          },
+          {
+            path: 'list',
+            loadComponent: () =>
+              import('./module/admin/admin-user/admin-user.component').then(
+                (m) => m.AdminUserComponent
+              ),
+            data: {
+              breadcrumb: 'List',
+            },
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-user/admin-user-form/admin-user-form.component'
+              ).then((m) => m.AdminUserFormComponent),
+            data: {
+              breadcrumb: 'Create',
+            },
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import(
+                './module/admin/admin-user/admin-user-form/admin-user-form.component'
+              ).then((m) => m.AdminUserFormComponent),
+            data: {
+              breadcrumb: 'Edit',
+            },
+          },
+        ],
+      },
     ],
   },
   {

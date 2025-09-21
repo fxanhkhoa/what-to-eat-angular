@@ -1,0 +1,110 @@
+<div class="p-6 bg-slate-200 rounded-lg shadow-md">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">
+      {{ isEdit ? 'Edit User' : 'Create User' }}
+    </h1>
+    <button mat-raised-button color="warn" (click)="onCancel()">
+      <mat-icon>cancel</mat-icon>
+      <span i18n>Cancel</span>
+    </button>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Basic Information -->
+    <mat-card class="p-4">
+      <mat-card-header>
+        <mat-card-title class="text-lg font-semibold" i18n>Basic Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="mt-4 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Email</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Enter email address" i18n-placeholder>
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <mat-error>
+              @if (form.get('email')?.hasError('required')) {
+                <span i18n>Email is required</span>
+              }
+              @if (form.get('email')?.hasError('email')) {
+                <span i18n>Please enter a valid email</span>
+              }
+            </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter full name" i18n-placeholder>
+            @if (form.get('name')?.invalid && form.get('name')?.touched) {
+            <mat-error>
+              @if (form.get('name')?.hasError('required')) {
+                <span i18n>Name is required</span>
+              }
+              @if (form.get('name')?.hasError('minlength')) {
+                <span i18n>Name must be at least 2 characters</span>
+              }
+            </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Phone</mat-label>
+            <input matInput formControlName="phone" placeholder="Enter phone number" i18n-placeholder>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Role</mat-label>
+            <mat-select formControlName="roleName" [disabled]="rolesLoading">
+              @for (role of availableRoles; track role) {
+              <mat-option [value]="role">
+                {{ role | titlecase }}
+              </mat-option>
+              }
+            </mat-select>
+            @if (rolesLoading) {
+            <mat-hint i18n>Loading roles...</mat-hint>
+            }
+            @if (form.get('roleName')?.invalid && form.get('roleName')?.touched) {
+            <mat-error i18n>
+              Role is required
+            </mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Date of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="grid grid-cols-1 gap-4">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label i18n>Address</mat-label>
+            <textarea matInput formControlName="address" rows="3" placeholder="Enter address" i18n-placeholder></textarea>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Action Buttons -->
+    <div class="flex justify-end space-x-4">
+      <button mat-raised-button color="warn" type="button" (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>
+        <span i18n>Cancel</span>
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="loading || form.invalid">
+        <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
+        {{ isEdit ? 'Update' : 'Create' }}
+        @if (loading) {
+        <mat-icon class="animate-spin ml-2">refresh</mat-icon>
+        }
+      </button>
+    </div>
+  </form>
+</div>

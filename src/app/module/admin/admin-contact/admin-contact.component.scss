@@ -1,0 +1,108 @@
+// Admin Contact Component Styles
+.mat-mdc-table {
+  .mat-mdc-header-cell {
+    background-color: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .mat-mdc-row {
+    &:hover {
+      background-color: #f9fafb;
+    }
+
+    &.mat-mdc-row-highlight {
+      background-color: #fef2f2;
+    }
+  }
+
+  .mat-mdc-cell {
+    border-bottom: 1px solid #f3f4f6;
+  }
+}
+
+.mat-mdc-paginator {
+  border-top: 1px solid #e5e7eb;
+}
+
+// Stats cards hover effects
+mat-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+}
+
+// Search input styling
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    background-color: #ffffff;
+  }
+}
+
+// Loading spinner
+.mat-mdc-progress-spinner {
+  margin: 0 auto;
+}
+
+// Avatar styling
+.avatar-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+}
+
+// Status indicators
+.status-active {
+  color: #10b981;
+}
+
+.status-deleted {
+  color: #ef4444;
+}
+
+// Responsive design improvements
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .contact-table {
+    font-size: 0.875rem;
+
+    .mat-mdc-cell {
+      padding: 8px 12px;
+    }
+  }
+}
+
+// Dark theme support (if needed in future)
+.dark-theme {
+  .mat-mdc-table {
+    .mat-mdc-header-cell {
+      background-color: #1f2937;
+      color: #f9fafb;
+      border-bottom-color: #374151;
+    }
+
+    .mat-mdc-row {
+      &:hover {
+        background-color: #374151;
+      }
+    }
+
+    .mat-mdc-cell {
+      border-bottom-color: #374151;
+      color: #f9fafb;
+    }
+  }
+
+  .mat-mdc-paginator {
+    border-top-color: #374151;
+  }
+}
