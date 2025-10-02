@@ -83,11 +83,10 @@ describe('VotingListComponent', () => {
 
   it('should identify most voted dish', () => {
     const mostVoted = component.getMostVotedDish(mockVotingSession);
-    expect(mostVoted).toEqual({
-      slug: 'test-dish',
-      title: 'Test Dish',
-      votes: 2
-    });
+    expect(mostVoted).toBeTruthy();
+    expect(mostVoted?.slug).toBe('test-dish');
+    expect(mostVoted?.customTitle).toBe('Test Dish');
+    expect(mostVoted?.votes).toBe(2);
   });
 
   it('should detect custom dishes', () => {
@@ -111,6 +110,13 @@ describe('VotingListComponent', () => {
     expect(formattedDate).toContain('2024');
   });
 
+  it('should format date string correctly', () => {
+    const testDateString = '2024-01-01T12:00:00Z';
+    const formattedDate = component.formatDate(testDateString);
+    expect(formattedDate).toContain('2024');
+    expect(formattedDate).toContain('Jan');
+  });
+
   it('should handle search', () => {
     spyOn(component, 'loadVotingSessions');
     component.onSearch('test keyword');
@@ -128,6 +134,77 @@ describe('VotingListComponent', () => {
     
     expect(component.currentPage()).toBe(3); // pageIndex + 1
     expect(component.limit()).toBe(20);
+    expect(component.loadVotingSessions).toHaveBeenCalled();
+  });
+
+  it('should return null when no dishes are voted', () => {
+    const emptySession: DishVote = {
+      ...mockVotingSession,
+      dishVoteItems: []
+    };
+    
+    const mostVoted = component.getMostVotedDish(emptySession);
+    expect(mostVoted).toBeNull();
+  });
+
+  it('should calculate zero votes for empty session', () => {
+    const emptySession: DishVote = {
+      ...mockVotingSession,
+      dishVoteItems: []
+    };
+    
+    const totalVotes = component.getTotalVotes(emptySession);
+    expect(totalVotes).toBe(0);
+  });
+
+  it('should handle multiple dishes with different vote counts', () => {
+    const multiDishSession: DishVote = {
+      ...mockVotingSession,
+      dishVoteItems: [
+        {
+          slug: 'dish-1',
+          customTitle: 'Dish 1',
+          voteUser: ['user1'],
+          voteAnonymous: [],
+          isCustom: false
+        },
+        {
+          slug: 'dish-2',
+          customTitle: 'Dish 2',
+          voteUser: ['user1', 'user2'],
+          voteAnonymous: ['anon1'],
+          isCustom: false
+        },
+        {
+          slug: 'dish-3',
+          customTitle: 'Dish 3',
+          voteUser: ['user1'],
+          voteAnonymous: ['anon1'],
+          isCustom: false
+        }
+      ]
+    };
+    
+    const mostVoted = component.getMostVotedDish(multiDishSession);
+    expect(mostVoted?.slug).toBe('dish-2');
+    expect(mostVoted?.votes).toBe(3);
+    
+    const totalVotes = component.getTotalVotes(multiDishSession);
+    expect(totalVotes).toBe(6); // 1 + 3 + 2
+  });
+
+  it('should reset to page 1 when searching', () => {
+    component.currentPage.set(5);
+    component.onSearch('new keyword');
+    
+    expect(component.currentPage()).toBe(1);
+  });
+
+  it('should handle empty keyword search', () => {
+    spyOn(component, 'loadVotingSessions');
+    component.onSearch('');
+    
+    expect(component.keyword()).toBe('');
     expect(component.loadVotingSessions).toHaveBeenCalled();
   });
 });

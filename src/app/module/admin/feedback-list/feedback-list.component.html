@@ -1,0 +1,169 @@
+<div class="feedback-list-container">
+  <!-- Header -->
+  <div class="header-section">
+    <div class="header-content">
+      <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-3">
+        <mat-icon class="text-4xl w-10 h-10 text-purple-600">rate_review</mat-icon>
+        <span i18n>Customer Feedback</span>
+      </h1>
+      <p i18n class="text-gray-600 mt-2">View and manage customer feedback submissions</p>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <mat-card class="filter-card">
+    <div class="filter-content">
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label i18n>Filter by Email</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [(ngModel)]="filters.email"
+          (ngModelChange)="onFilterChange()"
+          i18n-placeholder
+          placeholder="Search by email..."
+        />
+        @if (filters.email) {
+          <button
+            matSuffix
+            mat-icon-button
+            (click)="clearEmailFilter()"
+            i18n-aria-label
+            aria-label="Clear"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-label i18n>Filter by Rating</mat-label>
+        <mat-icon matPrefix>star</mat-icon>
+        <mat-select
+          [(ngModel)]="filters.rating"
+          (ngModelChange)="onFilterChange()"
+        >
+          <mat-option [value]="undefined" i18n>All Ratings</mat-option>
+          <mat-option [value]="5" i18n>5 Stars</mat-option>
+          <mat-option [value]="4" i18n>4 Stars</mat-option>
+          <mat-option [value]="3" i18n>3 Stars</mat-option>
+          <mat-option [value]="2" i18n>2 Stars</mat-option>
+          <mat-option [value]="1" i18n>1 Star</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-stroked-button
+        (click)="resetFilters()"
+        class="reset-button"
+      >
+        <mat-icon>refresh</mat-icon>
+        <span i18n>Reset</span>
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p i18n class="text-gray-600 mt-4">Loading feedbacks...</p>
+    </div>
+  }
+
+  <!-- Feedback Cards -->
+  @if (!isLoading() && feedbacks().length > 0) {
+    <div class="feedback-grid">
+      @for (feedback of feedbacks(); track feedback.id) {
+        <mat-card class="feedback-card">
+          <mat-card-header>
+            <div class="feedback-header">
+              <div class="user-info">
+                <mat-icon class="user-icon">account_circle</mat-icon>
+                <div>
+                  <h3 class="font-semibold text-gray-800">
+                    {{ feedback.userName || ('Anonymous' | i18nSelect: {}) }}
+                  </h3>
+                  <p class="text-sm text-gray-500">{{ feedback.email }}</p>
+                </div>
+              </div>
+              <div class="rating-display">
+                @for (star of [1, 2, 3, 4, 5]; track star) {
+                  <mat-icon [class.filled]="star <= feedback.rating">
+                    {{ star <= feedback.rating ? 'star' : 'star_border' }}
+                  </mat-icon>
+                }
+              </div>
+            </div>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p class="feedback-comment">{{ feedback.comment }}</p>
+            
+            <div class="feedback-meta">
+              @if (feedback.page) {
+                <mat-chip class="meta-chip">
+                  <mat-icon>link</mat-icon>
+                  {{ feedback.page }}
+                </mat-chip>
+              }
+              <mat-chip class="meta-chip items-center">
+                <mat-icon>calendar_today</mat-icon>
+                {{ feedback.createdAt | date: 'short' }}
+              </mat-chip>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button
+              mat-button
+              color="primary"
+              (click)="viewDetails(feedback)"
+              i18n-matTooltip
+              matTooltip="View full details"
+            >
+              <mat-icon>visibility</mat-icon>
+              <span i18n>View Details</span>
+            </button>
+            <button
+              mat-button
+              color="warn"
+              (click)="deleteFeedback(feedback.id)"
+              i18n-matTooltip
+              matTooltip="Delete feedback"
+            >
+              <mat-icon>delete</mat-icon>
+              <span i18n>Delete</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+
+    <!-- Pagination -->
+    <mat-paginator
+      [length]="totalItems()"
+      [pageSize]="pageSize()"
+      [pageIndex]="currentPage() - 1"
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      (page)="onPageChange($event)"
+      class="custom-paginator"
+    >
+    </mat-paginator>
+  }
+
+  <!-- Empty State -->
+  @if (!isLoading() && feedbacks().length === 0) {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">feedback</mat-icon>
+      <h2 i18n class="text-2xl font-semibold text-gray-700 mt-4">No feedback found</h2>
+      <p class="text-gray-500 mt-2">
+        @if (filters.email || filters.rating) {
+          <span i18n>Try adjusting your filters</span>
+        } @else {
+          <span i18n>No feedback submissions yet</span>
+        }
+      </p>
+    </div>
+  }
+</div>

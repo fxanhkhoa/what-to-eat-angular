@@ -7,6 +7,7 @@ import { ErrorSnackbarComponent } from '../component/error-snackbar/error-snackb
 import { NotificationSnackbarComponent } from '../component/notification-snackbar/notification-snackbar.component';
 import { SuccessSnackbarComponent } from '../component/success-snackbar/success-snackbar.component';
 import { ImageViewerComponent } from '../widget/image-viewer/image-viewer.component';
+import { WarningSnackbarComponent } from '../component/warning-snackbar/warning-snackbar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,18 @@ export class ToastService {
 
   showError(mainMsg: string, subMsg: string, duration: number) {
     this.snackBar.openFromComponent(ErrorSnackbarComponent, {
+      duration,
+      data: {
+        mainMsg,
+        subMsg,
+      },
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+    });
+  }
+
+   showWarning(mainMsg: string, subMsg: string, duration: number) {
+    this.snackBar.openFromComponent(WarningSnackbarComponent, {
       duration,
       data: {
         mainMsg,

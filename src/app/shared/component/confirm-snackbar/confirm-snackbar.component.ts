@@ -5,12 +5,11 @@ import {
   MatSnackBarRef,
   MAT_SNACK_BAR_DATA,
 } from '@angular/material/snack-bar';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-snackbar',
   standalone: true,
-  imports: [MatIconModule, TranslateModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule],
   templateUrl: './confirm-snackbar.component.html',
   styleUrl: './confirm-snackbar.component.scss',
 })

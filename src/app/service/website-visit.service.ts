@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap, timeout } from 'rxjs/operators';
 import { APIPagination } from '@/types/base.type';
 import { WebsiteVisit } from '@/types/website_visit.type';
 
@@ -11,8 +12,25 @@ const prefix = 'website-visit';
 export class WebsiteVisitService {
   constructor(private http: HttpClient) {}
 
+  /**
+   * Track website visit with real client IP
+   * Automatically fetches the client's real IP address from ipify service
+   * and sends it to the backend
+   */
   trackVisit(): Observable<void> {
-    return this.http.post<void>(`${environment.API_URL}/${prefix}/visit`, {});
+    return this.http
+      .get<{ ip: string }>('http://robotic.dratini.tech:3000/client-ip')
+      .pipe(
+        timeout(3000), // 3 second timeout
+        catchError(() => of({ ip: '' })), // Fallback if service fails
+        switchMap((response) => {
+          const body = response.ip ? { ip: response.ip } : {};
+          return this.http.post<void>(
+            `${environment.API_URL}/${prefix}/visit`,
+            body
+          );
+        })
+      );
   }
 
   getVisitCount(): Observable<{ count: number }> {

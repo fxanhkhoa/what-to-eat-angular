@@ -5,10 +5,11 @@ import cookies from 'js-cookie';
 import { isPlatformServer } from '@angular/common';
 import { Cookies_Key } from '@/enum/cookies.enum';
 import { WebsiteVisitService } from './service/website-visit.service';
+import { FeedbackFabComponent } from './components/feedback-fab/feedback-fab.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule],
+  imports: [RouterModule, FeedbackFabComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -112,3 +112,30 @@ body {
     )
   );
 }
+
+// Feedback Component Styles
+.feedback-dialog-container {
+  .mat-mdc-dialog-container {
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+}
+
+.success-snackbar {
+  .mdc-snackbar__surface {
+    background-color: #10b981 !important;
+  }
+  .mat-mdc-snack-bar-label {
+    color: white !important;
+  }
+}
+
+.error-snackbar {
+  .mdc-snackbar__surface {
+    background-color: #ef4444 !important;
+  }
+  .mat-mdc-snack-bar-label {
+    color: white !important;
+  }
+}

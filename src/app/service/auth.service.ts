@@ -3,7 +3,8 @@ import { ResultToken } from '@/types/auth.type';
 import { User } from '@/types/user.type';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, switchMap, timeout } from 'rxjs/operators';
 
 const prefix = 'auth';
 
@@ -16,11 +17,28 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(token: string) {
-    return this.http.post<ResultToken>(
-      `${environment.API_URL}/${prefix}/login`,
-      { token }
-    );
+  /**
+   * Login with Google/Apple token and real client IP
+   * Automatically fetches the client's real IP address from IP service
+   * and sends it to the backend along with the token
+   */
+  login(token: string, type: string = 'google'): Observable<ResultToken> {
+    return this.http
+      .get<{ ip: string }>('http://robotic.dratini.tech:3000/client-ip')
+      .pipe(
+        timeout(3000), // 3 second timeout
+        catchError(() => of({ ip: '' })), // Fallback if service fails
+        switchMap((response) => {
+          const body: any = { token, type };
+          if (response.ip) {
+            body.ip = response.ip;
+          }
+          return this.http.post<ResultToken>(
+            `${environment.API_URL}/${prefix}/login`,
+            body
+          );
+        })
+      );
   }
 
   refreshToken(refreshToken: string) {

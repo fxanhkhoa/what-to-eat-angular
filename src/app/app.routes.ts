@@ -317,6 +317,29 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'feedback',
+        data: {
+          breadcrumb: 'Feedback Management',
+        },
+        children: [
+          {
+            path: '',
+            redirectTo: 'list',
+            pathMatch: 'full',
+          },
+          {
+            path: 'list',
+            loadComponent: () =>
+              import('./module/admin/feedback-list/feedback-list.component').then(
+                (m) => m.FeedbackListComponent
+              ),
+            data: {
+              breadcrumb: 'List',
+            },
+          },
+        ],
+      },
     ],
   },
   {
