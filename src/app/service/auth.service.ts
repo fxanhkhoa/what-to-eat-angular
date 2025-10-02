@@ -24,7 +24,7 @@ export class AuthService {
    */
   login(token: string, type: string = 'google'): Observable<ResultToken> {
     return this.http
-      .get<{ ip: string }>('http://robotic.dratini.tech:3000/client-ip')
+      .get<{ ip: string }>('https://robotic.dratini.tech/client-ip')
       .pipe(
         timeout(3000), // 3 second timeout
         catchError(() => of({ ip: '' })), // Fallback if service fails
