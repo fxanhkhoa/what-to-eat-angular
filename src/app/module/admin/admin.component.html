@@ -66,6 +66,16 @@
                     }
                 </div>
             </a>
+            <a mat-list-item [routerLink]="['/admin/feedback']">
+                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
+                    <mat-icon class="!text-white min-w-5">
+                        feedback
+                    </mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white text-sm font-light">Feedback</span>
+                    }
+                </div>
+            </a>
             <a mat-list-item [routerLink]="['/admin/role-permission']">
                 <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
                     <mat-icon class="!text-white min-w-5">

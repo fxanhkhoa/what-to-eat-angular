@@ -1,0 +1,48 @@
+.feedback-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #F3A446 0%, #A06235 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(243, 164, 70, 0.4);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(243, 164, 70, 0.6);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 768px) {
+    bottom: 16px;
+    right: 16px;
+    transform: scale(0.9);
+
+    &:hover {
+      transform: scale(1);
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(243, 164, 70, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(243, 164, 70, 0.7);
+  }
+}
+
+.feedback-fab {
+  animation: pulse 2s infinite;
+}

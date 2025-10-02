@@ -53,6 +53,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { DishVoteService } from '@/app/service/dish-vote.service';
 import { VOTING_SESSION_TIMEOUT } from '@/constant/general.constant';
 import { environment } from '@/environments/environment';
+import { ToastService } from '@/app/shared/service/toast.service';
 
 @Component({
   selector: 'app-voting-create-update',
@@ -96,6 +97,7 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
   localeID = inject(LOCALE_ID);
   private dialog = inject(MatDialog);
   private dishVoteService = inject(DishVoteService);
+  private toastService = inject(ToastService);
   private router = inject(Router);
 
   openSidenav = signal(true);
@@ -222,6 +224,14 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
+          if (this.customDishes().some((d) => d.slug === result.slug)) {
+            this.toastService.showError(
+              $localize`Duplicated`,
+              $localize`This custom dish already exists.`,
+              1500
+            );
+            return;
+          }
           const dishVoteItem = this.createDishVoteItem();
           dishVoteItem.patchValue({
             slug: result.slug,
@@ -375,143 +385,161 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
 
   private setupSEO(): void {
     const isVietnamese = this.localeID === 'vi';
-    
+
     if (isVietnamese) {
-      this.titleService.setTitle('Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm | What to Eat');
-      
-      this.metaService.updateTag({ 
-        name: 'description', 
-        content: 'Tạo phiên bình chọn món ăn mới cho nhóm bạn bè và gia đình. Chọn món ăn, tùy chỉnh danh sách và chia sẻ để cùng nhau quyết định món ăn hôm nay.' 
+      this.titleService.setTitle(
+        'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm | What to Eat'
+      );
+
+      this.metaService.updateTag({
+        name: 'description',
+        content:
+          'Tạo phiên bình chọn món ăn mới cho nhóm bạn bè và gia đình. Chọn món ăn, tùy chỉnh danh sách và chia sẻ để cùng nhau quyết định món ăn hôm nay.',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'keywords', 
-        content: 'tạo bình chọn món ăn, tổ chức vote nhóm, chọn món ăn nhóm, tạo phiên vote, chia sẻ bình chọn, quyết định món ăn' 
+
+      this.metaService.updateTag({
+        name: 'keywords',
+        content:
+          'tạo bình chọn món ăn, tổ chức vote nhóm, chọn món ăn nhóm, tạo phiên vote, chia sẻ bình chọn, quyết định món ăn',
       });
-      
+
       // Open Graph tags
-      this.metaService.updateTag({ 
-        property: 'og:title', 
-        content: 'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm' 
+      this.metaService.updateTag({
+        property: 'og:title',
+        content: 'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm',
       });
-      
-      this.metaService.updateTag({ 
-        property: 'og:description', 
-        content: 'Tạo phiên bình chọn món ăn cho nhóm. Chọn món ăn, tùy chỉnh và chia sẻ để cùng quyết định món ăn hôm nay.' 
+
+      this.metaService.updateTag({
+        property: 'og:description',
+        content:
+          'Tạo phiên bình chọn món ăn cho nhóm. Chọn món ăn, tùy chỉnh và chia sẻ để cùng quyết định món ăn hôm nay.',
       });
-      
+
       // Twitter Card tags
-      this.metaService.updateTag({ 
-        name: 'twitter:title', 
-        content: 'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm' 
+      this.metaService.updateTag({
+        name: 'twitter:title',
+        content: 'Tạo Phiên Bình Chọn Món Ăn - Tổ Chức Vote Nhóm',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'twitter:description', 
-        content: 'Tạo phiên bình chọn món ăn cho nhóm. Chọn món và chia sẻ để cùng quyết định.' 
+
+      this.metaService.updateTag({
+        name: 'twitter:description',
+        content:
+          'Tạo phiên bình chọn món ăn cho nhóm. Chọn món và chia sẻ để cùng quyết định.',
       });
     } else {
-      this.titleService.setTitle('Create Food Voting Session - Organize Group Voting | What to Eat');
-      
-      this.metaService.updateTag({ 
-        name: 'description', 
-        content: 'Create a new food voting session for your friends and family. Select dishes, customize the list and share to decide what to eat together today.' 
+      this.titleService.setTitle(
+        'Create Food Voting Session - Organize Group Voting | What to Eat'
+      );
+
+      this.metaService.updateTag({
+        name: 'description',
+        content:
+          'Create a new food voting session for your friends and family. Select dishes, customize the list and share to decide what to eat together today.',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'keywords', 
-        content: 'create food voting, organize group poll, group food selection, create voting session, share food poll, food decision maker' 
+
+      this.metaService.updateTag({
+        name: 'keywords',
+        content:
+          'create food voting, organize group poll, group food selection, create voting session, share food poll, food decision maker',
       });
-      
+
       // Open Graph tags
-      this.metaService.updateTag({ 
-        property: 'og:title', 
-        content: 'Create Food Voting Session - Organize Group Voting' 
+      this.metaService.updateTag({
+        property: 'og:title',
+        content: 'Create Food Voting Session - Organize Group Voting',
       });
-      
-      this.metaService.updateTag({ 
-        property: 'og:description', 
-        content: 'Create food voting session for your group. Select dishes, customize and share to decide what to eat together.' 
+
+      this.metaService.updateTag({
+        property: 'og:description',
+        content:
+          'Create food voting session for your group. Select dishes, customize and share to decide what to eat together.',
       });
-      
+
       // Twitter Card tags
-      this.metaService.updateTag({ 
-        name: 'twitter:title', 
-        content: 'Create Food Voting Session - Organize Group Voting' 
+      this.metaService.updateTag({
+        name: 'twitter:title',
+        content: 'Create Food Voting Session - Organize Group Voting',
       });
-      
-      this.metaService.updateTag({ 
-        name: 'twitter:description', 
-        content: 'Create food voting session for your group. Select dishes and share to decide together.' 
+
+      this.metaService.updateTag({
+        name: 'twitter:description',
+        content:
+          'Create food voting session for your group. Select dishes and share to decide together.',
       });
     }
-    
+
     // Common meta tags
     this.metaService.updateTag({ property: 'og:type', content: 'website' });
-    this.metaService.updateTag({ property: 'og:site_name', content: 'What to Eat' });
-    this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
+    this.metaService.updateTag({
+      property: 'og:site_name',
+      content: 'What to Eat',
+    });
+    this.metaService.updateTag({
+      name: 'twitter:card',
+      content: 'summary_large_image',
+    });
     this.metaService.updateTag({ name: 'robots', content: 'index, follow' });
-    
+
     this.addOrUpdateCanonicalLink();
   }
 
   private addOrUpdateCanonicalLink() {
-      // Remove existing canonical link if it exists
-      const existingCanonical = this.document.querySelector(
-        'link[rel="canonical"]'
-      );
-      if (existingCanonical) {
-        existingCanonical.remove();
-      }
-  
-      // Add new canonical link with proper URL based on locale and dish slug
-      const link = this.document.createElement('link');
-      link.setAttribute('rel', 'canonical');
-  
-      // Get dish slug from current route
-      const baseUrl = environment.BASE_URL;
-      let canonicalUrl = baseUrl;
-  
-      if (this.localeID.startsWith('vi')) {
-        canonicalUrl = `${baseUrl}/vi/voting/create`;
-      } else {
-        canonicalUrl = `${baseUrl}/en/voting/create`;
-      }
-  
-      link.setAttribute('href', canonicalUrl);
-      this.document.head.appendChild(link);
+    // Remove existing canonical link if it exists
+    const existingCanonical = this.document.querySelector(
+      'link[rel="canonical"]'
+    );
+    if (existingCanonical) {
+      existingCanonical.remove();
     }
-  
-    private addHrefLangLinks() {
-      // Remove existing hreflang links if they exist
-      const existingHrefLangs = this.document.querySelectorAll(
-        'link[rel="alternate"][hreflang]'
-      );
-      existingHrefLangs.forEach((link) => link.remove());
-  
-      const baseUrl = environment.BASE_URL;
-  
-      // Add Vietnamese version
-      const viLink = this.document.createElement('link');
-      viLink.setAttribute('rel', 'alternate');
-      viLink.setAttribute('hreflang', 'vi');
-      viLink.setAttribute('href', `${baseUrl}/vi/voting/create`);
-      this.document.head.appendChild(viLink);
-  
-      // Add English version
-      const enLink = this.document.createElement('link');
-      enLink.setAttribute('rel', 'alternate');
-      enLink.setAttribute('hreflang', 'en');
-      enLink.setAttribute('href', `${baseUrl}/en/voting/create`);
-      this.document.head.appendChild(enLink);
-  
-      // Add x-default for default language
-      const defaultLink = this.document.createElement('link');
-      defaultLink.setAttribute('rel', 'alternate');
-      defaultLink.setAttribute('hreflang', 'x-default');
-      defaultLink.setAttribute('href', `${baseUrl}/en/voting/create`);
-      this.document.head.appendChild(defaultLink);
+
+    // Add new canonical link with proper URL based on locale and dish slug
+    const link = this.document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+
+    // Get dish slug from current route
+    const baseUrl = environment.BASE_URL;
+    let canonicalUrl = baseUrl;
+
+    if (this.localeID.startsWith('vi')) {
+      canonicalUrl = `${baseUrl}/vi/voting/create`;
+    } else {
+      canonicalUrl = `${baseUrl}/en/voting/create`;
     }
+
+    link.setAttribute('href', canonicalUrl);
+    this.document.head.appendChild(link);
+  }
+
+  private addHrefLangLinks() {
+    // Remove existing hreflang links if they exist
+    const existingHrefLangs = this.document.querySelectorAll(
+      'link[rel="alternate"][hreflang]'
+    );
+    existingHrefLangs.forEach((link) => link.remove());
+
+    const baseUrl = environment.BASE_URL;
+
+    // Add Vietnamese version
+    const viLink = this.document.createElement('link');
+    viLink.setAttribute('rel', 'alternate');
+    viLink.setAttribute('hreflang', 'vi');
+    viLink.setAttribute('href', `${baseUrl}/vi/voting/create`);
+    this.document.head.appendChild(viLink);
+
+    // Add English version
+    const enLink = this.document.createElement('link');
+    enLink.setAttribute('rel', 'alternate');
+    enLink.setAttribute('hreflang', 'en');
+    enLink.setAttribute('href', `${baseUrl}/en/voting/create`);
+    this.document.head.appendChild(enLink);
+
+    // Add x-default for default language
+    const defaultLink = this.document.createElement('link');
+    defaultLink.setAttribute('rel', 'alternate');
+    defaultLink.setAttribute('hreflang', 'x-default');
+    defaultLink.setAttribute('href', `${baseUrl}/en/voting/create`);
+    this.document.head.appendChild(defaultLink);
+  }
 
   private removeCanonicalLink(): void {
     const head = this.document.querySelector('head');

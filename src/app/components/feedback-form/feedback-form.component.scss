@@ -1,0 +1,133 @@
+.feedback-dialog {
+  min-width: 500px;
+  max-width: 600px;
+  
+  @media (max-width: 640px) {
+    min-width: unset;
+    max-width: 100%;
+  }
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 24px 0;
+  margin-bottom: 8px;
+
+  h2 {
+    margin: 0;
+    flex: 1;
+  }
+
+  .close-button {
+    margin-top: -8px;
+    margin-right: -8px;
+  }
+}
+
+.dialog-content {
+  padding: 0 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.rating-section {
+  padding: 20px;
+  background: linear-gradient(135deg, #F3A44615 0%, #A0623515 100%);
+  border-radius: 12px;
+  border: 2px dashed #F3A44640;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease;
+  outline: none;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #d1d5db;
+    transition: all 0.2s ease;
+
+    &.filled {
+      color: #fbbf24;
+      filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.3));
+    }
+  }
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  &:active {
+    transform: scale(1.05);
+  }
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.dialog-actions {
+  padding: 16px 24px 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 24px;
+}
+
+.cancel-button {
+  min-width: 100px;
+}
+
+.submit-button {
+  min-width: 160px;
+  background: linear-gradient(135deg, #F3A446 0%, #A06235 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:not(:disabled):hover {
+    background: linear-gradient(135deg, #E09335 0%, #8F5530 100%);
+    box-shadow: 0 4px 12px rgba(243, 164, 70, 0.4);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

@@ -1,0 +1,140 @@
+<div class="feedback-dialog">
+  <!-- Header -->
+  <div class="dialog-header">
+    <h2 mat-dialog-title class="text-2xl font-bold text-gray-800 flex items-center gap-3">
+      <mat-icon class="mr-1">feedback</mat-icon>
+      <span i18n>Share Your Experience</span>
+    </h2>
+    <button 
+      mat-icon-button 
+      [mat-dialog-close]="null"
+      class="close-button"
+      i18n-aria-label
+      aria-label="Close dialog"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <p i18n class="text-gray-600 mb-6">
+      We'd love to hear your thoughts! Your feedback helps us improve.
+    </p>
+
+    <form [formGroup]="feedbackForm" class="space-y-6">
+      <!-- Rating Section -->
+      <div class="rating-section">
+        <label i18n class="block text-sm font-semibold text-gray-700 mb-3">
+          How would you rate your experience? *
+        </label>
+        <div class="rating-stars">
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <button
+              type="button"
+              class="star-button"
+              [class.selected]="star <= selectedRating()"
+              (click)="setRating(star)"
+              (mouseenter)="hoverRating.set(star)"
+              (mouseleave)="hoverRating.set(0)"
+              i18n-aria-label
+              [attr.aria-label]="'Rate ' + star + ' stars'"
+            >
+              <mat-icon [class.filled]="star <= (hoverRating() || selectedRating())">
+                {{ star <= (hoverRating() || selectedRating()) ? 'star' : 'star_border' }}
+              </mat-icon>
+            </button>
+          }
+        </div>
+        @if (feedbackForm.get('rating')?.touched && feedbackForm.get('rating')?.hasError('required')) {
+          <p i18n class="error-text">Please select a rating</p>
+        }
+      </div>
+
+      <!-- Name Field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label i18n>Your Name</mat-label>
+        <mat-icon matPrefix class="text-gray-400">person</mat-icon>
+        <input
+          matInput
+          formControlName="userName"
+          i18n-placeholder
+          placeholder="John Doe"
+        />
+      </mat-form-field>
+
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label i18n>Email Address</mat-label>
+        <mat-icon matPrefix class="text-gray-400">email</mat-icon>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          i18n-placeholder
+          placeholder="your@email.com"
+        />
+        @if (feedbackForm.get('email')?.hasError('required')) {
+          <mat-error i18n>Email is required</mat-error>
+        }
+        @if (feedbackForm.get('email')?.hasError('email')) {
+          <mat-error i18n>Please enter a valid email</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Comment Field -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label i18n>Your Feedback</mat-label>
+        <mat-icon matPrefix class="text-gray-400 align-top mt-3">comment</mat-icon>
+        <textarea
+          matInput
+          formControlName="comment"
+          i18n-placeholder
+          placeholder="Tell us what you think..."
+          rows="5"
+          maxlength="1000"
+        ></textarea>
+        <mat-hint align="end">
+          {{ feedbackForm.get('comment')?.value?.length || 0 }}/1000
+        </mat-hint>
+        @if (feedbackForm.get('comment')?.hasError('required')) {
+          <mat-error i18n>Feedback comment is required</mat-error>
+        }
+        @if (feedbackForm.get('comment')?.hasError('minlength')) {
+          <mat-error i18n>Please provide at least 10 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Page Field (Hidden) -->
+      <input type="hidden" formControlName="page" />
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button
+      mat-stroked-button
+      [mat-dialog-close]="null"
+      class="cancel-button"
+    >
+      <span i18n>Cancel</span>
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="submitFeedback()"
+      [disabled]="feedbackForm.invalid || isSubmitting()"
+      class="submit-button"
+    >
+      @if (isSubmitting()) {
+        <span class="flex items-center gap-2">
+          <mat-icon class="animate-spin">refresh</mat-icon>
+          <span i18n>Submitting...</span>
+        </span>
+      } @else {
+        <span class="flex items-center gap-2">
+          <mat-icon>send</mat-icon>
+          <span i18n>Submit Feedback</span>
+        </span>
+      }
+    </button>
+  </mat-dialog-actions>
+</div>

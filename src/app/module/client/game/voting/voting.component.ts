@@ -347,6 +347,12 @@ export class VotingComponent implements OnInit, OnDestroy {
   }
 
   getTotalVotesBySlug(slug: string): number {
+    const foundDishVoteItem = this.dishVote?.dishVoteItems.find(
+      (item) => item.slug === slug
+    );
+    if (foundDishVoteItem && foundDishVoteItem.isCustom) {
+      return foundDishVoteItem.voteAnonymous.length;
+    }
     const dish = this.getDishBySlug(slug);
     if (!dish) return 0;
     return this.getTotalVotes(dish.slug);
