@@ -49,6 +49,238 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://eatwhat.io.vn/en/dish/sandwich-cuon-ca-hop-chien-gion</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/scotch-egg-thit-boc-trung-long-dao</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/sot-tieu-den</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-chien-muoi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-cot-let-chien-xu</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-cot-let-sot-ca-chua</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-cot-let-ap-chao-kem-tao-rim</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/sup-hai-san-tuyet-yen</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-sot-cam</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/sushi-tom-tempura</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/Thit-ba-chi-rang-muoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ba-roi-ap-chao</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-ba-roi-chien-nuoc-mam</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-chien-ngu-vi-sot-bo-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/kho-bo</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thom-say-muoi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/heo-quay-chay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-heo-chien-rieng</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-tho-chien-gion</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-vien-chien-gion-boc-trung-muoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-rang-chay-canh</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/toi-confit</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-vien-chien-rim-toi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/top-mo-sot-ca-chua</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-chien-nam-kim-cham</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-cuon-cai-bo-xoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-cut-chien-sa-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-cuon-trai-tim</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/xuc-xich-chien-bo-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/xuc-xich-loc-xoay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-sot-chanh-day</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/mut-tao-tay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ca-chua-nhoi-thit-chien-sot-ca</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/hoanh-thanh-cua-pho-mai</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/banh-bao-chay-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/bach-tuoc-chien-bo-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ba-roi-chay-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ba-khia-rang-muoi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ba-chi-sot-tac</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ba-chi-rang-rieng</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ba-chi-bo-cuon-nam-kim-cham</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/xuc-xich-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/tom-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/lap-vit</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/tho-rang-muoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-confit</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/bo-cuon-kieu-duc</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/banh-khoai-tay-pho-mai</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/suon-chien-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/nui-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/long-heo-chien-gion</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/cha-muc</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ca-ngu-ap-chao</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/ca-co-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-chien-la-lot-la-mo-va-ngai-cuu</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-chien-chay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/trung-chien-ca-chua-kim-chi-va-rau-cu</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/dish/thit-heo-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
     <loc>https://eatwhat.io.vn/en/dish/thit-bo-chien</loc>
     <priority>1</priority>
   </url>
@@ -2217,7 +2449,7 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/en/dish/mi-y</loc>
+    <loc>https://eatwhat.io.vn/en/dish/sinh-to-bo-chuoi-kiwi</loc>
     <priority>1</priority>
   </url>
   <url>
@@ -2253,7 +2485,7 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/en/dish/sinh-to-bo-chuoi-kiwi</loc>
+    <loc>https://eatwhat.io.vn/en/dish/banh-mi-dau-nhon</loc>
     <priority>1</priority>
   </url>
   <url>
@@ -2269,11 +2501,11 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/en/dish/banh-mi-chao</loc>
+    <loc>https://eatwhat.io.vn/en/dish/mi-y</loc>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/en/dish/banh-mi-dau-nhon</loc>
+    <loc>https://eatwhat.io.vn/en/dish/banh-mi-chao</loc>
     <priority>1</priority>
   </url>
   <url>
@@ -2517,16 +2749,248 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/en/ingredient/ca-hoi</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://eatwhat.io.vn/en/ingredient/mat-ong</loc>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eatwhat.io.vn/en/ingredient/dau-an</loc>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/en/ingredient/ca-hoi</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/sandwich-cuon-ca-hop-chien-gion</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/scotch-egg-thit-boc-trung-long-dao</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/sot-tieu-den</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-chien-muoi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-cot-let-chien-xu</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-cot-let-sot-ca-chua</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-cot-let-ap-chao-kem-tao-rim</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/sup-hai-san-tuyet-yen</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-sot-cam</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/sushi-tom-tempura</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/Thit-ba-chi-rang-muoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ba-roi-ap-chao</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-ba-roi-chien-nuoc-mam</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-chien-ngu-vi-sot-bo-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/kho-bo</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thom-say-muoi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/heo-quay-chay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-heo-chien-rieng</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-tho-chien-gion</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-vien-chien-gion-boc-trung-muoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-rang-chay-canh</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/toi-confit</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-vien-chien-rim-toi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/top-mo-sot-ca-chua</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-chien-nam-kim-cham</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-cuon-cai-bo-xoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-cut-chien-sa-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-cuon-trai-tim</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/xuc-xich-chien-bo-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/xuc-xich-loc-xoay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-sot-chanh-day</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/mut-tao-tay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ca-chua-nhoi-thit-chien-sot-ca</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/hoanh-thanh-cua-pho-mai</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/banh-bao-chay-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/bach-tuoc-chien-bo-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ba-roi-chay-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ba-khia-rang-muoi-ot</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ba-chi-sot-tac</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ba-chi-rang-rieng</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ba-chi-bo-cuon-nam-kim-cham</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/xuc-xich-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/tom-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/lap-vit</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/tho-rang-muoi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-confit</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/bo-cuon-kieu-duc</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/banh-khoai-tay-pho-mai</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/suon-chien-toi</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/nui-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/long-heo-chien-gion</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/cha-muc</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ca-ngu-ap-chao</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/ca-co-chien</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-chien-la-lot-la-mo-va-ngai-cuu</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-chien-chay</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/trung-chien-ca-chua-kim-chi-va-rau-cu</loc>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/dish/thit-heo-chien</loc>
+    <priority>1</priority>
   </url>
   <url>
     <loc>https://eatwhat.io.vn/vi/dish/thit-bo-chien</loc>
@@ -4697,7 +5161,7 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/vi/dish/mi-y</loc>
+    <loc>https://eatwhat.io.vn/vi/dish/sinh-to-bo-chuoi-kiwi</loc>
     <priority>1</priority>
   </url>
   <url>
@@ -4733,7 +5197,7 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/vi/dish/sinh-to-bo-chuoi-kiwi</loc>
+    <loc>https://eatwhat.io.vn/vi/dish/banh-mi-dau-nhon</loc>
     <priority>1</priority>
   </url>
   <url>
@@ -4749,11 +5213,11 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/vi/dish/banh-mi-chao</loc>
+    <loc>https://eatwhat.io.vn/vi/dish/mi-y</loc>
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/vi/dish/banh-mi-dau-nhon</loc>
+    <loc>https://eatwhat.io.vn/vi/dish/banh-mi-chao</loc>
     <priority>1</priority>
   </url>
   <url>
@@ -4997,15 +5461,15 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eatwhat.io.vn/vi/ingredient/ca-hoi</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://eatwhat.io.vn/vi/ingredient/mat-ong</loc>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eatwhat.io.vn/vi/ingredient/dau-an</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eatwhat.io.vn/vi/ingredient/ca-hoi</loc>
     <priority>0.7</priority>
   </url>
 </urlset>
