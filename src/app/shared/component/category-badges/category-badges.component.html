@@ -1,9 +1,15 @@
-<div class="flex flex-nowrap gap-2">
-    @for (category of categories; track category) {
+<div class="flex flex-nowrap gap-2 items-center">
+    @for (category of visibleCategories; track category) {
     <span
         [class]="'px-2 py-1 rounded-lg text-sm font-medium whitespace-nowrap flex-shrink-0 category-neumorphic_dark ' + getColorForCategory(category)"
         [title]="category">
         {{ category | categoryTranslate }}
+    </span>
+    }
+    @if (remainingCount > 0) {
+    <span class="plus-badge px-3 py-1 rounded-lg text-sm font-bold whitespace-nowrap flex-shrink-0 bg-white/10 text-white backdrop-blur-sm border border-white/20"
+        [title]="categories.slice(maxVisible).join(', ')">
+        +{{ remainingCount }}
     </span>
     }
 </div>
