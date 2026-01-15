@@ -23,7 +23,6 @@ import { bearerInterceptor } from './interceptor/bearer.interceptor';
 import { tokenRefreshInterceptor } from './interceptor/token-refresh.interceptor';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomPaginatorIntl } from './shared/paginator/custom-paginator-intl';
-import { MatIconRegistry } from '@angular/material/icon';
 
 export const appConfig: ApplicationConfig = {
   providers: [
