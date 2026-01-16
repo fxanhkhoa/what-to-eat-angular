@@ -128,6 +128,14 @@ export const routes: Routes = [
       import('./module/login/login.component').then((m) => m.LoginComponent),
   },
   {
+    path: 'profile',
+    canActivate: [authenticationGuard],
+    loadComponent: () =>
+      import('./module/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
+  },
+  {
     path: 'admin',
     loadComponent: () =>
       import('./module/admin/admin.component').then((m) => m.AdminComponent),
