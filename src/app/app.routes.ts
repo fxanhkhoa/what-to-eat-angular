@@ -50,6 +50,14 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'my-dishes',
+        canActivate: [authenticationGuard],
+        loadComponent: () =>
+          import('./module/client/user-dish-list/user-dish-list.component').then(
+            (m) => m.UserDishListComponent
+          ),
+      },
+      {
         path: 'game',
         children: [
           {
@@ -126,6 +134,14 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./module/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'profile',
+    canActivate: [authenticationGuard],
+    loadComponent: () =>
+      import('./module/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
   },
   {
     path: 'admin',

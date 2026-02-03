@@ -1,0 +1,112 @@
+<section id="main" class="p-5 md:p-10 mt-20 flex flex-col gap-5">
+
+    <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header Section -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-white mb-4" i18n>My Dish Lists</h1>
+                <p class="text-gray-300 text-lg" i18n>
+                    Manage your saved dishes, favorites, and collections
+                </p>
+            </div>
+
+            <!-- Content Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Saved Dishes Card -->
+                <mat-card class="glassmorphic_dark hover:scale-105 transition-transform duration-300">
+                    <mat-card-header>
+                        <mat-icon mat-card-avatar class="text-blue-400 text-5xl">bookmark</mat-icon>
+                        <mat-card-title class="text-white text-2xl">
+                            <span i18n>Saved Dishes</span>
+                        </mat-card-title>
+                        <mat-card-subtitle class="text-gray-400">
+                            <span i18n>Your bookmarked recipes</span>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="mt-4">
+                        <p class="text-gray-300" i18n>
+                            Quick access to all dishes you've saved for later. Perfect for meal planning!
+                        </p>
+                        <div class="mt-4 text-3xl font-bold text-blue-400">
+                            0 <span class="text-sm text-gray-400" i18n>dishes</span>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="flex justify-end">
+                        <button mat-raised-button color="primary" disabled>
+                            <mat-icon>arrow_forward</mat-icon>
+                            <span i18n>View All</span>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+
+                <!-- Favorites Card -->
+                <mat-card class="glassmorphic_dark hover:scale-105 transition-transform duration-300">
+                    <mat-card-header>
+                        <mat-icon mat-card-avatar class="text-red-400 text-5xl">favorite</mat-icon>
+                        <mat-card-title class="text-white text-2xl">
+                            <span i18n>Favorites</span>
+                        </mat-card-title>
+                        <mat-card-subtitle class="text-gray-400">
+                            <span i18n>Your most loved dishes</span>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="mt-4">
+                        <p class="text-gray-300" i18n>
+                            A collection of your favorite recipes that you absolutely love.
+                        </p>
+                        <div class="mt-4 text-3xl font-bold text-red-400">
+                            0 <span class="text-sm text-gray-400" i18n>dishes</span>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="flex justify-end">
+                        <button mat-raised-button color="accent" disabled>
+                            <mat-icon>arrow_forward</mat-icon>
+                            <span i18n>View All</span>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+
+                <!-- Collections Card -->
+                <mat-card class="glassmorphic_dark hover:scale-105 transition-transform duration-300">
+                    <mat-card-header>
+                        <mat-icon mat-card-avatar class="text-green-400 text-5xl">collections</mat-icon>
+                        <mat-card-title class="text-white text-2xl">
+                            <span i18n>Collections</span>
+                        </mat-card-title>
+                        <mat-card-subtitle class="text-gray-400">
+                            <span i18n>Organized dish groups</span>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="mt-4">
+                        <p class="text-gray-300" i18n>
+                            Create custom collections to organize your dishes by theme or occasion.
+                        </p>
+                        <div class="mt-4 text-3xl font-bold text-green-400">
+                            0 <span class="text-sm text-gray-400" i18n>collections</span>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions class="flex justify-end">
+                        <button mat-raised-button color="primary" disabled>
+                            <mat-icon>arrow_forward</mat-icon>
+                            <span i18n>View All</span>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+
+            <!-- Coming Soon Banner -->
+            <div class="glassmorphic_dark rounded-lg p-8 text-center">
+                <mat-icon class="text-yellow-400 text-6xl mb-4">construction</mat-icon>
+                <h2 class="text-2xl font-bold text-white mb-4" i18n>Coming Soon!</h2>
+                <p class="text-gray-300 text-lg mb-6" i18n>
+                    We're working hard to bring you an amazing dish management experience.
+                    Soon you'll be able to save, organize, and share your favorite dishes!
+                </p>
+                <button mat-raised-button color="primary" routerLink="/dish">
+                    <mat-icon>restaurant</mat-icon>
+                    <span i18n>Explore Dishes</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
