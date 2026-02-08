@@ -13,9 +13,16 @@ import { WarningSnackbarComponent } from '../component/warning-snackbar/warning-
   providedIn: 'root',
 })
 export class ToastService {
-  constructor(private snackBar: MatSnackBar, public dialog: MatDialog) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+  ) {}
 
-  showSuccess(mainMsg: string, subMsg: string, duration: number) {
+  showSuccess(
+    mainMsg: string = 'Success',
+    subMsg: string = 'operation completed successfully',
+    duration: number = 1500,
+  ) {
     this.snackBar.openFromComponent(SuccessSnackbarComponent, {
       duration,
       data: {
@@ -27,7 +34,7 @@ export class ToastService {
     });
   }
 
-  showError(mainMsg: string, subMsg: string, duration: number) {
+  showError(mainMsg: string, subMsg: string = 'An error occurred', duration: number = 1500) {
     this.snackBar.openFromComponent(ErrorSnackbarComponent, {
       duration,
       data: {
@@ -39,7 +46,7 @@ export class ToastService {
     });
   }
 
-   showWarning(mainMsg: string, subMsg: string, duration: number) {
+  showWarning(mainMsg: string, subMsg: string, duration: number = 1500) {
     this.snackBar.openFromComponent(WarningSnackbarComponent, {
       duration,
       data: {
@@ -59,7 +66,7 @@ export class ToastService {
 
   showConfirm(
     mainMsg?: string,
-    subMsg?: string
+    subMsg?: string,
   ): MatDialogRef<ConfirmDialogComponent, boolean> {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -73,7 +80,7 @@ export class ToastService {
   }
 
   showImage(
-    imageUrl: string | SafeUrl | undefined
+    imageUrl: string | SafeUrl | undefined,
   ): MatDialogRef<ImageViewerComponent, any> | null {
     if (typeof imageUrl === undefined) {
       return null;
@@ -91,7 +98,7 @@ export class ToastService {
     mainMsg: string,
     subMsg: string,
     duration: number,
-    redirectUrl: string
+    redirectUrl: string,
   ) {
     this.snackBar.openFromComponent(NotificationSnackbarComponent, {
       horizontalPosition: 'end',
