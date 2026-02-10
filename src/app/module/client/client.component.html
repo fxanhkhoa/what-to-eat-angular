@@ -315,7 +315,7 @@
                 <!-- Quick Links -->
                 <div class="col-span-1">
                     <h3 class="text-lg font-semibold text-white mb-4" i18n>Quick Links</h3>
-                    <div class="space-y-2">
+                    <div class="grid grid-cols-1 space-y-2">
                         <a routerLink="/" class="block text-gray-400 hover:text-white transition-colors duration-300"
                             i18n>Home</a>
                         <a routerLink="/dish"
@@ -332,7 +332,7 @@
                 <!-- Categories -->
                 <div class="col-span-1">
                     <h3 class="text-lg font-semibold text-white mb-4" i18n>Categories</h3>
-                    <div class="space-y-2">
+                    <div class="grid grid-cols-1 space-y-2">
                         @for (item of mealCategories; track item) {
                         <a href="#" class="block text-gray-400 hover:text-white transition-colors duration-300">
                             {{item | categoryTranslate}}

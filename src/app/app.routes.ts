@@ -52,10 +52,29 @@ export const routes: Routes = [
       {
         path: 'my-dishes',
         canActivate: [authenticationGuard],
-        loadComponent: () =>
-          import('./module/client/user-dish-list/user-dish-list.component').then(
-            (m) => m.UserDishListComponent
-          ),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list.component').then(
+                (m) => m.UserDishListComponent
+              ),
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component').then(
+                (m) => m.UserDishListCreateComponent
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component').then(
+                (m) => m.UserDishListCreateComponent
+              ),
+          },
+        ],
       },
       {
         path: 'game',

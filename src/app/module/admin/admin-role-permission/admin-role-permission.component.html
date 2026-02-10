@@ -10,7 +10,8 @@
     <div class="mb-4">
         <mat-form-field appearance="outline" class="w-full">
             <mat-label i18n>Search</mat-label>
-            <input matInput [(ngModel)]="keyword" (keyup.enter)="onSearch()" placeholder="Search by name" i18n-placeholder>
+            <input matInput [(ngModel)]="keyword" (keyup.enter)="onSearch()" placeholder="Search by name"
+                i18n-placeholder>
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </div>
@@ -36,7 +37,7 @@
                     <mat-expansion-panel class="mat-elevation-z0">
                         <mat-expansion-panel-header>
                             <mat-panel-title class="text-sm">
-                                {{ element.permission?.length || 0 }} <span i18n>permissions</span>
+                                {{ element.permission?.length || 0 }} &nbsp; <span i18n>permissions</span>
                             </mat-panel-title>
                             <mat-panel-description class="text-xs text-gray-600" i18n>
                                 Click to view details
@@ -64,14 +65,16 @@
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef i18n>Actions</th>
                 <td mat-cell *matCellDef="let element">
-                    <button mat-icon-button [routerLink]="['/admin/role-permission/edit', element._id]"
-                        matTooltip="Edit" i18n-matTooltip>
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)="deleteRolePermission(element._id)" matTooltip="Delete"
-                        color="warn" i18n-matTooltip>
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                    <div class="flex gap-2">
+                        <button mat-mini-fab [routerLink]="['/admin/role-permission/edit', element._id]"
+                            matTooltip="Edit" i18n-matTooltip>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteRolePermission(element._id)" matTooltip="Delete"
+                            color="warn" i18n-matTooltip>
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
                 </td>
             </ng-container>
 

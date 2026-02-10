@@ -20,7 +20,9 @@ import { SelectedDishModalComponent } from '../selected-dish-modal/selected-dish
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FlippingCardPickerComponent } from './flipping-card-picker/flipping-card-picker.component';
+import { FlippingCardCollectionPickerComponent } from './flipping-card-collection-picker/flipping-card-collection-picker.component';
 import { environment } from '@/environments/environment';
 
 @Component({
@@ -30,7 +32,9 @@ import { environment } from '@/environments/environment';
     MatProgressSpinnerModule,
     MatIconModule,
     MatButtonModule,
+    MatTabsModule,
     FlippingCardPickerComponent,
+    FlippingCardCollectionPickerComponent,
   ],
   templateUrl: './flipping-card.component.html',
   styleUrl: './flipping-card.component.scss',

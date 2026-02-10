@@ -15,135 +15,26 @@
                         </p>
                     </div>
                     <button mat-fab extended color="primary" 
-                        (click)="toggleCreateForm()"
+                        (click)="navigateToCreate()"
                         class="!bg-gradient-to-r !from-blue-500 !to-purple-500 hover:!from-blue-600 hover:!to-purple-600 !shadow-lg hover:!shadow-xl transition-all duration-300 !px-8">
-                        <mat-icon>{{ showCreateForm() ? 'close' : 'add' }}</mat-icon>
-                        <span i18n>{{ showCreateForm() ? 'Cancel' : 'New Collection' }}</span>
+                        <mat-icon>add</mat-icon>
+                        <span i18n>New Collection</span>
                     </button>
                 </div>
             </div>
         </div>
-
-        <!-- Create Collection Form -->
-        @if (showCreateForm()) {
-        <div class="mb-8 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10 p-8 shadow-2xl animate-in slide-in-from-top duration-500">
-            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <mat-icon class="text-purple-400">add_circle</mat-icon>
-                <span i18n>Create New Collection</span>
-            </h2>
-            <form [formGroup]="collectionForm" (ngSubmit)="createCollection()" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Collection Name -->
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-label i18n>Collection Name</mat-label>
-                        <input matInput formControlName="name" placeholder="e.g., My Birthday Dishes" i18n-placeholder>
-                        <mat-icon matPrefix class="text-blue-400 mr-2">label</mat-icon>
-                        <mat-error *ngIf="collectionForm.get('name')?.hasError('required')" i18n>Name is required</mat-error>
-                    </mat-form-field>
-
-                    <!-- Occasion -->
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-label i18n>Occasion</mat-label>
-                        <mat-select formControlName="occasion">
-                            <mat-option value="">None</mat-option>
-                            @for (occasion of occasions; track occasion) {
-                            <mat-option [value]="occasion">{{ occasion | titlecase }}</mat-option>
-                            }
-                        </mat-select>
-                        <mat-icon matPrefix class="text-purple-400 mr-2">event</mat-icon>
-                    </mat-form-field>
-                </div>
-
-                <!-- Description -->
-                <mat-form-field appearance="outline" class="w-full">
-                    <mat-label i18n>Description</mat-label>
-                    <textarea matInput formControlName="description" rows="3" 
-                        placeholder="Describe your collection..." i18n-placeholder></textarea>
-                    <mat-icon matPrefix class="text-green-400 mr-2">description</mat-icon>
-                </mat-form-field>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Event Date -->
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-label i18n>Event Date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="eventDate">
-                        <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-
-                    <!-- Icon -->
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-label i18n>Icon</mat-label>
-                        <mat-select formControlName="icon">
-                            @for (icon of availableIcons; track icon.name) {
-                            <mat-option [value]="icon.name">
-                                <div class="flex items-center gap-2">
-                                    <mat-icon>{{ icon.name }}</mat-icon>
-                                    <span>{{ icon.label }}</span>
-                                </div>
-                            </mat-option>
-                            }
-                        </mat-select>
-                        <mat-icon matPrefix class="mr-2">{{ collectionForm.get('icon')?.value }}</mat-icon>
-                    </mat-form-field>
-
-                    <!-- Color -->
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-label i18n>Color</mat-label>
-                        <mat-select formControlName="color">
-                            @for (color of availableColors; track color.value) {
-                            <mat-option [value]="color.value">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-6 h-6 rounded-full border-2 border-white" 
-                                        [style.background-color]="color.value"></span>
-                                    <span>{{ color.name }}</span>
-                                </div>
-                            </mat-option>
-                            }
-                        </mat-select>
-                        <span matPrefix class="w-6 h-6 rounded-full border-2 border-white mr-2" 
-                            [style.background-color]="collectionForm.get('color')?.value"></span>
-                    </mat-form-field>
-                </div>
-
-                <!-- Public Toggle -->
-                <div class="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
-                    <mat-slide-toggle formControlName="isPublic" color="primary">
-                        <span class="text-white" i18n>Make this collection public</span>
-                    </mat-slide-toggle>
-                    <mat-icon class="text-gray-400 text-sm" matTooltip="Public collections can be viewed by others" i18n-matTooltip>
-                        info
-                    </mat-icon>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="flex justify-end gap-4">
-                    <button mat-stroked-button type="button" (click)="toggleCreateForm()" class="!text-white !border-white/20">
-                        <mat-icon>close</mat-icon>
-                        <span i18n>Cancel</span>
-                    </button>
-                    <button mat-raised-button type="submit" 
-                        [disabled]="collectionForm.invalid || loading()"
-                        class="!bg-gradient-to-r !from-blue-500 !to-purple-500 !text-white hover:!shadow-xl transition-all">
-                        <mat-icon>save</mat-icon>
-                        <span i18n>Create Collection</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-        }
 
         <!-- Collections Grid -->
         @if (loading()) {
         <div class="flex justify-center items-center py-20">
             <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
         </div>
-        } @else if (collections().length === 0 && !showCreateForm()) {
+        } @else if (collections().length === 0) {
         <div class="text-center py-20 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10">
             <mat-icon class="text-gray-400 text-8xl mb-4">collections_bookmark</mat-icon>
             <h3 class="text-2xl font-bold text-white mb-2" i18n>No Collections Yet</h3>
             <p class="text-gray-400 mb-6" i18n>Create your first collection to get started!</p>
-            <button mat-raised-button color="primary" (click)="toggleCreateForm()">
+            <button mat-raised-button color="primary" (click)="navigateToCreate()">
                 <mat-icon>add</mat-icon>
                 <span i18n>Create Collection</span>
             </button>
@@ -180,7 +71,7 @@
                             <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button mat-menu-item>
+                            <button mat-menu-item (click)="navigateToEdit(collection._id)">
                                 <mat-icon class="text-blue-400">edit</mat-icon>
                                 <span i18n>Edit</span>
                             </button>
@@ -246,6 +137,7 @@
                             }
                         </div>
                         <button mat-raised-button 
+                            (click)="navigateToEdit(collection._id)"
                             [style.background-color]="collection.color || '#3b82f6'"
                             class="!text-white !shadow-lg hover:!shadow-xl transition-all">
                             <mat-icon>arrow_forward</mat-icon>

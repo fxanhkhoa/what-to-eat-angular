@@ -1,11 +1,13 @@
 <!-- Chat Container -->
 <div cdkDrag [cdkDragFreeDragPosition]="dragPosition"
-    class="fixed bottom-16 right-5 w-80 md:w-96 h-96 rounded-lg z-50 cursor-grab">
-    <div class="flex w-full justify-end pb-2">
+    class="fixed bottom-16 right-5 w-80 md:w-96 h-96 rounded-lg z-50 cursor-grab transition-all"
+    [class.pointer-events-none]="!isPanelExpanded()"
+    [class.h-auto]="!isPanelExpanded()">
+    <div class="flex w-full justify-end pb-2" [class.pointer-events-auto]="!isPanelExpanded()">
         <mat-icon svgIcon="drag" cdkDragHandle></mat-icon>
     </div>
-    <mat-accordion>
-        <mat-expansion-panel [expanded]="true">
+    <mat-accordion class="pointer-events-auto">
+        <mat-expansion-panel [expanded]="true" (opened)="isPanelExpanded.set(true)" (closed)="isPanelExpanded.set(false)">
             <mat-expansion-panel-header class="!bg-gradient-to-br !from-[#F3A446] !to-[#A06235]">
                 <div class="w-full pr-4">
                     <div class="flex w-full items-center justify-between w-full">
