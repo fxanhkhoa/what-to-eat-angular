@@ -1,112 +1,156 @@
-<section id="main" class="p-5 md:p-10 mt-20 flex flex-col gap-5">
-
-    <div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto">
-            <!-- Header Section -->
-            <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-white mb-4" i18n>My Dish Lists</h1>
-                <p class="text-gray-300 text-lg" i18n>
-                    Manage your saved dishes, favorites, and collections
-                </p>
-            </div>
-
-            <!-- Content Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                <!-- Saved Dishes Card -->
-                <mat-card class="glassmorphic_dark hover:scale-105 transition-transform duration-300">
-                    <mat-card-header>
-                        <mat-icon mat-card-avatar class="text-blue-400 text-5xl">bookmark</mat-icon>
-                        <mat-card-title class="text-white text-2xl">
-                            <span i18n>Saved Dishes</span>
-                        </mat-card-title>
-                        <mat-card-subtitle class="text-gray-400">
-                            <span i18n>Your bookmarked recipes</span>
-                        </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content class="mt-4">
-                        <p class="text-gray-300" i18n>
-                            Quick access to all dishes you've saved for later. Perfect for meal planning!
-                        </p>
-                        <div class="mt-4 text-3xl font-bold text-blue-400">
-                            0 <span class="text-sm text-gray-400" i18n>dishes</span>
+<section id="main" class="min-h-screen p-5 md:p-10 mt-20 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header Section with Glassmorphic Card -->
+        <div class="relative mb-12 overflow-hidden rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10 p-8 shadow-2xl">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10"></div>
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center gap-3 justify-center md:justify-start mb-3">
+                            <mat-icon class="text-blue-400 text-5xl">collections_bookmark</mat-icon>
+                            <h1 class="text-4xl md:text-5xl font-bold text-white" i18n>My Dish Collections</h1>
                         </div>
-                    </mat-card-content>
-                    <mat-card-actions class="flex justify-end">
-                        <button mat-raised-button color="primary" disabled>
-                            <mat-icon>arrow_forward</mat-icon>
-                            <span i18n>View All</span>
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
-
-                <!-- Favorites Card -->
-                <mat-card class="glassmorphic_dark hover:scale-105 transition-transform duration-300">
-                    <mat-card-header>
-                        <mat-icon mat-card-avatar class="text-red-400 text-5xl">favorite</mat-icon>
-                        <mat-card-title class="text-white text-2xl">
-                            <span i18n>Favorites</span>
-                        </mat-card-title>
-                        <mat-card-subtitle class="text-gray-400">
-                            <span i18n>Your most loved dishes</span>
-                        </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content class="mt-4">
-                        <p class="text-gray-300" i18n>
-                            A collection of your favorite recipes that you absolutely love.
+                        <p class="text-gray-300 text-lg" i18n>
+                            Create and organize your favorite dishes for any occasion
                         </p>
-                        <div class="mt-4 text-3xl font-bold text-red-400">
-                            0 <span class="text-sm text-gray-400" i18n>dishes</span>
-                        </div>
-                    </mat-card-content>
-                    <mat-card-actions class="flex justify-end">
-                        <button mat-raised-button color="accent" disabled>
-                            <mat-icon>arrow_forward</mat-icon>
-                            <span i18n>View All</span>
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
-
-                <!-- Collections Card -->
-                <mat-card class="glassmorphic_dark hover:scale-105 transition-transform duration-300">
-                    <mat-card-header>
-                        <mat-icon mat-card-avatar class="text-green-400 text-5xl">collections</mat-icon>
-                        <mat-card-title class="text-white text-2xl">
-                            <span i18n>Collections</span>
-                        </mat-card-title>
-                        <mat-card-subtitle class="text-gray-400">
-                            <span i18n>Organized dish groups</span>
-                        </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content class="mt-4">
-                        <p class="text-gray-300" i18n>
-                            Create custom collections to organize your dishes by theme or occasion.
-                        </p>
-                        <div class="mt-4 text-3xl font-bold text-green-400">
-                            0 <span class="text-sm text-gray-400" i18n>collections</span>
-                        </div>
-                    </mat-card-content>
-                    <mat-card-actions class="flex justify-end">
-                        <button mat-raised-button color="primary" disabled>
-                            <mat-icon>arrow_forward</mat-icon>
-                            <span i18n>View All</span>
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
-            </div>
-
-            <!-- Coming Soon Banner -->
-            <div class="glassmorphic_dark rounded-lg p-8 text-center">
-                <mat-icon class="text-yellow-400 text-6xl mb-4">construction</mat-icon>
-                <h2 class="text-2xl font-bold text-white mb-4" i18n>Coming Soon!</h2>
-                <p class="text-gray-300 text-lg mb-6" i18n>
-                    We're working hard to bring you an amazing dish management experience.
-                    Soon you'll be able to save, organize, and share your favorite dishes!
-                </p>
-                <button mat-raised-button color="primary" routerLink="/dish">
-                    <mat-icon>restaurant</mat-icon>
-                    <span i18n>Explore Dishes</span>
-                </button>
+                    </div>
+                    <button mat-fab extended color="primary" 
+                        (click)="navigateToCreate()"
+                        class="!bg-gradient-to-r !from-blue-500 !to-purple-500 hover:!from-blue-600 hover:!to-purple-600 !shadow-lg hover:!shadow-xl transition-all duration-300 !px-8">
+                        <mat-icon>add</mat-icon>
+                        <span i18n>New Collection</span>
+                    </button>
+                </div>
             </div>
         </div>
+
+        <!-- Collections Grid -->
+        @if (loading()) {
+        <div class="flex justify-center items-center py-20">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        </div>
+        } @else if (collections().length === 0) {
+        <div class="text-center py-20 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10">
+            <mat-icon class="text-gray-400 text-8xl mb-4">collections_bookmark</mat-icon>
+            <h3 class="text-2xl font-bold text-white mb-2" i18n>No Collections Yet</h3>
+            <p class="text-gray-400 mb-6" i18n>Create your first collection to get started!</p>
+            <button mat-raised-button color="primary" (click)="navigateToCreate()">
+                <mat-icon>add</mat-icon>
+                <span i18n>Create Collection</span>
+            </button>
+        </div>
+        } @else if (collections().length > 0) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @for (collection of collections(); track collection._id) {
+            <div class="group relative overflow-hidden rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <!-- Colored Accent Bar -->
+                <div class="h-2 w-full" [style.background-color]="collection.color || '#3b82f6'"></div>
+                
+                <!-- Card Content -->
+                <div class="p-6">
+                    <!-- Header with Icon and Menu -->
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg"
+                                [style.background-color]="collection.color || '#3b82f6'">
+                                <mat-icon>{{ collection.icon || 'collections' }}</mat-icon>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white line-clamp-1">{{ collection.name }}</h3>
+                                @if (collection.occasion) {
+                                <span class="text-sm text-gray-400 flex items-center gap-1 mt-1">
+                                    <mat-icon class="text-xs">event</mat-icon>
+                                    {{ collection.occasion | titlecase }}
+                                </span>
+                                }
+                            </div>
+                        </div>
+                        
+                        <!-- Actions Menu -->
+                        <button mat-icon-button [matMenuTriggerFor]="menu" class="text-white">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="navigateToEdit(collection._id)">
+                                <mat-icon class="text-blue-400">edit</mat-icon>
+                                <span i18n>Edit</span>
+                            </button>
+                            <button mat-menu-item (click)="duplicateCollection(collection)">
+                                <mat-icon class="text-green-400">content_copy</mat-icon>
+                                <span i18n>Duplicate</span>
+                            </button>
+                            <button mat-menu-item>
+                                <mat-icon class="text-purple-400">share</mat-icon>
+                                <span i18n>Share</span>
+                            </button>
+                            <mat-divider></mat-divider>
+                            <button mat-menu-item (click)="deleteCollection(collection._id)" class="!text-red-400">
+                                <mat-icon class="text-red-400">delete</mat-icon>
+                                <span i18n>Delete</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+
+                    <!-- Description -->
+                    @if (collection.description) {
+                    <p class="text-gray-300 text-sm mb-4 line-clamp-2">{{ collection.description }}</p>
+                    }
+
+                    <!-- Stats -->
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-blue-400 text-sm">restaurant</mat-icon>
+                            <span class="text-white font-semibold">{{ collection.dishSlugs.length || 0 }}</span>
+                            <span class="text-gray-400 text-sm" i18n>dishes</span>
+                        </div>
+                        @if (collection.eventDate) {
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-purple-400 text-sm">calendar_today</mat-icon>
+                            <span class="text-gray-400 text-sm">{{ collection.eventDate | date:'mediumDate' }}</span>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Tags -->
+                    @if (collection.tags && collection.tags.length > 0) {
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        @for (tag of collection.tags.slice(0, 3); track tag) {
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs border border-white/20">
+                            {{ tag }}
+                        </span>
+                        }
+                        @if (collection.tags.length > 3) {
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-gray-400 text-xs">
+                            +{{ collection.tags.length - 3 }}
+                        </span>
+                        }
+                    </div>
+                    }
+
+                    <!-- Footer Actions -->
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                        <div class="flex items-center gap-2">
+                            @if (collection.isPublic) {
+                            <mat-icon class="text-green-400 text-sm" matTooltip="Public collection" i18n-matTooltip>public</mat-icon>
+                            } @else {
+                            <mat-icon class="text-gray-400 text-sm" matTooltip="Private collection" i18n-matTooltip>lock</mat-icon>
+                            }
+                        </div>
+                        <button mat-raised-button 
+                            (click)="navigateToEdit(collection._id)"
+                            [style.background-color]="collection.color || '#3b82f6'"
+                            class="!text-white !shadow-lg hover:!shadow-xl transition-all">
+                            <mat-icon>arrow_forward</mat-icon>
+                            <span i18n>View Dishes</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hover Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            </div>
+            }
+        </div>
+        }
     </div>
 </section>

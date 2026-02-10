@@ -84,6 +84,9 @@ export class AppComponent implements OnInit {
     }
     this.authService.getProfileAPI().subscribe({
       next: (profile) => {
+        if (!profile) {
+          return;
+        }
         this.authService.setProfile(profile);
       },
       error: (error) => {

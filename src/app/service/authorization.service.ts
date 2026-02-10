@@ -53,4 +53,10 @@ export class AuthorizationService {
       `${environment.API_URL}/${prefix}/${id}`
     );
   }
+
+  getAllPermissions() {
+    return this.http.get<{ data: string[]; count: number }>(
+      `${environment.API_URL}/${prefix}/permissions/all`
+    );
+  }
 }

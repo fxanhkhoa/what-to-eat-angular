@@ -1,11 +1,12 @@
-<div class="container p-3 rounded clickable" (click)="snackBarRef.dismissWithAction()">
-    <div class="flex gap-2">
-        <div class="flex flex-col justify-center items-center">
-            <mat-icon class="icon">check_circle</mat-icon>
+<div class="success-snackbar-container" (click)="snackBarRef.dismissWithAction()">
+    <div class="flex items-center gap-3">
+        <div class="icon-wrapper">
+            <mat-icon class="success-icon">check_circle</mat-icon>
         </div>
-        <div class="flex flex-col gap-2">
-            <span class="text-xl text-white font-bold">{{ data.mainMsg }}</span>
-            <span class="text-white">{{ data.subMsg }}</span>
+        <div class="flex flex-col gap-1 flex-1">
+            <span class="main-message">{{ data.mainMsg }}</span>
+            <span class="sub-message">{{ data.subMsg }}</span>
         </div>
+        <mat-icon class="close-icon">close</mat-icon>
     </div>
 </div>

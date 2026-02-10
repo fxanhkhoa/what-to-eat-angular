@@ -21,14 +21,14 @@
             <mat-label i18n>Name</mat-label>
             <input matInput formControlName="name" placeholder="Enter role permission name" i18n-placeholder>
             @if (form.get('name')?.invalid && form.get('name')?.touched) {
-                <mat-error>
-                    @if (form.get('name')?.hasError('required')) {
-                        <span i18n>Name is required</span>
-                    }
-                    @if (form.get('name')?.hasError('minlength')) {
-                        <span i18n>Name must be at least 3 characters</span>
-                    }
-                </mat-error>
+            <mat-error>
+              @if (form.get('name')?.hasError('required')) {
+              <span i18n>Name is required</span>
+              }
+              @if (form.get('name')?.hasError('minlength')) {
+              <span i18n>Name must be at least 3 characters</span>
+              }
+            </mat-error>
             }
           </mat-form-field>
 
@@ -51,19 +51,16 @@
           <!-- Available Permissions -->
           <div>
             <h3 class="text-md font-medium mb-3 text-gray-700" i18n>Available Permissions</h3>
-            <div
-              cdkDropList
-              #availableList="cdkDropList"
-              [cdkDropListData]="availablePermissions"
+            <div cdkDropList #availableList="cdkDropList" [cdkDropListData]="availablePermissions"
               [cdkDropListConnectedTo]="[selectedList]"
               class="min-h-64 p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 overflow-y-auto max-h-96"
               (cdkDropListDropped)="onDrop($event)">
               @for (permission of availablePermissions; track trackByPermission($index, permission)) {
-              <div
-                cdkDrag
-                class="mb-2 p-2 bg-white rounded border cursor-move hover:shadow-md transition-shadow">
-                <mat-icon class="mr-2 text-gray-500">drag_indicator</mat-icon>
-                <span class="text-sm">{{ permission }}</span>
+              <div cdkDrag class="mb-2 p-2 bg-white rounded border cursor-move hover:shadow-md transition-shadow">
+                <div class="flex items-center">
+                  <mat-icon class="mr-2 text-gray-500">drag_indicator</mat-icon>
+                  <span class="text-sm">{{ permission }}</span>
+                </div>
               </div>
               }
               @if (availablePermissions.length === 0) {
@@ -77,27 +74,20 @@
 
           <!-- Selected Permissions -->
           <div>
-            <h3 class="text-md font-medium mb-3 text-gray-700">Selected Permissions ({{ selectedPermissions.length }})</h3>
-            <div
-              cdkDropList
-              #selectedList="cdkDropList"
-              [cdkDropListData]="selectedPermissions"
+            <h3 class="text-md font-medium mb-3 text-gray-700">Selected Permissions ({{ selectedPermissions.length }})
+            </h3>
+            <div cdkDropList #selectedList="cdkDropList" [cdkDropListData]="selectedPermissions"
               [cdkDropListConnectedTo]="[availableList]"
               class="min-h-64 p-4 border-2 border-solid border-blue-300 rounded-lg bg-blue-50 overflow-y-auto max-h-96"
               (cdkDropListDropped)="onDrop($event)">
               @for (permission of selectedPermissions; track trackByPermission($index, permission)) {
-              <div
-                cdkDrag
-                class="mb-2 p-2 bg-white rounded border cursor-move hover:shadow-md transition-shadow">
+              <div cdkDrag class="mb-2 p-2 bg-white rounded border cursor-move hover:shadow-md transition-shadow">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center">
                     <mat-icon class="mr-2 text-blue-500">drag_indicator</mat-icon>
                     <span class="text-sm">{{ permission }}</span>
                   </div>
-                  <button
-                    mat-icon-button
-                    (click)="removePermission(permission)"
-                    class="ml-2"
+                  <button mat-icon-button (click)="removePermission(permission)" class="ml-2"
                     matTooltip="Remove permission" i18n-matTooltip>
                     <mat-icon class="text-red-500">close</mat-icon>
                   </button>
@@ -122,11 +112,7 @@
         <mat-icon>cancel</mat-icon>
         <span i18n>Cancel</span>
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="loading || form.invalid">
+      <button mat-raised-button color="primary" type="submit" [disabled]="loading || form.invalid">
         <mat-icon>{{ isEdit ? 'save' : 'add' }}</mat-icon>
         {{ isEdit ? 'Update' : 'Create' }}
         @if (loading) {

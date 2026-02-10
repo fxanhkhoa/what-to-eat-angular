@@ -37,20 +37,38 @@
                                 class="bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">Available
                                 Dishes</span>
                         </mat-card-title>
-                        <mat-card-subtitle>Drag dishes to add them to voting</mat-card-subtitle>
+                        <mat-card-subtitle>Select collections or drag dishes to add them to voting</mat-card-subtitle>
                     </mat-card-header>
-                    <mat-accordion class="p-2">
-                        <mat-expansion-panel class="glassmorphic-container_dark">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title i18n> Filter </mat-panel-title>
-                                <mat-panel-description i18n>Let's find your favorite dishes!</mat-panel-description>
-                            </mat-expansion-panel-header>
-                            <div class="max-h-40 overflow-y-auto mb-2 p-2">
-                                <app-dish-filter (search)="onSearch($event)"></app-dish-filter>
-                            </div>
-                        </mat-expansion-panel>
-                    </mat-accordion>
+                    
                     <mat-card-content class="!h-full max-h-full overflow-y-auto">
+                        <mat-tab-group class="h-full" animationDuration="300ms">
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <mat-icon class="mr-2">collections_bookmark</mat-icon>
+                                    <span i18n>My Collections</span>
+                                </ng-template>
+                                <div class="pt-4">
+                                    <app-voting-collection-picker (dishesSelected)="onCollectionDishesSelected($event)"></app-voting-collection-picker>
+                                </div>
+                            </mat-tab>
+                            
+                            <mat-tab>
+                                <ng-template mat-tab-label>
+                                    <mat-icon class="mr-2">restaurant_menu</mat-icon>
+                                    <span i18n>All Dishes</span>
+                                </ng-template>
+                                <div class="pt-4">
+                                    <mat-accordion class="mb-4">
+                                        <mat-expansion-panel class="glassmorphic-container_dark">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title i18n> Filter </mat-panel-title>
+                                                <mat-panel-description i18n>Let's find your favorite dishes!</mat-panel-description>
+                                            </mat-expansion-panel-header>
+                                            <div class="max-h-40 overflow-y-auto mb-2 p-2">
+                                                <app-dish-filter (search)="onSearch($event)"></app-dish-filter>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
                         <div id="available-dishes" class="list h-full min-h-20 p-4 rounded-lg" cdkDropList
                             [cdkDropListData]="availableDishes()" [cdkDropListConnectedTo]="['selected-dishes']"
                             (cdkDropListDropped)="drop($event)">
@@ -90,13 +108,15 @@
                             </div>
                             }
                         </div>
-                    </mat-card-content>
-                    <mat-card-actions>
+                        
                         <mat-paginator [length]="total()" [pageSizeOptions]="[10, 25, 50, 100]"
                             [pageIndex]="currentPage() - 1" [pageSize]="limit()" (page)="paginatorChange($event)"
                             showFirstLastButtons aria-label="Select page">
                         </mat-paginator>
-                    </mat-card-actions>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-card-content>
                 </mat-card>
             </div>
 
@@ -200,7 +220,7 @@
             </div>
         </div>
     </section>
-    <mat-drawer mode="side" [opened]="openSidenav()" position="end" class="glassmorphic-container_dark !rounded-lg">
+    <mat-drawer mode="side" [opened]="openSidenav()" position="end" class="glassmorphic-container_dark !rounded-lg mt-20">
         <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" class="mt-10">
             <mat-tab label="Voting Details" i18n-label>
                 <div class="flex flex-col gap-5 p-5">

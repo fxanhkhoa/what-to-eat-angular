@@ -28,7 +28,31 @@
             }
         </div>
         <div class="col-span-12">
-            <app-flipping-card-picker></app-flipping-card-picker>
+            <mat-tab-group 
+              mat-stretch-tabs="false" 
+              mat-align-tabs="start"
+              class="custom-tab-group"
+            >
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="mr-2">collections_bookmark</mat-icon>
+                  <span i18n>My Collections</span>
+                </ng-template>
+                <div class="pt-4">
+                  <app-flipping-card-collection-picker></app-flipping-card-collection-picker>
+                </div>
+              </mat-tab>
+              
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="mr-2">restaurant</mat-icon>
+                  <span i18n>All Dishes</span>
+                </ng-template>
+                <div class="pt-4">
+                  <app-flipping-card-picker></app-flipping-card-picker>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </section>
