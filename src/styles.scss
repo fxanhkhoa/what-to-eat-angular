@@ -97,6 +97,7 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #6f5850 rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
 }
 
 :root {

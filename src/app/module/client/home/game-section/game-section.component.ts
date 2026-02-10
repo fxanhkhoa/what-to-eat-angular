@@ -1,17 +1,32 @@
 import { MultiLanguagePipe } from '@/app/pipe/multi-language.pipe';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, LOCALE_ID } from '@angular/core';
+import { Component, inject, Input, LOCALE_ID, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBadgeModule } from '@angular/material/badge';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-game-section',
-  imports: [CommonModule, MatIconModule, MatButtonModule, MultiLanguagePipe],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatChipsModule,
+    MatBadgeModule,
+    MultiLanguagePipe,
+    RouterModule,
+  ],
   templateUrl: './game-section.component.html',
   styleUrl: './game-section.component.scss',
 })
 export class GameSectionComponent {
   localeId = inject(LOCALE_ID);
+  currentSlide = signal(0);
+  hoveredCard = signal<number | null>(null);
 
   slides = [
     {
@@ -70,22 +85,39 @@ export class GameSectionComponent {
     },
   ];
 
-  currentSlide = 1;
+  getGameRoute(index: number): string {
+    const routes = ['/game/wheel-of-fortune', '/game/flipping-card', '/game/voting'];
+    return routes[index] || '/game';
+  }
+
+  getGameIcon(index: number): string {
+    const icons = ['casino', 'style', 'how_to_vote'];
+    return icons[index] || 'gamepad';
+  }
+
+  getGameFeatures(index: number): string[] {
+    const features = [
+      ['Random Selection', 'Quick Decision', 'Fun & Interactive'],
+      ['Memory Challenge', 'Surprise Factor', 'Addictive Gameplay'],
+      ['Group Activity', 'Democratic Choice', 'Social Fun'],
+    ];
+    return features[index] || [];
+  }
 
   // Previous slide
   onPreviousClick() {
-    const previous = this.currentSlide - 1;
-    this.currentSlide = previous < 0 ? this.slides.length - 1 : previous;
+    const previous = this.currentSlide() - 1;
+    this.currentSlide.set(previous < 0 ? this.slides.length - 1 : previous);
   }
 
   // Next slide
   onNextClick() {
-    const next = this.currentSlide + 1;
-    this.currentSlide = next === this.slides.length ? 0 : next;
+    const next = this.currentSlide() + 1;
+    this.currentSlide.set(next === this.slides.length ? 0 : next);
   }
 
   // Go to a specific slide
   goToSlide(index: number) {
-    this.currentSlide = index;
+    this.currentSlide.set(index);
   }
 }
