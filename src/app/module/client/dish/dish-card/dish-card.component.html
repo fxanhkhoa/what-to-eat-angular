@@ -1,46 +1,106 @@
-<!-- dish-card.component.html -->
-<mat-card class="!grid !grid-cols-12 gap-5 !min-h-80 h-full relative slide-in-blurred-right">
-    <span i18n='EASY|MEDIUM|HARD' [ngClass]="{
-                                'neumorphic-easy': dish.difficultLevel === 'EASY',
-                                'neumorphic-medium': dish.difficultLevel === 'MEDIUM',
-                                'neumorphic-hard': dish.difficultLevel === 'HARD'
-                            }" class="text-sm lowercase absolute top-1 left-1">
-        {{ dish.difficultLevel ?? 'N/A' | categoryTranslate }}
-    </span>
-
-    <div class="col-span-12 md:col-span-5">
-        <img [src]="dish.thumbnail" [alt]="dish.slug"
-            class="object-cover object-center rounded-lg w-full h-80 md:h-full" />
-    </div>
-
-
-    <div class="col-span-12 md:col-span-5 flex flex-col justify-between gap-2 p-5">
-        <div class="flex flex-col gap-2">
-            <h4 class="font-bold">
-                {{ (dish.title | multiLanguage: localeId)?.data }}
-            </h4>
-
-            <span class="hidden md:block text-gray-400 text-left">
-                {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 100) ?? '' }}...
-            </span>
-
-            <span class="md:hidden text-gray-400 text-left">
-                {{ (dish.shortDescription | multiLanguage: localeId)?.data?.slice(0, 30) ?? '' }}...
-            </span>
+<div class="dish-card group relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-sm border border-white/10 shadow-2xl transition-all duration-500 hover:shadow-[0_20px_60px_-12px_rgba(243,164,70,0.4)] hover:-translate-y-2 h-full">
+    
+    <!-- Animated Background Glow -->
+    <div class="absolute inset-0 bg-gradient-to-br from-[#F3A446]/5 via-transparent to-[#A06235]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+    
+    <!-- Image Section -->
+    <div class="relative h-56 overflow-hidden bg-gray-800">
+        <img 
+            [src]="dish.thumbnail ?? '/assets/images/placeholder.png'" 
+            [alt]="(dish.title | multiLanguage: localeId)?.data"
+            class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1" />
+        
+        <!-- Gradient Overlays -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent to-[#A06235]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <!-- Top Badge Row -->
+        <div class="absolute top-3 left-3 right-3 flex items-start justify-between z-10">
+            <!-- Difficulty Badge -->
+            <div 
+                i18n='EASY|MEDIUM|HARD'
+                [ngClass]="{
+                    'bg-emerald-500 shadow-emerald-500/50': dish.difficultLevel === 'EASY',
+                    'bg-amber-500 shadow-amber-500/50': dish.difficultLevel === 'MEDIUM',
+                    'bg-red-500 shadow-red-500/50': dish.difficultLevel === 'HARD'
+                }"
+                class="px-3 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-white shadow-lg backdrop-blur-lg border border-white/30 transform transition-transform duration-300 group-hover:scale-110">
+                {{ dish.difficultLevel ?? 'N/A' | categoryTranslate }}
+            </div>
+            
+            <!-- Favorite Button -->
+            <button 
+                mat-mini-fab
+                (click)="toggleFavorite($event)"
+                [disabled]="isLoadingFavorite()"
+                [ngClass]="isFavorite() ? '!bg-red-500 !shadow-red-500/50' : '!bg-black/40'"
+                class="backdrop-blur-md border border-white/20 !shadow-xl transition-all duration-300 hover:!scale-110 hover:!bg-black/60"
+                [matTooltip]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'">
+                <mat-icon [class.animate-pulse]="isFavorite()" [class.text-white]="isFavorite()" [class.text-gray-300]="!isFavorite()">
+                    {{ isFavorite() ? 'favorite' : 'favorite_border' }}
+                </mat-icon>
+            </button>
         </div>
-
-        <div class="flex gap-1">
-            <mat-icon class="my-auto">timer</mat-icon>
-            <span class="ml-1">{{ getTotalTime() }}</span>
-            <span i18n="@@minutes">minutes</span>
+        
+        <!-- Time Badge - Bottom Left on Image -->
+        <div class="absolute bottom-3 left-3 flex items-center gap-2 px-4 py-2 rounded-xl bg-black/60 backdrop-blur-lg border border-white/20 shadow-xl">
+            <mat-icon class="!w-5 !h-5 !text-[20px] text-[#FFB86A]">schedule</mat-icon>
+            <span class="text-white text-sm font-bold">{{ getTotalTime() }} min</span>
         </div>
     </div>
-
-
-    <div class="col-span-12 md:col-span-2 w-full h-full min-h-20">
-        <a matButton="elevated" [routerLink]="['/dish',  dish.slug]" class="!h-full !w-full !rounded-lg"
-            [target]="newTab ? '_blank' : '_self'">
-            <span i18n="@@discover">Discover</span>
+    
+    <!-- Content Section -->
+    <div class="relative p-5 flex flex-col h-[calc(100%-14rem)]">
+        <!-- Title -->
+        <h3 class="text-xl font-extrabold text-white mb-2 line-clamp-2 leading-tight group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-[#F3A446] group-hover:to-[#FFB86A] group-hover:bg-clip-text transition-all duration-300">
+            {{ (dish.title | multiLanguage: localeId)?.data }}
+        </h3>
+        
+        <!-- Description -->
+        <p class="text-sm text-gray-400 mb-4 line-clamp-2 group-hover:text-gray-300 transition-colors duration-300 flex-grow">
+            {{ (dish.shortDescription | multiLanguage: localeId)?.data }}
+        </p>
+        
+        <!-- Time Details Row -->
+        <div class="grid grid-cols-2 gap-3 mb-4 pb-4 border-t border-white/10">
+            <!-- Prep Time -->
+            <div class="flex items-center gap-2 mt-4">
+                <div class="p-2 rounded-lg bg-gradient-to-br from-[#F3A446]/20 to-[#FFB86A]/20 border border-[#F3A446]/30">
+                    <mat-icon class="!w-5 !h-5 !text-[20px] text-[#F3A446]">restaurant</mat-icon>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Prep</span>
+                    <span class="text-sm font-bold text-white">{{ dish.preparationTime || 0 }}'</span>
+                </div>
+            </div>
+            
+            <!-- Cook Time -->
+            <div class="flex items-center gap-2 mt-4">
+                <div class="p-2 rounded-lg bg-gradient-to-br from-[#A06235]/20 to-[#F3A446]/20 border border-[#A06235]/30">
+                    <mat-icon class="!w-5 !h-5 !text-[20px] text-[#FFB86A]">local_fire_department</mat-icon>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Cook</span>
+                    <span class="text-sm font-bold text-white">{{ dish.cookingTime || 0 }}'</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Button -->
+        <a 
+            [routerLink]="['/dish', dish.slug]"
+            [target]="newTab ? '_blank' : '_self'"
+            mat-raised-button
+            class="w-full !bg-gradient-to-r !from-[#A06235] !via-[#F3A446] !to-[#FFB86A] !text-white !font-bold !text-sm !rounded-xl !h-12 !shadow-lg hover:!shadow-[#F3A446]/60 hover:!shadow-2xl transition-all duration-300 group-hover:!scale-105 !overflow-hidden relative">
+            <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></span>
+            <span class="relative flex items-center justify-center gap-2" i18n>
+                Discover Recipe
+                <mat-icon class="!text-lg transition-transform duration-300 group-hover:translate-x-1">arrow_forward</mat-icon>
+            </span>
         </a>
     </div>
-</mat-card>
+    
+    <!-- Shine Effect Border -->
+    <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+         style="background: linear-gradient(45deg, transparent 40%, rgba(243,164,70,0.1) 50%, transparent 60%); background-size: 200% 200%; animation: shine 3s infinite;"></div>
+</div>
