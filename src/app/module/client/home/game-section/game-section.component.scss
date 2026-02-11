@@ -1,9 +1,6 @@
 @reference "tailwindcss";
 
 :host ::ng-deep {
-  // Smooth scrolling
-  scroll-behavior: smooth;
-
   // Slide animations
   .slide-item {
     position: absolute;
@@ -63,7 +60,7 @@
   // Card hover effects
   mat-card {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    
+
     &:hover {
       transform: translateY(-8px);
     }
@@ -78,7 +75,8 @@
 
   // Floating animation for badges
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
@@ -88,7 +86,8 @@
 
   // Pulse animation for background orbs
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 0.5;
       transform: scale(1);
     }
@@ -167,7 +166,8 @@
   }
 
   @keyframes bounce {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
