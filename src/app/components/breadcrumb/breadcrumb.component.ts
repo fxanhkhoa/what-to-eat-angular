@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class BreadcrumbComponent implements OnInit, OnDestroy {
   breadcrumbs: Array<{ label: string; url: string }> = [];
-  private subscription: Subscription = new Subscription();
+  subscription: Subscription = new Subscription();
 
   constructor(private breadcrumbService: BreadcrumbService) {}
 

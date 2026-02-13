@@ -18,6 +18,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ToastService } from '@/app/shared/service/toast.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ShareBottomSheetComponent } from '@/app/shared/components/share-bottom-sheet/share-bottom-sheet.component';
 
 @Component({
   selector: 'app-dish-card-fancy',
@@ -42,6 +44,7 @@ export class DishCardFancyComponent implements OnInit {
   private sanitizer = inject(DomSanitizer);
   private userFavoriteService = inject(UserFavoriteService);
   private toastr = inject(ToastService);
+  private bottomSheet = inject(MatBottomSheet);
   localeId = inject(LOCALE_ID);
 
   isFavorite = signal(false);
@@ -137,5 +140,13 @@ export class DishCardFancyComponent implements OnInit {
           },
         });
     }
+  }
+
+  openShareSheet(event: Event): void {
+    event.stopPropagation();
+    event.preventDefault();
+    this.bottomSheet.open(ShareBottomSheetComponent, {
+      data: { dish: this.dish },
+    });
   }
 }

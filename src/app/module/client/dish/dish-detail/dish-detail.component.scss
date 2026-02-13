@@ -1,37 +1,63 @@
 @reference "tailwindcss";
 
-.dish-html-wrapper > h2 {
-  @apply text-gray-500 py-3;
+// Screen reader only utility
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-.dish-html-wrapper > ul {
-  @apply list-disc pl-5;
-}
-
-.dish-html-wrapper > p {
-  @apply py-1 leading-loose flex gap-2 flex-wrap;
-}
-
-.dish-html-wrapper > p > img {
-  @apply object-cover h-auto w-96 transition-all delay-500 duration-300 ease-in-out rounded-2xl border-solid border border-purple-200;
-}
-
-.dish-html-wrapper > p > code {
-  @apply p-3 font-serif text-purple-400 rounded-lg bg-slate-50 text-base;
-  &::before {
-    content: "_🌟";
+// Custom animations
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-:host ::ng-deep .dish-html-wrapper img {
-  @apply object-cover h-auto w-full hover:scale-[1.1] duration-300 ease-in-out rounded-2xl;
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out;
+}
 
-  @media screen and (min-width: 640px) {
-    @apply w-1/2;
+// Custom scrollbar
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(251 146 60 / 0.5) rgba(255, 255, 255, 0.1);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgb(251 146 60), rgb(217 119 6));
+    border-radius: 10px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(180deg, rgb(253 186 116), rgb(245 158 11));
+    }
   }
 }
 
+// Dish content wrapper styling
 .dish-html-wrapper {
+  @apply text-gray-200;
   overflow-x: auto;
   word-break: break-word;
   max-width: 100%;
@@ -41,59 +67,172 @@
     box-sizing: border-box;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-white mb-4 mt-6;
+    background: linear-gradient(135deg, rgb(253 186 116), rgb(251 146 60), rgb(245 158 11));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  h1 { @apply text-4xl; }
+  h2 { @apply text-3xl; }
+  h3 { @apply text-2xl; }
+  h4 { @apply text-xl; }
+
+  p {
+    @apply py-3 leading-relaxed text-gray-300 text-lg;
+  }
+
+  ul, ol {
+    @apply list-disc pl-8 space-y-2 my-4 text-gray-300;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply leading-relaxed;
+    
+    &::marker {
+      @apply text-orange-400;
+    }
+  }
+
   img {
+    @apply object-cover h-auto w-full rounded-2xl my-6 shadow-2xl;
+    @apply transition-all duration-500 ease-in-out;
+    @apply ring-2 ring-white/10 hover:ring-orange-400/50;
     max-width: 100%;
     height: auto;
     display: block;
+
+    &:hover {
+      @apply scale-105 shadow-orange-500/20;
+    }
+
+    @media screen and (min-width: 768px) {
+      @apply max-w-2xl;
+    }
+  }
+
+  code {
+    @apply px-3 py-1 rounded-lg bg-gradient-to-r from-orange-500/20 to-amber-700/20;
+    @apply text-orange-300 font-mono text-sm border border-orange-500/30;
+  }
+
+  pre {
+    @apply p-6 rounded-xl bg-black/40 border border-white/10 my-4;
+    @apply overflow-x-auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    code {
+      @apply p-0 bg-transparent border-0 text-gray-300;
+    }
+  }
+
+  a {
+    @apply text-orange-400 underline decoration-orange-400/30;
+    @apply transition-all duration-300;
+    text-decoration-thickness: 2px;
+
+    &:hover {
+      @apply text-orange-300 decoration-orange-300;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  blockquote {
+    @apply border-l-4 border-orange-500 pl-6 py-3 my-4;
+    @apply bg-white/5 rounded-r-xl;
+    @apply italic text-gray-400;
   }
 
   table {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    display: block;
+    @apply w-full my-6 border-collapse;
+    @apply bg-white/5 rounded-lg overflow-hidden;
+    
+    thead {
+      @apply bg-gradient-to-r from-orange-500/20 to-amber-700/20;
+    }
+
+    th {
+      @apply px-6 py-4 text-left font-bold text-white border-b border-white/10;
+    }
+
+    td {
+      @apply px-6 py-4 border-b border-white/5 text-gray-300;
+    }
+
+    tr {
+      @apply transition-colors duration-200;
+      
+      &:hover {
+        @apply bg-white/5;
+      }
+    }
   }
 
-  pre,
-  code {
-    white-space: pre-wrap;
-    word-break: break-word;
-    max-width: 100%;
-    overflow-x: auto;
-    display: block;
+  hr {
+    @apply my-8 border-0 h-px;
+    background: linear-gradient(90deg, transparent, rgb(251 146 60 / 0.5), transparent);
+  }
+
+  strong, b {
+    @apply font-bold text-white;
+  }
+
+  em, i {
+    @apply italic text-gray-400;
   }
 }
 
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-
-.dish-html-wrapper > p > a {
-  text-decoration: underline !important;
-  text-decoration-color: #e9d5ff !important;
-  text-decoration-thickness: 1px;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-  transition-duration: 300ms;
-}
-.dish-html-wrapper > p > a:hover {
-  --tw-text-opacity: 1 !important;
-  color: rgb(168 85 247 / var(--tw-text-opacity)) !important;
-}
-
+// YouTube player styling
 :host ::ng-deep .youtube-player-placeholder {
   aspect-ratio: 16 / 9;
   width: 100% !important;
   height: auto !important;
-  border-radius: 2rem;
+  border-radius: 1rem;
 }
 
 :host ::ng-deep iframe {
   width: 100% !important;
   height: auto !important;
-  border-radius: 2rem;
+  border-radius: 1rem;
+}
+
+// Material Design overrides for dark theme
+:host ::ng-deep {
+  .mat-mdc-checkbox {
+    --mdc-checkbox-selected-checkmark-color: #ffffff;
+    --mdc-checkbox-selected-focus-icon-color: rgb(251 146 60);
+    --mdc-checkbox-selected-hover-icon-color: rgb(253 186 116);
+    --mdc-checkbox-selected-icon-color: rgb(251 146 60);
+    --mdc-checkbox-selected-pressed-icon-color: rgb(245 158 11);
+  }
+
+  .mat-mdc-fab.mat-primary,
+  .mat-mdc-mini-fab.mat-primary {
+    --mat-fab-foreground-color: #ffffff;
+    --mat-fab-state-layer-color: #ffffff;
+  }
+
+  .mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: rgb(251 146 60);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .dish-html-wrapper {
+    h1 { @apply text-2xl; }
+    h2 { @apply text-xl; }
+    h3 { @apply text-lg; }
+    
+    img {
+      @apply w-full;
+    }
+  }
 }

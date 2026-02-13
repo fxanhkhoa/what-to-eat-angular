@@ -6,17 +6,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { FeedbackFormComponent } from './feedback-form.component';
 import { FeedbackService } from '@/app/service/feedback.service';
+import { ToastService } from '@/app/shared/service/toast.service';
 
 describe('FeedbackFormComponent', () => {
   let component: FeedbackFormComponent;
   let fixture: ComponentFixture<FeedbackFormComponent>;
   let feedbackService: jasmine.SpyObj<FeedbackService>;
-  let snackBar: jasmine.SpyObj<MatSnackBar>;
+  let toastService: jasmine.SpyObj<ToastService>;
   let dialogRef: jasmine.SpyObj<MatDialogRef<FeedbackFormComponent>>;
 
   beforeEach(async () => {
     const feedbackServiceSpy = jasmine.createSpyObj('FeedbackService', ['create']);
-    const snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+    const toastServiceSpy = jasmine.createSpyObj('ToastService', ['showSuccess', 'showError']);
     const dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
@@ -27,13 +28,13 @@ describe('FeedbackFormComponent', () => {
       ],
       providers: [
         { provide: FeedbackService, useValue: feedbackServiceSpy },
-        { provide: MatSnackBar, useValue: snackBarSpy },
+        { provide: ToastService, useValue: toastServiceSpy },
         { provide: MatDialogRef, useValue: dialogRefSpy },
       ],
     }).compileComponents();
 
     feedbackService = TestBed.inject(FeedbackService) as jasmine.SpyObj<FeedbackService>;
-    snackBar = TestBed.inject(MatSnackBar) as jasmine.SpyObj<MatSnackBar>;
+    toastService = TestBed.inject(ToastService) as jasmine.SpyObj<ToastService>;
     dialogRef = TestBed.inject(MatDialogRef) as jasmine.SpyObj<MatDialogRef<FeedbackFormComponent>>;
 
     fixture = TestBed.createComponent(FeedbackFormComponent);
@@ -67,9 +68,9 @@ describe('FeedbackFormComponent', () => {
   });
 
   describe('Form Validation', () => {
-    it('should validate email as required', () => {
+    it('should not require email field', () => {
       const emailControl = component.feedbackForm.get('email');
-      expect(emailControl?.hasError('required')).toBeTrue();
+      expect(emailControl?.hasError('required')).toBeFalse();
     });
 
     it('should validate email format', () => {
@@ -90,9 +91,9 @@ describe('FeedbackFormComponent', () => {
       expect(ratingControl?.valid).toBeTrue();
     });
 
-    it('should validate comment as required', () => {
+    it('should not require comment field', () => {
       const commentControl = component.feedbackForm.get('comment');
-      expect(commentControl?.hasError('required')).toBeTrue();
+      expect(commentControl?.hasError('required')).toBeFalse();
     });
 
     it('should validate comment minimum length', () => {
@@ -154,14 +155,14 @@ describe('FeedbackFormComponent', () => {
     });
 
     it('should not submit if form is invalid', () => {
-      component.feedbackForm.patchValue({ email: '' });
+      component.feedbackForm.patchValue({ rating: 0 });
       component.submitFeedback();
       
       expect(feedbackService.create).not.toHaveBeenCalled();
     });
 
     it('should mark all fields as touched when submitting invalid form', () => {
-      component.feedbackForm.patchValue({ email: '' });
+      component.feedbackForm.patchValue({ rating: 0 });
       component.submitFeedback();
       
       expect(component.feedbackForm.get('email')?.touched).toBeTrue();
