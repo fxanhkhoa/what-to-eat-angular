@@ -137,13 +137,13 @@
                             <div
                                 class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 backdrop-blur-sm group cursor-pointer hover:from-orange-500/30 hover:to-red-500/30 transition-all">
                                 <button mat-icon-button type="button" (click)="openDishDetail(dish, $event)"
-                                    matTooltip="View details" i18n-matTooltip>
+                                    matTooltip="View details" i18n-matTooltip aria-label="View details" title="View details">
                                     <mat-icon>info</mat-icon>
                                 </button>
                                 <span class="text-sm text-white" (click)="openDishDetail(dish, $event)">{{ (dish.title |
                                     multiLanguage: localeId)?.data }}</span>
                                 <button mat-icon-button type="button" (click)="removeDish(dish.slug)"
-                                    matTooltip="Remove" i18n-matTooltip>
+                                    matTooltip="Remove" i18n-matTooltip aria-label="Remove dish" title="Remove dish">
                                     <mat-icon class="!text-red-500">close</mat-icon>
                                 </button>
                             </div>
@@ -202,7 +202,7 @@
                                     </h4>
                                     <button mat-icon-button type="button" (click)="openDishDetail(dish, $event)"
                                         class="!w-8 !h-8 !text-white/60 hover:!text-orange-400 hover:!bg-orange-500/10 transition-all flex-shrink-0"
-                                        matTooltip="View details" i18n-matTooltip>
+                                        matTooltip="View details" i18n-matTooltip aria-label="View details" title="View details">
                                         <mat-icon class="!text-xl">info</mat-icon>
                                     </button>
                                 </div>

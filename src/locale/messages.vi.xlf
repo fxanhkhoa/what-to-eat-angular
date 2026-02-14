@@ -4916,6 +4916,374 @@
                     <context context-type="linenumber">199,200</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="6672997488566032433" datatype="html">
+                <source>Make this collection public</source>
+                <target>Đặt bộ sưu tập này ở chế độ công khai</target>
+            </trans-unit>
+            <trans-unit id="1780893984847847326" datatype="html">
+                <source>Add Dishes</source>
+                <target>Thêm món ăn</target>
+            </trans-unit>
+            <trans-unit id="8530129542507408758" datatype="html">
+                <source>Search dishes</source>
+                <target>Tìm kiếm món ăn</target>
+            </trans-unit>
+            <trans-unit id="8445409909623962979" datatype="html">
+                <source>Selected dishes:</source>
+                <target>Món ăn đã chọn:</target>
+            </trans-unit>
+            <trans-unit id="2776617638046368313" datatype="html">
+                <source>View details</source>
+                <target>Xem chi tiết</target>
+            </trans-unit>
+            <trans-unit id="4814285799071780083" datatype="html">
+                <source>Remove</source>
+                <target>Xóa</target>
+            </trans-unit>
+            <trans-unit id="499211652050874170" datatype="html">
+                <source>Searching dishes...</source>
+                <target>Đang tìm kiếm món ăn...</target>
+            </trans-unit>
+            <trans-unit id="252627326381732407" datatype="html">
+                <source>Empty Collection</source>
+                <target>Bộ sưu tập trống</target>
+            </trans-unit>
+            <trans-unit id="4842353734468560299" datatype="html">
+                <source>This collection has no dishes</source>
+                <target>Bộ sưu tập này không có món ăn nào</target>
+            </trans-unit>
+            <trans-unit id="6324573489507306266" datatype="html">
+                <source>Collection Loaded</source>
+                <target>Đã tải bộ sưu tập</target>
+            </trans-unit>
+            <trans-unit id="6513953304614357903" datatype="html">
+                <source><x id="PH" equiv-text="dishes.length"/> dishes from "<x id="PH_1" equiv-text="collectionName"/>" added to wheel</source>
+                <target><x id="PH" equiv-text="dishes.length"/> món ăn từ "<x id="PH_1" equiv-text="collectionName"/>" đã được thêm vào vòng quay</target>
+            </trans-unit>
+            <trans-unit id="2062343947099654855" datatype="html">
+                <source>Loading collection dishes...</source>
+                <target>Đang tải món ăn từ bộ sưu tập...</target>
+            </trans-unit>
+            <trans-unit id="8189896187094245789" datatype="html">
+                <source>My Collections</source>
+                <target>Bộ sưu tập của tôi</target>
+            </trans-unit>
+            <trans-unit id="6531995694105039161" datatype="html">
+                <source>Click a collection to load its dishes to the wheel</source>
+                <target>Nhấp vào bộ sưu tập để tải món ăn vào vòng quay</target>
+            </trans-unit>
+            <trans-unit id="4012164213448143590" datatype="html">
+                <source> You don't have any dish collections yet. Create one to organize your favorite dishes! </source>
+                <target> Bạn chưa có bộ sưu tập món ăn nào. Tạo một bộ sưu tập để sắp xếp các món ăn yêu thích! </target>
+            </trans-unit>
+            <trans-unit id="3809891445639716804" datatype="html">
+                <source><x id="PH" equiv-text="dishes.length"/> dishes from "<x id="PH_1" equiv-text="collectionName"/>" added to game</source>
+                <target><x id="PH" equiv-text="dishes.length"/> món ăn từ "<x id="PH_1" equiv-text="collectionName"/>" đã được thêm vào trò chơi</target>
+            </trans-unit>
+            <trans-unit id="7433427381434775523" datatype="html">
+                <source>Click a collection to load its dishes to the game</source>
+                <target>Nhấp vào bộ sưu tập để tải món ăn vào trò chơi</target>
+            </trans-unit>
+            <trans-unit id="3938480838448084866" datatype="html">
+                <source><x id="PH" equiv-text="dishes.length"/> dishes from "<x id="PH_1" equiv-text="collectionName"/>" ready to add</source>
+                <target><x id="PH" equiv-text="dishes.length"/> món ăn từ "<x id="PH_1" equiv-text="collectionName"/>" sẵn sàng để thêm</target>
+            </trans-unit>
+            <trans-unit id="5110222210765015989" datatype="html">
+                <source>Click a collection to load its dishes for voting</source>
+                <target>Nhấp vào bộ sưu tập để tải món ăn cho bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="6866929643398277442" datatype="html">
+                <source>Dishes Added</source>
+                <target>Đã thêm món ăn</target>
+            </trans-unit>
+            <trans-unit id="7262790121771815926" datatype="html">
+                <source><x id="PH" equiv-text="newDishes.length"/> dishes added to voting</source>
+                <target><x id="PH" equiv-text="newDishes.length"/> món ăn đã được thêm vào bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="1680555240929419737" datatype="html">
+                <source>No New Dishes</source>
+                <target>Không có món ăn mới</target>
+            </trans-unit>
+            <trans-unit id="1007751772132974791" datatype="html">
+                <source>All dishes from this collection are already in the voting</source>
+                <target>Tất cả món ăn từ bộ sưu tập này đã có trong danh sách bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="8938417353304928528" datatype="html">
+                <source>VOTING SESSION</source>
+                <target>PHIÊN BỎ PHIẾU</target>
+            </trans-unit>
+            <trans-unit id="723251513816909868" datatype="html">
+                <source>View Results</source>
+                <target>Xem kết quả</target>
+            </trans-unit>
+            <trans-unit id="2891346899632677789" datatype="html">
+                <source> Live Results </source>
+                <target> Kết quả trực tiếp </target>
+            </trans-unit>
+            <trans-unit id="4501861359385130017" datatype="html">
+                <source>Current Winner:</source>
+                <target>Người chiến thắng hiện tại:</target>
+            </trans-unit>
+            <trans-unit id="1295614462098694869" datatype="html">
+                <source>Preview</source>
+                <target>Xem trước</target>
+            </trans-unit>
+            <trans-unit id="8175558606636421137" datatype="html">
+                <source>Vote!</source>
+                <target>Bỏ phiếu!</target>
+            </trans-unit>
+            <trans-unit id="2064400765532215105" datatype="html">
+                <source> Loading Voting Session... </source>
+                <target> Đang tải phiên bỏ phiếu... </target>
+            </trans-unit>
+            <trans-unit id="5144412723030703345" datatype="html">
+                <source>Please wait while we prepare everything</source>
+                <target>Vui lòng đợi trong khi chúng tôi chuẩn bị mọi thứ</target>
+            </trans-unit>
+            <trans-unit id="1659170319585428961" datatype="html">
+                <source>Oops! Something went wrong</source>
+                <target>Rất tiếc! Đã xảy ra lỗi</target>
+            </trans-unit>
+            <trans-unit id="8679806927601731663" datatype="html">
+                <source>Try Again</source>
+                <target>Thử lại</target>
+            </trans-unit>
+            <trans-unit id="4872276319201441792" datatype="html">
+                <source>Authentication Required</source>
+                <target>Yêu cầu xác thực</target>
+            </trans-unit>
+            <trans-unit id="8837650029287962445" datatype="html">
+                <source>You need to be logged in to participate in voting</source>
+                <target>Bạn cần đăng nhập để tham gia bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="203827529942340818" datatype="html">
+                <source>Enter your email</source>
+                <target>Nhập email của bạn</target>
+            </trans-unit>
+            <trans-unit id="7463529544721817732" datatype="html">
+                <source>My Dishes</source>
+                <target>Món ăn của tôi</target>
+            </trans-unit>
+            <trans-unit id="3540774662944260221" datatype="html">
+                <source>My Dish Collections</source>
+                <target>Bộ sưu tập món ăn của tôi</target>
+            </trans-unit>
+            <trans-unit id="4615871364122184246" datatype="html">
+                <source> Create and organize your favorite dishes for any occasion </source>
+                <target> Tạo và sắp xếp các món ăn yêu thích cho mọi dịp </target>
+            </trans-unit>
+            <trans-unit id="8346585071068558109" datatype="html">
+                <source>New Collection</source>
+                <target>Bộ sưu tập mới</target>
+            </trans-unit>
+            <trans-unit id="2125743556929842983" datatype="html">
+                <source>No Collections Yet</source>
+                <target>Chưa có bộ sưu tập nào</target>
+            </trans-unit>
+            <trans-unit id="2159999828324334619" datatype="html">
+                <source>Create your first collection to get started!</source>
+                <target>Tạo bộ sưu tập đầu tiên để bắt đầu!</target>
+            </trans-unit>
+            <trans-unit id="3262951443153694121" datatype="html">
+                <source>Create Collection</source>
+                <target>Tạo bộ sưu tập</target>
+            </trans-unit>
+            <trans-unit id="657778156261270416" datatype="html">
+                <source>Public collection</source>
+                <target>Bộ sưu tập công khai</target>
+            </trans-unit>
+            <trans-unit id="5920215406923781490" datatype="html">
+                <source>Private collection</source>
+                <target>Bộ sưu tập riêng tư</target>
+            </trans-unit>
+            <trans-unit id="6621329748219109148" datatype="html">
+                <source>Duplicate</source>
+                <target>Sao chép</target>
+            </trans-unit>
+            <trans-unit id="5767178971853405764" datatype="html">
+                <source>View Dishes</source>
+                <target>Xem món ăn</target>
+            </trans-unit>
+            <trans-unit id="1519954996184640001" datatype="html">
+                <source>Error</source>
+                <target>Lỗi</target>
+            </trans-unit>
+            <trans-unit id="3005995304777006102" datatype="html">
+                <source>Failed to load profile</source>
+                <target>Không thể tải hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="3129604876054849035" datatype="html">
+                <source>Please fill in all required fields</source>
+                <target>Vui lòng điền tất cả các trường bắt buộc</target>
+            </trans-unit>
+            <trans-unit id="4219429959475101385" datatype="html">
+                <source>Profile updated successfully</source>
+                <target>Cập nhật hồ sơ thành công</target>
+            </trans-unit>
+            <trans-unit id="4654779097697117547" datatype="html">
+                <source>Failed to update profile</source>
+                <target>Không thể cập nhật hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="3242255798983858463" datatype="html">
+                <source><x id="PH" equiv-text="diffDays"/> days</source>
+                <target><x id="PH" equiv-text="diffDays"/> ngày</target>
+            </trans-unit>
+            <trans-unit id="2888623698412132582" datatype="html">
+                <source><x id="PH" equiv-text="months"/> months</source>
+                <target><x id="PH" equiv-text="months"/> tháng</target>
+            </trans-unit>
+            <trans-unit id="6129309513432396551" datatype="html">
+                <source><x id="PH" equiv-text="years"/> years</source>
+                <target><x id="PH" equiv-text="years"/> năm</target>
+            </trans-unit>
+            <trans-unit id="7060120659575296897" datatype="html">
+                <source> Loading Profile </source>
+                <target> Đang tải hồ sơ </target>
+            </trans-unit>
+            <trans-unit id="734934965373819800" datatype="html">
+                <source>Go back</source>
+                <target>Quay lại</target>
+            </trans-unit>
+            <trans-unit id="5268165571303113726" datatype="html">
+                <source>Enter your full name</source>
+                <target>Nhập họ và tên của bạn</target>
+            </trans-unit>
+            <trans-unit id="4665600283516531962" datatype="html">
+                <source>Enter your address</source>
+                <target>Nhập địa chỉ của bạn</target>
+            </trans-unit>
+            <trans-unit id="6013106470543900413" datatype="html">
+                <source>Account Stats</source>
+                <target>Thống kê tài khoản</target>
+            </trans-unit>
+            <trans-unit id="4210216113713018268" datatype="html">
+                <source>Account Age</source>
+                <target>Tuổi tài khoản</target>
+            </trans-unit>
+            <trans-unit id="5045572951005571111" datatype="html">
+                <source>Joined</source>
+                <target>Tham gia</target>
+            </trans-unit>
+            <trans-unit id="4779826176246749894" datatype="html">
+                <source>Quick Info</source>
+                <target>Thông tin nhanh</target>
+            </trans-unit>
+            <trans-unit id="3057037570306460052" datatype="html">
+                <source>Profile Details</source>
+                <target>Chi tiết hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="6959497441009812685" datatype="html">
+                <source>Full Name</source>
+                <target>Họ và tên</target>
+            </trans-unit>
+            <trans-unit id="309103481835709504" datatype="html">
+                <source>Email cannot be changed</source>
+                <target>Email không thể thay đổi</target>
+            </trans-unit>
+            <trans-unit id="8194554728555410336" datatype="html">
+                <source>Phone Number</source>
+                <target>Số điện thoại</target>
+            </trans-unit>
+            <trans-unit id="2984628903434675339" datatype="html">
+                <source>Edit Profile</source>
+                <target>Chỉnh sửa hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="4319441956121197474" datatype="html">
+                <source>Save Changes</source>
+                <target>Lưu thay đổi</target>
+            </trans-unit>
+            <trans-unit id="6152557658130195320" datatype="html">
+                <source>Google Connected</source>
+                <target>Đã kết nối Google</target>
+            </trans-unit>
+            <trans-unit id="7263663899745244756" datatype="html">
+                <source>Facebook Connected</source>
+                <target>Đã kết nối Facebook</target>
+            </trans-unit>
+            <trans-unit id="8539044772790808997" datatype="html">
+                <source>GitHub Connected</source>
+                <target>Đã kết nối GitHub</target>
+            </trans-unit>
+            <trans-unit id="4507657285296772871" datatype="html">
+                <source>Apple Connected</source>
+                <target>Đã kết nối Apple</target>
+            </trans-unit>
+            <trans-unit id="5751706009096093407" datatype="html">
+                <source>No social accounts connected</source>
+                <target>Chưa kết nối tài khoản mạng xã hội nào</target>
+            </trans-unit>
+            <trans-unit id="3817525624264455684" datatype="html">
+                <source>Please enter a valid phone number (10-15 digits)</source>
+                <target>Vui lòng nhập số điện thoại hợp lệ (10-15 chữ số)</target>
+            </trans-unit>
+            <trans-unit id="487077452159084336" datatype="html">
+                <source>Select Language</source>
+                <target>Chọn ngôn ngữ</target>
+            </trans-unit>
+            <trans-unit id="1348774649041038169" datatype="html">
+                <source>Navigation</source>
+                <target>Điều hướng</target>
+            </trans-unit>
+            <trans-unit id="8441853471944844138" datatype="html">
+                <source>View Full Details</source>
+                <target>Xem chi tiết đầy đủ</target>
+            </trans-unit>
+            <trans-unit id="5584762056232685248" datatype="html">
+                <source>Prep Time</source>
+                <target>Thời gian chuẩn bị</target>
+            </trans-unit>
+            <trans-unit id="8092404101332014808" datatype="html">
+                <source>Cook Time</source>
+                <target>Thời gian nấu</target>
+            </trans-unit>
+            <trans-unit id="3448462145758383019" datatype="html">
+                <source>Total</source>
+                <target>Tổng cộng</target>
+            </trans-unit>
+            <trans-unit id="1063462873103909661" datatype="html">
+                <source>Difficulty</source>
+                <target>Độ khó</target>
+            </trans-unit>
+            <trans-unit id="7290374659252540217" datatype="html">
+                <source>Instructions</source>
+                <target>Hướng dẫn</target>
+            </trans-unit>
+            <trans-unit id="7155225034801019089" datatype="html">
+                <source>e.g., My Birthday Dishes</source>
+                <target>Ví dụ: Món ăn sinh nhật của tôi</target>
+            </trans-unit>
+            <trans-unit id="8827343041634624381" datatype="html">
+                <source>Describe your collection...</source>
+                <target>Mô tả bộ sưu tập của bạn...</target>
+            </trans-unit>
+            <trans-unit id="3737402445048363630" datatype="html">
+                <source>Public collections can be viewed by others</source>
+                <target>Bộ sưu tập công khai có thể được người khác xem</target>
+            </trans-unit>
+            <trans-unit id="8860681559537375134" datatype="html">
+                <source>Type to search dishes...</source>
+                <target>Nhập để tìm kiếm món ăn...</target>
+            </trans-unit>
+            <trans-unit id="5372292058092714345" datatype="html">
+                <source>Collection Name</source>
+                <target>Tên bộ sưu tập</target>
+            </trans-unit>
+            <trans-unit id="7637609321229466891" datatype="html">
+                <source>Occasion</source>
+                <target>Dịp</target>
+            </trans-unit>
+            <trans-unit id="808290236256490257" datatype="html">
+                <source>Event Date</source>
+                <target>Ngày sự kiện</target>
+            </trans-unit>
+            <trans-unit id="3074987902485823708" datatype="html">
+                <source>Icon</source>
+                <target>Biểu tượng</target>
+            </trans-unit>
+            <trans-unit id="9011959596901584887" datatype="html">
+                <source>Color</source>
+                <target>Màu sắc</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

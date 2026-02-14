@@ -2,12 +2,12 @@
     <!-- Background Effects -->
     <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 -z-10"></div>
     <div
-        class="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse">
+        class="absolute top-10 sm:top-20 left-5 sm:left-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse">
     </div>
-    <div class="absolute bottom-20 right-10 w-[500px] h-[500px] bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl animate-pulse"
+    <div class="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-80 h-80 sm:w-[500px] sm:h-[500px] bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl animate-pulse"
         style="animation-delay: 1.5s"></div>
 
-    <div class="container mx-auto px-4 md:px-8 relative z-10">
+    <div class="mx-auto px-4 md:px-8 relative z-10">
         <!-- Section Header -->
         <div class="text-center mb-16 space-y-4">
             <div
@@ -17,14 +17,14 @@
                     Games</span>
             </div>
 
-            <h2 class="text-4xl md:text-6xl font-bold text-white">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
                 <span class="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 text-transparent bg-clip-text"
                     i18n>
                     Play & Decide
                 </span>
             </h2>
 
-            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto" i18n>
+            <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4" i18n>
                 Can't decide what to eat? Let our fun games help you choose!
             </p>
         </div>
@@ -35,13 +35,13 @@
             <div class="relative">
                 <!-- Navigation Buttons -->
                 <button mat-fab (click)="onPreviousClick()"
-                    class="!absolute !left-0 md:!-left-6 !top-1/2 !-translate-y-1/2 !z-20 !bg-white/10 dark:!bg-gray-800/50 backdrop-blur-md !shadow-2xl hover:!bg-white/20 !transition-all !duration-300 hover:!scale-110 !border !border-white/20"
+                    class="!absolute !left-2 sm:!left-0 lg:!-left-6 !top-1/2 !-translate-y-1/2 !z-20 !bg-white/10 dark:!bg-gray-800/50 backdrop-blur-md !shadow-2xl hover:!bg-white/20 !transition-all !duration-300 hover:!scale-110 !border !border-white/20 !w-12 !h-12 sm:!w-14 sm:!h-14"
                     aria-label="Previous game">
                     <mat-icon class="text-white">chevron_left</mat-icon>
                 </button>
 
                 <button mat-fab (click)="onNextClick()"
-                    class="!absolute !right-0 md:!-right-6 !top-1/2 !-translate-y-1/2 !z-20 !bg-white/10 dark:!bg-gray-800/50 backdrop-blur-md !shadow-2xl hover:!bg-white/20 !transition-all !duration-300 hover:!scale-110 !border !border-white/20"
+                    class="!absolute !right-2 sm:!right-0 lg:!-right-6 !top-1/2 !-translate-y-1/2 !z-20 !bg-white/10 dark:!bg-gray-800/50 backdrop-blur-md !shadow-2xl hover:!bg-white/20 !transition-all !duration-300 hover:!scale-110 !border !border-white/20 !w-12 !h-12 sm:!w-14 sm:!h-14"
                     aria-label="Next game">
                     <mat-icon class="text-white">chevron_right</mat-icon>
                 </button>
@@ -52,8 +52,8 @@
                     <div class="slide-item" [class.active]="i === currentSlide()"
                         [class.inactive]="i !== currentSlide()">
                         <mat-card
-                            class="!bg-gradient-to-br !from-white/5 !to-white/10 dark:!from-gray-800/50 dark:!to-gray-900/50 backdrop-blur-xl !shadow-2xl !border !border-white/20 !rounded-3xl overflow-hidden">
-                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 md:p-12">
+                            class="!bg-gradient-to-br !from-white/5 !to-white/10 dark:!from-gray-800/50 dark:!to-gray-900/50 backdrop-blur-xl !shadow-2xl !border !border-white/20 !rounded-2xl sm:!rounded-3xl overflow-hidden">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 p-4 sm:p-6 md:p-8 lg:p-12">
                                 <!-- Image Side -->
                                 <div class="flex items-center justify-center order-2 lg:order-1">
                                     <div class="relative group">
@@ -64,16 +64,17 @@
 
                                         <!-- Image container -->
                                         <div
-                                            class="relative bg-gradient-to-br from-white/10 to-white/5 rounded-3xl p-6 border border-white/20 backdrop-blur-sm transform transition-all duration-500 group-hover:scale-105">
+                                            class="relative bg-gradient-to-br from-white/10 to-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-white/20 backdrop-blur-sm transform transition-all duration-500 group-hover:scale-105">
                                             <img [src]="slide.image"
                                                 [alt]="(slide.title | multiLanguage: localeId)?.data"
-                                                class="w-full h-auto object-contain rounded-2xl shadow-2xl">
+                                                class="w-full h-auto max-h-64 sm:max-h-80 lg:max-h-full object-contain rounded-xl sm:rounded-2xl shadow-2xl">
                                         </div>
 
                                         <!-- Floating badge -->
                                         <div
-                                            class="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full px-2.5 py-2 shadow-2xl animate-bounce">
-                                            <mat-icon class="text-white">{{ getGameIcon(i) }}</mat-icon>
+                                            class="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full px-2 py-1.5 sm:px-2.5 sm:py-2 shadow-2xl animate-bounce">
+                                            <mat-icon class="text-white">{{ getGameIcon(i)
+                                                }}</mat-icon>
                                         </div>
                                     </div>
                                 </div>
@@ -81,45 +82,44 @@
                                 <!-- Content Side -->
                                 <div class="flex flex-col justify-center space-y-6 order-1 lg:order-2">
                                     <!-- Title -->
-                                    <div class="space-y-3">
+                                    <div class="space-y-2 sm:space-y-3">
                                         <span
-                                            class="inline-block px-4 py-1.5 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-sm font-semibold text-purple-300"
+                                            class="inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-full text-xs sm:text-sm font-semibold text-purple-300"
                                             i18n>Game {{ i + 1 }} of {{ slides.length }}</span>
 
-                                        <h3 class="text-3xl md:text-4xl font-bold text-white leading-tight">
+                                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
                                             {{ (slide.title | multiLanguage: localeId)?.data }}
                                         </h3>
                                     </div>
 
                                     <!-- Description -->
-                                    <p class="text-base md:text-lg text-gray-300 leading-relaxed line-clamp-6">
+                                    <p
+                                        class="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed line-clamp-4 sm:line-clamp-6">
                                         {{ (slide.description | multiLanguage: localeId)?.data }}
                                     </p>
 
                                     <!-- Features -->
-                                    <div class="flex flex-wrap gap-2">
+                                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
                                         @for (feature of getGameFeatures(i); track feature) {
                                         <span
-                                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-gray-200 border border-white/20">
-                                            <mat-icon class="!text-sm text-purple-400">check_circle</mat-icon>
+                                            class="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-gray-200 border border-white/20">
+                                            <mat-icon class="!text-purple-400">check_circle</mat-icon>
                                             <span i18n>{{ feature }}</span>
                                         </span>
                                         }
                                     </div>
 
                                     <!-- CTA Button -->
-                                    <div class="flex gap-4 pt-4">
+                                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
                                         <button mat-raised-button [routerLink]="getGameRoute(i)"
-                                            class="!bg-gradient-to-r !from-purple-500 !to-pink-500 !text-white !shadow-xl hover:!shadow-2xl !rounded-full !px-8 !py-3 !text-lg !font-semibold !transition-all !duration-300 hover:!scale-105 group">
+                                            class="!bg-gradient-to-r !from-purple-500 !to-pink-500 !text-white !shadow-xl hover:!shadow-2xl !rounded-full !px-6 sm:!px-8 !py-2.5 sm:!py-3 !text-base sm:!text-lg !font-semibold !transition-all !duration-300 hover:!scale-105 group !w-full sm:!w-auto">
                                             <mat-icon
                                                 class="group-hover:rotate-12 transition-transform duration-300">play_arrow</mat-icon>
                                             <span i18n>Play Now</span>
-                                            <mat-icon
-                                                class="ml-2 group-hover:translate-x-1 transition-transform duration-300">arrow_forward</mat-icon>
                                         </button>
 
                                         <button mat-stroked-button [routerLink]="getGameRoute(i)"
-                                            class="!border-2 !border-purple-400 !text-purple-300 !rounded-full !px-6 !py-3 !text-base !font-medium hover:!bg-purple-500/10 !transition-all !duration-300">
+                                            class="!border-2 !border-purple-400 !text-purple-300 !rounded-full !px-4 sm:!px-6 !py-2.5 sm:!py-3 !text-sm sm:!text-base !font-medium hover:!bg-purple-500/10 !transition-all !duration-300 !w-full sm:!w-auto">
                                             <mat-icon>info</mat-icon>
                                             <span i18n>Learn More</span>
                                         </button>
@@ -144,19 +144,19 @@
             </div>
 
             <!-- Quick Game Cards Preview -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-12 sm:mt-16">
                 @for (slide of slides; let i = $index; track slide.id) {
                 <mat-card
-                    class="!bg-white/5 dark:!bg-gray-800/30 backdrop-blur-sm !border !border-white/10 !rounded-2xl !cursor-pointer !transition-all !duration-300 hover:!scale-105 hover:!shadow-2xl hover:!border-purple-500/50 group"
+                    class="!bg-white/5 dark:!bg-gray-800/30 backdrop-blur-sm !border !border-white/10 !rounded-xl sm:!rounded-2xl !cursor-pointer !transition-all !duration-300 hover:!scale-105 hover:!shadow-2xl hover:!border-purple-500/50 group"
                     [routerLink]="getGameRoute(i)" (mouseenter)="hoveredCard.set(i)"
                     (mouseleave)="hoveredCard.set(null)">
-                    <div class="!p-6 space-y-4">
+                    <div class="!p-4 sm:!p-6 space-y-3 sm:space-y-4">
                         <!-- Icon -->
                         <div class="flex items-center justify-between">
-                            <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300"
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300"
                                 [ngClass]="hoveredCard() === i ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 'bg-white/10'">
-                                <mat-icon [class.text-white]="hoveredCard() === i"
-                                    [class.text-purple-400]="hoveredCard() !== i">
+                                <mat-icon [class.!text-white]="hoveredCard() === i"
+                                    [class.!text-purple-400]="hoveredCard() !== i" class="!text-xl sm:!text-2xl">
                                     {{ getGameIcon(i) }}
                                 </mat-icon>
                             </div>
@@ -166,12 +166,13 @@
                         </div>
 
                         <!-- Title -->
-                        <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+                        <h4
+                            class="text-lg sm:text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
                             {{ (slide.title | multiLanguage: localeId)?.data }}
                         </h4>
 
                         <!-- Short description -->
-                        <p class="text-sm text-gray-400 line-clamp-2">
+                        <p class="text-xs sm:text-sm text-gray-400 line-clamp-2">
                             {{ (slide.description | multiLanguage: localeId)?.data }}
                         </p>
 

@@ -19,7 +19,9 @@
                     </button>
                     <button [matTooltip]="openSidenav() ? 'Close side' : 'Open side'" i18n-matTooltip matIconButton
                         (click)="openSidenav.set(!openSidenav())"
-                        [ngClass]="{'duration-300 rotate-180': openSidenav()}">
+                        [ngClass]="{'duration-300 rotate-180': openSidenav()}"
+                        [attr.aria-label]="openSidenav() ? 'Close side' : 'Open side'"
+                        [attr.title]="openSidenav() ? 'Close side' : 'Open side'">
                         <mat-icon>chevron_left</mat-icon>
                     </button>
                 </div>
@@ -95,7 +97,8 @@
                                     <button mat-icon-button
                                         class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity"
                                         (mouseenter)="showDishPreview($event, dish)" (mouseleave)="hideDishPreview()"
-                                        matTooltip="Preview dish" matTooltipPosition="above">
+                                        matTooltip="Preview dish" matTooltipPosition="above"
+                                        aria-label="Preview dish" title="Preview dish">
                                         <mat-icon class="text-gray-400">visibility</mat-icon>
                                     </button>
                                 </div>
@@ -139,11 +142,11 @@
                             <div class="flex gap-2">
                                 <button matIconButton (click)="clearSelectedDishes()"
                                     [disabled]="selectedDishes().length === 0" matTooltip="Clear all selected dishes"
-                                    i18n-matTooltip matTooltipPosition="above">
+                                    i18n-matTooltip matTooltipPosition="above" aria-label="Clear all selected dishes" title="Clear all selected dishes">
                                     <mat-icon class="text-red-400">delete</mat-icon>
                                 </button>
                                 <button matIconButton (click)="addCustomDish()" matTooltip="Add custom dish"
-                                    i18n-matTooltip matTooltipPosition="above">
+                                    i18n-matTooltip matTooltipPosition="above" aria-label="Add custom dish" title="Add custom dish">
                                     <mat-icon class="text-green-400">control_point_duplicate</mat-icon>
                                 </button>
                             </div>
@@ -156,9 +159,10 @@
                             @for (dish of selectedDishes(); track dish) {
                             <div class="group box bg-green-500/10 backdrop-blur-sm border border-green-500/20 rounded-lg p-3 mb-2 cursor-move hover:bg-green-500/20 transition-colors"
                                 cdkDrag>
-                                <button matIconButton
-                                    class="!absolute !-top-4 !-left-4 opacity-0 group-hover:!opacity-100 !transition-opacity">
-                                    <mat-icon class="!text-red-400" (click)="removeDish(dish)">close</mat-icon>
+                                <button matIconButton (click)="removeDish(dish)"
+                                    class="!absolute !-top-4 !-left-4 opacity-0 group-hover:!opacity-100 !transition-opacity"
+                                    aria-label="Remove dish" title="Remove dish">
+                                    <mat-icon class="!text-red-400">close</mat-icon>
                                 </button>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
@@ -174,7 +178,8 @@
                                     <button mat-icon-button
                                         class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity"
                                         (mouseenter)="showDishPreview($event, dish)" (mouseleave)="hideDishPreview()"
-                                        matTooltip="Preview dish" matTooltipPosition="above">
+                                        matTooltip="Preview dish" matTooltipPosition="above"
+                                        aria-label="Preview dish" title="Preview dish">
                                         <mat-icon class="text-green-400">visibility</mat-icon>
                                     </button>
                                 </div>
@@ -194,10 +199,10 @@
                             @for (customDish of customDishes(); track customDish) {
                             <div
                                 class="group box bg-blue-500/10 backdrop-blur-sm border border-blue-500/20 rounded-lg p-3 mb-2 hover:bg-blue-500/20 transition-colors">
-                                <button matIconButton
-                                    class="!absolute !-top-4 !-left-4 opacity-0 group-hover:!opacity-100 !transition-opacity">
-                                    <mat-icon class="!text-red-400"
-                                        (click)="removeCustomDish(customDish)">close</mat-icon>
+                                <button matIconButton (click)="removeCustomDish(customDish)"
+                                    class="!absolute !-top-4 !-left-4 opacity-0 group-hover:!opacity-100 !transition-opacity"
+                                    aria-label="Remove custom dish" title="Remove custom dish">
+                                    <mat-icon class="!text-red-400">close</mat-icon>
                                 </button>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-3">
@@ -207,7 +212,8 @@
                                         </div>
                                     </div>
                                     <a mat-icon-button [href]="customDish.slug" target="_blank"
-                                        class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity">
+                                        class="preview-btn opacity-0 group-hover:opacity-100 transition-opacity"
+                                        aria-label="Open dish in new tab" title="Open dish in new tab">
                                         <mat-icon class="text-blue-400">visibility</mat-icon>
                                     </a>
                                 </div>
