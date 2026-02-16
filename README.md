@@ -62,3 +62,8 @@ For more information on using the Angular CLI, including detailed command refere
 ```
 ng extract-i18n --output-path src/locale
 ```
+
+## Run unit test single file
+```
+npm run test:file src/app/components/feedback-fab/feedback-fab.component.spec.ts
+```

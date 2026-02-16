@@ -3,6 +3,19 @@
   border-radius: 10px;
   font-weight: 500;
   display: inline-block;
+  color: #ffffff;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5),
     -5px -5px 10px rgba(255, 255, 255, 0.05);
+}
+
+.plus-badge {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+    background: rgba(243, 164, 70, 0.3);
+    border-color: rgba(243, 164, 70, 0.5);
+    transform: scale(1.05);
+  }
 }

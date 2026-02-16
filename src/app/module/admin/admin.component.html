@@ -1,155 +1,231 @@
 <mat-sidenav-container class="sidenav-container !bg-cover !bg-no-repeat !bg-center">
     <mat-sidenav #drawer
-        class="sidenav ml-2 !rounded-xl !bg-transparent !bg-gradient-to-br !from-white/50 !via-white-30 !to-transparent !shadow-lg !ring-1 !ring-black/5"
+        class="sidenav !ml-3 !my-4 !rounded-2xl !bg-white/10 backdrop-blur-xl !shadow-2xl !ring-1 !ring-white/20 !border !border-white/10 overflow-hidden"
         fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
         [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-        <div class="flex mt-3 px-3 gap-3" [class.justify-center]="!(isHandset$)">
-            <img src="/assets/logo/what-to-eat-favicon-color.png" alt="logo"
-                class="w-10 h-10 object-cover object-center shadow rounded-full brightness-200" />
-            <div class="flex flex-col">
-                <span class="text-white text-sm font-semibold">
-                    {{payload?.name}}
-                </span>
-                <span class="text-white text-xs font-light">
-                    {{payload?.role_name}}
-                </span>
+        
+        <!-- User Profile Section -->
+        <div class="relative px-4 py-6 bg-gradient-to-br from-black/50 to-transparent">
+            <div class="flex items-center gap-3" [class.justify-center]="(isHandset$ | async)">
+                <div class="relative">
+                    <img src="/assets/logo/what-to-eat-favicon-color.png" alt="logo"
+                        class="w-12 h-12 object-cover object-center rounded-full shadow-lg ring-2 ring-white/30 brightness-110" />
+                    <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full ring-2 ring-white/50"></div>
+                </div>
+                @if (!(isHandset$ | async)) {
+                <div class="flex flex-col flex-1 min-w-0">
+                    <span class="text-white text-sm font-semibold truncate drop-shadow-lg">
+                        {{payload?.name}}
+                    </span>
+                    <span class="text-white/70 text-xs font-medium truncate">
+                        {{payload?.role_name}}
+                    </span>
+                </div>
+                }
             </div>
         </div>
-        <div class="border-t border-gray-50 opacity-50 mx-3 mt-2"></div>
-        <div i18n class="flex text-white mt-2 justify-center font-semibold">Menu</div>
-        <mat-nav-list>
-            <a mat-list-item [routerLink]="['/']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">home</mat-icon>
+        
+        <!-- Elegant Divider -->
+        <div class="relative h-px mx-4 my-3">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+        </div>
+        
+        <!-- Menu Header -->
+        @if (!(isHandset$ | async)) {
+        <div class="px-6 py-2">
+            <span i18n class="text-white/60 text-xs font-semibold uppercase tracking-wider">Navigation</span>
+        </div>
+        }
+        
+        <!-- Main Navigation -->
+        <mat-nav-list class="!pt-0">
+            <a mat-list-item [routerLink]="['/']" routerLinkActive="active-nav-item" [routerLinkActiveOptions]="{exact: true}"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">home</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Go to Client</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Go to Client</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        dashboard
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin']" routerLinkActive="active-nav-item" [routerLinkActiveOptions]="{exact: true}"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">dashboard</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Dashboard</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Dashboard</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin/ingredient']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        rice_bowl
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin/ingredient']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">rice_bowl</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Ingredient</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Ingredient</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin/dish']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        room_service
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin/dish']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">room_service</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Dish</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Dish</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin/contact']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        contact_mail
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin/contact']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">contact_mail</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Contact</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Contact</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin/feedback']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        feedback
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin/feedback']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">feedback</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Feedback</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Feedback</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin/role-permission']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        security
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin/role-permission']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">security</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Role Permission</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Role Permission</span>
                     }
                 </div>
             </a>
-            <a mat-list-item [routerLink]="['/admin/user']">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        people
-                    </mat-icon>
+            
+            <a mat-list-item [routerLink]="['/admin/user']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">people</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">User Management</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">User Management</span>
                     }
                 </div>
             </a>
         </mat-nav-list>
-        <div class="border-t border-gray-50 opacity-50 mx-3 mt-2"></div>
-        <mat-nav-list>
-            <a mat-list-item href="#" (click)="logout()">
-                <div class="flex gap-5 items-center" [class.justify-center]="!(isHandset$)">
-                    <mat-icon class="!text-white min-w-5">
-                        logout
-                    </mat-icon>
+        
+        <!-- Elegant Divider -->
+        <div class="relative h-px mx-4 my-3">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <mat-nav-list class="!pt-0">
+            <a mat-list-item [routerLink]="['/profile']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 !w-5 !h-5 !text-xl group-hover:scale-110 transition-transform duration-300">person</mat-icon>
                     @if (!(isHandset$ | async)) {
-                    <span i18n class="text-white text-sm font-light">Logout</span>
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Profile</span>
+                    }
+                </div>
+            </a>
+            
+            <a mat-list-item href="#" (click)="logout()"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-red-500/20 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-red-300 !w-5 !h-5 !text-xl group-hover:scale-110 transition-transform duration-300">logout</mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-red-300 text-sm font-medium group-hover:text-red-200 transition-colors">Logout</span>
                     }
                 </div>
             </a>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
-        <mat-toolbar color="primary"
-            class="!rounded-xl !bg-slate-200 !shadow-md !shadow-lg !ring-1 !ring-black/5"
-            style="z-index: 9999;">
-            @if (isHandset$ | async) {
-            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" i18n-aria-label>
-                <mat-icon aria-label="Side nav toggle icon" i18n-aria-label>menu</mat-icon>
-            </button>
-            }
-            <div class="flex-1">
-                <app-breadcrumb></app-breadcrumb>
-            </div>
-            <!-- Language Switcher -->
-            <div class="flex items-center gap-2">
-                <button mat-icon-button [matMenuTriggerFor]="languageMenu"
-                    class="flex items-center gap-2 hover:bg-white/10 rounded-lg px-2 py-1 transition-colors"
-                    aria-label="Change language" i18n-aria-label>
-                    <img [src]="currentLanguageObject?.image" [alt]="currentLanguageObject?.name"
-                        class="w-6 h-4 object-cover rounded-sm shadow-sm" />
-                    <mat-icon class="text-sm">expand_more</mat-icon>
-                </button>
-                <mat-menu #languageMenu="matMenu" class="mt-2">
-                    @for (lang of availableLanguages; track lang.code) {
-                    <button mat-menu-item (click)="changeLanguage(lang.code)"
-                        [class.active-language]="lang.code === currentLanguage">
-                        <div class="flex items-center gap-3 px-4 py-2 min-w-[140px]">
-                            <img [src]="lang.image" [alt]="lang.name"
-                                class="w-6 h-4 object-cover rounded-sm shadow-sm" />
-                            <span class="text-sm font-medium">{{ lang.name }}</span>
-                            @if (lang.code === currentLanguage) {
-                            <mat-icon class="ml-auto text-sm text-blue-400">check</mat-icon>
-                            }
-                        </div>
+    <mat-sidenav-content class="!bg-gradient-to-br !from-gray-50 !via-white !to-gray-50">
+        <!-- Premium Toolbar Design -->
+        <div class="sticky top-0 z-[9999] px-2 sm:px-4 pt-2 sm:pt-4">
+            <mat-toolbar color="primary"
+                class="!rounded-xl sm:!rounded-2xl !bg-gradient-to-r !from-white !via-white !to-blue-50/30 backdrop-blur-xl !shadow-2xl !ring-1 !ring-gray-200/50 !border !border-white/60 !min-h-[64px] sm:!min-h-[72px] !px-3 sm:!px-6">
+                
+                <div class="flex items-center w-full gap-2 sm:gap-4">
+                    <!-- Menu Button for Mobile -->
+                    @if (isHandset$ | async) {
+                    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" i18n-aria-label
+                        class="!w-9 !h-9 sm:!w-10 sm:!h-10 !rounded-xl hover:!bg-gradient-to-br hover:!from-blue-50 hover:!to-indigo-50 !transition-all !duration-300 !shadow-sm hover:!shadow-md">
+                        <mat-icon aria-label="Side nav toggle icon" i18n-aria-label class="!text-gray-700">menu</mat-icon>
                     </button>
                     }
-                </mat-menu>
-            </div>
-        </mat-toolbar>
-        <div class="p-5">
+                    
+                    <!-- Breadcrumb Section -->
+                    <div class="flex-1 min-w-0 overflow-hidden">
+                        <app-breadcrumb></app-breadcrumb>
+                    </div>
+                    
+                    <!-- Action Buttons Section -->
+                    <div class="flex items-center gap-2 shrink-0">
+                        <!-- Language Switcher -->
+                        <button mat-icon-button [matMenuTriggerFor]="languageMenu"
+                            class="!bg-gradient-to-br !from-gray-50 !to-white hover:!from-blue-50 hover:!to-indigo-50 !rounded-xl !transition-all !duration-300 !shadow-md hover:!shadow-lg !ring-1 !ring-gray-200/50 !relative !overflow-hidden group"
+                            aria-label="Change language" i18n-aria-label>
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-400/5 to-blue-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                            <img [src]="currentLanguageObject?.image" [alt]="currentLanguageObject?.name"
+                                class="w-5 sm:w-6 h-3.5 sm:h-4 object-cover rounded shadow-sm ring-1 ring-gray-300 relative z-10" />
+                            <span class="text-xs font-semibold text-gray-700 hidden lg:block relative z-10">{{ currentLanguageObject?.name }}</span>
+                            <mat-icon class="!text-sm sm:!text-base !text-gray-500 !w-4 !h-4 relative z-10">expand_more</mat-icon>
+                        </button>
+                        <mat-menu #languageMenu="matMenu" class="!mt-2" xPosition="before">
+                            <div class="px-3 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200">
+                                <span class="text-xs font-semibold text-gray-600 uppercase tracking-wider" i18n>Select Language</span>
+                            </div>
+                            @for (lang of availableLanguages; track lang.code) {
+                            <button mat-menu-item (click)="changeLanguage(lang.code)"
+                                [class.!bg-gradient-to-r]="lang.code === currentLanguage"
+                                [class.!from-blue-50]="lang.code === currentLanguage"
+                                [class.!to-indigo-50]="lang.code === currentLanguage"
+                                class="!px-4 !py-3 !transition-all !duration-200 hover:!bg-gray-50 !rounded-lg !mx-2 !my-1">
+                                <div class="flex items-center gap-3 min-w-[180px]">
+                                    <div class="relative">
+                                        <img [src]="lang.image" [alt]="lang.name"
+                                            class="w-8 h-6 object-cover rounded shadow-md ring-2 ring-white" />
+                                        @if (lang.code === currentLanguage) {
+                                        <div class="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full ring-2 ring-white"></div>
+                                        }
+                                    </div>
+                                    <span class="text-sm font-medium text-gray-800 flex-1">{{ lang.name }}</span>
+                                    @if (lang.code === currentLanguage) {
+                                    <mat-icon class="!text-lg !text-blue-500">check_circle</mat-icon>
+                                    }
+                                </div>
+                            </button>
+                            }
+                        </mat-menu>
+                        
+                        <!-- User Profile Badge -->
+                        <div class="hidden xl:flex items-center gap-2.5 px-3 py-2 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-md ring-1 ring-blue-200/50">
+                            <div class="relative shrink-0">
+                                <img src="/assets/logo/what-to-eat-favicon-color.png" alt="User avatar"
+                                    class="w-8 h-8 rounded-full ring-2 ring-white shadow-sm" />
+                                <div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full ring-2 ring-white"></div>
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span class="text-xs font-semibold text-gray-800 leading-tight truncate max-w-[120px]">{{payload?.name}}</span>
+                                <span class="text-[10px] text-gray-500 leading-tight truncate max-w-[120px]">{{payload?.role_name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-toolbar>
+        </div>
+        
+        <!-- Content Area with Enhanced Padding -->
+        <div class="p-6 min-h-[calc(100vh-100px)]">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

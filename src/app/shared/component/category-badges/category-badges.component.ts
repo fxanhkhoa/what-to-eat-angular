@@ -13,6 +13,22 @@ import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
 export class CategoryBadgesComponent {
   @Input() categories: string[] = [];
   @Input() useColorPalette: boolean = false;
+  @Input() maxVisible: number = 2;
+  @Input() showAll: boolean = true;
+
+  get visibleCategories(): string[] {
+    if (this.showAll) {
+      return this.categories ?? [];
+    }
+    return this.categories?.slice(0, this.maxVisible) ?? [];
+  }
+
+  get remainingCount(): number {
+    if (this.showAll) {
+      return 0;
+    }
+    return Math.max(0, (this.categories?.length ?? 0) - this.maxVisible);
+  }
 
   // Theme colors array - you can customize these colors
   themeColors = [

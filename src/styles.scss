@@ -97,6 +97,7 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #6f5850 rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -137,5 +138,20 @@ body {
   }
   .mat-mdc-snack-bar-label {
     color: white !important;
+  }
+}
+
+// Dish Detail Dialog Panel
+.dish-detail-dialog-panel {
+  .mat-mdc-dialog-container {
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 16px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .mat-mdc-dialog-surface {
+    border-radius: 16px !important;
+    overflow: hidden;
   }
 }

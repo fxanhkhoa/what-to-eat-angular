@@ -95,6 +95,7 @@ export class VotingChatComponent
   isOnlineCountAnimating = signal(false);
   previousOnlineCount = signal(0);
   animationType = signal<'increase' | 'decrease' | 'none'>('none');
+  isPanelExpanded = signal(true);
 
   // Computed properties
   onlineCount = computed(() => this.onlineUsers().length);

@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   title = 'what-to-eat-angular';
 
   ngOnInit(): void {
-    this.getProfile();
+    this.refreshTokenAndInitialize();
     // Website visit tracking (unique per browser)
     if (!isPlatformServer(this.platformId)) {
       if (!localStorage.getItem('website_visited')) {
@@ -43,6 +43,37 @@ export class AppComponent implements OnInit {
     }
   }
 
+  refreshTokenAndInitialize() {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
+    const refreshToken = cookies.get(Cookies_Key.REFRESH_TOKEN);
+    
+    if (refreshToken) {
+      // Refresh the access token if refresh token exists
+      this.authService.refreshToken(refreshToken).subscribe({
+        next: (tokenResult) => {
+          // Save new tokens to cookies
+          cookies.set(Cookies_Key.TOKEN, tokenResult.token, { expires: 7 });
+          cookies.set(Cookies_Key.REFRESH_TOKEN, tokenResult.refreshToken, { expires: 30 });
+          
+          // Now get the profile with the refreshed token
+          this.getProfile();
+        },
+        error: (error) => {
+          console.error('Error refreshing token:', error);
+          // Clear invalid tokens
+          cookies.remove(Cookies_Key.TOKEN);
+          cookies.remove(Cookies_Key.REFRESH_TOKEN);
+        },
+      });
+    } else {
+      // No refresh token, just try to get profile if access token exists
+      this.getProfile();
+    }
+  }
+
   getProfile() {
     if (isPlatformServer(this.platformId)) {
       return;
@@ -53,6 +84,9 @@ export class AppComponent implements OnInit {
     }
     this.authService.getProfileAPI().subscribe({
       next: (profile) => {
+        if (!profile) {
+          return;
+        }
         this.authService.setProfile(profile);
       },
       error: (error) => {

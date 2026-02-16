@@ -50,6 +50,33 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'my-dishes',
+        canActivate: [authenticationGuard],
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list.component').then(
+                (m) => m.UserDishListComponent
+              ),
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component').then(
+                (m) => m.UserDishListCreateComponent
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component').then(
+                (m) => m.UserDishListCreateComponent
+              ),
+          },
+        ],
+      },
+      {
         path: 'game',
         children: [
           {
@@ -126,6 +153,14 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./module/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'profile',
+    canActivate: [authenticationGuard],
+    loadComponent: () =>
+      import('./module/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
   },
   {
     path: 'admin',

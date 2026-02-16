@@ -5,7 +5,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { IngredientCardComponent } from './ingredient-card/ingredient-card.component';
 import { Ingredient, QueryIngredientDto } from '@/types/ingredient.type';
-import { EmptyComponent } from '../../../components/empty/empty.component';
 import { SearchBarComponent } from '../../../shared/component/search-bar/search-bar.component';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +18,6 @@ import { finalize } from 'rxjs';
     MatIconModule,
     MatProgressSpinnerModule,
     IngredientCardComponent,
-    EmptyComponent,
     SearchBarComponent,
     RouterModule,
     MatPaginatorModule,

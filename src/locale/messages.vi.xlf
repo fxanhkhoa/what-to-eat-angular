@@ -2854,6 +2854,15 @@
                     <context context-type="linenumber">43,45</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="1178868810054938145" datatype="html">
+                <source>Discover Recipe</source>
+                <target>Khám Phá Công Thức</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-card/dish-card.component.html</context>
+                    <context context-type="linenumber">102,103</context>
+                </context-group>
+            </trans-unit>
             <trans-unit id="7082225262867320439" datatype="html">
                 <source>No video available</source>
                 <target>Không có video</target>
@@ -2897,6 +2906,15 @@
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
                     <context context-type="linenumber">179,180</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2060259765918222839" datatype="html">
+                <source>Copy Link</source>
+                <target>Sao chép liên kết</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+                    <context context-type="linenumber">245,246</context>
                 </context-group>
             </trans-unit>
             <trans-unit id="related_dishes" datatype="html">
@@ -3793,6 +3811,195 @@
                     <context context-type="linenumber">17,18</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="967510499764666376" datatype="html">
+                <source> Hungry? </source>
+                <target> Đói chưa? </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">44</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3037412945258866322" datatype="html">
+                <source> Eat What </source>
+                <target> Ăn Gì </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">47</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7643761050170716875" datatype="html">
+                <source> Unlock a world of dining options and discover your next delicious meal, conveniently and wherever you are </source>
+                <target> Khám phá thế giới ẩm thực phong phú và tìm món ngon tiếp theo, tiện lợi mọi lúc mọi nơi </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">55</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4128848185817244052" datatype="html">
+                <source>1000+ Dishes</source>
+                <target>1000+ Món Ăn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">63,64</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5017984440962333157" datatype="html">
+                <source>Top Rated</source>
+                <target>Đánh Giá Cao</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">67,68</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4525190872435397369" datatype="html">
+                <source>Quick &amp; Easy</source>
+                <target>Nhanh &amp; Dễ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">71,72</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4903565739219999323" datatype="html">
+                <source>Find Your Meal</source>
+                <target>Tìm Món Ăn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">84,85</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4136445830229972723" datatype="html">
+                <source>Try Games</source>
+                <target>Chơi Game</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">94,95</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6539970189329766229" datatype="html">
+                <source>Follow us:</source>
+                <target>Theo dõi chúng tôi:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">100,101</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="598789626028399324" datatype="html">
+                <source>Recipes</source>
+                <target>Công Thức</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">142,143</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3706222784708785028" datatype="html">
+                <source>Rating</source>
+                <target>Đánh Giá</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">152,153</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3194340843253094883" datatype="html">
+                <source>Smart Search</source>
+                <target>Tìm Kiếm Thông Minh</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">163,164</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2436122091038860078" datatype="html">
+                <source>Find anything</source>
+                <target>Tìm mọi thứ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">164,165</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3763627351285780010" datatype="html">
+                <source>Save Favorites</source>
+                <target>Lưu Yêu Thích</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">173,174</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8056406592648751808" datatype="html">
+                <source>Quick access</source>
+                <target>Truy cập nhanh</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">174,175</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7832134155223029198" datatype="html">
+                <source>Fun Games</source>
+                <target>Trò Chơi Vui</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">183,184</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5221398177965257196" datatype="html">
+                <source>Random picks</source>
+                <target>Chọn ngẫu nhiên</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">184,185</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5297155731956190314" datatype="html">
+                <source>AI Suggest</source>
+                <target>AI Gợi Ý</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">193,194</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1299981020028839643" datatype="html">
+                <source>Personalized</source>
+                <target>Cá nhân hóa</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">194,195</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3522592715980446384" datatype="html">
+                <source>Trusted by Thousands</source>
+                <target>Được Hàng Nghìn Người Tin Dùng</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">203,204</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2906820659421842526" datatype="html">
+                <source>Scroll to explore</source>
+                <target>Cuộn để khám phá</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">
+                        src/app/module/client/home/home.component.html</context>
+                    <context context-type="linenumber">226,227</context>
+                </context-group>
+            </trans-unit>
             <trans-unit id="8637092259318659135" datatype="html">
                 <source> Ingredients</source>
                 <target>Nguyên liệu</target>
@@ -4436,6 +4643,646 @@
                         src/app/shared/widget/video-viewer/video-viewer.component.html</context>
                     <context context-type="linenumber">2,3</context>
                 </context-group>
+            </trans-unit>
+            <trans-unit id="8575484073059097777" datatype="html">
+                <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>home<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Home<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+                <target><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>home<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Trang chủ<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">194,196</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2521309862454620393" datatype="html">
+                <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>restaurant<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Dish<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+                <target><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>restaurant<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Món ăn<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">201,203</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8257979639259512666" datatype="html">
+                <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>eco<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Ingredient<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+                <target><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>eco<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Nguyên liệu<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">208,210</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4386839506897967612" datatype="html">
+                <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>bookmark<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>My Dishes<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+                <target><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>bookmark<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Món của tôi<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">215,217</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="125877948533407323" datatype="html">
+                <source>All Dishes</source>
+                <target>Tất cả món ăn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">323</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5736481176444461852" datatype="html">
+                <source>About Us</source>
+                <target>Về chúng tôi</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">326</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4721007402656921350" datatype="html">
+                <source> Privacy Policy </source>
+                <target> Chính sách bảo mật </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">381</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7571375880734710634" datatype="html">
+                <source> Terms of Service </source>
+                <target> Điều khoản dịch vụ </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">385</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8779173778325924127" datatype="html">
+                <source> Cookie Policy </source>
+                <target> Chính sách Cookie </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">389</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7844947641608675059" datatype="html">
+                <source><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>admin_panel_settings<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Admin<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+                <target><x id="START_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;mat-icon class=&quot;group-hover:scale-110 transition-transform&quot;&gt;"/>admin_panel_settings<x id="CLOSE_TAG_MAT_ICON" ctype="x-mat_icon" equiv-text="&lt;/mat-icon&gt;"/><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Quản trị<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+                    <context context-type="linenumber">223,225</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="891060578192602838" datatype="html">
+                <source>Filter By Category</source>
+                <target>Lọc theo danh mục</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">15,16</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="997184852628859666" datatype="html">
+                <source> Favorite Dishes </source>
+                <target> Món ăn yêu thích </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">36</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6692370725852523997" datatype="html">
+                <source>Discover culinary masterpieces</source>
+                <target>Khám phá những kiệt tác ẩm thực</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">40,41</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1572263755980504729" datatype="html">
+                <source> Let&apos;s pick your favorites to enlighten your day </source>
+                <target> Hãy chọn món yêu thích để làm sáng ngày của bạn </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">50</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2627026817710937014" datatype="html">
+                <source>Explore All Dishes</source>
+                <target>Khám phá tất cả món ăn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">154,155</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3333073151090596130" datatype="html">
+                <source>Loading delicious dishes...</source>
+                <target>Đang tải món ăn ngon...</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">62,63</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="934914398317254321" datatype="html">
+                <source>Explore Now</source>
+                <target>Khám phá ngay</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
+                    <context context-type="linenumber">131,132</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2095533154450573289" datatype="html">
+                <source>Interactive Games</source>
+                <target>Trò chơi tương tác</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">16,17</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="584543654506716840" datatype="html">
+                <source> Play &amp; Decide </source>
+                <target> Chơi và quyết định </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">23</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="605372656008549436" datatype="html">
+                <source> Can&apos;t decide what to eat? Let our fun games help you choose! </source>
+                <target> Không quyết định được ăn gì? Hãy để trò chơi vui của chúng tôi giúp bạn chọn! </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">28</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8065590330539966399" datatype="html">
+                <source>Game <x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ slides.length }}"/></source>
+                <target>Trò chơi <x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/> trong <x id="INTERPOLATION_1" equiv-text="{{ slides.length }}"/></target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">87,89</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3866661429030542156" datatype="html">
+                <source>Play Now</source>
+                <target>Chơi ngay</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">116,117</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7002955679222677443" datatype="html">
+                <source>Learn More</source>
+                <target>Tìm hiểu thêm</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">124,125</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6836301598104639378" datatype="html">
+                <source> Quick Play </source>
+                <target> Chơi nhanh </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
+                    <context context-type="linenumber">183</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4295710629093033518" datatype="html">
+                <source>Fresh &amp; Organic</source>
+                <target>Tươi &amp; hữu cơ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">12,13</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7734946452338645812" datatype="html">
+                <source>Discover Ingredients</source>
+                <target>Khám phá nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">16,17</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8493715701787434992" datatype="html">
+                <source> Explore our collection of fresh, high-quality ingredients to create amazing dishes </source>
+                <target> Khám phá bộ sưu tập nguyên liệu tươi ngon, chất lượng cao để tạo ra những món ăn tuyệt vời </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">20,21</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4095719924885338783" datatype="html">
+                <source>Filter by Category</source>
+                <target>Lọc theo danh mục</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">28,29</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2724611353584251336" datatype="html">
+                <source>Clear All Filters</source>
+                <target>Xóa tất cả bộ lọc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">67,68</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5665993850645444000" datatype="html">
+                <source> Loading fresh ingredients... </source>
+                <target> Đang tải nguyên liệu tươi... </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">81,82</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="504524586193256193" datatype="html">
+                <source> No Ingredients Found </source>
+                <target> Không tìm thấy nguyên liệu </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">96</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7802509229059959311" datatype="html">
+                <source> Try adjusting your filters to find more ingredients </source>
+                <target> Thử điều chỉnh bộ lọc để tìm thêm nguyên liệu </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">99</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4312517319627808728" datatype="html">
+                <source>Reset Filters</source>
+                <target>Đặt lại bộ lọc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">109,110</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2367083101464473156" datatype="html">
+                <source>Scroll to see more</source>
+                <target>Cuộn để xem thêm</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/home/ingredient-section/ingredient-section.component.html</context>
+                    <context context-type="linenumber">199,200</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6672997488566032433" datatype="html">
+                <source>Make this collection public</source>
+                <target>Đặt bộ sưu tập này ở chế độ công khai</target>
+            </trans-unit>
+            <trans-unit id="1780893984847847326" datatype="html">
+                <source>Add Dishes</source>
+                <target>Thêm món ăn</target>
+            </trans-unit>
+            <trans-unit id="8530129542507408758" datatype="html">
+                <source>Search dishes</source>
+                <target>Tìm kiếm món ăn</target>
+            </trans-unit>
+            <trans-unit id="8445409909623962979" datatype="html">
+                <source>Selected dishes:</source>
+                <target>Món ăn đã chọn:</target>
+            </trans-unit>
+            <trans-unit id="2776617638046368313" datatype="html">
+                <source>View details</source>
+                <target>Xem chi tiết</target>
+            </trans-unit>
+            <trans-unit id="4814285799071780083" datatype="html">
+                <source>Remove</source>
+                <target>Xóa</target>
+            </trans-unit>
+            <trans-unit id="499211652050874170" datatype="html">
+                <source>Searching dishes...</source>
+                <target>Đang tìm kiếm món ăn...</target>
+            </trans-unit>
+            <trans-unit id="252627326381732407" datatype="html">
+                <source>Empty Collection</source>
+                <target>Bộ sưu tập trống</target>
+            </trans-unit>
+            <trans-unit id="4842353734468560299" datatype="html">
+                <source>This collection has no dishes</source>
+                <target>Bộ sưu tập này không có món ăn nào</target>
+            </trans-unit>
+            <trans-unit id="6324573489507306266" datatype="html">
+                <source>Collection Loaded</source>
+                <target>Đã tải bộ sưu tập</target>
+            </trans-unit>
+            <trans-unit id="6513953304614357903" datatype="html">
+                <source><x id="PH" equiv-text="dishes.length"/> dishes from "<x id="PH_1" equiv-text="collectionName"/>" added to wheel</source>
+                <target><x id="PH" equiv-text="dishes.length"/> món ăn từ "<x id="PH_1" equiv-text="collectionName"/>" đã được thêm vào vòng quay</target>
+            </trans-unit>
+            <trans-unit id="2062343947099654855" datatype="html">
+                <source>Loading collection dishes...</source>
+                <target>Đang tải món ăn từ bộ sưu tập...</target>
+            </trans-unit>
+            <trans-unit id="8189896187094245789" datatype="html">
+                <source>My Collections</source>
+                <target>Bộ sưu tập của tôi</target>
+            </trans-unit>
+            <trans-unit id="6531995694105039161" datatype="html">
+                <source>Click a collection to load its dishes to the wheel</source>
+                <target>Nhấp vào bộ sưu tập để tải món ăn vào vòng quay</target>
+            </trans-unit>
+            <trans-unit id="4012164213448143590" datatype="html">
+                <source> You don't have any dish collections yet. Create one to organize your favorite dishes! </source>
+                <target> Bạn chưa có bộ sưu tập món ăn nào. Tạo một bộ sưu tập để sắp xếp các món ăn yêu thích! </target>
+            </trans-unit>
+            <trans-unit id="3809891445639716804" datatype="html">
+                <source><x id="PH" equiv-text="dishes.length"/> dishes from "<x id="PH_1" equiv-text="collectionName"/>" added to game</source>
+                <target><x id="PH" equiv-text="dishes.length"/> món ăn từ "<x id="PH_1" equiv-text="collectionName"/>" đã được thêm vào trò chơi</target>
+            </trans-unit>
+            <trans-unit id="7433427381434775523" datatype="html">
+                <source>Click a collection to load its dishes to the game</source>
+                <target>Nhấp vào bộ sưu tập để tải món ăn vào trò chơi</target>
+            </trans-unit>
+            <trans-unit id="3938480838448084866" datatype="html">
+                <source><x id="PH" equiv-text="dishes.length"/> dishes from "<x id="PH_1" equiv-text="collectionName"/>" ready to add</source>
+                <target><x id="PH" equiv-text="dishes.length"/> món ăn từ "<x id="PH_1" equiv-text="collectionName"/>" sẵn sàng để thêm</target>
+            </trans-unit>
+            <trans-unit id="5110222210765015989" datatype="html">
+                <source>Click a collection to load its dishes for voting</source>
+                <target>Nhấp vào bộ sưu tập để tải món ăn cho bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="6866929643398277442" datatype="html">
+                <source>Dishes Added</source>
+                <target>Đã thêm món ăn</target>
+            </trans-unit>
+            <trans-unit id="7262790121771815926" datatype="html">
+                <source><x id="PH" equiv-text="newDishes.length"/> dishes added to voting</source>
+                <target><x id="PH" equiv-text="newDishes.length"/> món ăn đã được thêm vào bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="1680555240929419737" datatype="html">
+                <source>No New Dishes</source>
+                <target>Không có món ăn mới</target>
+            </trans-unit>
+            <trans-unit id="1007751772132974791" datatype="html">
+                <source>All dishes from this collection are already in the voting</source>
+                <target>Tất cả món ăn từ bộ sưu tập này đã có trong danh sách bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="8938417353304928528" datatype="html">
+                <source>VOTING SESSION</source>
+                <target>PHIÊN BỎ PHIẾU</target>
+            </trans-unit>
+            <trans-unit id="723251513816909868" datatype="html">
+                <source>View Results</source>
+                <target>Xem kết quả</target>
+            </trans-unit>
+            <trans-unit id="2891346899632677789" datatype="html">
+                <source> Live Results </source>
+                <target> Kết quả trực tiếp </target>
+            </trans-unit>
+            <trans-unit id="4501861359385130017" datatype="html">
+                <source>Current Winner:</source>
+                <target>Người chiến thắng hiện tại:</target>
+            </trans-unit>
+            <trans-unit id="1295614462098694869" datatype="html">
+                <source>Preview</source>
+                <target>Xem trước</target>
+            </trans-unit>
+            <trans-unit id="8175558606636421137" datatype="html">
+                <source>Vote!</source>
+                <target>Bỏ phiếu!</target>
+            </trans-unit>
+            <trans-unit id="2064400765532215105" datatype="html">
+                <source> Loading Voting Session... </source>
+                <target> Đang tải phiên bỏ phiếu... </target>
+            </trans-unit>
+            <trans-unit id="5144412723030703345" datatype="html">
+                <source>Please wait while we prepare everything</source>
+                <target>Vui lòng đợi trong khi chúng tôi chuẩn bị mọi thứ</target>
+            </trans-unit>
+            <trans-unit id="1659170319585428961" datatype="html">
+                <source>Oops! Something went wrong</source>
+                <target>Rất tiếc! Đã xảy ra lỗi</target>
+            </trans-unit>
+            <trans-unit id="8679806927601731663" datatype="html">
+                <source>Try Again</source>
+                <target>Thử lại</target>
+            </trans-unit>
+            <trans-unit id="4872276319201441792" datatype="html">
+                <source>Authentication Required</source>
+                <target>Yêu cầu xác thực</target>
+            </trans-unit>
+            <trans-unit id="8837650029287962445" datatype="html">
+                <source>You need to be logged in to participate in voting</source>
+                <target>Bạn cần đăng nhập để tham gia bỏ phiếu</target>
+            </trans-unit>
+            <trans-unit id="203827529942340818" datatype="html">
+                <source>Enter your email</source>
+                <target>Nhập email của bạn</target>
+            </trans-unit>
+            <trans-unit id="7463529544721817732" datatype="html">
+                <source>My Dishes</source>
+                <target>Món ăn của tôi</target>
+            </trans-unit>
+            <trans-unit id="3540774662944260221" datatype="html">
+                <source>My Dish Collections</source>
+                <target>Bộ sưu tập món ăn của tôi</target>
+            </trans-unit>
+            <trans-unit id="4615871364122184246" datatype="html">
+                <source> Create and organize your favorite dishes for any occasion </source>
+                <target> Tạo và sắp xếp các món ăn yêu thích cho mọi dịp </target>
+            </trans-unit>
+            <trans-unit id="8346585071068558109" datatype="html">
+                <source>New Collection</source>
+                <target>Bộ sưu tập mới</target>
+            </trans-unit>
+            <trans-unit id="2125743556929842983" datatype="html">
+                <source>No Collections Yet</source>
+                <target>Chưa có bộ sưu tập nào</target>
+            </trans-unit>
+            <trans-unit id="2159999828324334619" datatype="html">
+                <source>Create your first collection to get started!</source>
+                <target>Tạo bộ sưu tập đầu tiên để bắt đầu!</target>
+            </trans-unit>
+            <trans-unit id="3262951443153694121" datatype="html">
+                <source>Create Collection</source>
+                <target>Tạo bộ sưu tập</target>
+            </trans-unit>
+            <trans-unit id="657778156261270416" datatype="html">
+                <source>Public collection</source>
+                <target>Bộ sưu tập công khai</target>
+            </trans-unit>
+            <trans-unit id="5920215406923781490" datatype="html">
+                <source>Private collection</source>
+                <target>Bộ sưu tập riêng tư</target>
+            </trans-unit>
+            <trans-unit id="6621329748219109148" datatype="html">
+                <source>Duplicate</source>
+                <target>Sao chép</target>
+            </trans-unit>
+            <trans-unit id="5767178971853405764" datatype="html">
+                <source>View Dishes</source>
+                <target>Xem món ăn</target>
+            </trans-unit>
+            <trans-unit id="1519954996184640001" datatype="html">
+                <source>Error</source>
+                <target>Lỗi</target>
+            </trans-unit>
+            <trans-unit id="3005995304777006102" datatype="html">
+                <source>Failed to load profile</source>
+                <target>Không thể tải hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="3129604876054849035" datatype="html">
+                <source>Please fill in all required fields</source>
+                <target>Vui lòng điền tất cả các trường bắt buộc</target>
+            </trans-unit>
+            <trans-unit id="4219429959475101385" datatype="html">
+                <source>Profile updated successfully</source>
+                <target>Cập nhật hồ sơ thành công</target>
+            </trans-unit>
+            <trans-unit id="4654779097697117547" datatype="html">
+                <source>Failed to update profile</source>
+                <target>Không thể cập nhật hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="3242255798983858463" datatype="html">
+                <source><x id="PH" equiv-text="diffDays"/> days</source>
+                <target><x id="PH" equiv-text="diffDays"/> ngày</target>
+            </trans-unit>
+            <trans-unit id="2888623698412132582" datatype="html">
+                <source><x id="PH" equiv-text="months"/> months</source>
+                <target><x id="PH" equiv-text="months"/> tháng</target>
+            </trans-unit>
+            <trans-unit id="6129309513432396551" datatype="html">
+                <source><x id="PH" equiv-text="years"/> years</source>
+                <target><x id="PH" equiv-text="years"/> năm</target>
+            </trans-unit>
+            <trans-unit id="7060120659575296897" datatype="html">
+                <source> Loading Profile </source>
+                <target> Đang tải hồ sơ </target>
+            </trans-unit>
+            <trans-unit id="734934965373819800" datatype="html">
+                <source>Go back</source>
+                <target>Quay lại</target>
+            </trans-unit>
+            <trans-unit id="5268165571303113726" datatype="html">
+                <source>Enter your full name</source>
+                <target>Nhập họ và tên của bạn</target>
+            </trans-unit>
+            <trans-unit id="4665600283516531962" datatype="html">
+                <source>Enter your address</source>
+                <target>Nhập địa chỉ của bạn</target>
+            </trans-unit>
+            <trans-unit id="6013106470543900413" datatype="html">
+                <source>Account Stats</source>
+                <target>Thống kê tài khoản</target>
+            </trans-unit>
+            <trans-unit id="4210216113713018268" datatype="html">
+                <source>Account Age</source>
+                <target>Tuổi tài khoản</target>
+            </trans-unit>
+            <trans-unit id="5045572951005571111" datatype="html">
+                <source>Joined</source>
+                <target>Tham gia</target>
+            </trans-unit>
+            <trans-unit id="4779826176246749894" datatype="html">
+                <source>Quick Info</source>
+                <target>Thông tin nhanh</target>
+            </trans-unit>
+            <trans-unit id="3057037570306460052" datatype="html">
+                <source>Profile Details</source>
+                <target>Chi tiết hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="6959497441009812685" datatype="html">
+                <source>Full Name</source>
+                <target>Họ và tên</target>
+            </trans-unit>
+            <trans-unit id="309103481835709504" datatype="html">
+                <source>Email cannot be changed</source>
+                <target>Email không thể thay đổi</target>
+            </trans-unit>
+            <trans-unit id="8194554728555410336" datatype="html">
+                <source>Phone Number</source>
+                <target>Số điện thoại</target>
+            </trans-unit>
+            <trans-unit id="2984628903434675339" datatype="html">
+                <source>Edit Profile</source>
+                <target>Chỉnh sửa hồ sơ</target>
+            </trans-unit>
+            <trans-unit id="4319441956121197474" datatype="html">
+                <source>Save Changes</source>
+                <target>Lưu thay đổi</target>
+            </trans-unit>
+            <trans-unit id="6152557658130195320" datatype="html">
+                <source>Google Connected</source>
+                <target>Đã kết nối Google</target>
+            </trans-unit>
+            <trans-unit id="7263663899745244756" datatype="html">
+                <source>Facebook Connected</source>
+                <target>Đã kết nối Facebook</target>
+            </trans-unit>
+            <trans-unit id="8539044772790808997" datatype="html">
+                <source>GitHub Connected</source>
+                <target>Đã kết nối GitHub</target>
+            </trans-unit>
+            <trans-unit id="4507657285296772871" datatype="html">
+                <source>Apple Connected</source>
+                <target>Đã kết nối Apple</target>
+            </trans-unit>
+            <trans-unit id="5751706009096093407" datatype="html">
+                <source>No social accounts connected</source>
+                <target>Chưa kết nối tài khoản mạng xã hội nào</target>
+            </trans-unit>
+            <trans-unit id="3817525624264455684" datatype="html">
+                <source>Please enter a valid phone number (10-15 digits)</source>
+                <target>Vui lòng nhập số điện thoại hợp lệ (10-15 chữ số)</target>
+            </trans-unit>
+            <trans-unit id="487077452159084336" datatype="html">
+                <source>Select Language</source>
+                <target>Chọn ngôn ngữ</target>
+            </trans-unit>
+            <trans-unit id="1348774649041038169" datatype="html">
+                <source>Navigation</source>
+                <target>Điều hướng</target>
+            </trans-unit>
+            <trans-unit id="8441853471944844138" datatype="html">
+                <source>View Full Details</source>
+                <target>Xem chi tiết đầy đủ</target>
+            </trans-unit>
+            <trans-unit id="5584762056232685248" datatype="html">
+                <source>Prep Time</source>
+                <target>Thời gian chuẩn bị</target>
+            </trans-unit>
+            <trans-unit id="8092404101332014808" datatype="html">
+                <source>Cook Time</source>
+                <target>Thời gian nấu</target>
+            </trans-unit>
+            <trans-unit id="3448462145758383019" datatype="html">
+                <source>Total</source>
+                <target>Tổng cộng</target>
+            </trans-unit>
+            <trans-unit id="1063462873103909661" datatype="html">
+                <source>Difficulty</source>
+                <target>Độ khó</target>
+            </trans-unit>
+            <trans-unit id="7290374659252540217" datatype="html">
+                <source>Instructions</source>
+                <target>Hướng dẫn</target>
+            </trans-unit>
+            <trans-unit id="7155225034801019089" datatype="html">
+                <source>e.g., My Birthday Dishes</source>
+                <target>Ví dụ: Món ăn sinh nhật của tôi</target>
+            </trans-unit>
+            <trans-unit id="8827343041634624381" datatype="html">
+                <source>Describe your collection...</source>
+                <target>Mô tả bộ sưu tập của bạn...</target>
+            </trans-unit>
+            <trans-unit id="3737402445048363630" datatype="html">
+                <source>Public collections can be viewed by others</source>
+                <target>Bộ sưu tập công khai có thể được người khác xem</target>
+            </trans-unit>
+            <trans-unit id="8860681559537375134" datatype="html">
+                <source>Type to search dishes...</source>
+                <target>Nhập để tìm kiếm món ăn...</target>
+            </trans-unit>
+            <trans-unit id="5372292058092714345" datatype="html">
+                <source>Collection Name</source>
+                <target>Tên bộ sưu tập</target>
+            </trans-unit>
+            <trans-unit id="7637609321229466891" datatype="html">
+                <source>Occasion</source>
+                <target>Dịp</target>
+            </trans-unit>
+            <trans-unit id="808290236256490257" datatype="html">
+                <source>Event Date</source>
+                <target>Ngày sự kiện</target>
+            </trans-unit>
+            <trans-unit id="3074987902485823708" datatype="html">
+                <source>Icon</source>
+                <target>Biểu tượng</target>
+            </trans-unit>
+            <trans-unit id="9011959596901584887" datatype="html">
+                <source>Color</source>
+                <target>Màu sắc</target>
             </trans-unit>
         </body>
     </file>

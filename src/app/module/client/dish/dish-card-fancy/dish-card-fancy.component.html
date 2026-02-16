@@ -1,9 +1,10 @@
 <div [style]="selectedBackground()" [routerLink]="'/dish/' + dish.slug"
-    class="group neumorphic-container_dark rounded-lg relative bg-no-repeat bg-cover max-w-2xl slide-in-blurred-right hover:scale-[1.1] duration-300 cursor-pointer">
+    class="group neumorphic-container_dark rounded-lg relative bg-no-repeat bg-cover max-w-2xl slide-in-blurred-right hover:scale-[1.1] duration-300 cursor-pointer overflow-hidden">
 
     <!-- Winner Indicator -->
     @if (isWinner) {
-    <div class="group-hover:opacity-0 duration-300 winner-badge absolute top-0 -left-4 z-20 text-black px-3 py-1 rounded-full text-xs font-bold">
+    <div
+        class="group-hover:opacity-0 duration-300 winner-badge absolute top-2 left-2 z-30 text-black px-3 py-1 rounded-full text-xs font-bold">
         <span class="winner-crown mr-1">👑</span>
         <span i18n="@@winner">WINNER</span>
     </div>
@@ -11,6 +12,28 @@
 
     <div class="grid grid-cols-12 gap-3 relative z-10 backdrop-brightness-50 backdrop-blur-xs md:backdrop-blur-[2px]">
         <div class="col-span-12 md:col-span-9 p-3">
+            <!-- Favorite Button - Top Right of Content -->
+            <div class="flex justify-between items-start mb-2">
+                <div class="flex-1"></div>
+                <div class="flex gap-2">
+                    <!-- Share Button -->
+                    <button mat-icon-button (click)="openShareSheet($event)"
+                        class="!-mt-1 !-mr-1 bg-[#F3A446]/20 rounded-full hover:bg-[#F3A446]/30 transition-all duration-300 backdrop-blur-sm hover:scale-110 border border-[#F3A446]/30"
+                        [matTooltip]="'Share recipe'" aria-label="Share recipe">
+                        <mat-icon class="text-[#F3A446]" aria-hidden="true">share</mat-icon>
+                    </button>
+
+                    <!-- Favorite Button -->
+                    <button mat-icon-button (click)="toggleFavorite($event)" [disabled]="isLoadingFavorite()"
+                        [class.text-red-500]="isFavorite()"
+                        class="!-mt-1 !-mr-1 bg-black/40 rounded-full hover:bg-black/60 transition-all duration-300 backdrop-blur-sm hover:scale-110"
+                        [matTooltip]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'"
+                        [attr.aria-label]="isFavorite() ? 'Remove from favorites' : 'Add to favorites'">
+                        <mat-icon aria-hidden="true">{{ isFavorite() ? 'favorite' : 'favorite_border' }}</mat-icon>
+                    </button>
+                </div>
+            </div>
+
             <div class="flex flex-col gap-1">
                 <span [matTooltip]="(dish.title | multiLanguage: localeId)?.data"
                     class="text-2xl font-bold tracking-wider bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
@@ -86,7 +109,7 @@
         </div>
         <div class="col-span-12 md:col-span-3 p-5 md:p-0">
             <div class="md:hidden relative !aspect-square">
-                <img [src]="dish.thumbnail"
+                <img [src]="dish.thumbnail" alt="{{ (dish.title | multiLanguage: localeId)?.data }}"
                     class="absolute bottom-0 aspect-square z-10 object-cover object-center !w-full !h-auto rounded-full" />
                 <div class="absolute bottom-0 w-full h-full aspect-square rounded-full blur-md bg-gray-300"></div>
             </div>
@@ -96,7 +119,7 @@
                     class="absolute lg:-right-16 aspect-square object-cover object-center w-auto h-full !rounded-full absolute aspect-square object-cover object-center w-auto h-full rounded-full">
                     <div class="absolute w-full h-full aspect-square rounded-full blur-md bg-gray-300">
                     </div>
-                    <img [src]="dish.thumbnail"
+                    <img [src]="dish.thumbnail" alt="{{ (dish.title | multiLanguage: localeId)?.data }}"
                         class="absolute z-10 aspect-square object-cover object-center w-auto h-full rounded-full" />
                 </div>
             </div>

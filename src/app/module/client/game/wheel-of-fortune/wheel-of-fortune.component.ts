@@ -21,6 +21,8 @@ import { SelectedDishModalComponent } from '../selected-dish-modal/selected-dish
 import { GameStateService } from '@/app/state/game-state.service';
 import { finalize, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { WheelDishPickerComponent } from './wheel-dish-picker/wheel-dish-picker.component';
+import { WheelCollectionPickerComponent } from './wheel-collection-picker/wheel-collection-picker.component';
+import { MatTabsModule } from '@angular/material/tabs';
 import { environment } from '@/environments/environment';
 
 @Component({
@@ -33,6 +35,8 @@ import { environment } from '@/environments/environment';
     WheelPlayerComponent,
     MatProgressSpinnerModule,
     WheelDishPickerComponent,
+    WheelCollectionPickerComponent,
+    MatTabsModule,
   ],
   templateUrl: './wheel-of-fortune.component.html',
   styleUrl: './wheel-of-fortune.component.scss',

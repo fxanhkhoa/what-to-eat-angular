@@ -1,98 +1,158 @@
-<div class="flex flex-col gap-1 p-5">
-    <div class="flex items-center">
-        <div class="flex flex-wrap md:flex-nowrap justify-between w-full">
-            <div class="flex flex-col gap-3">
-                <span i18n class="text-gray-300 px-3 pt-3">Filter By</span>
-                <form [formGroup]="mealCategoryForm" class="max-h-40 overflow-auto">
-                    <mat-selection-list [multiple]="true" formControlName="mealCategory"
-                        [hideSingleSelectionIndicator]="true">
+<div class="relative min-h-screen overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-[#F3A446]/10 to-[#A06235]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tl from-[#A06235]/10 to-[#F3A446]/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="relative max-w-7xl mx-auto mb-16">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-8 px-6 lg:px-0">
+            <!-- Filter Section -->
+            <div class="glass-effect rounded-2xl p-6 shadow-2xl border border-white/10 backdrop-blur-xl w-full lg:w-auto">
+                <div class="flex items-center gap-3 mb-4">
+                    <mat-icon class="text-[#F3A446] scale-125">tune</mat-icon>
+                    <h4 id="filter-by-category-label" i18n class="text-lg font-semibold text-gray-200">Filter By Category</h4>
+                </div>
+                <form [formGroup]="mealCategoryForm" class="max-h-52 overflow-y-auto custom-scrollbar">
+                    <mat-selection-list aria-labelledby="filter-by-category-label" [multiple]="true" formControlName="mealCategory"
+                        [hideSingleSelectionIndicator]="true" class="category-list">
                         @for (item of mealCategories; track item) {
-                        <mat-list-option value="{{ item }}">
-                            <span i18n="@@mealCategory_{{item}}">{{ item | categoryTranslate }}</span>
+                        <mat-list-option value="{{ item }}" class="hover:bg-[#F3A446]/10 rounded-lg transition-all duration-300">
+                            <div class="flex items-center gap-2">
+                                <mat-icon class="text-[#F3A446] !w-5 !h-5 text-sm">restaurant</mat-icon>
+                                <span i18n="@@mealCategory_{{item}}" class="text-sm font-medium">{{ item | categoryTranslate }}</span>
+                            </div>
                         </mat-list-option>
                         }
                     </mat-selection-list>
                 </form>
             </div>
-            <div class="mx-auto md:mx-0">
-                <h3 i18n
-                    class="text-5xl font-bold mb-6 bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text">
-                    Favorite Dishes</h3>
-            </div>
-            <div class="flex mx-auto md:mx-0 gap-5 max-w-40 items-center text-[#F3A446]">
-                <div>
-                    <mat-icon class="scale-150">select_all</mat-icon>
+
+            <!-- Title Section -->
+            <div class="text-center flex-1">
+                <div class="relative inline-block">
+                    <h1 i18n class="text-5xl md:text-7xl font-black mb-4 bg-gradient-to-r from-[#F3A446] via-[#FFB86A] to-[#A06235] text-transparent bg-clip-text animate-gradient-x drop-shadow-2xl">
+                        Favorite Dishes
+                    </h1>
+                    <div class="absolute -inset-1 bg-gradient-to-r from-[#F3A446] to-[#A06235] opacity-20 blur-2xl"></div>
                 </div>
-                <span class="tracking-wider leading-8" i18n>Let's pick your favorites to enlighten your day</span>
+                <p i18n class="text-gray-400 text-lg mt-2 font-light tracking-wide">Discover culinary masterpieces</p>
+            </div>
+
+            <!-- Info Section -->
+            <div class="glass-effect rounded-2xl p-6 shadow-2xl border border-white/10 backdrop-blur-xl max-w-xs">
+                <div class="flex items-start gap-4">
+                    <div class="bg-gradient-to-br from-[#F3A446] to-[#A06235] rounded-xl p-3 shadow-lg">
+                        <mat-icon class="text-white !w-8 !h-8 !text-[32px]">restaurant_menu</mat-icon>
+                    </div>
+                    <p i18n class="text-gray-300 text-sm leading-relaxed font-light">
+                        Let's pick your favorites to enlighten your day
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="grid grid-cols-12 gap-3 mt-5">
+    <!-- Dishes Grid -->
+    <div class="relative max-w-7xl mx-auto">
         @if (isLoading) {
-        <div class="col-span-12 flex justify-center">
-            <mat-spinner></mat-spinner>
+        <div class="flex flex-col items-center justify-center py-20">
+            <mat-spinner [diameter]="60" class="mb-4"></mat-spinner>
+            <p i18n class="text-gray-400 text-lg animate-pulse">Loading delicious dishes...</p>
         </div>
         }
         @else {
-        @for (item of dishes; track item) {
-        <div class="col-span-6 md:col-span-4 lg:col-span-3">
-            <mat-card class="ratio-3/4 p-5 h-full puff-in-center">
-                <div class="flex gap-1 absolute z-10 top-3 right-3">
-                    <span i18n='EASY|MEDIUM|HARD' [ngClass]="{
-                                'neumorphic-easy': item.difficultLevel === 'EASY',
-                                'neumorphic-medium': item.difficultLevel === 'MEDIUM',
-                                'neumorphic-hard': item.difficultLevel === 'HARD'
-                            }" class="text-sm lowercase">
-                        {{ item.difficultLevel ?? 'N/A' | categoryTranslate }}
-                    </span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            @for (item of dishes; track item; let idx = $index) {
+            <div class="dish-card-wrapper" [style.animation-delay.ms]="idx * 80">
+                <!-- Premium Card Design -->
+                <div class="dish-card group relative h-[420px] rounded-[28px] overflow-hidden cursor-pointer" 
+                    [routerLink]="['/dish', item.slug]">
+                    
+                    <!-- Full Background Image -->
+                    <div class="absolute inset-0">
+                        <img [src]="item.thumbnail ?? '/assets/images/placeholder.png'"
+                            [alt]="(item.title | multiLanguage : localeId)?.data"
+                            class="w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-125" />
+                    </div>
+                    
+                    <!-- Gradient Overlays -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#F3A446]/0 to-[#A06235]/0 group-hover:from-[#F3A446]/20 group-hover:to-[#A06235]/40 transition-all duration-500"></div>
+                    
+                    <!-- Decorative Corner Accent -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#F3A446]/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                    
+                    <!-- Top Section - Badges -->
+                    <div class="absolute top-5 left-5 right-5 z-20 flex items-start justify-between">
+                        <!-- Difficulty Badge -->
+                        <div i18n='EASY|MEDIUM|HARD' [ngClass]="{
+                            'difficulty-easy': item.difficultLevel === 'EASY',
+                            'difficulty-medium': item.difficultLevel === 'MEDIUM',
+                            'difficulty-hard': item.difficultLevel === 'HARD'
+                        }" class="difficulty-badge px-4 py-2 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] backdrop-blur-xl shadow-2xl">
+                            {{ item.difficultLevel ?? 'N/A' | categoryTranslate }}
+                        </div>
+                        
+                        <!-- Time Badge -->
+                        <div class="time-badge flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-xl">
+                            <mat-icon class="!w-4 !h-4 !text-[16px] text-[#FFB86A]">schedule</mat-icon>
+                            <span class="text-white text-xs font-bold">{{ item.preparationTime | number: '1.0-0' }}'</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Action Button -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 transition-all duration-500">
+                        <div class="play-button w-20 h-20 rounded-full bg-gradient-to-br from-[#F3A446] to-[#A06235] flex items-center justify-center shadow-2xl shadow-[#F3A446]/50 backdrop-blur-xl border-4 border-white/30">
+                            <mat-icon class="!text-white !w-10 !h-10 !text-[40px]">arrow_forward</mat-icon>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Content -->
+                    <div class="absolute bottom-0 left-0 right-0 p-6 z-20">
+                        <!-- Categories -->
+                        <div class="flex flex-wrap gap-2 mb-4 translate-y-2 group-hover:translate-y-0 transition-all duration-500">
+                            <app-category-badges [useColorPalette]="true"
+                                [categories]="item.mealCategories" [showAll]="false"></app-category-badges>
+                        </div>
+                        
+                        <!-- Title -->
+                        <h3 class="card-title text-2xl font-black text-white mb-3 line-clamp-2 leading-tight tracking-tight" i18n>
+                            {{ (item.title | multiLanguage : localeId)?.data }}
+                        </h3>
+                        
+                        <!-- Hover Details -->
+                        <div class="details-section max-h-0 group-hover:max-h-24 overflow-hidden transition-all duration-500 ease-out">
+                            <p class="text-white/70 text-sm line-clamp-2 mb-4">
+                                {{ (item.shortDescription | multiLanguage : localeId)?.data }}
+                            </p>
+                            <div class="flex items-center gap-3">
+                                <span i18n class="text-[#FFB86A] text-sm font-semibold tracking-wide uppercase">Explore Now</span>
+                                <div class="h-px flex-1 bg-gradient-to-r from-[#F3A446] to-transparent"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Glow Effect -->
+                    <div class="glow-effect absolute -inset-[2px] rounded-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10"></div>
+                    
+                    <!-- Border Shine -->
+                    <div class="shine-border absolute inset-0 rounded-[28px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </div>
-                <div class="flex flex-col gap-1 h-full">
-                    <div class="flex justify-center">
-                        <div class="w-40 h-40 relative">
-                            <img [src]="item.thumbnail ?? '/assets/images/placeholder.png'"
-                                alt="{{(item.title | multiLanguage : localeId)?.data}}"
-                                class="absolute w-40 h-40 ratio-square object-cover rounded-full" />
-                        </div>
-                    </div>
-                    <div class="flex justify-end">
-                        <button matIconButton [matTooltip]="(item.shortDescription | multiLanguage : localeId)?.data ">
-                            <mat-icon>info_outline</mat-icon>
-                        </button>
-                    </div>
-                    <div class="flex pt-1 pb-2 gap-3 min-h-12 max-w-full overflow-x-auto">
-                        <app-category-badges [useColorPalette]="false"
-                            [categories]="item.mealCategories"></app-category-badges>
-                    </div>
-                    <div class="flex justify-between mt-2">
-                        <div class="flex gap-1">
-                            <mat-icon>schedule</mat-icon>
-                            <span i18n='min' class="italic">{{ item.preparationTime | number: '1.0-0' }} &nbsp; min</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-between gap-3 flex-1">
-                        <span class="text-xl font-bold" i18n>{{ (item.title | multiLanguage :
-                            localeId)?.data }}
-                        </span>
-                        <div class="mt-auto flex justify-end">
-                            <button class="mt-auto !bg-[#2a2a2a]" matButton="elevated"
-                                [routerLink]="['/dish', item.slug]">
-                                <mat-icon>arrow_forward</mat-icon>
-                                <span i18n>Details</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </mat-card>
+            </div>
+            }
         </div>
-        }
         }
     </div>
 
-    <div class="flex justify-center mt-5">
-        <button matButton="tonal" [routerLink]="['/dish']">
-            <span i18n>View All</span>
-            <mat-icon>keyboard_double_arrow_down</mat-icon>
+    <!-- View All Button -->
+    <div class="flex justify-center mt-16">
+        <button mat-raised-button 
+            [routerLink]="['/dish']"
+            class="view-all-button !bg-gradient-to-r !from-[#A06235] !to-[#F3A446] !text-white !font-bold !text-lg !rounded-full !px-12 !py-4 !shadow-2xl hover:!shadow-[#F3A446]/50 hover:!scale-110 transition-all duration-500">
+            <span i18n class="mr-2">Explore All Dishes</span>
+            <mat-icon class="animate-bounce">keyboard_double_arrow_down</mat-icon>
         </button>
     </div>
 </div>
