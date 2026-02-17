@@ -1,0 +1,35 @@
+<mat-card class="flex-shrink-0 px-4 py-3 rounded-b-xl bg-gray-50">
+  <div class="flex items-center items-end gap-3 w-full">
+    <mat-form-field class="flex-1" appearance="outline">
+      <mat-label i18n>Type a message...</mat-label>
+      <textarea
+        matInput
+        #messageInputField
+        [value]="messageText()"
+        (input)="onMessageInput($event)"
+        (keydown)="onKeyDown($event)"
+        [disabled]="!isConnected"
+        placeholder="Type a message..."
+        i18n-placeholder
+        rows="1"
+        cdkTextareaAutosize
+        cdkAutosizeMaxRows="4"
+        class="resize-none"
+      ></textarea>
+      @if (messageText().length > 200) {
+      <mat-hint align="end">{{ messageText().length }}/500</mat-hint>
+      }
+    </mat-form-field>
+    <button
+      mat-fab
+      color="primary"
+      (click)="sendMessage()"
+      [disabled]="!messageText().trim() || !isConnected"
+      matTooltip="Send message (Enter)"
+      i18n-matTooltip
+      class="my-auto flex-shrink-0 bg-gradient-to-br from-[#F3A446] to-[#A06235] scale-90 disabled:opacity-50"
+    >
+      <mat-icon class="text-[20px]">send</mat-icon>
+    </button>
+  </div>
+</mat-card>

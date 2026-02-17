@@ -6,27 +6,18 @@ import {
   OnInit,
   OnDestroy,
   ViewChild,
-  ElementRef,
-  AfterViewChecked,
   signal,
   computed,
-  effect,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 
 // Angular Material
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // Services and Types
 import { ChatSocketService } from '@/app/service/chat-socket.service';
@@ -36,43 +27,41 @@ import {
   ChatRoomType,
   ChatUser,
 } from '@/types/chat.type';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { User } from '@/types/user.type';
 import { AuthService } from '@/app/service/auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { UserService } from '@/app/service/user.service';
+
+// Sub-components
+import { ChatHeaderComponent } from './chat-header/chat-header.component';
+import { ChatMessageListComponent } from './chat-message-list/chat-message-list.component';
+import { ChatInputComponent } from './chat-input/chat-input.component';
+import { TypingIndicatorComponent } from './typing-indicator/typing-indicator.component';
+import { reactions } from '@/app/shared/constant/reactions.constant';
 
 @Component({
   selector: 'app-voting-chat',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     MatCardModule,
-    MatInputModule,
-    MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
-    MatDividerModule,
-    MatMenuModule,
-    MatBadgeModule,
-    MatChipsModule,
     MatExpansionModule,
     DragDropModule,
+    ChatHeaderComponent,
+    ChatMessageListComponent,
+    ChatInputComponent,
+    TypingIndicatorComponent,
   ],
   templateUrl: './voting-chat.component.html',
   styleUrls: ['./voting-chat.component.scss'],
 })
-export class VotingChatComponent
-  implements OnInit, OnDestroy, AfterViewChecked
-{
+export class VotingChatComponent implements OnInit, OnDestroy {
   @Input() roomId!: string;
 
   @Output() resetPosition = new EventEmitter<void>();
 
-  @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
-  @ViewChild('messageInput') private messageInput!: ElementRef;
+  @ViewChild(ChatMessageListComponent) private messageList!: ChatMessageListComponent;
 
   private authService = inject(AuthService);
   private iconRegistry = inject(MatIconRegistry);
@@ -81,20 +70,15 @@ export class VotingChatComponent
 
   private destroy$ = new Subject<void>();
   private typingSubject = new Subject<string>();
-  private shouldScrollToBottom = true;
+
   // Reactive state
-  messageText = signal('');
   isConnected = signal(false);
   connectionError = signal<string | null>(null);
   messages = signal<ChatMessage[]>([]);
   onlineUsers = signal<ChatUser[]>([]);
   typingUsers = signal<string[]>([]);
-  isMinimized = signal(false);
   profile = signal<User | null>(null);
   dragPosition = { x: 0, y: 0 };
-  isOnlineCountAnimating = signal(false);
-  previousOnlineCount = signal(0);
-  animationType = signal<'increase' | 'decrease' | 'none'>('none');
   isPanelExpanded = signal(true);
 
   // Computed properties
@@ -112,27 +96,8 @@ export class VotingChatComponent
       : [];
   });
 
-  typingText = computed(() => {
-    const names = this.typingUserNames();
-    if (names.length === 0) return '';
-    if (names.length === 1)
-      return $localize`:@@voting-chat.one-typing:${names[0]} is typing...`;
-    if (names.length === 2)
-      return $localize`:@@voting-chat.two-typing:${names[0]} and ${names[1]} are typing...`;
-    return $localize`:@@voting-chat.multiple-typing:${names.length} people are typing...`;
-  });
-
   // Available reactions
-  readonly availableReactions = [
-    '👍',
-    '👎',
-    '❤️',
-    '😄',
-    '😮',
-    '😢',
-    '🎉',
-    '🤔',
-  ];
+  readonly availableReactions = reactions;
 
   constructor(private chatService: ChatSocketService) {
     this.iconRegistry.setDefaultFontSetClass(
@@ -143,20 +108,12 @@ export class VotingChatComponent
       'drag',
       this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/drag.svg')
     );
-    this.setupOnlineCountAnimation();
   }
 
   ngOnInit(): void {
     this.setupSubscriptions();
     this.setupTypingDebounce();
     this.setupBeforeUnloadHandler();
-  }
-
-  ngAfterViewChecked(): void {
-    if (this.shouldScrollToBottom) {
-      this.scrollToBottom();
-      this.shouldScrollToBottom = false;
-    }
   }
 
   ngOnDestroy(): void {
@@ -209,7 +166,7 @@ export class VotingChatComponent
       .pipe(takeUntil(this.destroy$))
       .subscribe((messages) => {
         this.messages.set(messages);
-        this.shouldScrollToBottom = true;
+        this.messageList?.markForScroll();
       });
 
     // New message notification
@@ -221,7 +178,7 @@ export class VotingChatComponent
           this.profile() != null &&
           message.senderId !== this.profile()!._id
         ) {
-          this.shouldScrollToBottom = true;
+          this.messageList?.markForScroll();
         }
       });
 
@@ -250,8 +207,8 @@ export class VotingChatComponent
   private setupTypingDebounce(): void {
     this.typingSubject
       .pipe(takeUntil(this.destroy$), debounceTime(300), distinctUntilChanged())
-      .subscribe(() => {
-        if (this.messageText().trim()) {
+      .subscribe((text) => {
+        if (text.trim()) {
           this.chatService.startTyping(
             this.profile()?._id ?? '',
             this.profile()?.name ?? ''
@@ -279,51 +236,14 @@ export class VotingChatComponent
     }
   }
 
-  private setupOnlineCountAnimation(): void {
-    // Watch for changes in online count and trigger animation
-    effect(() => {
-      const currentCount = this.onlineCount();
-      const previousCount = this.previousOnlineCount();
-
-      if (currentCount !== previousCount) {
-        // Determine animation type
-        if (currentCount > previousCount) {
-          this.animationType.set('increase');
-        } else if (currentCount < previousCount) {
-          this.animationType.set('decrease');
-        }
-
-        this.isOnlineCountAnimating.set(true);
-        this.previousOnlineCount.set(currentCount);
-
-        // Reset animation state after animation completes
-        setTimeout(() => {
-          this.isOnlineCountAnimating.set(false);
-          this.animationType.set('none');
-        }, 600); // Match the CSS animation duration
-      }
-    });
-  }
-
   private beforeUnloadHandler: (() => void) | null = null;
 
   // Message handling
-  onMessageInput(event: Event): void {
-    const target = event.target as HTMLTextAreaElement;
-    const value = target?.value || '';
-    this.messageText.set(value);
-    this.typingSubject.next(value);
+  onMessageInput(text: string): void {
+    this.typingSubject.next(text);
   }
 
-  onKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      this.sendMessage();
-    }
-  }
-
-  sendMessage(): void {
-    const text = this.messageText().trim();
+  onMessageSent(text: string): void {
     if (!text || !this.isConnected() || !this.profile()) return;
 
     this.chatService.sendMessage(text, ChatMessageType.TEXT, {
@@ -331,80 +251,19 @@ export class VotingChatComponent
       senderName: this.profile()!.name || 'Anonymous',
       senderAvatar: this.profile()!.avatar,
     });
-    this.messageText.set('');
+    
     this.chatService.stopTyping(
       this.profile()?._id ?? '',
       this.profile()?.name ?? ''
     );
-
-    // Focus back to input
-    setTimeout(() => {
-      this.messageInput.nativeElement.focus();
-    }, 100);
   }
 
   // Message reactions
-  addReaction(messageId: string, reaction: string): void {
-    this.chatService.reactToMessage(messageId, reaction);
-  }
-
-  getReactionCount(message: ChatMessage, reaction: string): number {
-    return message.reactions?.[reaction] || 0;
-  }
-
-  hasReacted(message: ChatMessage, reaction: string): boolean {
-    // Note: This is a simplified check. In a real app, you'd track which reactions are from the current user
-    return this.getReactionCount(message, reaction) > 0;
+  onReactionAdded(event: { messageId: string; reaction: string }): void {
+    this.chatService.reactToMessage(event.messageId, event.reaction);
   }
 
   // UI helpers
-  isOwnMessage(message: ChatMessage): boolean {
-    if (!this.profile()) return false;
-    return message.senderId === this.profile()!._id;
-  }
-
-  formatMessageTime(timestamp: number): string {
-    const date = new Date(timestamp * 1000);
-    const now = new Date();
-    const diffInHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
-
-    if (diffInHours < 24) {
-      return date.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      });
-    } else {
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false,
-      });
-    }
-  }
-
-  formatUserCount(count: number): string {
-    if (count === 0)
-      return $localize`:@@voting-chat.no-one-online:No one online`;
-    if (count === 1)
-      return $localize`:@@voting-chat.one-person-online:1 person online`;
-    return $localize`:@@voting-chat.multiple-people-online:${count} people online`;
-  }
-
-  getObjectKeys(obj: any): string[] {
-    return obj ? Object.keys(obj) : [];
-  }
-
-  hasReactionKeys(reactions: any): boolean {
-    return reactions && Object.keys(reactions).length > 0;
-  }
-
-  toggleMinimize(): void {
-    this.isMinimized.set(!this.isMinimized());
-  }
-
   loadMoreMessages(): void {
     this.chatService.loadMessageHistory(20);
   }
@@ -418,24 +277,6 @@ export class VotingChatComponent
         this.profile()?.name ?? ''
       );
     }
-  }
-
-  private scrollToBottom(): void {
-    try {
-      const container = this.messagesContainer.nativeElement;
-      container.scrollTop = container.scrollHeight;
-    } catch (err) {
-      console.warn('Could not scroll to bottom:', err);
-    }
-  }
-
-  // Track by function for better performance
-  trackByMessageId(index: number, message: ChatMessage): string {
-    return message.id;
-  }
-
-  trackByUserId(index: number, user: ChatUser): string {
-    return user.id;
   }
 
   /**
