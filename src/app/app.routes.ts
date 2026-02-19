@@ -163,6 +163,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'data-deletion',
+    canActivate: [authenticationGuard],
+    loadComponent: () =>
+      import('./module/data-deletion/data-deletion.component').then(
+        (m) => m.DataDeletionComponent
+      ),
+  },
+  {
     path: 'admin',
     loadComponent: () =>
       import('./module/admin/admin.component').then((m) => m.AdminComponent),

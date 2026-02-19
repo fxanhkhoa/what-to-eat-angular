@@ -57,7 +57,6 @@ import { AuthService } from '@/app/service/auth.service';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
-  private router = inject(Router);
   private userService = inject(UserService);
   private authService = inject(AuthService);
   private toastService = inject(ToastService);
@@ -87,12 +86,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     const name = userData?.name || this.payload?.name || 'User';
     return `https://ui-avatars.com/api/?name=${encodeURIComponent(
-      name
+      name,
     )}&background=random&color=fff&size=256`;
   });
 
   ngOnInit(): void {
-    console.log('ProfileComponent ngOnInit called');
     this.renderer.addClass(this.document.body, 'dark-theme');
     this.loadUserProfile();
   }
@@ -105,6 +103,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.isLoading.set(true);
     this.authService.getProfile().subscribe({
       next: (userData) => {
+        if (!userData) {
+          return;
+        }
         this.user.set(userData!);
         this.populateForm(userData!);
         this.isLoading.set(false);
@@ -114,7 +115,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.toastService.showError(
           $localize`Error`,
           $localize`Failed to load profile`,
-          3000
+          3000,
         );
         this.isLoading.set(false);
       },
@@ -147,7 +148,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.toastService.showError(
         $localize`Error`,
         $localize`Please fill in all required fields`,
-        3000
+        3000,
       );
       return;
     }
@@ -174,7 +175,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.toastService.showSuccess(
           $localize`Success`,
           $localize`Profile updated successfully`,
-          3000
+          3000,
         );
       },
       error: (error) => {
@@ -182,7 +183,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.toastService.showError(
           $localize`Error`,
           $localize`Failed to update profile`,
-          3000
+          3000,
         );
         this.isLoading.set(false);
       },

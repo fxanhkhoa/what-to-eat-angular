@@ -1,0 +1,135 @@
+<div class="data-deletion-container min-h-screen py-8 px-4 relative overflow-hidden">
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="data-deletion-content max-w-3xl mx-auto relative z-10">
+        <!-- Header -->
+        <div class="mb-6">
+            <button mat-icon-button (click)="goBack()" i18n-aria-label aria-label="Go back">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+        </div>
+
+        <!-- Warning Card -->
+        <mat-card class="warning-card mb-6 bg-red-50 dark:bg-red-900/20 border-2 border-red-500">
+            <mat-card-header>
+                <div class="flex items-center gap-3">
+                    <mat-icon class="text-red-600 text-4xl">warning</mat-icon>
+                    <mat-card-title class="text-red-600 dark:text-red-400" i18n>
+                        Danger Zone: Data Deletion
+                    </mat-card-title>
+                </div>
+            </mat-card-header>
+            <mat-card-content class="mt-4">
+                <p class="text-gray-700 dark:text-gray-300 mb-4" i18n>
+                    This page allows you to permanently delete all your data from our system. This is an irreversible action.
+                </p>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border border-red-300 dark:border-red-700">
+                    <h3 class="font-bold text-red-600 dark:text-red-400 mb-2" i18n>
+                        What will be deleted:
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+                        <li i18n>Your user account and profile information</li>
+                        <li i18n>All your saved dishes and favorites</li>
+                        <li i18n>Your dish collections and interactions</li>
+                        <li i18n>Your dietary preferences and personalization data</li>
+                        <li i18n>Your login history and activity logs</li>
+                        <li i18n>Any voting or feedback you've submitted</li>
+                    </ul>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Information Card -->
+        <mat-card class="info-card mb-6">
+            <mat-card-header>
+                <div class="flex items-center gap-3">
+                    <mat-icon class="text-blue-600">info</mat-icon>
+                    <mat-card-title i18n>Important Information</mat-card-title>
+                </div>
+            </mat-card-header>
+            <mat-card-content class="mt-4">
+                <div class="space-y-3 text-gray-700 dark:text-gray-300">
+                    <div class="flex items-start gap-3">
+                        <mat-icon class="text-blue-600 mt-1">check_circle</mat-icon>
+                        <p i18n>This action is <strong>permanent</strong> and cannot be undone.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <mat-icon class="text-blue-600 mt-1">check_circle</mat-icon>
+                        <p i18n>You will be immediately logged out after deletion.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <mat-icon class="text-blue-600 mt-1">check_circle</mat-icon>
+                        <p i18n>This complies with data protection regulations (GDPR, CCPA).</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <mat-icon class="text-blue-600 mt-1">check_circle</mat-icon>
+                        <p i18n>If you change your mind, you can create a new account later.</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Action Card -->
+        <mat-card class="action-card">
+            <mat-card-content class="py-8">
+                @if (isDeleting()) {
+                    <div class="flex flex-col items-center justify-center gap-4">
+                        <mat-spinner diameter="60"></mat-spinner>
+                        <p class="text-lg font-medium text-gray-700 dark:text-gray-300" i18n>
+                            Deleting your data...
+                        </p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400" i18n>
+                            Please wait, this may take a moment.
+                        </p>
+                    </div>
+                } @else {
+                    <div class="text-center space-y-6">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2" i18n>
+                                Ready to Delete Your Data?
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-400" i18n>
+                                Hello <strong>{{ userName() }}</strong>, clicking the button below will permanently remove all your data.
+                            </p>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                            <button 
+                                mat-raised-button 
+                                color="warn"
+                                class="delete-button min-w-[200px]"
+                                (click)="openDeleteConfirmation()"
+                                [disabled]="isDeleting()">
+                                <mat-icon>delete_forever</mat-icon>
+                                <span i18n>Delete All My Data</span>
+                            </button>
+                            
+                            <button 
+                                mat-stroked-button 
+                                class="min-w-[200px]"
+                                (click)="goBack()"
+                                [disabled]="isDeleting()">
+                                <mat-icon>cancel</mat-icon>
+                                <span i18n>Cancel & Go Back</span>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </mat-card-content>
+        </mat-card>
+
+        <!-- Privacy Notice -->
+        <div class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+            <p i18n>
+                For more information about data handling, please see our 
+                <a routerLink="/privacy-policy" class="text-blue-600 hover:underline">Privacy Policy</a>.
+            </p>
+        </div>
+    </div>
+</div>

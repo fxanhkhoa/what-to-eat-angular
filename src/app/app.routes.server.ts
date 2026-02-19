@@ -39,10 +39,10 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'terms',
-    renderMode: RenderMode.Server,
+    renderMode: RenderMode.Prerender,
   },
   {
     path: 'privacy-policy',
-    renderMode: RenderMode.Server,
+    renderMode: RenderMode.Prerender,
   },
 ];
