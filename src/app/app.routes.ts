@@ -378,6 +378,20 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'terms',
+    loadComponent: () =>
+      import('./module/terms/terms.component').then(
+        (m) => m.TermsComponent
+      ),
+  },
+  {
+    path: 'privacy-policy',
+    loadComponent: () =>
+      import('./module/privacy-policy/privacy-policy.component').then(
+        (m) => m.PrivacyPolicyComponent
+      ),
+  },
+  {
     path: 'forbidden',
     loadComponent: () =>
       import('./module/forbidden/forbidden.component').then(

@@ -4552,16 +4552,182 @@
           <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6359155224226863923" datatype="html">
-        <source>Image Preview</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/widget/image-viewer/image-viewer.component.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/widget/video-viewer/video-viewer.component.html</context>
-          <context context-type="linenumber">2,3</context>
-        </context-group>
+      <trans-unit id="termsTitle" datatype="html">
+        <source>Terms and Conditions</source>
+      </trans-unit>
+      <trans-unit id="termsLastUpdated" datatype="html">
+        <source>Last Updated: February 19, 2026</source>
+      </trans-unit>
+      <trans-unit id="termsAgreementTitle" datatype="html">
+        <source>1. Agreement to Terms</source>
+      </trans-unit>
+      <trans-unit id="termsAgreementContent" datatype="html">
+        <source>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</source>
+      </trans-unit>
+      <trans-unit id="termsUseTitle" datatype="html">
+        <source>2. Use of Service</source>
+      </trans-unit>
+      <trans-unit id="termsUseContent" datatype="html">
+        <source>This website provides food recommendation services, including dish suggestions, ingredient information, and interactive games. You agree to use the service only for lawful purposes and in accordance with these Terms.</source>
+      </trans-unit>
+      <trans-unit id="termsAccountTitle" datatype="html">
+        <source>3. User Accounts</source>
+      </trans-unit>
+      <trans-unit id="termsAccountContent" datatype="html">
+        <source>When you create an account with us, you must provide accurate, complete, and current information at all times. Failure to do so constitutes a breach of the Terms. You are responsible for safeguarding the password and for all activities that occur under your account.</source>
+      </trans-unit>
+      <trans-unit id="termsContentTitle" datatype="html">
+        <source>4. Content and Intellectual Property</source>
+      </trans-unit>
+      <trans-unit id="termsContentContent" datatype="html">
+        <source>The content on this website, including but not limited to text, graphics, logos, images, and software, is the property of the website or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works from any content without explicit permission.</source>
+      </trans-unit>
+      <trans-unit id="termsUserContentTitle" datatype="html">
+        <source>5. User-Generated Content</source>
+      </trans-unit>
+      <trans-unit id="termsUserContentContent" datatype="html">
+        <source>Users may create dish collections, ratings, and reviews. By posting content on the website, you grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, and display such content. You retain ownership of your content but represent that you have the right to grant this license.</source>
+      </trans-unit>
+      <trans-unit id="termsProhibitedTitle" datatype="html">
+        <source>6. Prohibited Activities</source>
+      </trans-unit>
+      <trans-unit id="termsProhibitedContent" datatype="html">
+        <source>You may not use the service to: (a) violate any laws or regulations; (b) infringe on the rights of others; (c) transmit harmful or malicious code; (d) attempt to gain unauthorized access to the service; (e) engage in any activity that interferes with or disrupts the service; (f) use automated systems or software to extract data from the website.</source>
+      </trans-unit>
+      <trans-unit id="termsDisclaimerTitle" datatype="html">
+        <source>7. Disclaimer of Warranties</source>
+      </trans-unit>
+      <trans-unit id="termsDisclaimerContent" datatype="html">
+        <source>The service is provided "as is" and "as available" without any warranties of any kind, either express or implied. We do not guarantee that the service will be uninterrupted, secure, or error-free. The food recommendations and nutritional information are provided for informational purposes only and should not replace professional dietary advice.</source>
+      </trans-unit>
+      <trans-unit id="termsLiabilityTitle" datatype="html">
+        <source>8. Limitation of Liability</source>
+      </trans-unit>
+      <trans-unit id="termsLiabilityContent" datatype="html">
+        <source>To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of the service.</source>
+      </trans-unit>
+      <trans-unit id="termsModificationTitle" datatype="html">
+        <source>9. Modifications to Service and Terms</source>
+      </trans-unit>
+      <trans-unit id="termsModificationContent" datatype="html">
+        <source>We reserve the right to modify or discontinue the service at any time without notice. We may also update these Terms from time to time. Your continued use of the service after any changes indicates your acceptance of the new Terms.</source>
+      </trans-unit>
+      <trans-unit id="termsTerminationTitle" datatype="html">
+        <source>10. Termination</source>
+      </trans-unit>
+      <trans-unit id="termsTerminationContent" datatype="html">
+        <source>We may terminate or suspend your account and access to the service immediately, without prior notice or liability, for any reason, including if you breach the Terms. Upon termination, your right to use the service will immediately cease.</source>
+      </trans-unit>
+      <trans-unit id="termsGoverningLawTitle" datatype="html">
+        <source>11. Governing Law</source>
+      </trans-unit>
+      <trans-unit id="termsGoverningLawContent" datatype="html">
+        <source>These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which we operate, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be resolved in the appropriate courts of that jurisdiction.</source>
+      </trans-unit>
+      <trans-unit id="termsContactTitle" datatype="html">
+        <source>12. Contact Information</source>
+      </trans-unit>
+      <trans-unit id="termsContactContent" datatype="html">
+        <source>If you have any questions about these Terms, please contact us through the contact form on our website or email us at the provided contact address.</source>
+      </trans-unit>
+      <trans-unit id="termsBackToHome" datatype="html">
+        <source>Back to Home</source>
+      </trans-unit>
+      <trans-unit id="privacyTitle" datatype="html">
+        <source>Privacy Policy</source>
+      </trans-unit>
+      <trans-unit id="privacyLastUpdated" datatype="html">
+        <source>Last Updated: February 19, 2026</source>
+      </trans-unit>
+      <trans-unit id="privacyIntroTitle" datatype="html">
+        <source>1. Introduction</source>
+      </trans-unit>
+      <trans-unit id="privacyIntroContent" datatype="html">
+        <source>Welcome to our Privacy Policy. Your privacy is critically important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our food recommendation website. Please read this policy carefully to understand our views and practices regarding your personal data.</source>
+      </trans-unit>
+      <trans-unit id="privacyCollectionTitle" datatype="html">
+        <source>2. Information We Collect</source>
+      </trans-unit>
+      <trans-unit id="privacyPersonalInfoSubtitle" datatype="html">
+        <source>2.1 Personal Information</source>
+      </trans-unit>
+      <trans-unit id="privacyPersonalInfoContent" datatype="html">
+        <source>We may collect personal information that you voluntarily provide to us when you register on the website, including your name, email address, date of birth, gender, and profile picture. When you use social login (Google, Facebook, Apple), we collect the information provided by these services.</source>
+      </trans-unit>
+      <trans-unit id="privacyUsageInfoSubtitle" datatype="html">
+        <source>2.2 Usage Information</source>
+      </trans-unit>
+      <trans-unit id="privacyUsageInfoContent" datatype="html">
+        <source>We automatically collect certain information when you visit, use, or navigate the website. This includes your IP address, browser type, device information, pages viewed, time spent on pages, and interaction with features. We also track your dish preferences, ratings, favorites, and interaction history to provide personalized recommendations.</source>
+      </trans-unit>
+      <trans-unit id="privacyCookiesSubtitle" datatype="html">
+        <source>2.3 Cookies and Tracking Technologies</source>
+      </trans-unit>
+      <trans-unit id="privacyCookiesContent" datatype="html">
+        <source>We use cookies and similar tracking technologies to track activity on our website and store certain information. Cookies are small data files stored on your device. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.</source>
+      </trans-unit>
+      <trans-unit id="privacyUseTitle" datatype="html">
+        <source>3. How We Use Your Information</source>
+      </trans-unit>
+      <trans-unit id="privacyUseContent" datatype="html">
+        <source>We use the information we collect for various purposes including: providing and maintaining our service; personalizing your experience and dish recommendations; processing your transactions and managing your account; sending you updates, newsletters, and promotional materials (with your consent); analyzing usage patterns to improve our service; detecting and preventing fraud and security threats; complying with legal obligations and enforcing our terms.</source>
+      </trans-unit>
+      <trans-unit id="privacySharingTitle" datatype="html">
+        <source>4. How We Share Your Information</source>
+      </trans-unit>
+      <trans-unit id="privacySharingContent" datatype="html">
+        <source>We may share your information in the following circumstances: with service providers who assist us in operating the website (e.g., hosting, analytics, payment processing); with third-party authentication services when you use social login; when required by law or to respond to legal processes; to protect our rights, property, or safety, or that of our users; in connection with a merger, sale, or acquisition of all or part of our business. We do not sell your personal information to third parties for their marketing purposes.</source>
+      </trans-unit>
+      <trans-unit id="privacySecurityTitle" datatype="html">
+        <source>5. Data Security</source>
+      </trans-unit>
+      <trans-unit id="privacySecurityContent" datatype="html">
+        <source>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. This includes encryption of data in transit and at rest, secure authentication mechanisms, and regular security audits. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</source>
+      </trans-unit>
+      <trans-unit id="privacyRetentionTitle" datatype="html">
+        <source>6. Data Retention</source>
+      </trans-unit>
+      <trans-unit id="privacyRetentionContent" datatype="html">
+        <source>We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. When you delete your account, we will delete or anonymize your personal information, except where we are required to retain it for legal, accounting, or security purposes.</source>
+      </trans-unit>
+      <trans-unit id="privacyRightsTitle" datatype="html">
+        <source>7. Your Privacy Rights</source>
+      </trans-unit>
+      <trans-unit id="privacyRightsContent" datatype="html">
+        <source>Depending on your location, you may have certain rights regarding your personal information, including: the right to access the personal information we hold about you; the right to request correction of inaccurate or incomplete data; the right to request deletion of your personal information; the right to object to or restrict certain processing activities; the right to data portability; the right to withdraw consent where processing is based on consent. To exercise these rights, please contact us using the information provided below.</source>
+      </trans-unit>
+      <trans-unit id="privacyChildrenTitle" datatype="html">
+        <source>8. Children's Privacy</source>
+      </trans-unit>
+      <trans-unit id="privacyChildrenContent" datatype="html">
+        <source>Our service is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us so we can delete such information.</source>
+      </trans-unit>
+      <trans-unit id="privacyThirdPartyTitle" datatype="html">
+        <source>9. Third-Party Links and Services</source>
+      </trans-unit>
+      <trans-unit id="privacyThirdPartyContent" datatype="html">
+        <source>Our website may contain links to third-party websites or services that are not operated by us. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services. We encourage you to review the privacy policy of every site you visit.</source>
+      </trans-unit>
+      <trans-unit id="privacyInternationalTitle" datatype="html">
+        <source>10. International Data Transfers</source>
+      </trans-unit>
+      <trans-unit id="privacyInternationalContent" datatype="html">
+        <source>Your information may be transferred to and maintained on computers located outside of your jurisdiction where data protection laws may differ. If you are located outside of our operating jurisdiction and choose to provide information to us, please note that we transfer the data to our jurisdiction and process it there.</source>
+      </trans-unit>
+      <trans-unit id="privacyChangesTitle" datatype="html">
+        <source>11. Changes to This Privacy Policy</source>
+      </trans-unit>
+      <trans-unit id="privacyChangesContent" datatype="html">
+        <source>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes. Changes are effective when they are posted on this page.</source>
+      </trans-unit>
+      <trans-unit id="privacyContactTitle" datatype="html">
+        <source>12. Contact Us</source>
+      </trans-unit>
+      <trans-unit id="privacyContactContent" datatype="html">
+        <source>If you have any questions about this Privacy Policy, please contact us through the contact form on our website. We will respond to your inquiry as soon as possible and work to address your concerns.</source>
+      </trans-unit>
+      <trans-unit id="privacyBackToHome" datatype="html">
+        <source>Back to Home</source>
       </trans-unit>
     </body>
   </file>

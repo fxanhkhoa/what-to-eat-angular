@@ -5280,9 +5280,241 @@
                 <source>Icon</source>
                 <target>Biểu tượng</target>
             </trans-unit>
-            <trans-unit id="9011959596901584887" datatype="html">
-                <source>Color</source>
-                <target>Màu sắc</target>
+            <trans-unit id="termsTitle" datatype="html">
+                <source>Terms and Conditions</source>
+                <target>Điều Khoản và Điều Kiện</target>
+            </trans-unit>
+            <trans-unit id="termsLastUpdated" datatype="html">
+                <source>Last Updated: February 19, 2026</source>
+                <target>Cập nhật lần cuối: 19 tháng 2, 2026</target>
+            </trans-unit>
+            <trans-unit id="termsAgreementTitle" datatype="html">
+                <source>1. Agreement to Terms</source>
+                <target>1. Chấp Nhận Điều Khoản</target>
+            </trans-unit>
+            <trans-unit id="termsAgreementContent" datatype="html">
+                <source>By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</source>
+                <target>Bằng cách truy cập và sử dụng trang web này, bạn chấp nhận và đồng ý bị ràng buộc bởi các điều khoản và điều kiện của thỏa thuận này. Nếu bạn không đồng ý tuân theo các điều khoản trên, vui lòng không sử dụng dịch vụ này.</target>
+            </trans-unit>
+            <trans-unit id="termsUseTitle" datatype="html">
+                <source>2. Use of Service</source>
+                <target>2. Sử Dụng Dịch Vụ</target>
+            </trans-unit>
+            <trans-unit id="termsUseContent" datatype="html">
+                <source>This website provides food recommendation services, including dish suggestions, ingredient information, and interactive games. You agree to use the service only for lawful purposes and in accordance with these Terms.</source>
+                <target>Trang web này cung cấp dịch vụ gợi ý món ăn, bao gồm đề xuất món ăn, thông tin nguyên liệu và trò chơi tương tác. Bạn đồng ý chỉ sử dụng dịch vụ cho các mục đích hợp pháp và theo các Điều khoản này.</target>
+            </trans-unit>
+            <trans-unit id="termsAccountTitle" datatype="html">
+                <source>3. User Accounts</source>
+                <target>3. Tài Khoản Người Dùng</target>
+            </trans-unit>
+            <trans-unit id="termsAccountContent" datatype="html">
+                <source>When you create an account with us, you must provide accurate, complete, and current information at all times. Failure to do so constitutes a breach of the Terms. You are responsible for safeguarding the password and for all activities that occur under your account.</source>
+                <target>Khi bạn tạo tài khoản với chúng tôi, bạn phải cung cấp thông tin chính xác, đầy đủ và cập nhật mọi lúc. Việc không làm như vậy cấu thành vi phạm Điều khoản. Bạn có trách nhiệm bảo vệ mật khẩu và cho tất cả các hoạt động diễn ra dưới tài khoản của bạn.</target>
+            </trans-unit>
+            <trans-unit id="termsContentTitle" datatype="html">
+                <source>4. Content and Intellectual Property</source>
+                <target>4. Nội Dung và Sở Hữu Trí Tuệ</target>
+            </trans-unit>
+            <trans-unit id="termsContentContent" datatype="html">
+                <source>The content on this website, including but not limited to text, graphics, logos, images, and software, is the property of the website or its content suppliers and is protected by international copyright laws. You may not reproduce, distribute, or create derivative works from any content without explicit permission.</source>
+                <target>Nội dung trên trang web này, bao gồm nhưng không giới hạn ở văn bản, đồ họa, logo, hình ảnh và phần mềm, là tài sản của trang web hoặc nhà cung cấp nội dung và được bảo vệ bởi luật bản quyền quốc tế. Bạn không được sao chép, phân phối hoặc tạo các tác phẩm phái sinh từ bất kỳ nội dung nào mà không có sự cho phép rõ ràng.</target>
+            </trans-unit>
+            <trans-unit id="termsUserContentTitle" datatype="html">
+                <source>5. User-Generated Content</source>
+                <target>5. Nội Dung Do Người Dùng Tạo Ra</target>
+            </trans-unit>
+            <trans-unit id="termsUserContentContent" datatype="html">
+                <source>Users may create dish collections, ratings, and reviews. By posting content on the website, you grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, and display such content. You retain ownership of your content but represent that you have the right to grant this license.</source>
+                <target>Người dùng có thể tạo bộ sưu tập món ăn, đánh giá và nhận xét. Bằng cách đăng nội dung lên trang web, bạn cấp cho chúng tôi giấy phép không độc quyền, toàn cầu, miễn phí bản quyền để sử dụng, sao chép, sửa đổi và hiển thị nội dung đó. Bạn vẫn giữ quyền sở hữu nội dung của mình nhưng cam đoan rằng bạn có quyền cấp giấy phép này.</target>
+            </trans-unit>
+            <trans-unit id="termsProhibitedTitle" datatype="html">
+                <source>6. Prohibited Activities</source>
+                <target>6. Các Hoạt Động Bị Cấm</target>
+            </trans-unit>
+            <trans-unit id="termsProhibitedContent" datatype="html">
+                <source>You may not use the service to: (a) violate any laws or regulations; (b) infringe on the rights of others; (c) transmit harmful or malicious code; (d) attempt to gain unauthorized access to the service; (e) engage in any activity that interferes with or disrupts the service; (f) use automated systems or software to extract data from the website.</source>
+                <target>Bạn không được sử dụng dịch vụ để: (a) vi phạm bất kỳ luật hoặc quy định nào; (b) xâm phạm quyền của người khác; (c) truyền mã độc hại hoặc có hại; (d) cố gắng truy cập trái phép vào dịch vụ; (e) tham gia vào bất kỳ hoạt động nào can thiệp hoặc làm gián đoạn dịch vụ; (f) sử dụng hệ thống hoặc phần mềm tự động để trích xuất dữ liệu từ trang web.</target>
+            </trans-unit>
+            <trans-unit id="termsDisclaimerTitle" datatype="html">
+                <source>7. Disclaimer of Warranties</source>
+                <target>7. Từ Chối Bảo Hành</target>
+            </trans-unit>
+            <trans-unit id="termsDisclaimerContent" datatype="html">
+                <source>The service is provided "as is" and "as available" without any warranties of any kind, either express or implied. We do not guarantee that the service will be uninterrupted, secure, or error-free. The food recommendations and nutritional information are provided for informational purposes only and should not replace professional dietary advice.</source>
+                <target>Dịch vụ được cung cấp "nguyên trạng" và "sẵn có" mà không có bất kỳ bảo hành nào, dù là rõ ràng hay ngụ ý. Chúng tôi không đảm bảo rằng dịch vụ sẽ không bị gián đoạn, an toàn hoặc không có lỗi. Các đề xuất món ăn và thông tin dinh dưỡng chỉ được cung cấp cho mục đích thông tin và không nên thay thế lời khuyên chế độ ăn chuyên nghiệp.</target>
+            </trans-unit>
+            <trans-unit id="termsLiabilityTitle" datatype="html">
+                <source>8. Limitation of Liability</source>
+                <target>8. Giới Hạn Trách Nhiệm Pháp Lý</target>
+            </trans-unit>
+            <trans-unit id="termsLiabilityContent" datatype="html">
+                <source>To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from your use of the service.</source>
+                <target>Trong phạm vi tối đa được pháp luật cho phép, chúng tôi sẽ không chịu trách nhiệm cho bất kỳ thiệt hại gián tiếp, ngẫu nhiên, đặc biệt, do hậu quả hoặc trừng phạt, hoặc bất kỳ mất mát lợi nhuận hoặc doanh thu nào, dù phát sinh trực tiếp hay gián tiếp, hoặc bất kỳ mất mát dữ liệu, sử dụng, thiện chí hoặc các mất mát vô hình khác phát sinh từ việc bạn sử dụng dịch vụ.</target>
+            </trans-unit>
+            <trans-unit id="termsModificationTitle" datatype="html">
+                <source>9. Modifications to Service and Terms</source>
+                <target>9. Sửa Đổi Dịch Vụ và Điều Khoản</target>
+            </trans-unit>
+            <trans-unit id="termsModificationContent" datatype="html">
+                <source>We reserve the right to modify or discontinue the service at any time without notice. We may also update these Terms from time to time. Your continued use of the service after any changes indicates your acceptance of the new Terms.</source>
+                <target>Chúng tôi giữ quyền sửa đổi hoặc ngừng dịch vụ bất kỳ lúc nào mà không cần thông báo. Chúng tôi cũng có thể cập nhật các Điều khoản này theo thời gian. Việc bạn tiếp tục sử dụng dịch vụ sau bất kỳ thay đổi nào cho thấy sự chấp nhận của bạn đối với Điều khoản mới.</target>
+            </trans-unit>
+            <trans-unit id="termsTerminationTitle" datatype="html">
+                <source>10. Termination</source>
+                <target>10. Chấm Dứt</target>
+            </trans-unit>
+            <trans-unit id="termsTerminationContent" datatype="html">
+                <source>We may terminate or suspend your account and access to the service immediately, without prior notice or liability, for any reason, including if you breach the Terms. Upon termination, your right to use the service will immediately cease.</source>
+                <target>Chúng tôi có thể chấm dứt hoặc tạm ngừng tài khoản và quyền truy cập của bạn vào dịch vụ ngay lập tức, mà không cần thông báo trước hoặc chịu trách nhiệm, vì bất kỳ lý do gì, bao gồm nếu bạn vi phạm Điều khoản. Sau khi chấm dứt, quyền sử dụng dịch vụ của bạn sẽ ngay lập tức chấm dứt.</target>
+            </trans-unit>
+            <trans-unit id="termsGoverningLawTitle" datatype="html">
+                <source>11. Governing Law</source>
+                <target>11. Luật Điều Chỉnh</target>
+            </trans-unit>
+            <trans-unit id="termsGoverningLawContent" datatype="html">
+                <source>These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which we operate, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be resolved in the appropriate courts of that jurisdiction.</source>
+                <target>Các Điều khoản này sẽ được điều chỉnh và giải thích theo luật pháp của khu vực pháp lý nơi chúng tôi hoạt động, không xét đến các quy định về xung đột pháp luật của nó. Bất kỳ tranh chấp nào phát sinh từ các Điều khoản này sẽ được giải quyết tại tòa án thích hợp của khu vực pháp lý đó.</target>
+            </trans-unit>
+            <trans-unit id="termsContactTitle" datatype="html">
+                <source>12. Contact Information</source>
+                <target>12. Thông Tin Liên Hệ</target>
+            </trans-unit>
+            <trans-unit id="termsContactContent" datatype="html">
+                <source>If you have any questions about these Terms, please contact us through the contact form on our website or email us at the provided contact address.</source>
+                <target>Nếu bạn có bất kỳ câu hỏi nào về các Điều khoản này, vui lòng liên hệ với chúng tôi qua biểu mẫu liên hệ trên trang web của chúng tôi hoặc gửi email cho chúng tôi tại địa chỉ liên hệ được cung cấp.</target>
+            </trans-unit>
+            <trans-unit id="termsBackToHome" datatype="html">
+                <source>Back to Home</source>
+                <target>Quay Về Trang Chủ</target>
+            </trans-unit>
+            <trans-unit id="privacyTitle" datatype="html">
+                <source>Privacy Policy</source>
+                <target>Chính Sách Bảo Mật</target>
+            </trans-unit>
+            <trans-unit id="privacyLastUpdated" datatype="html">
+                <source>Last Updated: February 19, 2026</source>
+                <target>Cập nhật lần cuối: 19 tháng 2, 2026</target>
+            </trans-unit>
+            <trans-unit id="privacyIntroTitle" datatype="html">
+                <source>1. Introduction</source>
+                <target>1. Giới Thiệu</target>
+            </trans-unit>
+            <trans-unit id="privacyIntroContent" datatype="html">
+                <source>Welcome to our Privacy Policy. Your privacy is critically important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our food recommendation website. Please read this policy carefully to understand our views and practices regarding your personal data.</source>
+                <target>Chào mừng đến với Chính sách Bảo mật của chúng tôi. Quyền riêng tư của bạn là vô cùng quan trọng đối với chúng tôi. Chính sách Bảo mật này giải thích cách chúng tôi thu thập, sử dụng, tiết lộ và bảo vệ thông tin của bạn khi bạn sử dụng trang web gợi ý món ăn của chúng tôi. Vui lòng đọc chính sách này cẩn thận để hiểu quan điểm và thực tiễn của chúng tôi liên quan đến dữ liệu cá nhân của bạn.</target>
+            </trans-unit>
+            <trans-unit id="privacyCollectionTitle" datatype="html">
+                <source>2. Information We Collect</source>
+                <target>2. Thông Tin Chúng Tôi Thu Thập</target>
+            </trans-unit>
+            <trans-unit id="privacyPersonalInfoSubtitle" datatype="html">
+                <source>2.1 Personal Information</source>
+                <target>2.1 Thông Tin Cá Nhân</target>
+            </trans-unit>
+            <trans-unit id="privacyPersonalInfoContent" datatype="html">
+                <source>We may collect personal information that you voluntarily provide to us when you register on the website, including your name, email address, date of birth, gender, and profile picture. When you use social login (Google, Facebook, Apple), we collect the information provided by these services.</source>
+                <target>Chúng tôi có thể thu thập thông tin cá nhân mà bạn tự nguyện cung cấp cho chúng tôi khi bạn đăng ký trên trang web, bao gồm tên, địa chỉ email, ngày sinh, giới tính và ảnh đại diện của bạn. Khi bạn sử dụng đăng nhập xã hội (Google, Facebook, Apple), chúng tôi thu thập thông tin do các dịch vụ này cung cấp.</target>
+            </trans-unit>
+            <trans-unit id="privacyUsageInfoSubtitle" datatype="html">
+                <source>2.2 Usage Information</source>
+                <target>2.2 Thông Tin Sử Dụng</target>
+            </trans-unit>
+            <trans-unit id="privacyUsageInfoContent" datatype="html">
+                <source>We automatically collect certain information when you visit, use, or navigate the website. This includes your IP address, browser type, device information, pages viewed, time spent on pages, and interaction with features. We also track your dish preferences, ratings, favorites, and interaction history to provide personalized recommendations.</source>
+                <target>Chúng tôi tự động thu thập một số thông tin nhất định khi bạn truy cập, sử dụng hoặc điều hướng trang web. Điều này bao gồm địa chỉ IP, loại trình duyệt, thông tin thiết bị, các trang đã xem, thời gian dành cho các trang và tương tác với các tính năng. Chúng tôi cũng theo dõi sở thích món ăn, đánh giá, yêu thích và lịch sử tương tác của bạn để cung cấp các đề xuất được cá nhân hóa.</target>
+            </trans-unit>
+            <trans-unit id="privacyCookiesSubtitle" datatype="html">
+                <source>2.3 Cookies and Tracking Technologies</source>
+                <target>2.3 Cookie và Công Nghệ Theo Dõi</target>
+            </trans-unit>
+            <trans-unit id="privacyCookiesContent" datatype="html">
+                <source>We use cookies and similar tracking technologies to track activity on our website and store certain information. Cookies are small data files stored on your device. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.</source>
+                <target>Chúng tôi sử dụng cookie và các công nghệ theo dõi tương tự để theo dõi hoạt động trên trang web của chúng tôi và lưu trữ một số thông tin nhất định. Cookie là các tệp dữ liệu nhỏ được lưu trữ trên thiết bị của bạn. Bạn có thể hướng dẫn trình duyệt của mình từ chối tất cả cookie hoặc chỉ ra khi một cookie đang được gửi.</target>
+            </trans-unit>
+            <trans-unit id="privacyUseTitle" datatype="html">
+                <source>3. How We Use Your Information</source>
+                <target>3. Cách Chúng Tôi Sử Dụng Thông Tin Của Bạn</target>
+            </trans-unit>
+            <trans-unit id="privacyUseContent" datatype="html">
+                <source>We use the information we collect for various purposes including: providing and maintaining our service; personalizing your experience and dish recommendations; processing your transactions and managing your account; sending you updates, newsletters, and promotional materials (with your consent); analyzing usage patterns to improve our service; detecting and preventing fraud and security threats; complying with legal obligations and enforcing our terms.</source>
+                <target>Chúng tôi sử dụng thông tin chúng tôi thu thập cho nhiều mục đích khác nhau bao gồm: cung cấp và duy trì dịch vụ của chúng tôi; cá nhân hóa trải nghiệm và đề xuất món ăn của bạn; xử lý giao dịch và quản lý tài khoản của bạn; gửi cho bạn các cập nhật, bản tin và tài liệu quảng cáo (với sự đồng ý của bạn); phân tích các mẫu sử dụng để cải thiện dịch vụ của chúng tôi; phát hiện và ngăn chặn gian lận và các mối đe dọa bảo mật; tuân thủ các nghĩa vụ pháp lý và thực thi các điều khoản của chúng tôi.</target>
+            </trans-unit>
+            <trans-unit id="privacySharingTitle" datatype="html">
+                <source>4. How We Share Your Information</source>
+                <target>4. Cách Chúng Tôi Chia Sẻ Thông Tin Của Bạn</target>
+            </trans-unit>
+            <trans-unit id="privacySharingContent" datatype="html">
+                <source>We may share your information in the following circumstances: with service providers who assist us in operating the website (e.g., hosting, analytics, payment processing); with third-party authentication services when you use social login; when required by law or to respond to legal processes; to protect our rights, property, or safety, or that of our users; in connection with a merger, sale, or acquisition of all or part of our business. We do not sell your personal information to third parties for their marketing purposes.</source>
+                <target>Chúng tôi có thể chia sẻ thông tin của bạn trong các trường hợp sau: với các nhà cung cấp dịch vụ hỗ trợ chúng tôi vận hành trang web (ví dụ: lưu trữ, phân tích, xử lý thanh toán); với các dịch vụ xác thực của bên thứ ba khi bạn sử dụng đăng nhập xã hội; khi được yêu cầu bởi luật pháp hoặc để đáp ứng các quy trình pháp lý; để bảo vệ quyền, tài sản hoặc sự an toàn của chúng tôi hoặc người dùng của chúng tôi; liên quan đến sự sáp nhập, bán hoặc mua lại toàn bộ hoặc một phần hoạt động kinh doanh của chúng tôi. Chúng tôi không bán thông tin cá nhân của bạn cho các bên thứ ba cho mục đích tiếp thị của họ.</target>
+            </trans-unit>
+            <trans-unit id="privacySecurityTitle" datatype="html">
+                <source>5. Data Security</source>
+                <target>5. Bảo Mật Dữ Liệu</target>
+            </trans-unit>
+            <trans-unit id="privacySecurityContent" datatype="html">
+                <source>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. This includes encryption of data in transit and at rest, secure authentication mechanisms, and regular security audits. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</source>
+                <target>Chúng tôi thực hiện các biện pháp bảo mật kỹ thuật và tổ chức thích hợp để bảo vệ thông tin cá nhân của bạn khỏi việc truy cập, thay đổi, tiết lộ hoặc phá hủy trái phép. Điều này bao gồm mã hóa dữ liệu trong quá trình truyền và lúc nghỉ, cơ chế xác thực an toàn và kiểm tra bảo mật định kỳ. Tuy nhiên, không có phương pháp truyền qua Internet hoặc lưu trữ điện tử nào an toàn 100%, và chúng tôi không thể đảm bảo an ninh tuyệt đối.</target>
+            </trans-unit>
+            <trans-unit id="privacyRetentionTitle" datatype="html">
+                <source>6. Data Retention</source>
+                <target>6. Lưu Giữ Dữ Liệu</target>
+            </trans-unit>
+            <trans-unit id="privacyRetentionContent" datatype="html">
+                <source>We retain your personal information for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law. When you delete your account, we will delete or anonymize your personal information, except where we are required to retain it for legal, accounting, or security purposes.</source>
+                <target>Chúng tôi giữ lại thông tin cá nhân của bạn trong thời gian cần thiết để thực hiện các mục đích được nêu trong Chính sách Bảo mật này, trừ khi thời gian lưu giữ dài hơn được yêu cầu hoặc cho phép bởi luật pháp. Khi bạn xóa tài khoản của mình, chúng tôi sẽ xóa hoặc ẩn danh thông tin cá nhân của bạn, ngoại trừ trường hợp chúng tôi được yêu cầu giữ lại nó vì mục đích pháp lý, kế toán hoặc bảo mật.</target>
+            </trans-unit>
+            <trans-unit id="privacyRightsTitle" datatype="html">
+                <source>7. Your Privacy Rights</source>
+                <target>7. Quyền Riêng Tư Của Bạn</target>
+            </trans-unit>
+            <trans-unit id="privacyRightsContent" datatype="html">
+                <source>Depending on your location, you may have certain rights regarding your personal information, including: the right to access the personal information we hold about you; the right to request correction of inaccurate or incomplete data; the right to request deletion of your personal information; the right to object to or restrict certain processing activities; the right to data portability; the right to withdraw consent where processing is based on consent. To exercise these rights, please contact us using the information provided below.</source>
+                <target>Tùy thuộc vào vị trí của bạn, bạn có thể có một số quyền nhất định liên quan đến thông tin cá nhân của bạn, bao gồm: quyền truy cập thông tin cá nhân mà chúng tôi nắm giữ về bạn; quyền yêu cầu sửa chữa dữ liệu không chính xác hoặc không đầy đủ; quyền yêu cầu xóa thông tin cá nhân của bạn; quyền phản đối hoặc hạn chế các hoạt động xử lý nhất định; quyền chuyển đổi dữ liệu; quyền rút lại sự đồng ý khi xử lý dựa trên sự đồng ý. Để thực hiện các quyền này, vui lòng liên hệ với chúng tôi bằng thông tin được cung cấp bên dưới.</target>
+            </trans-unit>
+            <trans-unit id="privacyChildrenTitle" datatype="html">
+                <source>8. Children's Privacy</source>
+                <target>8. Quyền Riêng Tư Của Trẻ Em</target>
+            </trans-unit>
+            <trans-unit id="privacyChildrenContent" datatype="html">
+                <source>Our service is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us so we can delete such information.</source>
+                <target>Dịch vụ của chúng tôi không dành cho trẻ em dưới 13 tuổi. Chúng tôi không cố ý thu thập thông tin cá nhân từ trẻ em dưới 13 tuổi. Nếu bạn là cha mẹ hoặc người giám hộ và tin rằng con bạn đã cung cấp thông tin cá nhân cho chúng tôi, vui lòng liên hệ với chúng tôi để chúng tôi có thể xóa thông tin đó.</target>
+            </trans-unit>
+            <trans-unit id="privacyThirdPartyTitle" datatype="html">
+                <source>9. Third-Party Links and Services</source>
+                <target>9. Liên Kết và Dịch Vụ Bên Thứ Ba</target>
+            </trans-unit>
+            <trans-unit id="privacyThirdPartyContent" datatype="html">
+                <source>Our website may contain links to third-party websites or services that are not operated by us. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services. We encourage you to review the privacy policy of every site you visit.</source>
+                <target>Trang web của chúng tôi có thể chứa các liên kết đến các trang web hoặc dịch vụ của bên thứ ba không do chúng tôi vận hành. Chúng tôi không kiểm soát và không chịu trách nhiệm về nội dung, chính sách bảo mật hoặc thực tiễn của bất kỳ trang web hoặc dịch vụ bên thứ ba nào. Chúng tôi khuyến khích bạn xem xét chính sách bảo mật của mọi trang web bạn truy cập.</target>
+            </trans-unit>
+            <trans-unit id="privacyInternationalTitle" datatype="html">
+                <source>10. International Data Transfers</source>
+                <target>10. Chuyển Giao Dữ Liệu Quốc Tế</target>
+            </trans-unit>
+            <trans-unit id="privacyInternationalContent" datatype="html">
+                <source>Your information may be transferred to and maintained on computers located outside of your jurisdiction where data protection laws may differ. If you are located outside of our operating jurisdiction and choose to provide information to us, please note that we transfer the data to our jurisdiction and process it there.</source>
+                <target>Thông tin của bạn có thể được chuyển đến và duy trì trên các máy tính nằm ngoài phạm vi quyền hạn của bạn, nơi luật bảo vệ dữ liệu có thể khác nhau. Nếu bạn ở ngoài phạm vi quyền hạn hoạt động của chúng tôi và chọn cung cấp thông tin cho chúng tôi, xin lưu ý rằng chúng tôi chuyển dữ liệu đến phạm vi quyền hạn của chúng tôi và xử lý nó ở đó.</target>
+            </trans-unit>
+            <trans-unit id="privacyChangesTitle" datatype="html">
+                <source>11. Changes to This Privacy Policy</source>
+                <target>11. Thay Đổi Chính Sách Bảo Mật Này</target>
+            </trans-unit>
+            <trans-unit id="privacyChangesContent" datatype="html">
+                <source>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date. You are advised to review this Privacy Policy periodically for any changes. Changes are effective when they are posted on this page.</source>
+                <target>Chúng tôi có thể cập nhật Chính sách Bảo mật của mình theo thời gian. Chúng tôi sẽ thông báo cho bạn về bất kỳ thay đổi nào bằng cách đăng Chính sách Bảo mật mới trên trang này và cập nhật ngày "Cập nhật lần cuối". Bạn nên xem lại Chính sách Bảo mật này định kỳ để biết bất kỳ thay đổi nào. Các thay đổi có hiệu lực khi chúng được đăng trên trang này.</target>
+            </trans-unit>
+            <trans-unit id="privacyContactTitle" datatype="html">
+                <source>12. Contact Us</source>
+                <target>12. Liên Hệ Với Chúng Tôi</target>
+            </trans-unit>
+            <trans-unit id="privacyContactContent" datatype="html">
+                <source>If you have any questions about this Privacy Policy, please contact us through the contact form on our website. We will respond to your inquiry as soon as possible and work to address your concerns.</source>
+                <target>Nếu bạn có bất kỳ câu hỏi nào về Chính sách Bảo mật này, vui lòng liên hệ với chúng tôi qua biểu mẫu liên hệ trên trang web của chúng tôi. Chúng tôi sẽ trả lời câu hỏi của bạn càng sớm càng tốt và làm việc để giải quyết mối quan tâm của bạn.</target>
+            </trans-unit>
+            <trans-unit id="privacyBackToHome" datatype="html">
+                <source>Back to Home</source>
+                <target>Quay Về Trang Chủ</target>
             </trans-unit>
         </body>
     </file>
