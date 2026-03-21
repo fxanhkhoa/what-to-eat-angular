@@ -78,9 +78,9 @@ export class PushNotificationService {
     try {
       const existingRegistration =
         (await navigator.serviceWorker.getRegistration(
-          '/firebase-messaging-sw.js',
+          environment.SW_PATH,
         )) ??
-        (await navigator.serviceWorker.register('/firebase-messaging-sw.js'));
+        (await navigator.serviceWorker.register(environment.SW_PATH));
       const token = await getToken(this.messaging, {
         vapidKey: environment.VAPID_PUBLIC_KEY,
         serviceWorkerRegistration: existingRegistration,
