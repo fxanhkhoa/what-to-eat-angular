@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { AuthService } from './service/auth.service';
+import { PushNotificationService } from './service/push-notification.service';
 import cookies from 'js-cookie';
 import { isPlatformServer } from '@angular/common';
 import { Cookies_Key } from '@/enum/cookies.enum';
@@ -18,10 +19,15 @@ export class AppComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
   private websiteVisitService = inject(WebsiteVisitService);
+  private pushNotificationService = inject(PushNotificationService);
 
   title = 'what-to-eat-angular';
 
   ngOnInit(): void {
+    // Connect PushNotificationService to AuthService (avoids circular DI)
+    if (!isPlatformServer(this.platformId)) {
+      this.authService.setPushNotificationService(this.pushNotificationService);
+    }
     this.refreshTokenAndInitialize();
     // Website visit tracking (unique per browser)
     if (!isPlatformServer(this.platformId)) {
@@ -38,6 +44,24 @@ export class AppComponent implements OnInit {
               page_path: event.urlAfterRedirects,
             });
           }
+        }
+      });
+      // Foreground push notification listener
+      this.pushNotificationService.onForegroundMessage().subscribe((payload) => {
+        console.log('[FCM] Foreground message received', payload);
+        this.pushNotificationService.refreshUnreadCount();
+        // Show native notification when app is in foreground
+        const title = payload.notification?.title || 'New Notification';
+        const options = {
+          body: payload.notification?.body || '',
+          icon: '/assets/logo/what-to-eat-favicon-color-128x128.png',
+          badge: '/assets/logo/what-to-eat-favicon-color-72x72.png',
+          data: payload.data || {},
+          tag: payload.data?.tag || 'default',
+          renotify: true,
+        };
+        if (Notification.permission === 'granted') {
+          navigator.serviceWorker.ready.then((reg) => reg.showNotification(title, options));
         }
       });
     }
