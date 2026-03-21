@@ -162,6 +162,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       name: formValue.name,
       phone: formValue.phone || null,
       address: formValue.address || null,
+      googleID: this.user()!.googleID || null,
+      facebookID: this.user()!.facebookID || null,
+      githubID: this.user()!.githubID || null,
+      avatar: this.user()!.avatar || null,
       dateOfBirth: formValue.dateOfBirth
         ? new Date(formValue.dateOfBirth).toISOString()
         : null,

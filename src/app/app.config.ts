@@ -13,7 +13,9 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '@/environments/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getMessaging, provideMessaging } from '@angular/fire/messaging';
 import {
   provideHttpClient,
   withFetch,
@@ -33,24 +35,25 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({
         scrollPositionRestoration: 'enabled', // or 'top'
         anchorScrolling: 'enabled',
-      })
+      }),
     ),
     provideClientHydration(withEventReplay()),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'what-to-eat-90d3e',
-        appId: '1:276849599452:web:598db247d5eb2e2f302519',
-        storageBucket: 'what-to-eat-90d3e.appspot.com',
-        authDomain: 'what-to-eat-90d3e.firebaseapp.com',
-        messagingSenderId: '276849599452',
-        measurementId: 'G-FWE0TE8LCZ',
-        apiKey: 'AIzaSyBV6PbTETDHd5rYI_4ZLFOUpo3lBRIHfFo',
-      })
+        apiKey: 'AIzaSyBMtHMc7AEo5U4uZvR84wn-Z73oXGSZgCA',
+        authDomain: 'what-to-eat-no-firebase.firebaseapp.com',
+        projectId: 'what-to-eat-no-firebase',
+        storageBucket: 'what-to-eat-no-firebase.firebasestorage.app',
+        messagingSenderId: '500870159993',
+        appId: '1:500870159993:web:105e95dd672dd099137ea8',
+        measurementId: environment.FIREBASE_MEASUREMENT_ID,
+      }),
     ),
     provideAuth(() => getAuth()),
+    provideMessaging(() => getMessaging()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([bearerInterceptor, tokenRefreshInterceptor])
+      withInterceptors([bearerInterceptor, tokenRefreshInterceptor]),
     ),
     { provide: MatPaginatorIntl, useClass: CustomPaginatorIntl },
   ],

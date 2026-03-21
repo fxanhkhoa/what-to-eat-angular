@@ -48,10 +48,7 @@ export class UserLoginTrackingComponent implements OnInit, AfterViewInit {
     this.loadData();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  ngAfterViewInit() {}
 
   loadData() {
     this.userLoginTrackService
