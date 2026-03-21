@@ -31,7 +31,21 @@ messaging.onBackgroundMessage((payload) => {
 // Handle notification click — open/focus the app
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  const url = event.notification.data?.url || '/';
+
+  // Restrict to same-origin paths to prevent open-redirect via spoofed payloads
+  const raw = event.notification.data?.url;
+  let url = '/';
+  if (raw) {
+    try {
+      const parsed = new URL(raw, self.location.origin);
+      if (parsed.origin === self.location.origin) {
+        url = parsed.pathname + parsed.search + parsed.hash;
+      }
+    } catch {
+      // malformed URL — fall back to '/'
+    }
+  }
+
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
       for (const client of clientList) {

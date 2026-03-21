@@ -2,15 +2,13 @@ import { environment } from '@/environments/environment';
 import { ResultToken } from '@/types/auth.type';
 import { User } from '@/types/user.type';
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, Injector, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, switchMap, tap, timeout } from 'rxjs/operators';
+import { PushNotificationService } from './push-notification.service';
 
 const prefix = 'auth';
-
-// Lazy import to avoid circular dependency
-let pushNotificationServiceInstance: import('./push-notification.service').PushNotificationService | null = null;
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +17,13 @@ export class AuthService {
   private profile: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
   private platformId = inject(PLATFORM_ID);
+  private injector = inject(Injector);
+
+  private get pushNotificationService(): PushNotificationService {
+    return this.injector.get(PushNotificationService);
+  }
 
   constructor(private http: HttpClient) {}
-
-  /** Inject the PushNotificationService after app init to avoid circular deps */
-  setPushNotificationService(svc: import('./push-notification.service').PushNotificationService) {
-    pushNotificationServiceInstance = svc;
-  }
 
   /**
    * Login with Google/Apple token and real client IP
@@ -50,12 +48,12 @@ export class AuthService {
         }),
         tap(() => {
           // Register FCM token after successful login
-          if (isPlatformBrowser(this.platformId) && pushNotificationServiceInstance) {
-            pushNotificationServiceInstance
+          if (isPlatformBrowser(this.platformId)) {
+            this.pushNotificationService
               .requestPermission()
               .then((granted) => {
                 if (granted) {
-                  pushNotificationServiceInstance!.getAndRegisterToken();
+                  this.pushNotificationService.getAndRegisterToken();
                 }
               });
           }
@@ -72,8 +70,8 @@ export class AuthService {
 
   logout(refreshToken: string) {
     // Unregister FCM token before logout
-    if (isPlatformBrowser(this.platformId) && pushNotificationServiceInstance) {
-      pushNotificationServiceInstance.deleteAndUnregisterToken();
+    if (isPlatformBrowser(this.platformId)) {
+      this.pushNotificationService.deleteAndUnregisterToken();
     }
     return this.http.post<any>(`${environment.API_URL}/${prefix}/logout`, {
       refreshToken,
@@ -83,12 +81,12 @@ export class AuthService {
   getProfileAPI() {
     return this.http.get<User>(`${environment.API_URL}/${prefix}/profile`).pipe(
       tap(() => {
-        if (isPlatformBrowser(this.platformId) && pushNotificationServiceInstance) {
-          pushNotificationServiceInstance
+        if (isPlatformBrowser(this.platformId)) {
+          this.pushNotificationService
             .requestPermission()
             .then((granted) => {
               if (granted) {
-                pushNotificationServiceInstance!.getAndRegisterToken();
+                this.pushNotificationService.getAndRegisterToken();
               }
             });
         }

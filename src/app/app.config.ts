@@ -13,6 +13,7 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '@/environments/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getMessaging, provideMessaging } from '@angular/fire/messaging';
 import {
@@ -45,7 +46,7 @@ export const appConfig: ApplicationConfig = {
         storageBucket: 'what-to-eat-no-firebase.firebasestorage.app',
         messagingSenderId: '500870159993',
         appId: '1:500870159993:web:105e95dd672dd099137ea8',
-        measurementId: 'G-5JDXHHX4K6',
+        measurementId: environment.FIREBASE_MEASUREMENT_ID,
       }),
     ),
     provideAuth(() => getAuth()),

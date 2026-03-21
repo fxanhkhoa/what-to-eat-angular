@@ -56,6 +56,7 @@ export class PushNotificationService {
   /** Request browser notification permission */
   async requestPermission(): Promise<boolean> {
     if (!isPlatformBrowser(this.platformId)) return false;
+    if (typeof Notification === 'undefined') return false;
     try {
       const permission = await Notification.requestPermission();
       return permission === 'granted';
@@ -66,18 +67,23 @@ export class PushNotificationService {
 
   /** Get FCM token and register it with the backend */
   async getAndRegisterToken(): Promise<string | null> {
-    console.log(
-      '[PushNotification] Requesting FCM token with VAPID key',
-      environment.VAPID_PUBLIC_KEY,
-    );
+    console.log('[PushNotification] Requesting FCM token');
     if (!this.messaging || !isPlatformBrowser(this.platformId)) return null;
-
+    if (!('serviceWorker' in navigator)) {
+      console.warn(
+        '[PushNotification] Service workers are not supported in this browser',
+      );
+      return null;
+    }
     try {
+      const existingRegistration =
+        (await navigator.serviceWorker.getRegistration(
+          '/firebase-messaging-sw.js',
+        )) ??
+        (await navigator.serviceWorker.register('/firebase-messaging-sw.js'));
       const token = await getToken(this.messaging, {
         vapidKey: environment.VAPID_PUBLIC_KEY,
-        serviceWorkerRegistration: await navigator.serviceWorker.register(
-          '/firebase-messaging-sw.js',
-        ),
+        serviceWorkerRegistration: existingRegistration,
       });
 
       if (token) {
@@ -100,7 +106,10 @@ export class PushNotificationService {
   /** Listen for foreground messages */
   onForegroundMessage(): Observable<any> {
     return new Observable((observer) => {
-      if (!this.messaging) return;
+      if (!this.messaging) {
+        observer.complete();
+        return;
+      }
       const unsub = onMessage(this.messaging, (payload) => {
         observer.next(payload);
       });

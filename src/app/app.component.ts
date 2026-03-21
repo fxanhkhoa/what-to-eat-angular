@@ -5,6 +5,7 @@ import { PushNotificationService } from './service/push-notification.service';
 import cookies from 'js-cookie';
 import { isPlatformServer } from '@angular/common';
 import { Cookies_Key } from '@/enum/cookies.enum';
+import { environment } from '@/environments/environment';
 import { WebsiteVisitService } from './service/website-visit.service';
 import { FeedbackFabComponent } from './components/feedback-fab/feedback-fab.component';
 
@@ -24,10 +25,6 @@ export class AppComponent implements OnInit {
   title = 'what-to-eat-angular';
 
   ngOnInit(): void {
-    // Connect PushNotificationService to AuthService (avoids circular DI)
-    if (!isPlatformServer(this.platformId)) {
-      this.authService.setPushNotificationService(this.pushNotificationService);
-    }
     this.refreshTokenAndInitialize();
     // Website visit tracking (unique per browser)
     if (!isPlatformServer(this.platformId)) {
@@ -40,30 +37,40 @@ export class AppComponent implements OnInit {
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
           if (typeof window.gtag === 'function') {
-            window.gtag('config', 'G-FWE0TE8LCZ', {
+            window.gtag('config', environment.FIREBASE_MEASUREMENT_ID, {
               page_path: event.urlAfterRedirects,
             });
           }
         }
       });
       // Foreground push notification listener
-      this.pushNotificationService.onForegroundMessage().subscribe((payload) => {
-        console.log('[FCM] Foreground message received', payload);
-        this.pushNotificationService.refreshUnreadCount();
-        // Show native notification when app is in foreground
-        const title = payload.notification?.title || 'New Notification';
-        const options = {
-          body: payload.notification?.body || '',
-          icon: '/assets/logo/what-to-eat-favicon-color-128x128.png',
-          badge: '/assets/logo/what-to-eat-favicon-color-72x72.png',
-          data: payload.data || {},
-          tag: payload.data?.tag || 'default',
-          renotify: true,
-        };
-        if (Notification.permission === 'granted') {
-          navigator.serviceWorker.ready.then((reg) => reg.showNotification(title, options));
-        }
-      });
+      this.pushNotificationService
+        .onForegroundMessage()
+        .subscribe((payload) => {
+          console.log('[FCM] Foreground message received', payload);
+          this.pushNotificationService.refreshUnreadCount();
+          // Show native notification when app is in foreground
+          // This may cause double notifications if the service worker also shows a notification, but it ensures users see it immediately
+          const title = payload.notification?.title || 'New Notification';
+          const options = {
+            body: payload.notification?.body || '',
+            icon: '/assets/logo/what-to-eat-favicon-color-128x128.png',
+            badge: '/assets/logo/what-to-eat-favicon-color-72x72.png',
+            data: payload.data || {},
+            tag: payload.data?.tag || 'default',
+            renotify: true,
+          };
+          if (
+            typeof Notification !== 'undefined' &&
+            Notification.permission === 'granted' &&
+            typeof navigator !== 'undefined' &&
+            'serviceWorker' in navigator
+          ) {
+            navigator.serviceWorker.ready.then((reg) =>
+              reg.showNotification(title, options),
+            );
+          }
+        });
     }
   }
 
@@ -73,15 +80,17 @@ export class AppComponent implements OnInit {
     }
 
     const refreshToken = cookies.get(Cookies_Key.REFRESH_TOKEN);
-    
+
     if (refreshToken) {
       // Refresh the access token if refresh token exists
       this.authService.refreshToken(refreshToken).subscribe({
         next: (tokenResult) => {
           // Save new tokens to cookies
           cookies.set(Cookies_Key.TOKEN, tokenResult.token, { expires: 7 });
-          cookies.set(Cookies_Key.REFRESH_TOKEN, tokenResult.refreshToken, { expires: 30 });
-          
+          cookies.set(Cookies_Key.REFRESH_TOKEN, tokenResult.refreshToken, {
+            expires: 30,
+          });
+
           // Now get the profile with the refreshed token
           this.getProfile();
         },
