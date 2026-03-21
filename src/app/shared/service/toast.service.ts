@@ -99,15 +99,19 @@ export class ToastService {
     subMsg: string,
     duration: number,
     redirectUrl: string,
+    type: string = 'activity',
   ) {
     this.snackBar.openFromComponent(NotificationSnackbarComponent, {
       horizontalPosition: 'end',
       verticalPosition: 'top',
       duration,
+      panelClass: ['notification-snackbar'],
       data: {
         mainMsg,
         subMsg,
         redirectUrl,
+        type,
+        duration,
       },
     });
   }

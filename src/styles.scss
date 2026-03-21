@@ -141,6 +141,16 @@ body {
   }
 }
 
+.notification-snackbar {
+  .mdc-snackbar__surface {
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 380px !important;
+    min-width: 320px !important;
+  }
+}
+
 // Dish Detail Dialog Panel
 .dish-detail-dialog-panel {
   .mat-mdc-dialog-container {

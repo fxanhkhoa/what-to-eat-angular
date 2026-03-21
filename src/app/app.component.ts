@@ -2,6 +2,7 @@ import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { AuthService } from './service/auth.service';
 import { PushNotificationService } from './service/push-notification.service';
+import { ToastService } from './shared/service/toast.service';
 import cookies from 'js-cookie';
 import { isPlatformServer } from '@angular/common';
 import { Cookies_Key } from '@/enum/cookies.enum';
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   private router = inject(Router);
   private websiteVisitService = inject(WebsiteVisitService);
   private pushNotificationService = inject(PushNotificationService);
+  private toastService = inject(ToastService);
 
   title = 'what-to-eat-angular';
 
@@ -49,27 +51,14 @@ export class AppComponent implements OnInit {
         .subscribe((payload) => {
           console.log('[FCM] Foreground message received', payload);
           this.pushNotificationService.refreshUnreadCount();
-          // Show native notification when app is in foreground
-          // This may cause double notifications if the service worker also shows a notification, but it ensures users see it immediately
-          const title = payload.notification?.title || 'New Notification';
-          const options = {
-            body: payload.notification?.body || '',
-            icon: '/assets/logo/what-to-eat-favicon-color-128x128.png',
-            badge: '/assets/logo/what-to-eat-favicon-color-72x72.png',
-            data: payload.data || {},
-            tag: payload.data?.tag || 'default',
-            renotify: true,
-          };
-          if (
-            typeof Notification !== 'undefined' &&
-            Notification.permission === 'granted' &&
-            typeof navigator !== 'undefined' &&
-            'serviceWorker' in navigator
-          ) {
-            navigator.serviceWorker.ready.then((reg) =>
-              reg.showNotification(title, options),
-            );
-          }
+          // Show in-app notification toast instead of native browser notification
+          this.toastService.showNotification(
+            payload.notification?.title || 'New Notification',
+            payload.notification?.body || '',
+            5000000,
+            payload.data?.['url'] || '/',
+            payload.data?.['type'] || 'activity',
+          );
         });
     }
   }
