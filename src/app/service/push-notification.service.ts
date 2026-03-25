@@ -10,6 +10,15 @@ import {
 } from '@angular/fire/messaging';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import type {
+  AdminNotificationLog,
+  CreateNotificationTemplateDto,
+  NotificationTemplate,
+  SendBroadcastDto,
+  SendSegmentDto,
+  UpdateNotificationTemplateDto,
+} from '@/types/notification.type';
+import { APIPagination } from '@/types/base.type';
 
 export type NotificationItem = {
   _id: string;
@@ -188,6 +197,64 @@ export class PushNotificationService {
     return this.http.put<NotificationPreference>(
       `${environment.API_URL}/${prefix}/preferences/`,
       dto,
+    );
+  }
+
+  // ---- Admin: broadcast & segment ----
+
+  sendBroadcast(dto: SendBroadcastDto): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.API_URL}/${prefix}/broadcast/`,
+      dto,
+    );
+  }
+
+  sendSegment(dto: SendSegmentDto): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(
+      `${environment.API_URL}/${prefix}/segment/`,
+      dto,
+    );
+  }
+
+  getAdminLogs(
+    page = 1,
+    limit = 20,
+    sentTo?: string,
+  ): Observable<APIPagination<AdminNotificationLog>> {
+    const params: Record<string, string | number> = { page, limit };
+    if (sentTo) params['sentTo'] = sentTo;
+    return this.http.get<APIPagination<AdminNotificationLog>>(
+      `${environment.API_URL}/${prefix}/admin/logs/`,
+      { params },
+    );
+  }
+
+  // ---- Admin: templates ----
+
+  getTemplates(page = 1, limit = 50): Observable<APIPagination<NotificationTemplate>> {
+    return this.http.get<APIPagination<NotificationTemplate>>(
+      `${environment.API_URL}/${prefix}/templates/`,
+      { params: { page, limit } },
+    );
+  }
+
+  createTemplate(dto: CreateNotificationTemplateDto): Observable<NotificationTemplate> {
+    return this.http.post<NotificationTemplate>(
+      `${environment.API_URL}/${prefix}/templates/`,
+      dto,
+    );
+  }
+
+  updateTemplate(id: string, dto: UpdateNotificationTemplateDto): Observable<NotificationTemplate> {
+    return this.http.put<NotificationTemplate>(
+      `${environment.API_URL}/${prefix}/templates/${id}/`,
+      dto,
+    );
+  }
+
+  deleteTemplate(id: string): Observable<{ message: string }> {
+    return this.http.delete<{ message: string }>(
+      `${environment.API_URL}/${prefix}/templates/${id}/`,
     );
   }
 }

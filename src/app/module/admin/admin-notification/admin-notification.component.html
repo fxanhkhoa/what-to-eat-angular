@@ -1,0 +1,307 @@
+<div class="p-4">
+  <h2 class="text-xl font-semibold mb-4" i18n>Push Notifications</h2>
+
+  <mat-tab-group animationDuration="200ms">
+
+    <!-- ─── COMPOSE TAB ─────────────────────────────────────────── -->
+    <mat-tab label="Compose">
+      <div class="py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Left: form -->
+        <mat-card class="p-4">
+          <mat-card-header>
+            <mat-card-title i18n>Compose Notification</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="composeForm" class="flex flex-col gap-3 mt-3">
+
+              <!-- Target toggle -->
+              <div class="flex gap-2 mb-1">
+                <button mat-stroked-button [color]="sendTarget === 'all' ? 'primary' : ''"
+                  type="button" (click)="setSendTarget('all')">
+                  <mat-icon>groups</mat-icon>
+                  <span i18n>All Users</span>
+                </button>
+                <button mat-stroked-button [color]="sendTarget === 'segment' ? 'primary' : ''"
+                  type="button" (click)="setSendTarget('segment')">
+                  <mat-icon>filter_list</mat-icon>
+                  <span i18n>Segment</span>
+                </button>
+              </div>
+
+              <!-- Segment options -->
+              @if (sendTarget === 'segment') {
+                <mat-divider></mat-divider>
+                <mat-form-field appearance="outline">
+                  <mat-label i18n>Role names (comma-separated)</mat-label>
+                  <input matInput formControlName="roleNames" placeholder="ADMIN, FOOD_SHOP_OWNER" />
+                  <mat-hint i18n>Leave blank to ignore role filter</mat-hint>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label i18n>Inactive for at least (days)</mat-label>
+                  <input matInput type="number" min="1" formControlName="inactiveDays" />
+                  <mat-hint i18n>Users with no login in the last N days</mat-hint>
+                </mat-form-field>
+                <mat-divider></mat-divider>
+              }
+
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Title</mat-label>
+                <input matInput formControlName="title" />
+                @if (composeForm.get('title')?.hasError('required') && composeForm.get('title')?.touched) {
+                  <mat-error i18n>Title is required</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Body</mat-label>
+                <textarea matInput rows="3" formControlName="body"></textarea>
+                @if (composeForm.get('body')?.hasError('required') && composeForm.get('body')?.touched) {
+                  <mat-error i18n>Body is required</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Image URL (optional)</mat-label>
+                <input matInput formControlName="imageUrl" />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Type</mat-label>
+                <mat-select formControlName="type">
+                  @for (t of notificationTypes; track t) {
+                    <mat-option [value]="t">{{ t }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Schedule (optional)</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="scheduledAt" />
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-hint i18n>Leave blank to send immediately</mat-hint>
+              </mat-form-field>
+
+              <button mat-raised-button color="primary" type="button"
+                [disabled]="sending()" (click)="send()">
+                @if (sending()) {
+                  <mat-progress-spinner diameter="20" mode="indeterminate"></mat-progress-spinner>
+                } @else {
+                  <mat-icon>send</mat-icon>
+                  <span i18n>Send</span>
+                }
+              </button>
+            </form>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Right: load from template -->
+        <mat-card class="p-4">
+          <mat-card-header>
+            <mat-card-title i18n>Load from Template</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (templates().length === 0) {
+              <p class="text-gray-500 mt-3" i18n>No templates yet. Create one in the Templates tab.</p>
+            }
+            @for (tmpl of templates(); track tmpl._id) {
+              <div class="flex items-center justify-between py-2 border-b last:border-0">
+                <div>
+                  <div class="font-medium">{{ tmpl.name }}</div>
+                  <div class="text-sm text-gray-500">{{ tmpl.title }}</div>
+                </div>
+                <button mat-stroked-button color="primary" type="button" (click)="loadFromTemplate(tmpl)">
+                  <mat-icon>file_copy</mat-icon>
+                  <span i18n>Use</span>
+                </button>
+              </div>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- ─── TEMPLATES TAB ───────────────────────────────────────── -->
+    <mat-tab label="Templates">
+      <div class="py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <!-- Template form -->
+        <mat-card class="p-4">
+          <mat-card-header>
+            <mat-card-title>{{ editingTemplateId() ? 'Edit Template' : 'New Template' }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="templateForm" class="flex flex-col gap-3 mt-3">
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Template Name</mat-label>
+                <input matInput formControlName="name" />
+                @if (templateForm.get('name')?.hasError('required') && templateForm.get('name')?.touched) {
+                  <mat-error i18n>Name is required</mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Title</mat-label>
+                <input matInput formControlName="title" />
+                @if (templateForm.get('title')?.hasError('required') && templateForm.get('title')?.touched) {
+                  <mat-error i18n>Title is required</mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Body</mat-label>
+                <textarea matInput rows="3" formControlName="body"></textarea>
+                @if (templateForm.get('body')?.hasError('required') && templateForm.get('body')?.touched) {
+                  <mat-error i18n>Body is required</mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Image URL (optional)</mat-label>
+                <input matInput formControlName="imageUrl" />
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label i18n>Type</mat-label>
+                <mat-select formControlName="type">
+                  @for (t of notificationTypes; track t) {
+                    <mat-option [value]="t">{{ t }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+              <div class="flex gap-2">
+                <button mat-raised-button color="primary" type="button"
+                  [disabled]="savingTemplate()" (click)="saveTemplate()">
+                  @if (savingTemplate()) {
+                    <mat-progress-spinner diameter="20" mode="indeterminate"></mat-progress-spinner>
+                  } @else {
+                    <mat-icon>save</mat-icon>
+                    <span>{{ editingTemplateId() ? 'Update' : 'Create' }}</span>
+                  }
+                </button>
+                @if (editingTemplateId()) {
+                  <button mat-stroked-button type="button" (click)="cancelEditTemplate()">
+                    <span i18n>Cancel</span>
+                  </button>
+                }
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Template list -->
+        <mat-card class="p-4">
+          <mat-card-header>
+            <mat-card-title i18n>Saved Templates</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (loadingTemplates()) {
+              <mat-progress-spinner mode="indeterminate" diameter="32" class="mx-auto mt-4"></mat-progress-spinner>
+            } @else {
+              <div class="overflow-x-auto">
+                <table mat-table [dataSource]="templateDataSource" class="w-full">
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Name</th>
+                    <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef i18n>Type</th>
+                    <td mat-cell *matCellDef="let row">
+                      <mat-chip>{{ row.type }}</mat-chip>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef i18n>Title</th>
+                    <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef i18n>Created</th>
+                    <td mat-cell *matCellDef="let row">{{ row.createdAt | date:'short' }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                      <button mat-icon-button color="primary" (click)="editTemplate(row)" matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" (click)="deleteTemplate(row._id)" matTooltip="Delete">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="templateColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: templateColumns;"></tr>
+                </table>
+              </div>
+              <mat-paginator
+                [length]="templateTotal()"
+                [pageSize]="templateLimit()"
+                [pageSizeOptions]="[10, 25, 50]"
+                (page)="onTemplatePage($event)">
+              </mat-paginator>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- ─── HISTORY TAB ─────────────────────────────────────────── -->
+    <mat-tab label="History">
+      <div class="py-4">
+        <mat-card class="p-4">
+          <mat-card-header>
+            <mat-card-title i18n>Admin Notification Logs</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            @if (loadingLogs()) {
+              <mat-progress-spinner mode="indeterminate" diameter="32" class="mx-auto mt-4"></mat-progress-spinner>
+            } @else {
+              <div class="overflow-x-auto">
+                <table mat-table [dataSource]="logDataSource" class="w-full">
+                  <ng-container matColumnDef="sentTo">
+                    <th mat-header-cell *matHeaderCellDef i18n>Target</th>
+                    <td mat-cell *matCellDef="let row">
+                      <mat-chip [color]="row.sentTo === 'all' ? 'primary' : 'accent'" highlighted>
+                        {{ row.sentTo }}
+                      </mat-chip>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef i18n>Type</th>
+                    <td mat-cell *matCellDef="let row">{{ row.type }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="title">
+                    <th mat-header-cell *matHeaderCellDef i18n>Title</th>
+                    <td mat-cell *matCellDef="let row">{{ row.title }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="totalSent">
+                    <th mat-header-cell *matHeaderCellDef i18n>Sent</th>
+                    <td mat-cell *matCellDef="let row" class="text-green-600 font-medium">{{ row.totalSent }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="totalFailed">
+                    <th mat-header-cell *matHeaderCellDef i18n>Failed</th>
+                    <td mat-cell *matCellDef="let row" [class.text-red-500]="row.totalFailed > 0">{{ row.totalFailed }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="sentAt">
+                    <th mat-header-cell *matHeaderCellDef i18n>Sent At</th>
+                    <td mat-cell *matCellDef="let row">{{ row.sentAt ? (row.sentAt | date:'short') : '—' }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="scheduledAt">
+                    <th mat-header-cell *matHeaderCellDef i18n>Scheduled At</th>
+                    <td mat-cell *matCellDef="let row">{{ row.scheduledAt ? (row.scheduledAt | date:'short') : '—' }}</td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="logColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: logColumns;"></tr>
+                </table>
+              </div>
+              <mat-paginator
+                [length]="logTotal()"
+                [pageSize]="logLimit()"
+                [pageSizeOptions]="[10, 20, 50]"
+                (page)="onLogPage($event)">
+              </mat-paginator>
+            }
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>
