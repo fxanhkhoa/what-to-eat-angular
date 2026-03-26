@@ -74,6 +74,8 @@ export class AdminNotificationComponent implements OnInit {
   templates = signal<NotificationTemplate[]>([]);
 
   notificationTypes = ['marketing', 'activity', 'chat'];
+  hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
+  minutes = ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55'];
 
   // ---- Templates tab ----
   templateForm!: FormGroup;
@@ -95,8 +97,8 @@ export class AdminNotificationComponent implements OnInit {
   logLimit = signal(10);
 
   ngOnInit(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
     this.initForms();
+    if (!isPlatformBrowser(this.platformId)) return;
     this.loadTemplates();
     this.loadLogs();
   }
@@ -108,6 +110,8 @@ export class AdminNotificationComponent implements OnInit {
       imageUrl: [''],
       type: ['marketing', Validators.required],
       scheduledAt: [null],
+      scheduledHour: ['00'],
+      scheduledMinute: ['00'],
       // segment fields
       roleNames: [''],
       inactiveDays: [null],
@@ -144,7 +148,12 @@ export class AdminNotificationComponent implements OnInit {
       return;
     }
     const v = this.composeForm.value;
-    const scheduledAt = v.scheduledAt ? new Date(v.scheduledAt).toISOString() : undefined;
+    let scheduledAt: string | undefined;
+    if (v.scheduledAt) {
+      const date = new Date(v.scheduledAt);
+      date.setHours(Number(v.scheduledHour ?? 0), Number(v.scheduledMinute ?? 0), 0, 0);
+      scheduledAt = date.toISOString();
+    }
     this.sending.set(true);
 
     const base = {
@@ -171,7 +180,7 @@ export class AdminNotificationComponent implements OnInit {
     obs.pipe(finalize(() => this.sending.set(false))).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'OK', { duration: 3000 });
-        this.composeForm.reset({ type: 'marketing' });
+        this.composeForm.reset({ type: 'marketing', scheduledAt: null, scheduledHour: '00', scheduledMinute: '00' });
         this.loadLogs();
       },
       error: (err) =>
