@@ -4,7 +4,7 @@
     <mat-tab-group animationDuration="200ms">
 
         <!-- ─── COMPOSE TAB ─────────────────────────────────────────── -->
-        <mat-tab label="Compose">
+        <mat-tab label="Compose" i18n-label>
             <div class="py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <!-- Left: form -->
@@ -150,13 +150,13 @@
         </mat-tab>
 
         <!-- ─── TEMPLATES TAB ───────────────────────────────────────── -->
-        <mat-tab label="Templates">
+        <mat-tab label="Templates" i18n-label>
             <div class="py-4 grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <!-- Template form -->
                 <mat-card class="p-4">
                     <mat-card-header>
-                        <mat-card-title>{{ editingTemplateId() ? 'Edit Template' : 'New Template' }}</mat-card-title>
+                        <mat-card-title i18n>{{ editingTemplateId() ? 'Edit Template' : 'New Template' }}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                         <form [formGroup]="templateForm" class="flex flex-col gap-3 mt-3">
@@ -210,7 +210,7 @@
                                 </button>
                                 @if (editingTemplateId()) {
                                 <button mat-stroked-button type="button" (click)="cancelEditTemplate()">
-                                    <span i18n>Cancel</span>
+                                    <span i18n="@@Cancel">Cancel</span>
                                 </button>
                                 }
                             </div>
@@ -252,11 +252,11 @@
                                     <th mat-header-cell *matHeaderCellDef></th>
                                     <td mat-cell *matCellDef="let row">
                                         <button mat-icon-button color="primary" (click)="editTemplate(row)"
-                                            matTooltip="Edit">
+                                            matTooltip="Edit" i18n-matTooltip="@@Edit">
                                             <mat-icon>edit</mat-icon>
                                         </button>
                                         <button mat-icon-button color="warn" (click)="deleteTemplate(row._id)"
-                                            matTooltip="Delete">
+                                            matTooltip="Delete" i18n-matTooltip="@@Delete">
                                             <mat-icon>delete</mat-icon>
                                         </button>
                                     </td>
@@ -275,7 +275,7 @@
         </mat-tab>
 
         <!-- ─── HISTORY TAB ─────────────────────────────────────────── -->
-        <mat-tab label="History">
+        <mat-tab label="History" i18n-label>
             <div class="py-4">
                 <mat-card class="p-4">
                     <mat-card-header>

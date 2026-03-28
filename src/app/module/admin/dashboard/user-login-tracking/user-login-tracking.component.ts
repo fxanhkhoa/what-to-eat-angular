@@ -48,7 +48,19 @@ export class UserLoginTrackingComponent implements OnInit, AfterViewInit {
     this.loadData();
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.sortingDataAccessor = (
+      item: UserLoginTrack,
+      property: string
+    ): string | number => {
+      if (property === 'loginAt') {
+        return new Date(item.loginAt).getTime();
+      }
+
+      return item[property as keyof UserLoginTrack] as string;
+    };
+  }
 
   loadData() {
     this.userLoginTrackService

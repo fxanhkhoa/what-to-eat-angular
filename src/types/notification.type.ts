@@ -1,3 +1,6 @@
+export type NotificationType = 'chat' | 'activity' | 'marketing';
+export type SentToFilter = 'all' | 'segment';
+
 export type SegmentFilter = {
   roleNames?: string[];
   inactiveDays?: number;
@@ -9,7 +12,7 @@ export type NotificationTemplate = {
   title: string;
   body: string;
   imageUrl?: string;
-  type: 'chat' | 'activity' | 'marketing';
+  type: NotificationType;
   data?: Record<string, string>;
   createdAt?: string;
   createdBy?: string;
@@ -21,7 +24,7 @@ export type AdminNotificationLog = {
   title: string;
   body: string;
   imageUrl?: string;
-  type: string;
+  type: NotificationType;
   data?: Record<string, string>;
   sentTo: 'all' | 'segment';
   segmentFilter?: SegmentFilter;
@@ -37,7 +40,7 @@ export type SendBroadcastDto = {
   body: string;
   imageUrl?: string;
   data?: Record<string, string>;
-  type: 'chat' | 'activity' | 'marketing';
+  type: NotificationType;
   scheduledAt?: string;
 };
 
@@ -46,7 +49,7 @@ export type SendSegmentDto = {
   body: string;
   imageUrl?: string;
   data?: Record<string, string>;
-  type: 'chat' | 'activity' | 'marketing';
+  type: NotificationType;
   scheduledAt?: string;
   segmentFilter: SegmentFilter;
 };
@@ -56,7 +59,7 @@ export type CreateNotificationTemplateDto = {
   title: string;
   body: string;
   imageUrl?: string;
-  type: 'chat' | 'activity' | 'marketing';
+  type: NotificationType;
   data?: Record<string, string>;
 };
 
@@ -65,6 +68,6 @@ export type UpdateNotificationTemplateDto = {
   title?: string;
   body?: string;
   imageUrl?: string;
-  type?: 'chat' | 'activity' | 'marketing';
+  type?: NotificationType;
   data?: Record<string, string>;
 };

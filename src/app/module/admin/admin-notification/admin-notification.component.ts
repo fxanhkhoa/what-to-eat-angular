@@ -34,6 +34,7 @@ import type {
   NotificationTemplate,
 } from '@/types/notification.type';
 import { finalize } from 'rxjs';
+import { c } from "../../../../../node_modules/@angular/cdk/a11y-module.d-DBHGyKoh";
 
 @Component({
   selector: 'app-admin-notification',
@@ -57,7 +58,7 @@ import { finalize } from 'rxjs';
     MatTooltipModule,
     MatDividerModule,
     MatSnackBarModule,
-  ],
+],
   templateUrl: './admin-notification.component.html',
   styleUrl: './admin-notification.component.scss',
 })
@@ -126,6 +127,15 @@ export class AdminNotificationComponent implements OnInit {
     });
   }
 
+  private extractErrorMessage(err: any, fallback = 'Operation failed'): string {
+    return (
+      err?.error?.message ??
+      err?.error?.error ??
+      err?.message ??
+      fallback
+    );
+  }
+
   // ---- Compose actions ----
 
   setSendTarget(target: 'all' | 'segment'): void {
@@ -184,7 +194,7 @@ export class AdminNotificationComponent implements OnInit {
         this.loadLogs();
       },
       error: (err) =>
-        this.snackBar.open(err?.error ?? 'Send failed', 'Dismiss', { duration: 4000 }),
+        this.snackBar.open(this.extractErrorMessage(err, 'Send failed'), 'Dismiss', { duration: 4000 }),
     });
   }
 
@@ -201,7 +211,14 @@ export class AdminNotificationComponent implements OnInit {
           this.templateTotal.set(res.count);
           this.templates.set(res.data);
         },
-        error: () => {},
+        error: (err) => {
+          console.error('[AdminNotification] Failed to load templates', err);
+          this.snackBar.open(
+            this.extractErrorMessage(err, 'Failed to load templates'),
+            'Dismiss',
+            { duration: 4000 },
+          );
+        },
       });
   }
 
@@ -249,7 +266,7 @@ export class AdminNotificationComponent implements OnInit {
         this.loadTemplates();
       },
       error: (err) =>
-        this.snackBar.open(err?.error ?? 'Save failed', 'Dismiss', { duration: 4000 }),
+        this.snackBar.open(this.extractErrorMessage(err, 'Save failed'), 'Dismiss', { duration: 4000 }),
     });
   }
 
@@ -261,7 +278,7 @@ export class AdminNotificationComponent implements OnInit {
         this.loadTemplates();
       },
       error: (err) =>
-        this.snackBar.open(err?.error ?? 'Delete failed', 'Dismiss', { duration: 4000 }),
+        this.snackBar.open(this.extractErrorMessage(err, 'Delete failed'), 'Dismiss', { duration: 4000 }),
     });
   }
 
@@ -277,7 +294,14 @@ export class AdminNotificationComponent implements OnInit {
           this.logDataSource.data = res.data;
           this.logTotal.set(res.count);
         },
-        error: () => {},
+        error: (err) => {
+          console.error('[AdminNotification] Failed to load admin logs', err);
+          this.snackBar.open(
+            this.extractErrorMessage(err, 'Failed to load admin logs'),
+            'Dismiss',
+            { duration: 4000 },
+          );
+        },
       });
   }
 

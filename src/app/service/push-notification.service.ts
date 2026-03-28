@@ -17,6 +17,7 @@ import type {
   SendBroadcastDto,
   SendSegmentDto,
   UpdateNotificationTemplateDto,
+  SentToFilter,
 } from '@/types/notification.type';
 import { APIPagination } from '@/types/base.type';
 
@@ -219,7 +220,7 @@ export class PushNotificationService {
   getAdminLogs(
     page = 1,
     limit = 20,
-    sentTo?: string,
+    sentTo?: SentToFilter,
   ): Observable<APIPagination<AdminNotificationLog>> {
     const params: Record<string, string | number> = { page, limit };
     if (sentTo) params['sentTo'] = sentTo;

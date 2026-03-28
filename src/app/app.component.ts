@@ -9,10 +9,11 @@ import { Cookies_Key } from '@/enum/cookies.enum';
 import { environment } from '@/environments/environment';
 import { WebsiteVisitService } from './service/website-visit.service';
 import { FeedbackFabComponent } from './components/feedback-fab/feedback-fab.component';
+import { CookieConsentBannerComponent } from './shared/component/cookie-consent-banner/cookie-consent-banner.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, FeedbackFabComponent],
+  imports: [RouterModule, FeedbackFabComponent, CookieConsentBannerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
