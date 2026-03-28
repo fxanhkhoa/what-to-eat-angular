@@ -383,6 +383,18 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'notification',
+        canActivate: [authenticationGuard, authorizationGuard],
+        data: {
+          permissions: [Permissions.SEND_NOTIFICATIONS],
+          breadcrumb: 'Push Notifications',
+        },
+        loadComponent: () =>
+          import('./module/admin/admin-notification/admin-notification.component').then(
+            (m) => m.AdminNotificationComponent
+          ),
+      },
     ],
   },
   {

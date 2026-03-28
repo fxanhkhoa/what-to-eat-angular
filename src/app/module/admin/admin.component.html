@@ -118,6 +118,16 @@
                     }
                 </div>
             </a>
+            
+            <a mat-list-item [routerLink]="['/admin/notification']" routerLinkActive="active-nav-item"
+                class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
+                <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">notifications_active</mat-icon>
+                    @if (!(isHandset$ | async)) {
+                    <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Push Notifications</span>
+                    }
+                </div>
+            </a>
         </mat-nav-list>
         
         <!-- Elegant Divider -->
@@ -130,7 +140,7 @@
             <a mat-list-item [routerLink]="['/profile']" routerLinkActive="active-nav-item"
                 class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-white/10 group">
                 <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
-                    <mat-icon class="!text-white/90 !w-5 !h-5 !text-xl group-hover:scale-110 transition-transform duration-300">person</mat-icon>
+                    <mat-icon class="!text-white/90 group-hover:scale-110 transition-transform duration-300">person</mat-icon>
                     @if (!(isHandset$ | async)) {
                     <span i18n class="text-white/90 text-sm font-medium group-hover:text-white transition-colors">Profile</span>
                     }
@@ -140,7 +150,7 @@
             <a mat-list-item href="#" (click)="logout()"
                 class="!mx-2 !mb-1 !rounded-xl !transition-all !duration-300 hover:!bg-red-500/20 group">
                 <div class="flex gap-4 items-center px-2 py-1" [class.justify-center]="(isHandset$ | async)">
-                    <mat-icon class="!text-red-300 !w-5 !h-5 !text-xl group-hover:scale-110 transition-transform duration-300">logout</mat-icon>
+                    <mat-icon class="!text-red-300 group-hover:scale-110 transition-transform duration-300">logout</mat-icon>
                     @if (!(isHandset$ | async)) {
                     <span i18n class="text-red-300 text-sm font-medium group-hover:text-red-200 transition-colors">Logout</span>
                     }

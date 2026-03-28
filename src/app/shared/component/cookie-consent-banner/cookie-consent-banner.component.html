@@ -1,0 +1,28 @@
+@if (isVisible) {
+<section class="fixed inset-x-0 bottom-0 z-[10000] p-3 sm:p-4" aria-live="polite">
+  <div
+    class="mx-auto max-w-6xl rounded-2xl border border-white/20 bg-gray-900/95 p-4 text-white shadow-2xl backdrop-blur-md sm:p-5">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div class="space-y-2">
+        <p class="text-base font-semibold" i18n="@@cookieConsentTitle">We use cookies</p>
+        <p class="text-sm text-gray-200" i18n="@@cookieConsentMessage">
+          We use cookies to improve your experience. By clicking Accept, you agree to our cookie policy.
+        </p>
+        <div class="flex flex-wrap items-center gap-3 text-sm">
+          <a routerLink="/privacy-policy" class="text-blue-300 underline-offset-2 hover:underline"
+            i18n="@@cookieConsentPrivacyLink">Privacy Policy</a>
+          <a routerLink="/terms" class="text-blue-300 underline-offset-2 hover:underline"
+            i18n="@@cookieConsentTermsLink">Terms of Service</a>
+        </div>
+      </div>
+
+      <div class="flex shrink-0 items-center">
+        <button mat-flat-button color="primary" type="button" (click)="acceptCookies()"
+          class="!rounded-xl !px-6 !font-medium" i18n="@@cookieConsentAcceptButton">
+          Accept
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+}
