@@ -320,15 +320,15 @@
     </div>
 
     <!-- Table Container -->
-    <div class="overflow-x-auto max-h-[70vh]">
+    <div class="overflow-x-auto max-h-[70vh] relative">
       @if (isLoading()) {
-      <div class="flex justify-center items-center p-12">
+      <div class="absolute inset-0 flex justify-center items-center bg-white/70 z-10">
         <div class="text-center">
           <mat-spinner class="mx-auto mb-4"></mat-spinner>
           <p class="text-gray-600" i18n>Searching for dishes...</p>
         </div>
       </div>
-      } @else {
+      }
       <table mat-table [dataSource]="dataSource" matSort class="w-full">
 
         <!-- Actions Column -->
@@ -503,7 +503,6 @@
           </td>
         </tr>
       </table>
-      }
     </div>
 
     <!-- Enhanced Pagination -->

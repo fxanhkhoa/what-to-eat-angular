@@ -7,14 +7,14 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   inject,
   LOCALE_ID,
-  OnChanges,
+  OnDestroy,
   OnInit,
   PLATFORM_ID,
   signal,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import {
@@ -31,7 +31,14 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { distinctUntilChanged, finalize, debounceTime, switchMap } from 'rxjs';
+import {
+  distinctUntilChanged,
+  finalize,
+  debounceTime,
+  switchMap,
+  of,
+  Subject,
+} from 'rxjs';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { DishService } from '@/app/service/dish.service';
@@ -45,7 +52,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, takeUntil } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -78,7 +85,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrl: './admin-dish-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminDishListComponent implements OnInit, AfterViewInit {
+export class AdminDishListComponent implements OnInit, AfterViewInit, OnDestroy {
   jumpToPage: number = 1;
   private fb = inject(FormBuilder);
   private dishService = inject(DishService);
@@ -87,6 +94,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   localeId = inject(LOCALE_ID);
   private iconRegistry = inject(MatIconRegistry);
   private sanitizer = inject(DomSanitizer);
+  private cdr = inject(ChangeDetectorRef);
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -136,6 +144,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   labels: string[] = [];
 
   isLoading = signal(false);
+  private destroy$ = new Subject<void>();
 
   constructor() {
     // Initialize with empty array, replace with your data source
@@ -143,31 +152,31 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
 
     this.iconRegistry.addSvgIcon(
       'easy',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/easy.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/easy.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'medium',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/medium.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/medium.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'hard',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/hard.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/hard.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'cooking_time',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/cooking_time.svg'
-      )
+        '/assets/icons/cooking_time.svg',
+      ),
     );
     this.iconRegistry.addSvgIcon(
       'preparation_time',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/preparation_time.svg'
-      )
+        '/assets/icons/preparation_time.svg',
+      ),
     );
     this.iconRegistry.addSvgIcon(
       'search',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/search.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/search.svg'),
     );
   }
 
@@ -193,9 +202,13 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
     this.loadDishes();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   initTable() {
     this.dataSource.sort = this.sort;
-    // this.dataSource.paginator = this.paginator;
 
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
@@ -224,7 +237,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
     if (!this.paginator) return;
     const page = Math.max(
       1,
-      Math.min(this.jumpToPage, this.paginator.getNumberOfPages())
+      Math.min(this.jumpToPage, this.paginator.getNumberOfPages()),
     );
     this.paginator.pageIndex = page - 1;
     this.loadDishes();
@@ -242,7 +255,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
         $localize`Delete Dish`,
         $localize`Are you sure you want to delete "${
           dish.title.find((t) => t.lang === this.localeId)!.data
-        }"?`
+        }"?`,
       )
       .afterClosed()
       .subscribe((res) => {
@@ -251,7 +264,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
             this.toastService.showSuccess(
               $localize`Deleted`,
               $localize`Ingredient deleted successfully`,
-              1500
+              1500,
             );
             this.loadDishes();
           });
@@ -295,7 +308,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   // Chip input methods
   addChip(
     event: MatChipInputEvent,
-    type: 'tags' | 'ingredients' | 'labels'
+    type: 'tags' | 'ingredients' | 'labels',
   ): void {
     const value = (event.value || '').trim();
 
@@ -388,12 +401,13 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
           switchMap((value) => {
             if (value && value.length >= 2) {
               this.isLoadingSuggestions.set(true);
-              return this.dishService
-                .getSuggestions(value, 8)
-                .pipe(finalize(() => this.isLoadingSuggestions.set(false)));
+              return (this.dishService.getSuggestions(value, 8) ?? of([])).pipe(
+                finalize(() => this.isLoadingSuggestions.set(false)),
+              );
             }
-            return [];
-          })
+            return of([]);
+          }),
+          takeUntil(this.destroy$),
         )
         .subscribe((suggestions) => {
           this.searchSuggestions.set(suggestions);
@@ -416,7 +430,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
       // Check if autocomplete panel is open
       const input = event.target as HTMLInputElement;
       const autocompletePanel = document.querySelector(
-        'mat-autocomplete-panel'
+        'mat-autocomplete-panel',
       );
 
       if (autocompletePanel && autocompletePanel.clientHeight > 0) {
@@ -470,7 +484,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
           this.isLoading.set(false);
           const endTime = performance.now();
           this.searchTime.set(Math.round(endTime - startTime));
-        })
+        }),
       )
       .subscribe((res) => {
         this.totalResults.set(res.count);
@@ -478,10 +492,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
         if (this.paginator) {
           this.paginator.length = res.count;
         }
-
-        setTimeout(() => {
-          this.dataSource.sort = this.sort;
-        }, 500);
+        this.cdr.markForCheck();
       });
   }
 
@@ -515,7 +526,7 @@ export class AdminDishListComponent implements OnInit, AfterViewInit {
   toggleDifficultyLevel(level: string) {
     if (this.difficultyLevels?.value?.includes(level)) {
       this.difficultyLevels?.setValue(
-        this.difficultyLevels?.value?.filter((l: string) => l !== level)
+        this.difficultyLevels?.value?.filter((l: string) => l !== level),
       );
     } else {
       this.filterForm
