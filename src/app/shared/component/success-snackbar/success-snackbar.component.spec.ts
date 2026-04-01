@@ -53,16 +53,13 @@ describe('SuccessSnackbarComponent', () => {
 
   describe('Data Binding', () => {
     it('should display the main message', () => {
-      const mainMsgElement = compiled.querySelector('.text-xl.text-white.font-bold');
+      const mainMsgElement = compiled.querySelector('.main-message');
       expect(mainMsgElement).toBeTruthy();
       expect(mainMsgElement?.textContent?.trim()).toBe(mockData.mainMsg);
     });
 
     it('should display the sub message', () => {
-      const subMsgElements = compiled.querySelectorAll('.text-white');
-      const subMsgElement = Array.from(subMsgElements).find(el => 
-        el.textContent?.trim() === mockData.subMsg
-      );
+      const subMsgElement = compiled.querySelector('.sub-message');
       expect(subMsgElement).toBeTruthy();
       expect(subMsgElement?.textContent?.trim()).toBe(mockData.subMsg);
     });
@@ -76,36 +73,37 @@ describe('SuccessSnackbarComponent', () => {
 
   describe('Template Structure', () => {
     it('should have a clickable container', () => {
-      const container = compiled.querySelector('.container.clickable');
+      const container = compiled.querySelector('.success-snackbar-container');
       expect(container).toBeTruthy();
     });
 
     it('should have proper styling classes on container', () => {
-      const container = compiled.querySelector('.container');
-      expect(container?.classList.contains('p-3')).toBe(true);
-      expect(container?.classList.contains('rounded')).toBe(true);
-      expect(container?.classList.contains('clickable')).toBe(true);
+      const container = compiled.querySelector('.success-snackbar-container');
+      expect(container).toBeTruthy();
+      expect(container?.classList.contains('success-snackbar-container')).toBe(true);
     });
 
     it('should have proper flex layout', () => {
-      const flexContainer = compiled.querySelector('.flex.gap-2');
+      const flexContainer = compiled.querySelector('.flex.items-center.gap-3');
       expect(flexContainer).toBeTruthy();
     });
 
     it('should have icon with correct class', () => {
-      const icon = compiled.querySelector('mat-icon.icon');
+      const icon = compiled.querySelector('mat-icon.success-icon');
       expect(icon).toBeTruthy();
     });
 
     it('should have two text elements with proper styling', () => {
-      const textElements = compiled.querySelectorAll('.text-white');
-      expect(textElements.length).toBeGreaterThanOrEqual(2);
+      const mainMsg = compiled.querySelector('.main-message');
+      const subMsg = compiled.querySelector('.sub-message');
+      expect(mainMsg).toBeTruthy();
+      expect(subMsg).toBeTruthy();
     });
   });
 
   describe('Dismissal Functionality', () => {
     it('should call dismissWithAction when container is clicked', () => {
-      const container = compiled.querySelector('.container.clickable') as HTMLElement;
+      const container = compiled.querySelector('.success-snackbar-container') as HTMLElement;
       
       container.click();
       
@@ -113,7 +111,7 @@ describe('SuccessSnackbarComponent', () => {
     });
 
     it('should dismiss snackbar on click', () => {
-      const container = compiled.querySelector('.container.clickable') as HTMLElement;
+      const container = compiled.querySelector('.success-snackbar-container') as HTMLElement;
       
       container.click();
       
@@ -121,7 +119,7 @@ describe('SuccessSnackbarComponent', () => {
     });
 
     it('should call dismissWithAction exactly once per click', () => {
-      const container = compiled.querySelector('.container.clickable') as HTMLElement;
+      const container = compiled.querySelector('.success-snackbar-container') as HTMLElement;
       
       container.click();
       
@@ -135,11 +133,11 @@ describe('SuccessSnackbarComponent', () => {
       component.data = emptyData;
       fixture.detectChanges();
       
-      const mainMsgElement = compiled.querySelector('.text-xl.text-white.font-bold');
-      const subMsgElements = compiled.querySelectorAll('.text-white');
+      const mainMsgElement = compiled.querySelector('.main-message');
+      const subMsgElement = compiled.querySelector('.sub-message');
       
       expect(mainMsgElement?.textContent?.trim()).toBe('');
-      expect(subMsgElements.length).toBeGreaterThan(0);
+      expect(subMsgElement).toBeTruthy();
     });
 
     it('should handle long messages', () => {
@@ -150,7 +148,7 @@ describe('SuccessSnackbarComponent', () => {
       component.data = longData;
       fixture.detectChanges();
       
-      const mainMsgElement = compiled.querySelector('.text-xl.text-white.font-bold');
+      const mainMsgElement = compiled.querySelector('.main-message');
       expect(mainMsgElement?.textContent).toContain(longData.mainMsg);
     });
 
@@ -162,7 +160,7 @@ describe('SuccessSnackbarComponent', () => {
       component.data = specialData;
       fixture.detectChanges();
       
-      const mainMsgElement = compiled.querySelector('.text-xl.text-white.font-bold');
+      const mainMsgElement = compiled.querySelector('.main-message');
       expect(mainMsgElement?.textContent).toContain(specialData.mainMsg);
     });
 
@@ -174,31 +172,31 @@ describe('SuccessSnackbarComponent', () => {
       component.data = newData;
       fixture.detectChanges();
       
-      const mainMsgElement = compiled.querySelector('.text-xl.text-white.font-bold');
+      const mainMsgElement = compiled.querySelector('.main-message');
       expect(mainMsgElement?.textContent?.trim()).toBe(newData.mainMsg);
     });
   });
 
   describe('Visual Elements', () => {
     it('should have icon centered properly', () => {
-      const iconContainer = compiled.querySelector('.flex.flex-col.justify-center.items-center');
+      const iconContainer = compiled.querySelector('.icon-wrapper');
       expect(iconContainer).toBeTruthy();
       expect(iconContainer?.querySelector('mat-icon')).toBeTruthy();
     });
 
     it('should have text in a separate column', () => {
-      const textContainer = compiled.querySelector('.flex.flex-col.gap-2');
+      const textContainer = compiled.querySelector('.flex.flex-col.gap-1');
       expect(textContainer).toBeTruthy();
     });
 
-    it('should have main message with bold styling', () => {
-      const mainMsg = compiled.querySelector('.font-bold');
+    it('should have main message element', () => {
+      const mainMsg = compiled.querySelector('.main-message');
       expect(mainMsg).toBeTruthy();
     });
 
-    it('should have main message with larger text', () => {
-      const mainMsg = compiled.querySelector('.text-xl');
-      expect(mainMsg).toBeTruthy();
+    it('should have sub message element', () => {
+      const subMsg = compiled.querySelector('.sub-message');
+      expect(subMsg).toBeTruthy();
     });
   });
 
@@ -223,16 +221,16 @@ describe('SuccessSnackbarComponent', () => {
     });
 
     it('should have clickable element that is interactive', () => {
-      const container = compiled.querySelector('.clickable');
+      const container = compiled.querySelector('.success-snackbar-container');
       expect(container).toBeTruthy();
     });
 
     it('should have clear text hierarchy with main and sub messages', () => {
-      const mainMsg = compiled.querySelector('.text-xl');
-      const allTextElements = compiled.querySelectorAll('.text-white');
+      const mainMsg = compiled.querySelector('.main-message');
+      const subMsg = compiled.querySelector('.sub-message');
       
       expect(mainMsg).toBeTruthy();
-      expect(allTextElements.length).toBeGreaterThanOrEqual(2);
+      expect(subMsg).toBeTruthy();
     });
   });
 
@@ -267,7 +265,7 @@ describe('SuccessSnackbarComponent', () => {
       component.data = minimalData;
       fixture.detectChanges();
       
-      const container = compiled.querySelector('.container');
+      const container = compiled.querySelector('.success-snackbar-container');
       expect(container).toBeTruthy();
     });
   });

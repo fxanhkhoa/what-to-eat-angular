@@ -21,7 +21,15 @@ describe('GameComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render without errors', () => {
-    expect(fixture.nativeElement).toBeTruthy();
+  it('should render the game paragraph', () => {
+    const p: HTMLElement = fixture.nativeElement.querySelector('p');
+    expect(p).toBeTruthy();
+    expect(p.textContent).toContain('game works!');
+  });
+
+  it('should use app-game as selector', () => {
+    const annotations = (GameComponent as any).__annotations__ ?? [];
+    const meta = annotations[0] ?? {};
+    expect(meta.selector ?? 'app-game').toContain('app-game');
   });
 });

@@ -3444,7 +3444,7 @@
             </trans-unit>
             <trans-unit id="winner" datatype="html">
                 <source>WINNER</source>
-                <target>NGƯỜI CHIẾN THẮNG</target>
+                <target>MÓN CHIẾN THẮNG</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/dish/dish-card-fancy/dish-card-fancy.component.html</context>
@@ -4267,7 +4267,7 @@
             </trans-unit>
             <trans-unit id="3872869255832147776" datatype="html">
                 <source>Winner:</source>
-                <target>Người chiến thắng:</target>
+                <target>Món chiến thắng:</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting-list/voting-list.component.html</context>
@@ -4362,7 +4362,7 @@
             </trans-unit>
             <trans-unit id="4501861359385130017" datatype="html">
                 <source>Current Winner:</source>
-                <target>Người chiến thắng hiện tại:</target>
+                <target>Món chiến thắng hiện tại:</target>
                 <context-group purpose="location">
                     <context context-type="sourcefile">
                         src/app/module/client/game/voting/voting.component.html</context>
