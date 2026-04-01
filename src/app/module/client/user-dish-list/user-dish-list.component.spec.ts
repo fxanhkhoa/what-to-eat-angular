@@ -32,7 +32,7 @@ describe('UserDishListComponent', () => {
 
   const mockCollections = [makeCollection('c1'), makeCollection('c2')];
 
-  function setup(platformId = 'browser') {
+  async function setup(platformId = 'browser') {
     collectionSpy = jasmine.createSpyObj('UserDishCollectionService', [
       'findAll',
       'delete',
@@ -50,7 +50,7 @@ describe('UserDishListComponent', () => {
     );
     authSpy.getProfile.and.returnValue(of(mockUser));
 
-    TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [UserDishListComponent, NoopAnimationsModule],
       providers: [
         { provide: UserDishCollectionService, useValue: collectionSpy },
@@ -71,8 +71,6 @@ describe('UserDishListComponent', () => {
   }
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({}).compileComponents();
-    TestBed.resetTestingModule();
     await setup();
   });
 
