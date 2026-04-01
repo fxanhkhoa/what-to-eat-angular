@@ -145,6 +145,7 @@ export class FlippingCardComponent implements OnDestroy, OnInit {
   }
 
   shuffleDeckAnimation(deckElement: HTMLElement): void {
+    if (!deckElement) return;
     deckElement.classList.add('shuffle');
     setTimeout(() => {
       deckElement.classList.remove('shuffle');

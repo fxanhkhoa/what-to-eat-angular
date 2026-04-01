@@ -113,30 +113,40 @@ describe('MasonryGalleryComponent', () => {
   });
 
   describe('getActualColumns', () => {
+    let originalInnerWidth: number;
+
+    beforeEach(() => {
+      originalInnerWidth = window.innerWidth;
+    });
+
+    afterEach(() => {
+      Object.defineProperty(window, 'innerWidth', { value: originalInnerWidth, configurable: true });
+    });
+
     it('should return 1 column for small screens (< 640px)', () => {
-      spyOnProperty(window, 'innerWidth').and.returnValue(639);
+      Object.defineProperty(window, 'innerWidth', { value: 639, configurable: true });
       expect(component.getActualColumns()).toBe(1);
     });
 
     it('should return 2 columns for medium screens (640-767px)', () => {
-      spyOnProperty(window, 'innerWidth').and.returnValue(700);
+      Object.defineProperty(window, 'innerWidth', { value: 700, configurable: true });
       expect(component.getActualColumns()).toBe(2);
     });
 
     it('should return 3 columns for large screens (768-1023px) when columns > 2', () => {
-      spyOnProperty(window, 'innerWidth').and.returnValue(900);
+      Object.defineProperty(window, 'innerWidth', { value: 900, configurable: true });
       component.columns = 4;
       expect(component.getActualColumns()).toBe(3);
     });
 
     it('should return input columns for large screens when columns <= 2', () => {
-      spyOnProperty(window, 'innerWidth').and.returnValue(900);
+      Object.defineProperty(window, 'innerWidth', { value: 900, configurable: true });
       component.columns = 2;
       expect(component.getActualColumns()).toBe(2);
     });
 
     it('should return input columns for extra large screens (>= 1024px)', () => {
-      spyOnProperty(window, 'innerWidth').and.returnValue(1200);
+      Object.defineProperty(window, 'innerWidth', { value: 1200, configurable: true });
       component.columns = 5;
       expect(component.getActualColumns()).toBe(5);
     });

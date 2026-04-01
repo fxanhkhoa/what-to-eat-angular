@@ -316,7 +316,8 @@ describe('ToastService', () => {
           horizontalPosition: 'end',
           verticalPosition: 'top',
           duration,
-          data: { mainMsg, subMsg, redirectUrl }
+          panelClass: ['notification-snackbar'],
+          data: { mainMsg, subMsg, redirectUrl, type: 'activity', duration }
         }
       );
     });

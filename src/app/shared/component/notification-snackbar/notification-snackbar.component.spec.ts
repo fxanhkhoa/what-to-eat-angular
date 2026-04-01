@@ -161,7 +161,7 @@ describe('NotificationSnackbarComponent', () => {
     });
 
     it('should have a progress bar track element', () => {
-      expect(compiled.querySelector('.notif-progress-track')).toBeTruthy();
+      expect(compiled.querySelector('.notif-progress')).toBeTruthy();
     });
 
     it('should have a progress bar fill element', () => {
