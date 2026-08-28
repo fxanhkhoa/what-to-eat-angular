@@ -22,3 +22,4 @@ RUN npm ci --omit=dev
 EXPOSE 4000
 
 CMD ["npm", "run", "serve:ssr:what-to-eat-angular"]
+
