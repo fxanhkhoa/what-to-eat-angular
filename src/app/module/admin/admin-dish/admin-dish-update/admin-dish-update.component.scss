@@ -1,4 +1,26 @@
-:host::ng-deep .ql-container {
-    max-height: 50vh;
-    overflow-y: auto;
+:host {
+  display: block;
+}
+
+/* Ensure material form fields span full width of their container */
+mat-form-field {
+  width: 100%;
+}
+
+:host::ng-deep .ql-toolbar.ql-snow {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-color: #e2e8f0;
+  background-color: #f8fafc;
+}
+
+:host::ng-deep .ql-container.ql-snow {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-color: #e2e8f0;
+  min-height: 180px;
+  max-height: 45vh;
+  overflow-y: auto;
+  font-family: inherit;
+  font-size: 0.95rem;
 }

@@ -506,6 +506,29 @@ describe('AdminDishUpdateComponent', () => {
     });
   });
 
+  // ─── UX Navigation & Computations ────────────────────────────────────────
+
+  describe('UX Navigation and Computations', () => {
+    it('should navigate back to admin/dish when onCancel is called', () => {
+      component.onCancel();
+      expect(routerMock.navigate).toHaveBeenCalledWith(['admin', 'dish']);
+    });
+
+    it('should compute totalTime from preparation and cooking times', () => {
+      component.dishForm.get('preparationTime')?.setValue(25);
+      component.dishForm.get('cookingTime')?.setValue(45);
+      expect(component.totalTime).toBe(70);
+    });
+
+    it('should compute previewTitle from title array or fallback to slug', () => {
+      component.dishForm.get('slug')?.setValue('pho-bo-dac-biet');
+      expect(component.previewTitle).toBe('pho-bo-dac-biet');
+
+      component.titleArray.at(0).get('data')?.setValue('Pho Bo Dac Biet');
+      expect(component.previewTitle).toBe('Pho Bo Dac Biet');
+    });
+  });
+
   // ─── Helpers ──────────────────────────────────────────────────────────────
 
   function fillValidForm() {

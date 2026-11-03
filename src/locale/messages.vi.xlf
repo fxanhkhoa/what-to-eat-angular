@@ -8106,6 +8106,198 @@
                     <context context-type="linenumber">420</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="1309405748203859567" datatype="html">
+                <source>Back to Dishes</source>
+                <target>Quay lại danh sách món ăn</target>
+            </trans-unit>
+            <trans-unit id="6512505240208200347" datatype="html">
+                <source>Edit Dish</source>
+                <target>Chỉnh sửa món ăn</target>
+            </trans-unit>
+            <trans-unit id="1319881706020360569" datatype="html">
+                <source> Manage culinary recipes, ingredient portions, cooking times, media previews, and categories. </source>
+                <target> Quản lý công thức nấu ăn, định lượng nguyên liệu, thời gian nấu, phương tiện và danh mục. </target>
+            </trans-unit>
+            <trans-unit id="535097976321429338" datatype="html">
+                <source>Loading dish details...</source>
+                <target>Đang tải thông tin món ăn...</target>
+            </trans-unit>
+            <trans-unit id="8430682423511511800" datatype="html">
+                <source>e.g. beef-pho-special</source>
+                <target>vd: pho-bo-dac-biet</target>
+            </trans-unit>
+            <trans-unit id="3246467004668431059" datatype="html">
+                <source>https://...</source>
+                <target>https://...</target>
+            </trans-unit>
+            <trans-unit id="4068534059924607442" datatype="html">
+                <source>View full image</source>
+                <target>Xem toàn bộ ảnh</target>
+            </trans-unit>
+            <trans-unit id="7901104294558612339" datatype="html">
+                <source>Add tag + press Enter...</source>
+                <target>Thêm thẻ + nhấn Enter...</target>
+            </trans-unit>
+            <trans-unit id="2880936328032282325" datatype="html">
+                <source>Add label + press Enter...</source>
+                <target>Thêm nhãn + nhấn Enter...</target>
+            </trans-unit>
+            <trans-unit id="7334808953567606161" datatype="html">
+                <source>Search related dish...</source>
+                <target>Tìm món ăn liên quan...</target>
+            </trans-unit>
+            <trans-unit id="2037809872802320745" datatype="html">
+                <source>Basic Information &amp; Titles</source>
+                <target>Thông tin cơ bản &amp; Tên món</target>
+            </trans-unit>
+            <trans-unit id="4168981061700286424" datatype="html">
+                <source>URL Slug</source>
+                <target>Đường dẫn tĩnh (Slug)</target>
+            </trans-unit>
+            <trans-unit id="2578492055805159610" datatype="html">
+                <source>Unique URL-friendly identifier for the dish</source>
+                <target>Định danh URL duy nhất cho món ăn</target>
+            </trans-unit>
+            <trans-unit id="188619297487182490" datatype="html">
+                <source> Title Translations </source>
+                <target> Bản dịch tên món </target>
+            </trans-unit>
+            <trans-unit id="67310683219283888" datatype="html">
+                <source>Ingredients &amp; Recipe Portions</source>
+                <target>Nguyên liệu &amp; Định lượng</target>
+            </trans-unit>
+            <trans-unit id="636094060843272845" datatype="html">
+                <source> List required ingredients, measured quantities, and special preparation notes </source>
+                <target> Danh sách nguyên liệu cần có, định lượng và ghi chú sơ chế đặc biệt </target>
+            </trans-unit>
+            <trans-unit id="5802344053781705016" datatype="html">
+                <source>Cooking Instructions &amp; Content</source>
+                <target>Hướng dẫn nấu &amp; Nội dung</target>
+            </trans-unit>
+            <trans-unit id="1740412153067661287" datatype="html">
+                <source> Detailed step-by-step preparation steps, chef tips, and cooking methods </source>
+                <target> Chi tiết các bước chuẩn bị, mẹo từ đầu bếp và phương pháp nấu </target>
+            </trans-unit>
+            <trans-unit id="5411078901674653287" datatype="html">
+                <source>Thumbnail &amp; Media</source>
+                <target>Ảnh thu nhỏ &amp; Đa phương tiện</target>
+            </trans-unit>
+            <trans-unit id="4145287881406093444" datatype="html">
+                <source>Video Tutorials</source>
+                <target>Video hướng dẫn</target>
+            </trans-unit>
+            <trans-unit id="2096869320547819484" datatype="html">
+                <source>Times &amp; Difficulty</source>
+                <target>Thời gian &amp; Độ khó</target>
+            </trans-unit>
+            <trans-unit id="7154290956147824049" datatype="html">
+                <source>Prep Time (min)</source>
+                <target>Thời gian chuẩn bị (phút)</target>
+            </trans-unit>
+            <trans-unit id="1399885603107132466" datatype="html">
+                <source>Cook Time (min)</source>
+                <target>Thời gian nấu (phút)</target>
+            </trans-unit>
+            <trans-unit id="1021894577520027480" datatype="html">
+                <source>Estimated Total Time:</source>
+                <target>Tổng thời gian ước tính:</target>
+            </trans-unit>
+            <trans-unit id="982745398054129955" datatype="html">
+                <source>minutes</source>
+                <target>phút</target>
+            </trans-unit>
+            <trans-unit id="7511812466159222682" datatype="html">
+                <source>Categories &amp; Taxonomies</source>
+                <target>Danh mục &amp; Phân loại</target>
+            </trans-unit>
+            <trans-unit id="4385207902924130626" datatype="html">
+                <source>Select applicable meal types (Breakfast, Dinner, etc.)</source>
+                <target>Chọn các bữa ăn phù hợp (Bữa sáng, Bữa tối,...)</target>
+            </trans-unit>
+            <trans-unit id="8311598386431868163" datatype="html">
+                <source>Primary food groups present in dish</source>
+                <target>Các nhóm thực phẩm chính trong món ăn</target>
+            </trans-unit>
+            <trans-unit id="3764454298790732867" datatype="html">
+                <source>Tags &amp; Related Dishes</source>
+                <target>Thẻ &amp; Món ăn liên quan</target>
+            </trans-unit>
+            <trans-unit id="5594220919782017548" datatype="html">
+                <source>Search Tags</source>
+                <target>Thẻ tìm kiếm</target>
+            </trans-unit>
+            <trans-unit id="5517191838480860809" datatype="html">
+                <source>Badges / Labels</source>
+                <target>Huy hiệu / Nhãn</target>
+            </trans-unit>
+            <trans-unit id="2167689405923897250" datatype="html">
+                <source>Related Dishes</source>
+                <target>Món ăn liên quan</target>
+            </trans-unit>
+            <trans-unit id="5955964541125325072" datatype="html">
+                <source>e.g. Traditional Beef Pho</source>
+                <target>vd: Phở bò truyền thống</target>
+            </trans-unit>
+            <trans-unit id="2597947852693023038" datatype="html">
+                <source>Remove ingredient</source>
+                <target>Xóa nguyên liệu</target>
+            </trans-unit>
+            <trans-unit id="3391193219852065265" datatype="html">
+                <source>Search ingredient name...</source>
+                <target>Tìm tên nguyên liệu...</target>
+            </trans-unit>
+            <trans-unit id="3676299822125179807" datatype="html">
+                <source>e.g. sliced, diced</source>
+                <target>vd: thái lát, xắt hạt lựu</target>
+            </trans-unit>
+            <trans-unit id="1019448218961657852" datatype="html">
+                <source>Ingredient #<x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/></source>
+                <target>Nguyên liệu #<x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/></target>
+            </trans-unit>
+            <trans-unit id="3536314854901975221" datatype="html">
+                <source>Select Ingredient</source>
+                <target>Chọn nguyên liệu</target>
+            </trans-unit>
+            <trans-unit id="7948378070328482637" datatype="html">
+                <source>Prep Note</source>
+                <target>Ghi chú sơ chế</target>
+            </trans-unit>
+            <trans-unit id="8795104669016152260" datatype="html">
+                <source>Ingredient selection is required</source>
+                <target>Vui lòng chọn nguyên liệu</target>
+            </trans-unit>
+            <trans-unit id="7045123878111147511" datatype="html">
+                <source>Required</source>
+                <target>Bắt buộc</target>
+            </trans-unit>
+            <trans-unit id="9184399479212110992" datatype="html">
+                <source>Brief summary of flavor, origin, or key qualities...</source>
+                <target>Mô tả ngắn gọn về hương vị, xuất xứ hoặc điểm nổi bật...</target>
+            </trans-unit>
+            <trans-unit id="8814017997329522030" datatype="html">
+                <source>Brief Summary</source>
+                <target>Mô tả ngắn gọn</target>
+            </trans-unit>
+            <trans-unit id="6421460271971606186" datatype="html">
+                <source>Zoom</source>
+                <target>Phóng to</target>
+            </trans-unit>
+            <trans-unit id="3435467983509908051" datatype="html">
+                <source>No image URL entered</source>
+                <target>Chưa nhập URL hình ảnh</target>
+            </trans-unit>
+            <trans-unit id="3772101299371629356" datatype="html">
+                <source>YouTube / Vimeo URL</source>
+                <target>Đường dẫn YouTube / Vimeo</target>
+            </trans-unit>
+            <trans-unit id="3150473190925738800" datatype="html">
+                <source>Watch video</source>
+                <target>Xem video</target>
+            </trans-unit>
+            <trans-unit id="3848292639607916939" datatype="html">
+                <source>Video Link</source>
+                <target>Đường dẫn video</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

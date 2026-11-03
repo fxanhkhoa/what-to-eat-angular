@@ -1,391 +1,609 @@
-<div class="p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-md">
-  <h1 class="text-2xl font-bold text-gray-800 mb-6" i18n>Create New Dish</h1>
+<div class="space-y-6 max-w-7xl mx-auto pb-16">
+  <!-- Top Navigation & Header with MatCard -->
+  <mat-card appearance="outlined"
+    class="!border-0 !bg-gradient-to-r !from-orange-600 !via-amber-600 !to-rose-600 !rounded-2xl !p-6 !text-white shadow-xl relative overflow-hidden">
+    <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
 
+    <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <button type="button" (click)="onCancel()"
+          class="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-100 hover:text-white mb-2 transition-colors bg-transparent border-0 p-0 cursor-pointer">
+          <mat-icon>arrow_back</mat-icon>
+          <span i18n>Back to Dishes</span>
+        </button>
+        <div class="flex items-center gap-3">
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white m-0">
+            @if (dishId && dishId !== 'create') {
+            <span i18n>Edit Dish</span>: {{ loadedDishTitle || previewTitle }}
+            } @else {
+            <span i18n>Create New Dish</span>
+            }
+          </h1>
+          @if (dishId && dishId !== 'create') {
+          <span class="text-xs bg-white/20 backdrop-blur-sm px-2.5 py-1 rounded-full font-mono">
+            {{ dishId }}
+          </span>
+          } @else {
+          <span
+            class="text-xs bg-emerald-500/80 backdrop-blur-sm px-2.5 py-1 rounded-full font-semibold uppercase tracking-wider"
+            i18n>
+            New
+          </span>
+          }
+        </div>
+        <p class="text-orange-100 text-sm mt-1 mb-0" i18n>
+          Manage culinary recipes, ingredient portions, cooking times, media previews, and categories.
+        </p>
+      </div>
+
+      <!-- Header Action Buttons -->
+      <div class="flex items-center gap-3">
+        <button type="button" mat-stroked-button (click)="onCancel()"
+          class="!border-white/40 !text-white hover:!bg-white/10 !rounded-xl">
+          <span i18n>Cancel</span>
+        </button>
+        <button type="button" mat-flat-button (click)="onSubmit()"
+          [disabled]="dishForm.invalid || isLoading"
+          class="!bg-white !text-orange-950 hover:!bg-orange-50 !font-bold !px-6 !py-2.5 !rounded-xl !shadow-md flex items-center gap-2">
+          @if (isLoading) {
+          <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
+          } @else {
+          <mat-icon class="text-orange-700">save</mat-icon>
+          }
+          <span>
+            @if (dishId && dishId !== 'create') {
+            <span i18n>Update Dish</span>
+            } @else {
+            <span i18n>Create Dish</span>
+            }
+          </span>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  @if (isLoading && (!dishForm.get('slug')?.value && dishId && dishId !== 'create')) {
+  <mat-card appearance="outlined" class="!rounded-2xl !p-12 !bg-white shadow-md flex flex-col items-center justify-center text-center">
+    <mat-spinner diameter="44"></mat-spinner>
+    <p class="mt-4 text-slate-600 text-sm font-medium" i18n>Loading dish details...</p>
+  </mat-card>
+  } @else {
   <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="space-y-6">
-    <!-- Basic Information -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Slug -->
-      <mat-form-field class="w-full" appearance="outline">
-        <mat-label i18n>Slug</mat-label>
-        <input matInput formControlName="slug" placeholder="dish-name-slug" i18n-placeholder>
-        @if (dishForm.get('slug')?.hasError('required')) {
-        <mat-error i18n>
-          Slug is required
-        </mat-error>
-        }
-      </mat-form-field>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- Thumbnail with Preview -->
-      <div class="flex flex-col w-full">
-        <mat-form-field class="w-full" appearance="outline">
-          <mat-label i18n>Thumbnail URL</mat-label>
-          <input matInput formControlName="thumbnail" placeholder="https://example.com/image.jpg" i18n-placeholder>
-          @if (dishForm.get('thumbnail')?.value) {
-          <button type="button" mat-icon-button matSuffix (click)="previewImage(dishForm.get('thumbnail')?.value)"
-            matTooltip="Preview image" i18n-matTooltip>
-            <mat-icon>visibility</mat-icon>
-          </button>
-          }
-        </mat-form-field>
+      <!-- LEFT COLUMN: Recipe, Content, and Ingredients (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
 
-        <!-- Image Preview -->
-        @if (dishForm.get('thumbnail')?.value) {
-        <div class="mt-2 border rounded p-2 flex flex-col items-center">
-          <img [src]="dishForm.get('thumbnail')?.value" class="max-h-32 object-contain" alt="Thumbnail preview"
-            (error)="handleImageError($event)">
-          <span class="text-xs text-gray-500 mt-1" i18n>Thumbnail Preview</span>
-        </div>
-        }
-      </div>
-    </div>
+        <!-- Card 1: Core Identification & Multilingual Titles -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <mat-icon class="text-orange-600">restaurant_menu</mat-icon>
+              <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Basic Information & Titles</mat-card-title>
+            </div>
+            <button type="button" mat-stroked-button color="primary" (click)="addLanguageField('title', '')"
+              class="!text-xs !h-8 !rounded-lg ml-auto">
+              <mat-icon>add</mat-icon>
+              <span i18n>Add Language</span>
+            </button>
+          </mat-card-header>
 
-    <!-- Multilanguage Title -->
-    <div class="border rounded-lg p-4 bg-gray-50">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-gray-700" i18n>Title Translations</h3>
-        <button type="button" mat-raised-button color="primary" (click)="addLanguageField('title', '')" class="h-10">
-          <span i18n>Add Language</span>
-        </button>
-      </div>
-      <div class="text-sm text-gray-600">
-        <p i18n>Click the button above to add another language field to all translation sections.</p>
-      </div>
-      <div formArrayName="title" class="space-y-3">
-        @for (title of titleArray.controls; track title; let i = $index) {
-        <div [formGroupName]="i" class="flex gap-4 items-center">
-          <mat-form-field class="w-1/4" appearance="outline">
-            <mat-label i18n>Language</mat-label>
-            <mat-select formControlName="lang">
-              @for (lang of availableLanguages; track lang) {
-              <mat-option [value]="lang">
-                {{ lang.toUpperCase() }}
-              </mat-option>
+          <mat-card-content class="!p-6 space-y-5">
+            <!-- Slug Field -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>URL Slug</mat-label>
+              <mat-icon matPrefix class="text-slate-400 mr-2">tag</mat-icon>
+              <input matInput formControlName="slug" placeholder="e.g. beef-pho-special" i18n-placeholder>
+              <mat-hint i18n>Unique URL-friendly identifier for the dish</mat-hint>
+              @if (dishForm.get('slug')?.hasError('required') && dishForm.get('slug')?.touched) {
+              <mat-error i18n>Slug is required</mat-error>
               }
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="w-3/4" appearance="outline">
-            <mat-label i18n>Title</mat-label>
-            <input matInput formControlName="data" placeholder="Dish Title" i18n-placeholder>
-          </mat-form-field>
-          <!-- Remove button - only show if there's more than one language -->
-          @if (titleArray.length > 1) {
-          <button type="button" mat-icon-button color="warn" (click)="removeLanguageField('title', i)"
-            matTooltip="Remove language" i18n-matTooltip>
-            <mat-icon>delete</mat-icon>
-          </button>
-          }
-        </div>
-        }
-      </div>
-    </div>
+            </mat-form-field>
 
-    <!-- Multilanguage Short Description -->
-    <div class="border rounded-lg p-4 bg-gray-50">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-gray-700" i18n>Short Description Translations</h3>
-        <button type="button" mat-raised-button color="primary" (click)="addLanguageField('shortDescription', '')"
-          class="h-10">
-          <span i18n>Add Language</span>
-        </button>
-      </div>
-      <div formArrayName="shortDescription" class="space-y-3">
-        @for (desc of shortDescriptionArray.controls; track desc; let i = $index) {
-        <div [formGroupName]="i" class="flex gap-4 items-center">
-          <mat-form-field class="w-1/4" appearance="outline">
-            <mat-label i18n>Language</mat-label>
-            <mat-select formControlName="lang">
-              @for (lang of availableLanguages; track lang) {
-              <mat-option [value]="lang">
-                {{ lang.toUpperCase() }}
-              </mat-option>
+            <!-- Title FormArray -->
+            <div class="space-y-3">
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500" i18n>
+                Title Translations
+              </label>
+              <div formArrayName="title" class="space-y-3">
+                @for (title of titleArray.controls; track title; let i = $index) {
+                <div [formGroupName]="i"
+                  class="flex items-center gap-3 p-3 bg-slate-50/70 rounded-xl border border-slate-200/60">
+                  <mat-form-field appearance="outline" class="w-32 !mb-0" subscriptSizing="dynamic">
+                    <mat-label i18n>Language</mat-label>
+                    <mat-select formControlName="lang">
+                      @for (lang of availableLanguages; track lang) {
+                      <mat-option [value]="lang">
+                        {{ lang.toUpperCase() }}
+                      </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="flex-1 !mb-0" subscriptSizing="dynamic">
+                    <mat-label i18n>Dish Title</mat-label>
+                    <input matInput formControlName="data" placeholder="e.g. Traditional Beef Pho" i18n-placeholder>
+                  </mat-form-field>
+
+                  @if (titleArray.length > 1) {
+                  <button type="button" mat-icon-button color="warn" (click)="removeLanguageField('title', i)"
+                    matTooltip="Remove language" i18n-matTooltip>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  }
+                </div>
+                }
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card 2: Ingredients in Dish -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <mat-icon class="text-emerald-600">kitchen</mat-icon>
+              <div>
+                <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Ingredients & Recipe Portions</mat-card-title>
+                <mat-card-subtitle class="text-xs text-slate-500 mt-0.5" i18n>
+                  List required ingredients, measured quantities, and special preparation notes
+                </mat-card-subtitle>
+              </div>
+            </div>
+            <button type="button" mat-flat-button color="primary" (click)="addIngredient()"
+              class="!text-xs !h-9 !rounded-xl !px-3.5 flex items-center gap-1.5 ml-auto">
+              <mat-icon>add</mat-icon>
+              <span i18n>Add Ingredient</span>
+            </button>
+          </mat-card-header>
+
+          <mat-card-content class="!p-6 space-y-4">
+            <div formArrayName="ingredients" class="space-y-3">
+              @for (ingredient of ingredientsArray.controls; track ingredient; let i = $index) {
+              <div [formGroupName]="i"
+                class="p-4 bg-slate-50/80 rounded-2xl border border-slate-200/70 hover:border-orange-300 transition-all space-y-3">
+                <div class="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-orange-100 text-orange-700 font-bold text-xs flex items-center justify-center">
+                      {{ i + 1 }}
+                    </span>
+                    <span class="text-xs font-semibold text-slate-600" i18n>Ingredient #{{ i + 1 }}</span>
+                  </div>
+                  @if (ingredientsArray.length > 1) {
+                  <button type="button" mat-icon-button color="warn" (click)="removeIngredient(i)"
+                    matTooltip="Remove ingredient" i18n-matTooltip>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  }
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 items-start">
+                  <!-- Autocomplete Ingredient (col 6) -->
+                  <div class="sm:col-span-6">
+                    <mat-form-field appearance="outline" class="w-full" subscriptSizing="dynamic">
+                      <mat-label i18n>Select Ingredient</mat-label>
+                      <mat-icon matPrefix class="text-slate-400 mr-2">search</mat-icon>
+                      <input matInput formControlName="ingredient" placeholder="Search ingredient name..." i18n-placeholder
+                        [matAutocomplete]="ingredientAuto">
+                      <mat-autocomplete #ingredientAuto="matAutocomplete" [displayWith]="displayIngredient"
+                        (optionSelected)="selectIngredient($event, i)">
+                        @for (item of filteredIngredients | async; track item) {
+                        <mat-option [value]="item">
+                          <div class="flex gap-2.5 items-center">
+                            @if (item.images && item.images.length) {
+                            <img [src]="item.images[0]" class="w-6 h-6 object-cover rounded-md" alt="">
+                            }
+                            <span class="font-medium">
+                              {{ (item.title | multiLanguage : localeId)?.data }}
+                            </span>
+                            <span class="text-xs text-slate-500 font-mono">({{ item.measure }})</span>
+                          </div>
+                        </mat-option>
+                        }
+                      </mat-autocomplete>
+                      @if (ingredient.get('ingredient')?.hasError('required') && ingredient.get('ingredient')?.touched) {
+                      <mat-error i18n>Ingredient selection is required</mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+
+                  <!-- Quantity (col 3) -->
+                  <div class="sm:col-span-3">
+                    <mat-form-field appearance="outline" class="w-full" subscriptSizing="dynamic">
+                      <mat-label i18n>Quantity</mat-label>
+                      <input matInput type="number" formControlName="quantity" min="0" step="0.1" placeholder="0">
+                      @if (ingredient.get('quantity')?.hasError('required') && ingredient.get('quantity')?.touched) {
+                      <mat-error i18n>Required</mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+
+                  <!-- Note (col 3) -->
+                  <div class="sm:col-span-3">
+                    <mat-form-field appearance="outline" class="w-full" subscriptSizing="dynamic">
+                      <mat-label i18n>Prep Note</mat-label>
+                      <input matInput formControlName="note" placeholder="e.g. sliced, diced" i18n-placeholder>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
               }
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="w-3/4" appearance="outline">
-            <mat-label i18n>Short Description</mat-label>
-            <textarea matInput formControlName="data" placeholder="Brief description of the dish" i18n-placeholder
-              rows="2"></textarea>
-          </mat-form-field>
-          <!-- Remove button - only show if there's more than one language -->
-          @if (shortDescriptionArray.length > 1) {
-          <button type="button" mat-icon-button color="warn" (click)="removeLanguageField('shortDescription', i)"
-            matTooltip="Remove language" i18n-matTooltip>
-            <mat-icon>delete</mat-icon>
-          </button>
-          }
-        </div>
-        }
-      </div>
-    </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
 
-    <!-- Multilanguage Content -->
-    <div class="border rounded-lg p-4 bg-gray-50">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-gray-700" i18n>Content Translations</h3>
-        <button type="button" mat-raised-button color="primary" (click)="addLanguageField('content', '')" class="h-10">
-          <span i18n>Add Language</span>
-        </button>
+        <!-- Card 3: Short Description Translations -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <mat-icon class="text-amber-600">short_text</mat-icon>
+              <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Short Description</mat-card-title>
+            </div>
+            <button type="button" mat-stroked-button color="primary" (click)="addLanguageField('shortDescription', '')"
+              class="!text-xs !h-8 !rounded-lg ml-auto">
+              <mat-icon>add</mat-icon>
+              <span i18n>Add Language</span>
+            </button>
+          </mat-card-header>
+
+          <mat-card-content class="!p-6 space-y-4">
+            <div formArrayName="shortDescription" class="space-y-4">
+              @for (desc of shortDescriptionArray.controls; track desc; let i = $index) {
+              <div [formGroupName]="i"
+                class="p-4 bg-slate-50/70 rounded-xl border border-slate-200/60 space-y-3">
+                <div class="flex items-center justify-between">
+                  <mat-form-field appearance="outline" class="w-36 !mb-0" subscriptSizing="dynamic">
+                    <mat-label i18n>Language</mat-label>
+                    <mat-select formControlName="lang">
+                      @for (lang of availableLanguages; track lang) {
+                      <mat-option [value]="lang">
+                        {{ lang.toUpperCase() }}
+                      </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+
+                  @if (shortDescriptionArray.length > 1) {
+                  <button type="button" mat-icon-button color="warn" (click)="removeLanguageField('shortDescription', i)"
+                    matTooltip="Remove language" i18n-matTooltip>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  }
+                </div>
+
+                <mat-form-field appearance="outline" class="w-full !mb-0">
+                  <mat-label i18n>Brief Summary</mat-label>
+                  <textarea matInput formControlName="data" placeholder="Brief summary of flavor, origin, or key qualities..." i18n-placeholder
+                    rows="2"></textarea>
+                </mat-form-field>
+              </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card 4: Rich Recipe Instructions (Quill) -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <mat-icon class="text-rose-600">menu_book</mat-icon>
+              <div>
+                <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Cooking Instructions & Content</mat-card-title>
+                <mat-card-subtitle class="text-xs text-slate-500 mt-0.5" i18n>
+                  Detailed step-by-step preparation steps, chef tips, and cooking methods
+                </mat-card-subtitle>
+              </div>
+            </div>
+            <button type="button" mat-stroked-button color="primary" (click)="addLanguageField('content', '')"
+              class="!text-xs !h-8 !rounded-lg ml-auto">
+              <mat-icon>add</mat-icon>
+              <span i18n>Add Language</span>
+            </button>
+          </mat-card-header>
+
+          <mat-card-content class="!p-6 space-y-6">
+            <div formArrayName="content" class="space-y-6">
+              @for (content of contentArray.controls; track content; let i = $index) {
+              <div [formGroupName]="i"
+                class="p-4 bg-slate-50/70 rounded-xl border border-slate-200/60 space-y-3">
+                <div class="flex items-center justify-between">
+                  <mat-form-field appearance="outline" class="w-36 !mb-0" subscriptSizing="dynamic">
+                    <mat-label i18n>Language</mat-label>
+                    <mat-select formControlName="lang">
+                      @for (lang of availableLanguages; track lang) {
+                      <mat-option [value]="lang">
+                        {{ lang.toUpperCase() }}
+                      </mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+
+                  @if (contentArray.length > 1) {
+                  <button type="button" mat-icon-button color="warn" (click)="removeLanguageField('content', i)"
+                    matTooltip="Remove language" i18n-matTooltip>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  }
+                </div>
+
+                <div class="w-full bg-white rounded-lg border border-slate-200 overflow-hidden">
+                  <quill-editor class="w-full block" [formControlName]="'data'" [modules]="quillModules">
+                  </quill-editor>
+                </div>
+              </div>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+
       </div>
-      <div formArrayName="content" class="space-y-6">
-        @for (content of contentArray.controls; track content; let i = $index) {
-        <div [formGroupName]="i" class="flex flex-col gap-2">
-          <div class="flex gap-4 items-center">
-            <mat-form-field class="w-1/4" appearance="outline">
-              <mat-label i18n>Language</mat-label>
-              <mat-select formControlName="lang">
-                @for (lang of availableLanguages; track lang) {
-                <mat-option [value]="lang">
-                  {{ lang.toUpperCase() }}
+
+      <!-- RIGHT COLUMN: Media, Timing, Categories, Tags & Related (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- Card 5: Thumbnail & Media Preview -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center gap-2">
+            <mat-icon class="text-orange-600">image</mat-icon>
+            <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Thumbnail & Media</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content class="!p-6 space-y-4">
+            <!-- Thumbnail Input -->
+            <mat-form-field appearance="outline" class="w-full" subscriptSizing="dynamic">
+              <mat-label i18n>Thumbnail URL</mat-label>
+              <mat-icon matPrefix class="text-slate-400 mr-2">link</mat-icon>
+              <input matInput formControlName="thumbnail" placeholder="https://..." i18n-placeholder>
+              @if (dishForm.get('thumbnail')?.value) {
+              <button type="button" mat-icon-button matSuffix (click)="previewImage(dishForm.get('thumbnail')?.value)"
+                matTooltip="View full image" i18n-matTooltip>
+                <mat-icon>visibility</mat-icon>
+              </button>
+              }
+            </mat-form-field>
+
+            <!-- Image Preview Box -->
+            <div class="relative w-full aspect-video rounded-xl bg-slate-100 border-2 border-dashed border-slate-200 overflow-hidden flex items-center justify-center group">
+              @if (dishForm.get('thumbnail')?.value) {
+              <img [src]="dishForm.get('thumbnail')?.value" alt="Thumbnail preview"
+                (error)="handleImageError($event)"
+                class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                <button type="button" mat-flat-button color="accent" (click)="previewImage(dishForm.get('thumbnail')?.value)"
+                  class="!text-xs !rounded-lg">
+                  <mat-icon>zoom_in</mat-icon>
+                  <span i18n>Zoom</span>
+                </button>
+              </div>
+              } @else {
+              <div class="flex flex-col items-center justify-center text-slate-400 p-6 text-center">
+                <mat-icon class="text-slate-300">image</mat-icon>
+                <span class="text-xs font-medium mt-1" i18n>No image URL entered</span>
+              </div>
+              }
+            </div>
+
+            <!-- Videos Section -->
+            <div class="pt-2 border-t border-slate-100 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <mat-icon class="text-rose-500">videocam</mat-icon>
+                  <span class="text-sm font-bold text-slate-700" i18n>Video Tutorials</span>
+                </div>
+                <button type="button" mat-stroked-button (click)="addVideo()" class="!text-xs !h-7 !rounded-lg">
+                  <mat-icon>add</mat-icon>
+                  <span i18n>Add Video</span>
+                </button>
+              </div>
+
+              <div formArrayName="videos" class="space-y-2">
+                @for (video of videosArray.controls; track video; let i = $index) {
+                <div class="flex items-center gap-2">
+                  <mat-form-field appearance="outline" class="flex-1 !mb-0" subscriptSizing="dynamic">
+                    <mat-label i18n>Video Link</mat-label>
+                    <input matInput [formControlName]="i" placeholder="YouTube / Vimeo URL" i18n-placeholder>
+                  </mat-form-field>
+
+                  @if (video.value) {
+                  <button type="button" mat-icon-button color="primary" (click)="previewVideo(video.value)"
+                    matTooltip="Watch video" i18n-matTooltip>
+                    <mat-icon>play_circle</mat-icon>
+                  </button>
+                  }
+
+                  <button type="button" mat-icon-button color="warn" (click)="removeVideo(i)"
+                    matTooltip="Remove video" i18n-matTooltip>
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+                }
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card 6: Cooking Times & Difficulty -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center gap-2">
+            <mat-icon class="text-blue-600">timer</mat-icon>
+            <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Times & Difficulty</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content class="!p-6 space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label i18n>Prep Time (min)</mat-label>
+                <mat-icon matPrefix class="text-slate-400 mr-2">schedule</mat-icon>
+                <input matInput type="number" formControlName="preparationTime" min="0" placeholder="0">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label i18n>Cook Time (min)</mat-label>
+                <mat-icon matPrefix class="text-slate-400 mr-2">outdoor_grill</mat-icon>
+                <input matInput type="number" formControlName="cookingTime" min="0" placeholder="0">
+              </mat-form-field>
+            </div>
+
+            <!-- Total Time Badge -->
+            <div class="p-3 bg-blue-50/60 rounded-xl border border-blue-100 flex items-center justify-between text-xs text-blue-800">
+              <span class="font-medium" i18n>Estimated Total Time:</span>
+              <span class="font-bold text-sm text-blue-900">{{ totalTime }} <span i18n>minutes</span></span>
+            </div>
+
+            <!-- Difficulty Level -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>Difficulty Level</mat-label>
+              <mat-select formControlName="difficultLevel">
+                <mat-option [value]="" i18n>-- Select Difficulty --</mat-option>
+                @for (level of difficultyLevels; track level) {
+                <mat-option [value]="level">
+                  {{ level | titlecase }}
                 </mat-option>
                 }
               </mat-select>
             </mat-form-field>
-            <!-- Remove button - only show if there's more than one language -->
-            @if (contentArray.length > 1) {
-            <button type="button" mat-icon-button color="warn" (click)="removeLanguageField('content', i)"
-              matTooltip="Remove language" i18n-matTooltip>
-              <mat-icon>delete</mat-icon>
-            </button>
-            }
-          </div>
-          <div class="w-full">
-            <quill-editor class="w-full" [formControlName]="'data'" [modules]="quillModules">
-            </quill-editor>
-          </div>
-        </div>
-        }
-      </div>
-    </div>
+          </mat-card-content>
+        </mat-card>
 
-    <!-- Time and Difficulty -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Preparation Time (minutes)</mat-label>
-        <input matInput type="number" formControlName="preparationTime" min="0">
-      </mat-form-field>
+        <!-- Card 7: Categories & Classifications -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center gap-2">
+            <mat-icon class="text-indigo-600">category</mat-icon>
+            <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Categories & Taxonomies</mat-card-title>
+          </mat-card-header>
 
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Cooking Time (minutes)</mat-label>
-        <input matInput type="number" formControlName="cookingTime" min="0">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Difficulty Level</mat-label>
-        <mat-select formControlName="difficultLevel">
-          <mat-option [value]="" i18n>-- Select Difficulty --</mat-option>
-          @for (level of difficultyLevels; track level) {
-          <mat-option [value]="level">
-            {{level | titlecase}}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <!-- Categories and Tags -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Meal Categories</mat-label>
-        <mat-select formControlName="mealCategories" multiple>
-          @for (category of mealCategoryOptions; track category) {
-          <mat-option [value]="category">
-            {{ category | categoryTranslate}}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Ingredient Categories</mat-label>
-        <mat-select formControlName="ingredientCategories" multiple>
-          @for (category of ingredientCategoryOptions; track category) {
-          <mat-option [value]="category">
-            {{ category | categoryTranslate }}
-          </mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Tags</mat-label>
-        <mat-chip-grid #tagsList>
-          @for (tag of dishForm.get('tags')?.value || []; track tag) {
-          <mat-chip [removable]="true" (removed)="removeTag(tag)">
-            {{tag}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          }
-          <input placeholder="New tag..." i18n-placeholder [matChipInputFor]="tagsList"
-            (matChipInputTokenEnd)="updateTags($event)">
-        </mat-chip-grid>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label i18n>Labels</mat-label>
-        <mat-chip-grid #labelsList>
-          @for (label of dishForm.get('labels')?.value || []; track label) {
-          <mat-chip [removable]="true" (removed)="removeLabel(label)">
-            {{label}}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          }
-          <input placeholder="New label..." i18n-placeholder [matChipInputFor]="labelsList"
-            (matChipInputTokenEnd)="updateLabel($event)">
-        </mat-chip-grid>
-      </mat-form-field>
-    </div>
-
-    <!-- Videos Array with Previews -->
-    <div class="border rounded-lg p-4 bg-gray-50">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-gray-700" i18n>Videos</h3>
-        <button type="button" mat-raised-button color="primary" (click)="addVideo()" class="h-10">
-          <span i18n>Add Video</span>
-        </button>
-      </div>
-
-      <div formArrayName="videos" class="space-y-6">
-        @for (video of videosArray.controls; track video; let i = $index) {
-        <div class="flex flex-col gap-2 pb-4 border-b last:border-b-0">
-          <div class="flex items-center gap-2">
-            <mat-form-field class="flex-grow" appearance="outline">
-              <mat-label i18n>Video URL</mat-label>
-              <input matInput [formControlName]="i"
-                placeholder="[https://youtube.com/watch?v=xxxxx]or [https://vimeo.com/xxxxx]">
+          <mat-card-content class="!p-6 space-y-4">
+            <!-- Meal Categories -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>Meal Categories</mat-label>
+              <mat-select formControlName="mealCategories" multiple>
+                @for (category of mealCategoryOptions; track category) {
+                <mat-option [value]="category">
+                  {{ category | categoryTranslate }}
+                </mat-option>
+                }
+              </mat-select>
+              <mat-hint i18n>Select applicable meal types (Breakfast, Dinner, etc.)</mat-hint>
             </mat-form-field>
-            @if (video.value) {
-            <button type="button" mat-icon-button color="primary" (click)="previewVideo(video.value)"
-              matTooltip="Preview video" i18n-matTooltip>
-              <mat-icon>play_circle</mat-icon>
-            </button>
-            }
-            <button type="button" mat-icon-button color="warn" (click)="removeVideo(i)" matTooltip="Remove video"
-              i18n-matTooltip>
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-          <!-- Video Preview -->
-          <!-- <div *ngIf="getVideoEmbedUrl(video.value)" class="w-full">
-                    <div class="aspect-video max-h-[180px] border rounded overflow-hidden">
-                      <iframe [src]="getVideoEmbedUrl(video.value)" class="w-full h-full" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                      </iframe>
-                    </div>
-                  </div> -->
-        </div>
-        }
-      </div>
-    </div>
 
-    <!-- Ingredients -->
-    <div class="border rounded-lg p-4 bg-gray-50">
-      <div class="flex justify-between items-center mb-3">
-        <h2 class="text-lg font-medium" i18n>Ingredients</h2>
-        <button type="button" mat-mini-fab color="primary" (click)="addIngredient()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-
-      <div formArrayName="ingredients" class="space-y-4">
-        @for (ingredient of ingredientsArray.controls; track ingredient; let i = $index) {
-        <div [formGroupName]="i" class="grid grid-cols-1 md:grid-cols-4 gap-3 pb-3 border-b last:border-b-0">
-          <mat-form-field appearance="outline">
-            <mat-label i18n>Quantity</mat-label>
-            <input matInput type="number" formControlName="quantity" min="0" step="0.1">
-            @if (ingredient.get('quantity')?.hasError('required')) {
-            <mat-error i18n>
-              Quantity is required
-            </mat-error>
-            }
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-span-2">
-            <mat-label i18n>Ingredient</mat-label>
-            <input matInput formControlName="ingredient" placeholder="Search ingredient..." i18n-placeholder
-              [matAutocomplete]="ingredientAuto">
-            <mat-autocomplete #ingredientAuto="matAutocomplete" [displayWith]="displayIngredient"
-              (optionSelected)="selectIngredient($event, i)">
-              @for (ingredient of filteredIngredients | async; track ingredient) {
-              <mat-option [value]="ingredient">
-                <div class="flex gap-3 items-center">
-                  @if (ingredient.images && ingredient.images.length) {
-                  <span>
-                    <img [src]="ingredient.images[0]" class="w-6 h-6 object-cover rounded">
-                  </span>
-                  }
-                  <span>
-                    {{(ingredient.title | multiLanguage : localeId)?.data}}
-                    <small class="text-gray-600 ml-1">{{ingredient.measure}}</small>
-                  </span>
-                </div>
-              </mat-option>
-              }
-            </mat-autocomplete>
-          </mat-form-field>
-          <div class="flex items-center gap-3">
-            <mat-form-field appearance="outline" class="flex-grow">
-              <mat-label i18n>Note</mat-label>
-              <input matInput formControlName="note">
+            <!-- Ingredient Categories -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>Ingredient Categories</mat-label>
+              <mat-select formControlName="ingredientCategories" multiple>
+                @for (category of ingredientCategoryOptions; track category) {
+                <mat-option [value]="category">
+                  {{ category | categoryTranslate }}
+                </mat-option>
+                }
+              </mat-select>
+              <mat-hint i18n>Primary food groups present in dish</mat-hint>
             </mat-form-field>
-            @if (ingredientsArray.length > 1) {
-            <button type="button" mat-icon-button color="warn" (click)="removeIngredient(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            }
-          </div>
-        </div>
-        }
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Card 8: Tags, Labels & Related Dishes -->
+        <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+          <mat-card-header class="!p-6 !pb-3 border-b border-slate-100 flex items-center gap-2">
+            <mat-icon class="text-teal-600">label</mat-icon>
+            <mat-card-title class="!text-lg !font-bold text-slate-800" i18n>Tags & Related Dishes</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content class="!p-6 space-y-4">
+            <!-- Tags -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>Search Tags</mat-label>
+              <mat-chip-grid #tagsList>
+                @for (tag of dishForm.get('tags')?.value || []; track tag) {
+                <mat-chip [removable]="true" (removed)="removeTag(tag)">
+                  {{ tag }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                }
+                <input placeholder="Add tag + press Enter..." i18n-placeholder [matChipInputFor]="tagsList"
+                  (matChipInputTokenEnd)="updateTags($event)">
+              </mat-chip-grid>
+            </mat-form-field>
+
+            <!-- Labels -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>Badges / Labels</mat-label>
+              <mat-chip-grid #labelsList>
+                @for (label of dishForm.get('labels')?.value || []; track label) {
+                <mat-chip [removable]="true" (removed)="removeLabel(label)">
+                  {{ label }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                }
+                <input placeholder="Add label + press Enter..." i18n-placeholder [matChipInputFor]="labelsList"
+                  (matChipInputTokenEnd)="updateLabel($event)">
+              </mat-chip-grid>
+            </mat-form-field>
+
+            <!-- Related Dishes -->
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label i18n>Related Dishes</mat-label>
+              <mat-chip-grid #chipList aria-label="Related dish selection">
+                @for (dish of selectedRelatedDishes; track dish) {
+                <mat-chip-option [selectable]="true" [removable]="true" (removed)="removeRelatedDish(dish)">
+                  <div class="flex items-center gap-2">
+                    @if (dish.thumbnail) {
+                    <img [src]="dish.thumbnail" alt="" class="w-5 h-5 object-cover rounded-full">
+                    }
+                    <span>{{ (dish.title | multiLanguage : localeId)?.data }}</span>
+                  </div>
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip-option>
+                }
+                <input placeholder="Search related dish..." i18n-placeholder #relatedDishInput [formControl]="relatedDishCtrl"
+                  [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+              </mat-chip-grid>
+
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRelatedDish($event)">
+                @for (dish of filteredDishes | async; track dish) {
+                <mat-option [value]="dish">
+                  <div class="flex items-center gap-2.5">
+                    @if (dish.thumbnail) {
+                    <img [src]="dish.thumbnail" alt="" class="w-7 h-7 object-cover rounded-md">
+                    }
+                    <span class="font-medium">
+                      {{ (dish.title | multiLanguage : localeId)?.data }}
+                    </span>
+                  </div>
+                </mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+
       </div>
     </div>
 
-    <!-- Related Dishes -->
-    <mat-form-field class="w-full" appearance="outline">
-      <mat-label>Related Dishes</mat-label>
-      <mat-chip-grid #chipList aria-label="Related dish selection">
-        @for (dish of selectedRelatedDishes; track dish) {
-        <mat-chip-option [selectable]="true" [removable]="true" (removed)="removeRelatedDish(dish)">
-          <div class="flex gap-3 items-center">
-            <img [src]="dish.thumbnail" alt="" class="w-6 h-6 object-cover rounded">
-            <span>
-              {{(dish.title | multiLanguage : localeId)?.data}}
-            </span>
-          </div>
-          <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip-option>
-        }
-        <input placeholder="Search dishes..." #relatedDishInput [formControl]="relatedDishCtrl" [matAutocomplete]="auto"
-          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-      </mat-chip-grid>
-
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedRelatedDish($event)">
-        @for (dish of filteredDishes | async; track dish) {
-        <mat-option [value]="dish">
-          <div class="flex gap-3">
-            <img [src]="dish.thumbnail" alt="" class="w-8 h-8 object-cover rounded">
-            <span>
-              {{(dish.title | multiLanguage : localeId)?.data}}
-            </span>
-          </div>
-        </mat-option>
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <!-- Form Actions -->
-    <div class="flex justify-end gap-4 pt-4">
-      <button type="button" mat-stroked-button color="warn"><span i18n>Cancel</span></button>
-      <button type="submit" mat-raised-button color="primary" [disabled]="dishForm.invalid">
-        @if (dishId && dishId !== 'create') {
-        <span i18n>Update Dish</span>
-        } @else {
-        <span i18n>Create Dish</span>
-        }
-        @if (isLoading) {
-        <mat-spinner diameter="20"></mat-spinner>
-        }
+    <!-- Bottom Actions Bar -->
+    <div class="flex items-center justify-between p-4 bg-white/90 backdrop-blur-md rounded-2xl shadow-md border border-slate-200/80">
+      <button type="button" mat-stroked-button (click)="onCancel()" class="!rounded-xl">
+        <mat-icon>arrow_back</mat-icon>
+        <span i18n>Cancel</span>
       </button>
+
+      <div class="flex items-center gap-3">
+        <button type="submit" mat-flat-button color="primary" [disabled]="dishForm.invalid || isLoading"
+          class="!font-bold !px-6 !py-2.5 !rounded-xl !shadow-md flex items-center gap-2">
+          @if (isLoading) {
+          <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
+          } @else {
+          <mat-icon>check</mat-icon>
+          }
+          <span>
+            @if (dishId && dishId !== 'create') {
+            <span i18n>Update Dish</span>
+            } @else {
+            <span i18n>Create Dish</span>
+            }
+          </span>
+        </button>
+      </div>
     </div>
   </form>
+  }
 </div>
