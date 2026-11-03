@@ -362,4 +362,54 @@ describe('DishFilterComponent', () => {
       expect(component.searchSuggestions()).toEqual([]);
     });
   });
+
+  // ── clearKeyword & resetFilters ─────────────────────────────────────────────
+
+  describe('clearKeyword and resetFilters', () => {
+    it('should clear keyword and call onSearch when clearKeyword is called', () => {
+      spyOn(component, 'onSearch');
+      component.filterForm.patchValue({ keyword: 'ramen' });
+      component.clearKeyword();
+      expect(component.filterForm.get('keyword')?.value).toBe('');
+      expect(component.onSearch).toHaveBeenCalled();
+    });
+
+    it('should reset all filters and tags and call onSearch when resetFilters is called', () => {
+      spyOn(component, 'onSearch');
+      component.filterForm.patchValue({
+        keyword: 'ramen',
+        preparationTimeFrom: 10,
+        preparationTimeTo: 40,
+        difficultLevels: [DIFFICULT_LEVELS.EASY],
+      });
+      component.tags = [{ id: 'spicy', value: 'spicy' }];
+      component.filter = { tags: ['spicy'] };
+
+      component.resetFilters();
+
+      expect(component.filterForm.get('keyword')?.value).toBe('');
+      expect(component.filterForm.get('preparationTimeFrom')?.value).toBe(1);
+      expect(component.filterForm.get('preparationTimeTo')?.value).toBe(60);
+      expect(component.filterForm.get('difficultLevels')?.value).toEqual([]);
+      expect(component.tags).toEqual([]);
+      expect(component.filter.tags).toEqual([]);
+      expect(component.onSearch).toHaveBeenCalled();
+    });
+
+    it('should correctly report hasActiveFilters and activeFiltersCount', () => {
+      expect(component.hasActiveFilters).toBeFalse();
+      expect(component.activeFiltersCount).toBe(0);
+
+      component.filterForm.patchValue({ keyword: 'soup' });
+      expect(component.hasActiveFilters).toBeTrue();
+      expect(component.activeFiltersCount).toBe(1);
+
+      component.filterForm.patchValue({ keyword: '', difficultLevels: [DIFFICULT_LEVELS.HARD] });
+      expect(component.hasActiveFilters).toBeTrue();
+      expect(component.activeFiltersCount).toBe(1);
+
+      component.tags = [{ id: 'quick', value: 'quick' }];
+      expect(component.activeFiltersCount).toBe(2);
+    });
+  });
 });
