@@ -43,9 +43,9 @@
           <span i18n>Cancel</span>
         </button>
         <button type="button" mat-flat-button (click)="onSubmit()"
-          [disabled]="ingredientForm.invalid || isSaving"
+          [disabled]="ingredientForm.invalid || isSaving()"
           class="!bg-white !text-amber-900 hover:!bg-amber-50 !font-bold !px-6 !py-2.5 !rounded-xl !shadow-md flex items-center gap-2">
-          @if (isSaving) {
+          @if (isSaving()) {
           <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
           } @else {
           <mat-icon class="text-amber-900">save</mat-icon>
@@ -62,7 +62,7 @@
     </div>
   </mat-card>
 
-  @if (isLoading) {
+  @if (isLoading()) {
   <mat-card appearance="outlined" class="!rounded-2xl !p-12 !bg-white shadow-md flex flex-col items-center justify-center text-center">
     <mat-spinner diameter="44"></mat-spinner>
     <p class="mt-4 text-slate-600 text-sm font-medium" i18n>Loading ingredient details...</p>
@@ -384,7 +384,7 @@
                     </button>
                     }
                   </div>
-                  <input matInput [formControlName]="i"
+                  <input matInput [formControl]="$any(img)"
                     class="w-full text-xs font-mono text-slate-600 truncate bg-transparent focus:outline-none" />
                 </div>
 
@@ -511,9 +511,9 @@
           <button type="button" mat-stroked-button (click)="onCancel()" class="!rounded-xl">
             <span i18n>Cancel</span>
           </button>
-          <button type="submit" mat-flat-button color="primary" [disabled]="ingredientForm.invalid || isSaving"
+          <button type="submit" mat-flat-button color="primary" [disabled]="ingredientForm.invalid || isSaving()"
             class="!rounded-xl !px-6 !py-2.5 !font-bold flex items-center gap-2">
-            @if (isSaving) {
+            @if (isSaving()) {
             <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
             } @else {
             <mat-icon>save</mat-icon>
