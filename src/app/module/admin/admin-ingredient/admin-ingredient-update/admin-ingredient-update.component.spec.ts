@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subject, throwError } from 'rxjs';
-import { FormGroup } from '@angular/forms';
 
 import { AdminIngredientUpdateComponent } from './admin-ingredient-update.component';
 import { IngredientService } from '@/app/service/ingredient.service';

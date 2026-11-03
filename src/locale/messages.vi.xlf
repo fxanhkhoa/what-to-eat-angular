@@ -8298,6 +8298,13 @@
                 <source>Video Link</source>
                 <target>Đường dẫn video</target>
             </trans-unit>
+            <trans-unit id="477506357815848870" datatype="html">
+                <source>Provide translations for ingredient name in multiple languages</source>
+                <target>Cung cấp bản dịch tên nguyên liệu cho nhiều ngôn ngữ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>
