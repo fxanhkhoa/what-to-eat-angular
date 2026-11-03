@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { Component, inject, signal, Renderer2, OnDestroy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,14 +19,13 @@ import { catchError, of, take } from 'rxjs';
   selector: 'app-data-deletion',
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     MatButtonModule,
     MatIconModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatDialogModule,
-  ],
+    MatDialogModule
+],
   templateUrl: './data-deletion.component.html',
   styleUrl: './data-deletion.component.scss',
 })

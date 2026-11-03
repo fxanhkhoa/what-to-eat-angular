@@ -7,7 +7,7 @@ import {
   computed,
   PLATFORM_ID,
 } from '@angular/core';
-import { CommonModule, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -31,7 +31,6 @@ import { ContactDetailsDialogComponent } from './contact-details-dialog/contact-
 @Component({
   selector: 'app-admin-contact',
   imports: [
-    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -43,8 +42,8 @@ import { ContactDetailsDialogComponent } from './contact-details-dialog/contact-
     MatProgressSpinnerModule,
     MatChipsModule,
     MatDialogModule,
-    FormsModule,
-  ],
+    FormsModule
+],
   templateUrl: './admin-contact.component.html',
   styleUrl: './admin-contact.component.scss',
 })

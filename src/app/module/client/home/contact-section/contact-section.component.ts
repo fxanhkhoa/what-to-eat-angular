@@ -1,5 +1,5 @@
 import { ContactService } from '@/app/service/contact.service';
-import { CommonModule } from '@angular/common';
+
 import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
@@ -25,9 +25,8 @@ import { finalize } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-    CommonModule,
-    MatProgressSpinnerModule,
-  ],
+    MatProgressSpinnerModule
+],
   templateUrl: './contact-section.component.html',
   styleUrl: './contact-section.component.scss',
 })

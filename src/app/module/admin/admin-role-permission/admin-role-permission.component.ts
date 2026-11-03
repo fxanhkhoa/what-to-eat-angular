@@ -6,7 +6,7 @@ import {
   ViewChild,
   PLATFORM_ID,
 } from '@angular/core';
-import { CommonModule, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {
   MatPaginator,
@@ -33,7 +33,6 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-admin-role-permission',
   imports: [
-    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -45,8 +44,8 @@ import { FormsModule } from '@angular/forms';
     MatChipsModule,
     MatDialogModule,
     RouterModule,
-    FormsModule,
-  ],
+    FormsModule
+],
   templateUrl: './admin-role-permission.component.html',
   styleUrl: './admin-role-permission.component.scss',
 })

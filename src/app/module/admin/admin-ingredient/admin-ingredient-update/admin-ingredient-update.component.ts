@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   FormArray,
   FormBuilder,
@@ -39,7 +39,6 @@ import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-vie
   selector: 'app-admin-ingredient-update',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -54,8 +53,8 @@ import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-vie
     MatCardModule,
     MatDividerModule,
     MatBadgeModule,
-    CategoryTranslatePipe,
-  ],
+    CategoryTranslatePipe
+],
   templateUrl: './admin-ingredient-update.component.html',
   styleUrl: './admin-ingredient-update.component.scss',
 })

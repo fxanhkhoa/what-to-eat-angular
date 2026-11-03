@@ -1,8 +1,4 @@
-import {
-  CommonModule,
-  isPlatformBrowser,
-  isPlatformServer,
-} from '@angular/common';
+import { CommonModule, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
   Component,
   ContentChild,

@@ -1,5 +1,5 @@
 import { Dish, QueryDishDto } from '@/types/dish.type';
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Meta, Title } from '@angular/platform-browser';
@@ -19,7 +19,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-dish-basic',
   imports: [
-    CommonModule,
     MatButtonModule,
     DishFilterComponent,
     MatIconModule,
@@ -27,8 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     EmptyComponent,
     DishCardComponent,
     MatPaginatorModule,
-    MatProgressSpinnerModule,
-  ],
+    MatProgressSpinnerModule
+],
   templateUrl: './dish-basic.component.html',
   styleUrl: './dish-basic.component.scss',
 })

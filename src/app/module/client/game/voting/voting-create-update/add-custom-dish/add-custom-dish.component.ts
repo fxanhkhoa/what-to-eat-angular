@@ -11,20 +11,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { DishVoteItem } from '@/types/dish-vote.type';
-import { CommonModule } from '@angular/common';
+
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-custom-dish',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
-  ],
+    MatIconModule
+],
   templateUrl: './add-custom-dish.component.html',
   styleUrl: './add-custom-dish.component.scss',
 })

@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   Component,
   inject,
@@ -38,7 +38,6 @@ import { AuthService } from '@/app/service/auth.service';
   selector: 'app-profile',
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
@@ -50,8 +49,8 @@ import { AuthService } from '@/app/service/auth.service';
     MatNativeDateModule,
     MatChipsModule,
     MatDividerModule,
-    MatProgressSpinnerModule,
-  ],
+    MatProgressSpinnerModule
+],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })

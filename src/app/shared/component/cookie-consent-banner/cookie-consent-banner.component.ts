@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ const CONSENT_EXPIRES_IN_DAYS = 90;
 @Component({
   selector: 'app-cookie-consent-banner',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule],
+  imports: [RouterModule, MatButtonModule],
   templateUrl: './cookie-consent-banner.component.html',
   styleUrl: './cookie-consent-banner.component.scss',
 })

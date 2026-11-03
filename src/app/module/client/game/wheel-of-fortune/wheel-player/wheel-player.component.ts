@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformServer } from '@angular/common';
+import { isPlatformServer } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -25,7 +25,7 @@ type Sector = {
 
 @Component({
   selector: 'app-wheel-player',
-  imports: [CommonModule, DishCardFancyComponent, OverlayModule],
+  imports: [DishCardFancyComponent, OverlayModule],
   templateUrl: './wheel-player.component.html',
   styleUrl: './wheel-player.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import {
   MatDialogModule,
@@ -15,14 +15,13 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-voting-name-dialog',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule,
-  ],
+    MatIconModule
+],
   template: `
     <div class="p-6">
       <h2 class="text-lg font-semibold mb-4">Let us know your name</h2>
@@ -37,19 +36,21 @@ import { MatIconModule } from '@angular/material/icon';
             i18n-placeholder
             placeholder="Enter your name"
             class="min-h-14"
-          />
-          <mat-error *ngIf="!name.trim()">
-            <span i18n>Name is required.</span>
-          </mat-error>
+            />
+          @if (!name.trim()) {
+            <mat-error>
+              <span i18n>Name is required.</span>
+            </mat-error>
+          }
         </mat-form-field>
-
+    
         <button matButton="elevated" type="submit" [disabled]="!name.trim()">
           <mat-icon>check_circle</mat-icon>
           <span i18n>Submit</span>
         </button>
       </form>
     </div>
-  `,
+    `,
 })
 export class VotingNameDialogComponent {
   name: string = '';

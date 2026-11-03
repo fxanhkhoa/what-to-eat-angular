@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { DishFilterComponent } from '@/app/module/client/dish/dish-filter/dish-filter.component';
 import { Dish, QueryDishDto } from '@/types/dish.type';
-import { CommonModule } from '@angular/common';
+
 import { DishCardComponent } from '@/app/module/client/dish/dish-card/dish-card.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,15 +18,14 @@ import { ToastService } from '@/app/shared/service/toast.service';
   selector: 'app-wheel-dish-picker',
   imports: [
     DishFilterComponent,
-    CommonModule,
     DishCardComponent,
     MatButtonModule,
     MatIconModule,
     EmptyComponent,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatPaginatorModule,
-  ],
+    MatPaginatorModule
+],
   templateUrl: './wheel-dish-picker.component.html',
   styleUrl: './wheel-dish-picker.component.scss',
 })

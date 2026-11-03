@@ -2,7 +2,7 @@ import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
 import { DishService } from '@/app/service/dish.service';
 import { MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { Dish } from '@/types/dish.type';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { Component, inject, LOCALE_ID, OnInit, signal } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,14 +15,13 @@ import { environment } from '@/environments/environment';
 @Component({
   selector: 'app-dish',
   imports: [
-    CommonModule,
     RouterModule,
     MatButtonModule,
     MatIconModule,
     CategoryTranslatePipe,
     DishCardFancyComponent,
-    EmptyComponent,
-  ],
+    EmptyComponent
+],
   templateUrl: './dish.component.html',
   styleUrl: './dish.component.scss',
 })

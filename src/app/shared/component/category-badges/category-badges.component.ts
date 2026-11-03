@@ -1,12 +1,12 @@
 // category-badges.component.ts
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
 
 @Component({
   selector: 'app-category-badges',
   standalone: true,
-  imports: [CommonModule, CategoryTranslatePipe],
+  imports: [CategoryTranslatePipe],
   templateUrl: './category-badges.component.html',
   styleUrls: ['./category-badges.component.scss'],
 })

@@ -1,10 +1,10 @@
 import { Component, Input, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-typing-indicator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './typing-indicator.component.html',
   styleUrls: ['./typing-indicator.component.scss'],
 })

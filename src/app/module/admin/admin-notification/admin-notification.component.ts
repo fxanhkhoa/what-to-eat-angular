@@ -34,7 +34,6 @@ import type {
   NotificationTemplate,
 } from '@/types/notification.type';
 import { finalize } from 'rxjs';
-import { c } from "../../../../../node_modules/@angular/cdk/a11y-module.d-DBHGyKoh";
 
 @Component({
   selector: 'app-admin-notification',

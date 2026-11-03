@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, Inject, LOCALE_ID } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -20,12 +20,11 @@ export interface ShareBottomSheetData {
   selector: 'app-share-bottom-sheet',
   standalone: true,
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MultiLanguagePipe,
-  ],
+    MultiLanguagePipe
+],
   templateUrl: './share-bottom-sheet.component.html',
   styleUrl: './share-bottom-sheet.component.scss',
 })
