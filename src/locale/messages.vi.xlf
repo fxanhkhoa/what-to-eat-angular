@@ -8305,6 +8305,46 @@
                     <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="1233482864703216366" datatype="html">
+                <source>Food Guide &amp; Recipe Search</source>
+                <target>Cẩm nang Ẩm thực &amp; Tìm kiếm Món ăn</target>
+            </trans-unit>
+            <trans-unit id="3784877622425032431" datatype="html">
+                <source> The Ultimate Food Guide: What to Eat Now </source>
+                <target> Cẩm nang Ẩm thực Đỉnh cao: Ăn gì Bây giờ </target>
+            </trans-unit>
+            <trans-unit id="2666463722860541544" datatype="html">
+                <source> Hungry? Discover delicious dishes, restaurant recommendations, and food guides for every craving. Find your next meal! </source>
+                <target> Bạn đói à? Khám phá các món ăn ngon, gợi ý nhà hàng và cẩm nang ẩm thực cho mọi cơn thèm. Tìm bữa ăn tiếp theo của bạn! </target>
+            </trans-unit>
+            <trans-unit id="2431454692062371107" datatype="html">
+                <source>Dishes Found</source>
+                <target>Món ăn tìm thấy</target>
+            </trans-unit>
+            <trans-unit id="6037196991598476003" datatype="html">
+                <source>recipes</source>
+                <target>công thức</target>
+            </trans-unit>
+            <trans-unit id="8167408879288470866" datatype="html">
+                <source>Explore Dishes</source>
+                <target>Khám phá Món ăn</target>
+            </trans-unit>
+            <trans-unit id="1946364768984151105" datatype="html">
+                <source> Page <x id="INTERPOLATION"/> of <x id="INTERPOLATION_1"/> </source>
+                <target> Trang <x id="INTERPOLATION"/> / <x id="INTERPOLATION_1"/> </target>
+            </trans-unit>
+            <trans-unit id="901252465736456968" datatype="html">
+                <source>Discovering Delicious Recipes...</source>
+                <target>Đang tìm kiếm món ăn ngon...</target>
+            </trans-unit>
+            <trans-unit id="2816394757216705305" datatype="html">
+                <source>Cooking up matching dishes based on your filters. Just a moment!</source>
+                <target>Đang chuẩn bị các món ăn phù hợp với bộ lọc của bạn. Vui lòng chờ giây lát!</target>
+            </trans-unit>
+            <trans-unit id="4612500536333059318" datatype="html">
+                <source> No recipes matched your current filters. Try searching for different keywords or relaxing cooking time and difficulty options. </source>
+                <target> Không tìm thấy món ăn nào phù hợp với bộ lọc của bạn. Hãy thử tìm từ khóa khác hoặc mở rộng thời gian nấu và độ khó. </target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

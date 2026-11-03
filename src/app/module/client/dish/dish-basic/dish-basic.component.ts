@@ -90,4 +90,17 @@ export class DishBasicComponent implements OnInit {
     this.limit.set(event.pageSize);
     this.getDishes();
   }
+
+  get totalPages(): number {
+    return Math.ceil(this.total() / this.limit()) || 1;
+  }
+
+  get startItemIndex(): number {
+    if (this.total() === 0) return 0;
+    return (this.currentPage() - 1) * this.limit() + 1;
+  }
+
+  get endItemIndex(): number {
+    return Math.min(this.currentPage() * this.limit(), this.total());
+  }
 }

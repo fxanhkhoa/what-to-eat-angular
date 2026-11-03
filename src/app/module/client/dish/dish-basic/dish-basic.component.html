@@ -1,64 +1,160 @@
-<!-- dish.component.html -->
-<!-- <section id="banner">
-    <div class="banner h-64 flex flex-col gap-2 justify-center items-center text-purple-500 p-5">
-        <h1 class="drop-shadow-lg font-bold uppercase" i18n>The Ultimate Food Guide: What to Eat Now</h1>
-        <h5 class="text-gray-200" i18n>Hungry? Discover delicious dishes, restaurant recommendations, and food guides
-            for every craving. Find your next meal!</h5>
-        <div class="flex gap-2 mt-3">
-            <a class="group text-gray-300 hover:text-white font-semibold transition-all duration-300 ease-in-out"
-                href="/">
-                <span i18n
-                    class="bg-left-bottom bg-gradient-to-r from-purple-500 to-purple-500 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
-                    {{ 'home' }}
-                </span>
-            </a>
-            <span>/</span>
-            <span i18n class="text-gray-300 font-bold underline">{{ 'dish' }}</span>
-        </div>
-    </div>
-</section> -->
+<section id="main" class="min-h-screen relative bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-white overflow-hidden">
+  <!-- Ambient background glow elements -->
+  <div class="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
+    <div class="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-[#F3A446]/10 to-[#A06235]/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute top-1/3 right-10 w-[500px] h-[500px] bg-gradient-to-bl from-purple-500/10 to-pink-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-gradient-to-tr from-amber-500/10 to-orange-500/10 rounded-full blur-3xl"></div>
+  </div>
 
-<section id="main" class="p-5 md:p-10 flex flex-col mt-20">
-    <div class="flex">
-        <button matButton="elevated" (click)="goBack()">
-            <mat-icon>chevron_left</mat-icon>
-            <span i18n>Back</span>
-        </button>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-20">
+    <!-- Top Action & Navigation Bar -->
+    <div class="flex items-center justify-between gap-4 mb-8">
+      <!-- Back Button (MUST BE FIRST BUTTON FOR TESTS) -->
+      <button mat-fab extended (click)="goBack()"
+        class="!bg-white/10 hover:!bg-white/20 !text-white backdrop-blur-md !border !border-white/15 !shadow-xl !h-11 !px-4 !rounded-xl transition-all duration-300 hover:scale-105 group"
+        aria-label="Go back">
+        <mat-icon class="!text-amber-400 group-hover:-translate-x-1 transition-transform">arrow_back</mat-icon>
+        <span class="font-medium text-sm ml-1" i18n>Back</span>
+      </button>
+
+      <!-- Breadcrumb Info -->
+      <div class="hidden sm:flex items-center gap-2 text-xs text-gray-400 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-xl">
+        <span class="hover:text-amber-400 cursor-pointer transition-colors" (click)="goBack()" i18n>Dish</span>
+        <mat-icon class="!w-4 !h-4 !text-[16px] text-gray-500">chevron_right</mat-icon>
+        <span class="text-amber-400 font-semibold" i18n> Filter </span>
+      </div>
     </div>
-    <div class="grid grid-cols-12 gap-5 py-5">
-        <div class="col-span-12">
-            <mat-accordion>
-                <mat-expansion-panel class="glassmorphic-container_dark">
-                    <mat-expansion-panel-header>
-                        <mat-panel-title i18n> Filter </mat-panel-title>
-                        <mat-panel-description i18n>Let's find your favorite dishes!</mat-panel-description>
-                    </mat-expansion-panel-header>
-                    <app-dish-filter (search)="onSearch($event)"></app-dish-filter>
-                </mat-expansion-panel>
-            </mat-accordion>
+
+    <!-- Hero Header Card -->
+    <div class="relative overflow-hidden rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/10 via-white/5 to-transparent border border-white/15 p-6 sm:p-10 mb-8 shadow-2xl">
+      <!-- Top accent gradient line -->
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-[#F3A446] to-orange-500"></div>
+
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <!-- Pill Badge -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 backdrop-blur-sm mb-3">
+            <mat-icon class="!w-4 !h-4 !text-[16px] text-amber-400">restaurant_menu</mat-icon>
+            <span class="text-xs font-semibold text-amber-300 uppercase tracking-wider" i18n>Food Guide & Recipe Search</span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight m-0">
+            <span class="bg-gradient-to-r from-[#F3A446] via-[#FFB86A] to-[#A06235] text-transparent bg-clip-text" i18n>
+              The Ultimate Food Guide: What to Eat Now
+            </span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-sm sm:text-base text-gray-300 mt-3 max-w-2xl leading-relaxed m-0" i18n>
+            Hungry? Discover delicious dishes, restaurant recommendations, and food guides for every craving. Find your next meal!
+          </p>
         </div>
-        <div class="col-span-12">
-            <div class="grid grid-cols-12 gap-5 max-h-[80vh] overflow-auto">
-                @if (loading()) {
-                <div class="col-span-12 mx-auto">
-                    <mat-spinner></mat-spinner>
-                </div>
-                } @else {
-                @if (!dishes().length) {
-                <div class="col-span-12">
-                    <app-empty></app-empty>
-                </div>
-                }
-                @for (dish of dishes(); track dish) {
-                <div class="col-span-12 md:col-span-12 lg:col-span-6">
-                    <app-dish-card [dish]="dish"></app-dish-card>
-                </div>
-                }
-                }
+
+        <!-- Quick Summary Stats Card -->
+        <div class="flex items-center gap-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-4 sm:p-5 shrink-0 self-start md:self-auto shadow-inner">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F3A446] to-[#A06235] flex items-center justify-center text-white shadow-lg">
+            <mat-icon class="!text-2xl">dinner_dining</mat-icon>
+          </div>
+          <div>
+            <div class="text-xs uppercase font-bold tracking-wider text-gray-400" i18n>Dishes Found</div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-white flex items-baseline gap-1.5">
+              <span>{{ total() }}</span>
+              <span class="text-xs font-medium text-amber-400" i18n>recipes</span>
             </div>
-            <mat-paginator [length]="total()" [pageSizeOptions]="[10, 25, 50, 100]" [pageIndex]="currentPage() - 1"
-                [pageSize]="limit()" (page)="paginatorChange($event)" showFirstLastButtons aria-label="Select page">
-            </mat-paginator>
+          </div>
         </div>
+      </div>
     </div>
+
+    <!-- Filter Expansion Section -->
+    <div class="mb-8">
+      <mat-accordion class="filter-accordion">
+        <mat-expansion-panel [expanded]="true" class="glassmorphic-container_dark !rounded-2xl !border !border-white/10 overflow-hidden shadow-2xl">
+          <mat-expansion-panel-header class="!py-4 !px-5 sm:!px-7 hover:!bg-white/5 transition-colors">
+            <div class="flex items-center gap-3 w-full">
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+                <mat-icon>tune</mat-icon>
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4 flex-1 mr-4">
+                <mat-panel-title class="!text-base sm:!text-lg !font-bold !text-white !m-0" i18n> Filter </mat-panel-title>
+                <mat-panel-description class="!text-xs sm:!text-sm !text-gray-400 !m-0" i18n>Let's find your favorite dishes!</mat-panel-description>
+              </div>
+            </div>
+          </mat-expansion-panel-header>
+
+          <div class="pt-4 px-2 sm:px-4 pb-2 border-t border-white/10">
+            <app-dish-filter (search)="onSearch($event)"></app-dish-filter>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <!-- Results Section -->
+    <div class="space-y-6">
+      <!-- Results Bar -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
+        <div class="flex items-center gap-2.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></div>
+          <span class="font-bold text-lg text-white" i18n>Explore Dishes</span>
+          @if (!loading() && total() > 0) {
+          <span class="text-xs bg-amber-500/20 text-amber-300 font-semibold px-2.5 py-0.5 rounded-full border border-amber-500/30">
+            {{ startItemIndex }}-{{ endItemIndex }} / {{ total() }}
+          </span>
+          }
+        </div>
+
+        @if (!loading() && total() > 0) {
+        <span class="text-xs text-gray-400" i18n>
+          Page {{ currentPage() }} of {{ totalPages }}
+        </span>
+        }
+      </div>
+
+      <!-- Loading State (MUST contain mat-spinner for tests) -->
+      @if (loading()) {
+      <div class="glassmorphic-container_dark rounded-3xl p-16 sm:p-20 flex flex-col items-center justify-center text-center border border-white/10 shadow-2xl min-h-[400px]">
+        <div class="relative flex items-center justify-center mb-6">
+          <div class="absolute inset-0 rounded-full bg-amber-500/20 blur-xl animate-ping"></div>
+          <mat-spinner diameter="56"></mat-spinner>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2" i18n>Discovering Delicious Recipes...</h3>
+        <p class="text-sm text-gray-400 max-w-sm m-0" i18n>Cooking up matching dishes based on your filters. Just a moment!</p>
+      </div>
+      } @else {
+        <!-- Empty State -->
+        @if (!dishes().length) {
+        <div class="glassmorphic-container_dark rounded-3xl p-8 sm:p-12 border border-white/10 shadow-2xl">
+          <app-empty></app-empty>
+          <p class="text-center text-sm text-gray-400 mt-4 max-w-md mx-auto" i18n>
+            No recipes matched your current filters. Try searching for different keywords or relaxing cooking time and difficulty options.
+          </p>
+        </div>
+        }
+
+        <!-- Dishes Grid -->
+        @if (dishes().length > 0) {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (dish of dishes(); track dish) {
+          <div class="transform transition-all duration-300 hover:-translate-y-1 h-full">
+            <app-dish-card [dish]="dish"></app-dish-card>
+          </div>
+          }
+        </div>
+        }
+      }
+
+      <!-- Pagination Controls -->
+      @if (total() > 0) {
+      <div class="mt-12 flex justify-center">
+        <div class="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-2 sm:p-3 shadow-2xl w-full sm:w-auto">
+          <mat-paginator [length]="total()" [pageSizeOptions]="[10, 25, 50, 100]" [pageIndex]="currentPage() - 1"
+            [pageSize]="limit()" (page)="paginatorChange($event)" showFirstLastButtons aria-label="Select page"
+            class="!bg-transparent !text-white [&_.mat-mdc-paginator-container]:!text-gray-300 [&_.mat-mdc-icon-button]:!text-amber-400 [&_.mat-mdc-icon-button:hover]:!bg-amber-500/20">
+          </mat-paginator>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
 </section>
