@@ -1,0 +1,224 @@
+<div class="relative bg-white text-gray-800 flex flex-col max-h-[90vh]">
+  <!-- Dialog Title Header -->
+  <div mat-dialog-title
+    class="!m-0 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 px-6 py-4 text-white flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
+        <mat-icon class="text-white">nutrition</mat-icon>
+      </div>
+      <div>
+        <h2 class="text-xl font-bold tracking-tight leading-tight text-white m-0">{{ englishTitle }}</h2>
+        <div class="flex items-center gap-2 mt-1">
+          <span class="text-xs bg-white/25 px-2 py-0.5 rounded-full font-mono text-white">{{ ingredient.slug }}</span>
+          <button mat-icon-button (click)="copySlug()" matTooltip="Copy slug"
+            class="text-white/80 hover:text-white">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="close()" class="!text-white hover:bg-white/10 rounded-full">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Dialog Scrollable Content -->
+  <mat-dialog-content class="!p-6 space-y-6">
+    <!-- Image & Quick Overview Section -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+      <!-- Image Gallery -->
+      <div class="md:col-span-5 space-y-3">
+        <mat-card appearance="outlined" class="relative aspect-square w-full !rounded-2xl overflow-hidden bg-slate-100 ring-1 ring-slate-200 shadow-sm group">
+          <img [src]="currentImage" alt="{{ englishTitle }}"
+            (error)="handleImageError($event)"
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          @if (ingredient.calories) {
+            <div class="absolute bottom-3 left-3 bg-black/75 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-lg font-medium flex items-center gap-1 shadow">
+              <mat-icon class="text-amber-400">local_fire_department</mat-icon>
+              <span>{{ ingredient.calories }} kcal</span>
+            </div>
+          }
+        </mat-card>
+
+        @if (ingredient.images && ingredient.images.length > 1) {
+          <div class="flex gap-2 overflow-x-auto pb-1">
+            @for (img of ingredient.images; track $index) {
+              <button (click)="activeImageIndex = $index"
+                [class.ring-2]="activeImageIndex === $index"
+                [class.ring-amber-500]="activeImageIndex === $index"
+                class="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-slate-100 ring-1 ring-slate-200 focus:outline-none transition-all cursor-pointer">
+                <img [src]="img" alt="Thumbnail" (error)="handleImageError($event)" class="w-full h-full object-cover" />
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Quick Details & Categories -->
+      <div class="md:col-span-7 space-y-4">
+        <!-- Categories -->
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-2" i18n>Categories</span>
+          <mat-chip-set>
+            @for (cat of ingredient.ingredientCategory; track cat) {
+              <mat-chip class="!text-xs !bg-amber-50 !text-amber-800 !border !border-amber-200/80">
+                {{ cat | categoryTranslate }}
+              </mat-chip>
+            }
+            @if (!ingredient.ingredientCategory || ingredient.ingredientCategory.length === 0) {
+              <span class="text-xs text-slate-400 italic" i18n>No categories assigned</span>
+            }
+          </mat-chip-set>
+        </div>
+
+        <!-- Serving & Measure with MatCard -->
+        <mat-card appearance="outlined" class="!bg-slate-50 !border-slate-200/70 !rounded-xl">
+          <mat-card-content class="!p-3.5 grid grid-cols-2 gap-3">
+            <div>
+              <span class="text-xs text-slate-500 block" i18n>Serving Measure</span>
+              <span class="font-semibold text-slate-800 text-sm">{{ ingredient.measure || 'Standard' }}</span>
+            </div>
+            <div>
+              <span class="text-xs text-slate-500 block" i18n>Standard Weight</span>
+              <span class="font-semibold text-slate-800 text-sm">{{ ingredient.weight ? ingredient.weight + ' g' : '—' }}</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Language Translations -->
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-2" i18n>Translations</span>
+          <div class="space-y-1.5">
+            @for (item of ingredient.title; track item.lang) {
+              <div class="flex items-center gap-2 text-sm bg-white border border-slate-200/80 rounded-lg px-3 py-1.5 shadow-xs">
+                <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded bg-slate-200 text-slate-700">
+                  {{ item.lang }}
+                </span>
+                <span class="font-medium text-slate-800">{{ item.data }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Nutrition Facts Panel with MatCard -->
+    <mat-card appearance="outlined" class="!rounded-2xl !bg-gradient-to-b !from-white !to-slate-50/50 shadow-sm">
+      <mat-card-content class="!p-5 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div class="flex items-center gap-2">
+            <mat-icon class="text-amber-500">restaurant</mat-icon>
+            <h3 class="font-bold text-slate-800 text-base m-0" i18n>Nutritional Profile</h3>
+          </div>
+          <span class="text-xs text-slate-500">
+            Per {{ ingredient.measure || 'serving' }} ({{ ingredient.weight || 100 }}g)
+          </span>
+        </div>
+
+        <!-- Energy highlight -->
+        <div class="flex items-center justify-between bg-amber-500/10 border border-amber-500/20 px-4 py-3 rounded-xl">
+          <div class="flex items-center gap-2">
+            <mat-icon class="text-amber-600">local_fire_department</mat-icon>
+            <span class="font-medium text-amber-950 text-sm" i18n>Energy / Calories</span>
+          </div>
+          <div class="text-right">
+            <span class="text-2xl font-black text-amber-600">{{ ingredient.calories || 0 }}</span>
+            <span class="text-xs text-amber-700 font-medium ml-1">kcal</span>
+          </div>
+        </div>
+
+        <!-- Macro Percentage Distribution Bar -->
+        @if (totalMacroCalories > 0) {
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs text-slate-600 font-medium">
+              <span i18n>Macronutrient Energy Distribution</span>
+              <span>Protein {{ proteinPercent }}% | Carbs {{ carbPercent }}% | Fat {{ fatPercent }}%</span>
+            </div>
+            <div class="h-3 w-full bg-slate-200 rounded-full overflow-hidden flex shadow-inner">
+              <div [style.width.%]="proteinPercent" class="bg-emerald-500 transition-all duration-500"
+                matTooltip="Protein: {{ proteinPercent }}%"></div>
+              <div [style.width.%]="carbPercent" class="bg-amber-400 transition-all duration-500"
+                matTooltip="Carbs: {{ carbPercent }}%"></div>
+              <div [style.width.%]="fatPercent" class="bg-rose-500 transition-all duration-500"
+                matTooltip="Fat: {{ fatPercent }}%"></div>
+            </div>
+          </div>
+        }
+
+        <!-- Macronutrients 3-card Grid -->
+        <div class="grid grid-cols-3 gap-3">
+          <mat-card appearance="outlined" class="!bg-white !border-emerald-200 !rounded-xl text-center shadow-xs">
+            <mat-card-content class="!p-3">
+              <span class="text-xs font-semibold text-emerald-700 block uppercase" i18n>Protein</span>
+              <span class="text-xl font-bold text-emerald-900 mt-0.5 block">
+                {{ ingredient.protein || 0 }}<span class="text-xs font-normal">g</span>
+              </span>
+              <span class="text-[11px] text-slate-500 block">{{ proteinCalories }} kcal</span>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card appearance="outlined" class="!bg-white !border-amber-200 !rounded-xl text-center shadow-xs">
+            <mat-card-content class="!p-3">
+              <span class="text-xs font-semibold text-amber-700 block uppercase" i18n>Carbohydrate</span>
+              <span class="text-xl font-bold text-amber-900 mt-0.5 block">
+                {{ ingredient.carbohydrate || 0 }}<span class="text-xs font-normal">g</span>
+              </span>
+              <span class="text-[11px] text-slate-500 block">{{ carbCalories }} kcal</span>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card appearance="outlined" class="!bg-white !border-rose-200 !rounded-xl text-center shadow-xs">
+            <mat-card-content class="!p-3">
+              <span class="text-xs font-semibold text-rose-700 block uppercase" i18n>Fat</span>
+              <span class="text-xl font-bold text-rose-900 mt-0.5 block">
+                {{ ingredient.fat || 0 }}<span class="text-xs font-normal">g</span>
+              </span>
+              <span class="text-[11px] text-slate-500 block">{{ fatCalories }} kcal</span>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <!-- Micronutrients Details -->
+        <div class="grid grid-cols-2 gap-3 pt-1">
+          <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-200/60">
+            <span class="text-xs text-slate-600 font-medium" i18n>Cholesterol</span>
+            <span class="text-sm font-semibold text-slate-800">{{ ingredient.cholesterol || 0 }} mg</span>
+          </div>
+          <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-200/60">
+            <span class="text-xs text-slate-600 font-medium" i18n>Sodium</span>
+            <span class="text-sm font-semibold text-slate-800">{{ ingredient.sodium || 0 }} mg</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Timestamps -->
+    <div class="text-xs text-slate-400 flex flex-wrap gap-4 pt-1">
+      @if (ingredient.createdAt) {
+        <span>Created: {{ ingredient.createdAt | date:'mediumDate' }}</span>
+      }
+      @if (ingredient.updatedAt) {
+        <span>Updated: {{ ingredient.updatedAt | date:'mediumDate' }}</span>
+      }
+    </div>
+  </mat-dialog-content>
+
+  <!-- Dialog Actions -->
+  <mat-dialog-actions align="end" class="!border-t !border-slate-200 !px-6 !py-3 !bg-slate-50 flex items-center justify-between !m-0">
+    <a mat-button [routerLink]="['/ingredient', ingredient.slug]" target="_blank"
+      class="!text-xs !font-medium !text-slate-600 hover:!text-amber-600">
+      <mat-icon class="mr-1">open_in_new</mat-icon>
+      <span i18n>View on Public Website</span>
+    </a>
+
+    <div class="flex items-center gap-2">
+      <button mat-stroked-button (click)="close()" i18n>Close</button>
+      <button mat-flat-button color="primary" (click)="editIngredient()">
+        <mat-icon>edit</mat-icon>
+        <span i18n>Edit Ingredient</span>
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>

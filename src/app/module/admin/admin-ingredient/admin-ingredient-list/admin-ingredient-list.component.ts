@@ -1,4 +1,3 @@
-import { Ingredient, QueryIngredientDto } from '@/types/ingredient.type';
 import {
   AfterViewInit,
   Component,
@@ -8,71 +7,102 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
+import { CommonModule, isPlatformServer } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
-import { MultiLanguage } from '@/types/base.type';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule, isPlatformServer } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { IngredientService } from '@/app/service/ingredient.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { debounceTime, finalize } from 'rxjs';
-import { ToastService } from '@/app/shared/service/toast.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-viewer.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { debounceTime, finalize } from 'rxjs';
+
+import { Ingredient, QueryIngredientDto } from '@/types/ingredient.type';
+import { MultiLanguage } from '@/types/base.type';
+import { INGREDIENT_CATEGORIES } from '@/enum/ingredient.enum';
+import { IngredientService } from '@/app/service/ingredient.service';
+import { ToastService } from '@/app/shared/service/toast.service';
+import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-viewer.component';
+import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
+import { AdminIngredientDetailDialogComponent } from '../admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component';
 
 @Component({
   selector: 'app-admin-ingredient-list',
+  standalone: true,
   imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
     MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
-    CommonModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    RouterModule,
     MatTooltipModule,
+    MatChipsModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatMenuModule,
+    CategoryTranslatePipe,
   ],
   templateUrl: './admin-ingredient-list.component.html',
   styleUrl: './admin-ingredient-list.component.scss',
 })
 export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
-    'action',
+    'image',
     'slug',
-    'images',
     'title',
+    'categories',
     'measure',
     'calories',
-    'carbohydrate',
-    'fat',
-    'ingredientCategory',
-    'weight',
-    'protein',
-    'cholesterol',
-    'sodium',
+    'macros',
+    'micronutrients',
     'updatedAt',
+    'action',
   ];
 
   dataSource = new MatTableDataSource<Ingredient>([]);
   searchControl = new FormControl('');
   categoryFilter = new FormControl('');
+
   isLoading = signal(false);
+  viewMode = signal<'table' | 'grid'>('table');
+  totalCount = signal(0);
+  categoryCount = signal(0);
+  avgCalories = signal(0);
 
   availableCategories: string[] = [];
+  allCategories = Object.values(INGREDIENT_CATEGORIES);
+  quickCategories: string[] = [
+    'ALL',
+    INGREDIENT_CATEGORIES.VEGETABLES,
+    INGREDIENT_CATEGORIES.PROTEIN_FOODS,
+    INGREDIENT_CATEGORIES.FRUIT,
+    INGREDIENT_CATEGORIES.GRAINS,
+    INGREDIENT_CATEGORIES.MILK_AND_DAIRY,
+    INGREDIENT_CATEGORIES.HERBS_AND_SPICES,
+    INGREDIENT_CATEGORIES.FATS_AND_OILS,
+  ];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -84,7 +114,14 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   private dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    // Subscribe to search input changes
+    if (typeof localStorage !== 'undefined') {
+      const savedMode = localStorage.getItem('admin_ingredient_view_mode') as 'table' | 'grid';
+      if (savedMode === 'table' || savedMode === 'grid') {
+        this.viewMode.set(savedMode);
+      }
+    }
+
+    // Debounced search
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
       .subscribe((value) => {
@@ -95,7 +132,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
         }
       });
 
-    // Subscribe to category filter changes
+    // Category filter changes
     this.categoryFilter.valueChanges.subscribe((value) => {
       this.filterByCategory(value || '');
     });
@@ -103,74 +140,131 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initTableFunctions();
-    // Load data (replace with your actual data loading)
+
     const page = parseInt(this.route.snapshot.paramMap.get('page') ?? '1', 10);
-    const limit = parseInt(
-      this.route.snapshot.paramMap.get('limit') ?? '25',
-      10
-    );
-    this.paginator.pageIndex = page - 1;
-    this.paginator.pageSize = limit;
+    const limit = parseInt(this.route.snapshot.paramMap.get('limit') ?? '24', 10);
+    if (this.paginator) {
+      this.paginator.pageIndex = Math.max(0, page - 1);
+      this.paginator.pageSize = limit;
+    }
     this.loadData();
   }
 
-  initTableFunctions() {
+  initTableFunctions(): void {
     this.dataSource.sort = this.sort;
 
-    // Custom sorting for title field (multilanguage)
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'title':
-          // Sort by the English title or first available title
-          const englishTitle = item.title.find((t) => t.lang === 'en');
-          return englishTitle ? englishTitle.data : item.title[0]?.data || '';
+          const englishTitle = item.title?.find((t) => t.lang === 'en');
+          return englishTitle ? englishTitle.data : item.title?.[0]?.data || '';
         case 'ingredientCategory':
-          return item.ingredientCategory.join(', ');
+        case 'categories':
+          return (item.ingredientCategory || []).join(', ');
+        case 'calories':
+          return item.calories || 0;
+        case 'updatedAt':
+          return item.updatedAt ? new Date(item.updatedAt).getTime() : 0;
         default:
-          return item[property as keyof Ingredient] as string | number;
+          return (item[property as keyof Ingredient] as string | number) ?? '';
       }
     };
   }
 
-  loadData(keyword?: string) {
+  setViewMode(mode: 'table' | 'grid'): void {
+    this.viewMode.set(mode);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('admin_ingredient_view_mode', mode);
+    }
+  }
+
+  loadData(keyword?: string): void {
     if (isPlatformServer(this.platformId)) {
       return;
     }
+
     const query: QueryIngredientDto = {
-      page: this.paginator.pageIndex + 1,
-      limit: this.paginator.pageSize,
+      page: this.paginator ? this.paginator.pageIndex + 1 : 1,
+      limit: this.paginator ? this.paginator.pageSize : 24,
     };
 
-    if (keyword) {
-      query.keyword = keyword;
+    const effectiveKeyword = keyword !== undefined ? keyword : this.searchControl.value?.trim() || '';
+    if (effectiveKeyword) {
+      query.keyword = effectiveKeyword;
+    }
+
+    const selectedCategory = this.categoryFilter.value;
+    if (selectedCategory && selectedCategory !== 'ALL') {
+      query.ingredientCategory = [selectedCategory];
     }
 
     this.isLoading.set(true);
     this.ingredientService
       .findAll(query)
       .pipe(finalize(() => this.isLoading.set(false)))
-      .subscribe((res) => {
-        if (res.count === 0) {
-          this.dataSource.data = [];
-          return;
-        }
-        this.dataSource.data = res.data;
+      .subscribe({
+        next: (res) => {
+          if (res.count === 0) {
+            this.dataSource.data = [];
+            this.totalCount.set(0);
+            this.avgCalories.set(0);
+            this.categoryCount.set(0);
+            this.availableCategories = [];
+            if (this.paginator) {
+              this.paginator.length = 0;
+            }
+            return;
+          }
 
-        // Extract all unique categories for the filter
-        const allCategories = new Set<string>();
-        res.data.forEach((item) => {
-          item.ingredientCategory.forEach((cat) => allCategories.add(cat));
-        });
-        this.availableCategories = Array.from(allCategories).sort();
-        this.paginator.length = res.count;
+          this.dataSource.data = res.data || [];
+          this.totalCount.set(res.count || 0);
 
-        setTimeout(() => {
-          this.dataSource.sort = this.sort;
-        }, 500);
+          if (this.paginator) {
+            this.paginator.length = res.count || 0;
+          }
+
+          // Extract all unique categories
+          const allCats = new Set<string>();
+          (res.data || []).forEach((item) => {
+            (item.ingredientCategory || []).forEach((cat) => allCats.add(cat));
+          });
+          this.availableCategories = Array.from(allCats).sort();
+
+          // Compute quick stats
+          if (res.data && res.data.length > 0) {
+            const totalCals = res.data.reduce((sum, item) => sum + (item.calories || 0), 0);
+            this.avgCalories.set(Math.round(totalCals / res.data.length));
+            this.categoryCount.set(allCats.size);
+          } else {
+            this.avgCalories.set(0);
+            this.categoryCount.set(0);
+          }
+
+          setTimeout(() => {
+            if (this.sort) {
+              this.dataSource.sort = this.sort;
+            }
+          }, 200);
+        },
+        error: () => {
+          this.toastService.showError($localize`Error`, $localize`Failed to load ingredients`, 3000);
+        },
       });
   }
 
-  applyFilter(filterValue: string) {
+  getTitle(titles: MultiLanguage<string>[]): string {
+    if (!titles || titles.length === 0) return 'N/A';
+    const english = titles.find((t) => t.lang === 'en');
+    return english ? english.data : titles[0]?.data || 'N/A';
+  }
+
+  getSecondaryTitle(titles: MultiLanguage<string>[]): string | null {
+    if (!titles || titles.length < 2) return null;
+    const secondary = titles.find((t) => t.lang !== 'en');
+    return secondary ? secondary.data : null;
+  }
+
+  applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -178,72 +272,81 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  filterByCategory(category: string) {
+  filterByCategory(category: string): void {
     if (!category) {
-      // Reset the filter
       this.dataSource.filterPredicate = (data, filter) =>
         !filter || filter === '' ? true : data.slug.includes(filter);
       this.dataSource.filter = this.searchControl.value || '';
       return;
     }
 
-    // Set custom filter predicate to filter by category
     this.dataSource.filterPredicate = (data: Ingredient, filter: string) => {
       const searchTerm = this.searchControl.value?.toLowerCase() || '';
-
-      // Check if ingredient belongs to the selected category
-      const matchesCategory = data.ingredientCategory.includes(category);
-
-      // Check if ingredient matches the search term
-      const titleMatch = data.title.some((t) =>
+      const matchesCategory = (data.ingredientCategory || []).includes(category);
+      const titleMatch = (data.title || []).some((t) =>
         t.data.toLowerCase().includes(searchTerm)
       );
-      const slugMatch = data.slug.toLowerCase().includes(searchTerm);
-
+      const slugMatch = (data.slug || '').toLowerCase().includes(searchTerm);
       const matchesSearch = !searchTerm || titleMatch || slugMatch;
 
       return matchesCategory && matchesSearch;
     };
 
-    // Trigger filtering
     this.dataSource.filter = category;
   }
 
-  // Helper method to get displayable title
-  getTitle(titles: MultiLanguage<string>[]): string {
-    const englishTitle = titles.find((t) => t.lang === 'en');
-    return englishTitle ? englishTitle.data : titles[0]?.data || 'N/A';
+  selectQuickCategory(category: string): void {
+    if (category === 'ALL') {
+      this.categoryFilter.setValue('');
+    } else {
+      this.categoryFilter.setValue(category);
+    }
   }
 
-  clearFilters() {
+  isCategorySelected(category: string): boolean {
+    const current = this.categoryFilter.value;
+    if (category === 'ALL') {
+      return !current || current === '';
+    }
+    return current === category;
+  }
+
+  clearFilters(): void {
     this.searchControl.setValue('');
     this.categoryFilter.setValue('');
     this.dataSource.filter = '';
   }
 
-  onDelete(id: string) {
-    this.toastService
-      .showConfirm(
-        'Delete Ingredient',
-        'Are you sure you want to delete this ingredient?'
-      )
-      .afterClosed()
-      .subscribe((res) => {
-        if (res) {
-          this.ingredientService.delete(id).subscribe(() => {
-            this.toastService.showSuccess(
-              $localize`Deleted`,
-              $localize`Ingredient deleted successfully`,
-              1500
-            );
-            this.loadData();
-          });
-        }
-      });
+  hasActiveFilters(): boolean {
+    return !!(this.searchControl.value || this.categoryFilter.value);
   }
 
-  previewImage(imageUrl: string): void {
-    // Open image in dialog for larger view
+  copySlug(slug: string, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    if (slug && typeof navigator !== 'undefined') {
+      navigator.clipboard.writeText(slug);
+      this.toastService.showSuccess($localize`Copied`, $localize`Slug copied to clipboard`, 2000);
+    }
+  }
+
+  openDetailDialog(ingredient: Ingredient, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.dialog.open(AdminIngredientDetailDialogComponent, {
+      data: ingredient,
+      width: '95%',
+      maxWidth: '820px',
+      autoFocus: false,
+    });
+  }
+
+  previewImage(imageUrl: string, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
     this.dialog.open(ImageViewerComponent, {
       data: imageUrl,
       width: '80%',
@@ -254,6 +357,35 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
 
   handleImageError(event: any): void {
     event.target.src = '/assets/images/placeholder.png';
-    event.target.classList.add('error-image'); // Optional: add a class to style error images
+    event.target.classList?.add('error-image');
+  }
+
+  onDelete(id: string, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    this.toastService
+      .showConfirm(
+        $localize`Delete Ingredient`,
+        $localize`Are you sure you want to delete this ingredient? This action cannot be undone.`
+      )
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.ingredientService.delete(id).subscribe({
+            next: () => {
+              this.toastService.showSuccess(
+                $localize`Deleted`,
+                $localize`Ingredient deleted successfully`,
+                1500
+              );
+              this.loadData();
+            },
+            error: () => {
+              this.toastService.showError($localize`Error`, $localize`Failed to delete ingredient`, 3000);
+            },
+          });
+        }
+      });
   }
 }
