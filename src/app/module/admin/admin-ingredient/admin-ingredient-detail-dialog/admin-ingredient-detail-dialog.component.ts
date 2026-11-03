@@ -5,6 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Router, RouterModule } from '@angular/router';
 import { Ingredient } from '@/types/ingredient.type';
 import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
@@ -20,6 +23,9 @@ import { ToastService } from '@/app/shared/service/toast.service';
     MatIconModule,
     MatTooltipModule,
     MatChipsModule,
+    MatCardModule,
+    MatDividerModule,
+    MatProgressBarModule,
     RouterModule,
     CategoryTranslatePipe,
   ],

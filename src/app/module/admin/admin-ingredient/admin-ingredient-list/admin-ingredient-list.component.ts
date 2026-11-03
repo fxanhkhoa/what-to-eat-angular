@@ -22,6 +22,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { debounceTime, finalize } from 'rxjs';
 
@@ -54,6 +58,10 @@ import { AdminIngredientDetailDialogComponent } from '../admin-ingredient-detail
     MatTooltipModule,
     MatChipsModule,
     MatButtonToggleModule,
+    MatCardModule,
+    MatDividerModule,
+    MatBadgeModule,
+    MatMenuModule,
     CategoryTranslatePipe,
   ],
   templateUrl: './admin-ingredient-list.component.html',
@@ -83,6 +91,9 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   avgCalories = signal(0);
 
   allCategories = Object.values(INGREDIENT_CATEGORIES);
+  get availableCategories(): string[] {
+    return this.allCategories;
+  }
   quickCategories: string[] = [
     'ALL',
     INGREDIENT_CATEGORIES.VEGETABLES,
@@ -166,9 +177,13 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  loadData(): void {
+  loadData(searchTerm?: string): void {
     if (isPlatformServer(this.platformId)) {
       return;
+    }
+
+    if (searchTerm !== undefined) {
+      this.searchControl.setValue(searchTerm, { emitEvent: false });
     }
 
     const keyword = this.searchControl.value?.trim() || '';
@@ -235,6 +250,14 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     if (!titles || titles.length < 2) return null;
     const secondary = titles.find((t) => t.lang !== 'en');
     return secondary ? secondary.data : null;
+  }
+
+  applyFilter(filterValue: string): void {
+    this.searchControl.setValue(filterValue.trim().toLowerCase());
+  }
+
+  filterByCategory(category: string): void {
+    this.categoryFilter.setValue(category);
   }
 
   selectQuickCategory(category: string): void {

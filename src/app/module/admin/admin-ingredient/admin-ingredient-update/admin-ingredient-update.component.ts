@@ -16,6 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { finalize } from 'rxjs';
@@ -48,6 +51,9 @@ import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-vie
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatChipsModule,
+    MatCardModule,
+    MatDividerModule,
+    MatBadgeModule,
     CategoryTranslatePipe,
   ],
   templateUrl: './admin-ingredient-update.component.html',
@@ -198,10 +204,14 @@ export class AdminIngredientUpdateComponent implements OnInit {
     }
   }
 
+  addImage(url: string = ''): void {
+    this.imagesArray.push(this.fb.control(url, Validators.required));
+  }
+
   addImageFromInput(): void {
     const url = this.newImageUrl.trim();
     if (url) {
-      this.imagesArray.push(this.fb.control(url, Validators.required));
+      this.addImage(url);
       this.newImageUrl = '';
     }
   }

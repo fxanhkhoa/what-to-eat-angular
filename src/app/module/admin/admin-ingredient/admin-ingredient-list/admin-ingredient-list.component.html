@@ -1,7 +1,7 @@
 <div class="space-y-6">
   <!-- Top Hero Header -->
-  <div
-    class="bg-gradient-to-r from-amber-600 via-orange-500 to-amber-700 rounded-2xl p-6 sm:p-8 text-white shadow-xl ring-1 ring-black/10 relative overflow-hidden">
+  <mat-card appearance="outlined"
+    class="!border-0 !bg-gradient-to-r !from-amber-600 !via-orange-500 !to-amber-700 !rounded-2xl !p-6 sm:!p-8 !text-white shadow-xl relative overflow-hidden">
     <!-- Decorative background elements -->
     <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
     <div class="absolute right-20 -top-12 w-48 h-48 bg-amber-400/20 rounded-full blur-xl pointer-events-none"></div>
@@ -13,29 +13,31 @@
           <mat-icon class="!text-sm !w-4 !h-4">inventory_2</mat-icon>
           <span i18n>Ingredients Catalog</span>
         </div>
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight" i18n>Ingredient Management</h1>
-        <p class="text-amber-100 text-sm sm:text-base max-w-xl" i18n>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white m-0" i18n>Ingredient Management</h1>
+        <p class="text-amber-100 text-sm sm:text-base max-w-xl m-0" i18n>
           Maintain raw food components, portion metrics, nutritional facts, and dietary categorization.
         </p>
       </div>
 
       <!-- Action buttons -->
       <div class="flex flex-wrap items-center gap-3">
-        <!-- View Mode Toggle -->
-        <div class="bg-white/20 backdrop-blur-md rounded-xl p-1 flex items-center border border-white/20">
-          <button (click)="setViewMode('table')" [class.bg-white]="viewMode() === 'table'"
-            [class.text-amber-900]="viewMode() === 'table'" [class.text-white]="viewMode() !== 'table'"
-            class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs">
-            <mat-icon class="!text-sm !w-4 !h-4">view_list</mat-icon>
+        <!-- View Mode Toggle with MatButtonToggle -->
+        <mat-button-toggle-group [value]="viewMode()" (change)="setViewMode($event.value)"
+          class="!bg-white/20 !border-white/30 !rounded-xl !overflow-hidden backdrop-blur-md"
+          aria-label="View mode">
+          <mat-button-toggle value="table" class="!text-white"
+            [class.!bg-white]="viewMode() === 'table'"
+            [class.!text-amber-900]="viewMode() === 'table'">
+            <mat-icon class="!text-sm !w-4 !h-4 mr-1">view_list</mat-icon>
             <span i18n>Table</span>
-          </button>
-          <button (click)="setViewMode('grid')" [class.bg-white]="viewMode() === 'grid'"
-            [class.text-amber-900]="viewMode() === 'grid'" [class.text-white]="viewMode() !== 'grid'"
-            class="px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all shadow-xs">
-            <mat-icon class="!text-sm !w-4 !h-4">grid_view</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="grid" class="!text-white"
+            [class.!bg-white]="viewMode() === 'grid'"
+            [class.!text-amber-900]="viewMode() === 'grid'">
+            <mat-icon class="!text-sm !w-4 !h-4 mr-1">grid_view</mat-icon>
             <span i18n>Cards</span>
-          </button>
-        </div>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
 
         <!-- Refresh button -->
         <button mat-icon-button (click)="loadData()" [disabled]="isLoading()" matTooltip="Refresh list"
@@ -45,140 +47,147 @@
 
         <!-- Create Button -->
         <a mat-flat-button routerLink="/admin/ingredient/create"
-          class="!bg-white !text-amber-800 hover:!bg-amber-50 !font-bold !px-5 !py-2.5 !rounded-xl !shadow-md transition-transform active:scale-95 flex items-center gap-2">
+          class="!bg-white !text-amber-800 hover:!bg-amber-50 !font-bold !px-5 !py-2.5 !rounded-xl !shadow-md flex items-center gap-2">
           <mat-icon class="!text-amber-800">add</mat-icon>
           <span i18n>Add Ingredient</span>
         </a>
       </div>
     </div>
-  </div>
+  </mat-card>
 
-  <!-- Quick Statistics Cards -->
+  <!-- Quick Statistics Cards with MatCard -->
   <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
     <!-- Stat 1: Total Ingredients -->
-    <div
-      class="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl shadow-sm ring-1 ring-black/5 flex items-center justify-between border-l-4 border-amber-500">
-      <div>
-        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider" i18n>Total Ingredients</p>
-        <p class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">{{ totalCount() }}</p>
-      </div>
-      <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-        <mat-icon class="!text-2xl">kitchen</mat-icon>
-      </div>
-    </div>
+    <mat-card appearance="outlined" class="!rounded-2xl !bg-white/90 backdrop-blur-sm border-l-4 !border-l-amber-500 shadow-sm">
+      <mat-card-content class="!p-4 sm:!p-5 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-slate-500 uppercase tracking-wider m-0" i18n>Total Ingredients</p>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1 mb-0">{{ totalCount() }}</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+          <mat-icon class="!text-2xl">kitchen</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Stat 2: Active Categories in Dataset -->
-    <div
-      class="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl shadow-sm ring-1 ring-black/5 flex items-center justify-between border-l-4 border-emerald-500">
-      <div>
-        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider" i18n>Page Categories</p>
-        <p class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1">{{ categoryCount() }}</p>
-      </div>
-      <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-        <mat-icon class="!text-2xl">category</mat-icon>
-      </div>
-    </div>
+    <mat-card appearance="outlined" class="!rounded-2xl !bg-white/90 backdrop-blur-sm border-l-4 !border-l-emerald-500 shadow-sm">
+      <mat-card-content class="!p-4 sm:!p-5 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-slate-500 uppercase tracking-wider m-0" i18n>Page Categories</p>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-800 mt-1 mb-0">{{ categoryCount() }}</p>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+          <mat-icon class="!text-2xl">category</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Stat 3: Avg. Calories -->
-    <div
-      class="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl shadow-sm ring-1 ring-black/5 flex items-center justify-between border-l-4 border-orange-500">
-      <div>
-        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider" i18n>Avg. Energy</p>
-        <div class="flex items-baseline gap-1 mt-1">
-          <span class="text-2xl sm:text-3xl font-extrabold text-slate-800">{{ avgCalories() }}</span>
-          <span class="text-xs text-slate-500 font-medium">kcal</span>
+    <mat-card appearance="outlined" class="!rounded-2xl !bg-white/90 backdrop-blur-sm border-l-4 !border-l-orange-500 shadow-sm">
+      <mat-card-content class="!p-4 sm:!p-5 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-slate-500 uppercase tracking-wider m-0" i18n>Avg. Energy</p>
+          <div class="flex items-baseline gap-1 mt-1">
+            <span class="text-2xl sm:text-3xl font-extrabold text-slate-800">{{ avgCalories() }}</span>
+            <span class="text-xs text-slate-500 font-medium">kcal</span>
+          </div>
         </div>
-      </div>
-      <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
-        <mat-icon class="!text-2xl">local_fire_department</mat-icon>
-      </div>
-    </div>
+        <div class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center">
+          <mat-icon class="!text-2xl">local_fire_department</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
     <!-- Stat 4: Filter Status -->
-    <div
-      class="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl shadow-sm ring-1 ring-black/5 flex items-center justify-between border-l-4 border-blue-500">
-      <div>
-        <p class="text-xs font-medium text-slate-500 uppercase tracking-wider" i18n>Filter Status</p>
-        <p class="text-sm font-semibold text-slate-800 mt-1 truncate max-w-[130px]">
-          {{ categoryFilter.value ? (categoryFilter.value | categoryTranslate) : 'All Categories' }}
-        </p>
-        @if (hasActiveFilters()) {
-        <span class="text-[11px] text-blue-600 font-medium cursor-pointer hover:underline" (click)="clearFilters()"
-          i18n>
-          Reset Filters
-        </span>
-        } @else {
-        <span class="text-[11px] text-slate-400" i18n>Viewing all items</span>
-        }
-      </div>
-      <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-        <mat-icon class="!text-2xl">filter_alt</mat-icon>
-      </div>
-    </div>
-  </div>
-
-  <!-- Search, Filter & Quick Tags Bar -->
-  <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-md ring-1 ring-black/5 p-5 space-y-4">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
-      <!-- Search Input -->
-      <div class="md:col-span-7">
-        <mat-form-field appearance="outline" class="w-full !mb-0" subscriptSizing="dynamic">
-          <mat-label i18n>Search ingredients by name or slug...</mat-label>
-          <input matInput [formControl]="searchControl" placeholder="Try 'salmon', 'broccoli', 'olive-oil'">
-          <mat-icon matPrefix class="mr-2 text-slate-400">search</mat-icon>
-          @if (searchControl.value) {
-          <button matSuffix mat-icon-button aria-label="Clear" (click)="searchControl.setValue('')">
-            <mat-icon class="text-slate-400">close</mat-icon>
+    <mat-card appearance="outlined" class="!rounded-2xl !bg-white/90 backdrop-blur-sm border-l-4 !border-l-blue-500 shadow-sm">
+      <mat-card-content class="!p-4 sm:!p-5 flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-slate-500 uppercase tracking-wider m-0" i18n>Filter Status</p>
+          <p class="text-sm font-semibold text-slate-800 mt-1 mb-0 truncate max-w-[130px]">
+            {{ categoryFilter.value ? (categoryFilter.value | categoryTranslate) : 'All Categories' }}
+          </p>
+          @if (hasActiveFilters()) {
+          <button mat-button color="primary" class="!p-0 !min-w-0 !h-auto !text-[11px] font-medium"
+            (click)="clearFilters()" i18n>
+            Reset Filters
           </button>
+          } @else {
+          <span class="text-[11px] text-slate-400" i18n>Viewing all items</span>
           }
-        </mat-form-field>
-      </div>
-
-      <!-- Category Dropdown Filter -->
-      <div class="md:col-span-4">
-        <mat-form-field appearance="outline" class="w-full !mb-0" subscriptSizing="dynamic">
-          <mat-label i18n>Category Filter</mat-label>
-          <mat-select [formControl]="categoryFilter">
-            <mat-option [value]="''" i18n>All Categories</mat-option>
-            @for (category of allCategories; track category) {
-            <mat-option [value]="category">
-              {{ category | categoryTranslate }}
-            </mat-option>
-            }
-          </mat-select>
-          <mat-icon matPrefix class="mr-2 text-slate-400">filter_list</mat-icon>
-        </mat-form-field>
-      </div>
-
-      <!-- Clear Button -->
-      <div class="md:col-span-1 flex justify-end">
-        <button mat-icon-button (click)="clearFilters()" [disabled]="!hasActiveFilters()" matTooltip="Reset all filters"
-          class="!border !border-slate-200 !rounded-xl hover:!bg-slate-50 transition-colors">
-          <mat-icon class="text-slate-600">restart_alt</mat-icon>
-        </button>
-      </div>
-    </div>
-
-    <!-- Quick Category Chips -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-1 scrollbar-none">
-      <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex-shrink-0 mr-1" i18n>Quick:</span>
-      @for (cat of quickCategories; track cat) {
-      <button type="button" (click)="selectQuickCategory(cat)" [class.bg-amber-500]="isCategorySelected(cat)"
-        [class.text-white]="isCategorySelected(cat)" [class.shadow-sm]="isCategorySelected(cat)"
-        [class.bg-slate-100]="!isCategorySelected(cat)" [class.text-slate-700]="!isCategorySelected(cat)"
-        class="px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all hover:bg-amber-100 hover:text-amber-900 flex-shrink-0 cursor-pointer">
-        @if (cat === 'ALL') {
-        <span i18n>All</span>
-        } @else {
-        {{ cat | categoryTranslate }}
-        }
-      </button>
-      }
-    </div>
+        </div>
+        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+          <mat-icon class="!text-2xl">filter_alt</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <!-- Main Content Card (Table or Grid) -->
-  <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-lg ring-1 ring-black/5 overflow-hidden">
+  <!-- Search, Filter & Quick Tags Bar with MatCard -->
+  <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-md">
+    <mat-card-content class="!p-5 space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+        <!-- Search Input -->
+        <div class="md:col-span-7">
+          <mat-form-field appearance="outline" class="w-full !mb-0" subscriptSizing="dynamic">
+            <mat-label i18n>Search ingredients by name or slug...</mat-label>
+            <input matInput [formControl]="searchControl" placeholder="Try 'salmon', 'broccoli', 'olive-oil'">
+            <mat-icon matPrefix class="mr-2 text-slate-400">search</mat-icon>
+            @if (searchControl.value) {
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="searchControl.setValue('')">
+              <mat-icon class="text-slate-400">close</mat-icon>
+            </button>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Category Dropdown Filter -->
+        <div class="md:col-span-4">
+          <mat-form-field appearance="outline" class="w-full !mb-0" subscriptSizing="dynamic">
+            <mat-label i18n>Category Filter</mat-label>
+            <mat-select [formControl]="categoryFilter">
+              <mat-option [value]="''" i18n>All Categories</mat-option>
+              @for (category of allCategories; track category) {
+              <mat-option [value]="category">
+                {{ category | categoryTranslate }}
+              </mat-option>
+              }
+            </mat-select>
+            <mat-icon matPrefix class="mr-2 text-slate-400">filter_list</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <!-- Clear Button -->
+        <div class="md:col-span-1 flex justify-end">
+          <button mat-icon-button (click)="clearFilters()" [disabled]="!hasActiveFilters()" matTooltip="Reset all filters"
+            class="!border !border-slate-200 !rounded-xl hover:!bg-slate-50 transition-colors">
+            <mat-icon class="text-slate-600">restart_alt</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Category Chips with MatChipListbox -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 pt-1 scrollbar-none">
+        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex-shrink-0 mr-1" i18n>Quick:</span>
+        <mat-chip-listbox aria-label="Quick category filters" class="!flex-nowrap">
+          @for (cat of quickCategories; track cat) {
+          <mat-chip-option [selected]="isCategorySelected(cat)" (selectionChange)="selectQuickCategory(cat)"
+            [class.!bg-amber-500]="isCategorySelected(cat)" [class.!text-white]="isCategorySelected(cat)"
+            class="!text-xs">
+            @if (cat === 'ALL') {
+            <span i18n>All</span>
+            } @else {
+            {{ cat | categoryTranslate }}
+            }
+          </mat-chip-option>
+          }
+        </mat-chip-listbox>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Main Content Card (Table or Grid) with MatCard -->
+  <mat-card appearance="outlined" class="!rounded-2xl !bg-white/95 backdrop-blur-md shadow-lg overflow-hidden">
     @if (isLoading()) {
     <div class="flex flex-col justify-center items-center py-20 px-4 text-center">
       <mat-spinner diameter="44" strokeWidth="4"></mat-spinner>
@@ -192,11 +201,11 @@
         <mat-icon class="!text-4xl !w-10 !h-10">search_off</mat-icon>
       </div>
       <h3 class="text-lg font-bold text-slate-800" i18n>No Ingredients Found</h3>
-      <p class="text-slate-500 text-sm mt-1 mb-6" i18n>
+      <p class="text-slate-500 text-sm mt-1 mb-6">
         @if (hasActiveFilters()) {
-        No ingredients matched your filter criteria. Try clearing search filters or search for another food.
+        <span i18n>No ingredients matched your filter criteria. Try clearing search filters or search for another food.</span>
         } @else {
-        There are currently no ingredients in the catalog. Start by adding one!
+        <span i18n>There are currently no ingredients in the catalog. Start by adding one!</span>
         }
       </p>
       <div class="flex gap-3">
@@ -262,15 +271,14 @@
                 }
               </div>
               <div class="flex items-center gap-1.5 text-xs text-slate-500">
-                <span class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-[11px] text-slate-600">{{ element.slug
-                  }}</span>
-                <button (click)="copySlug(element.slug, $event)" matTooltip="Copy slug"
-                  class="text-slate-400 hover:text-slate-700">
-                  <mat-icon class="!text-xs !w-3.5 !h-3.5 leading-none">content_copy</mat-icon>
+                <span class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-[11px] text-slate-600">{{ element.slug }}</span>
+                <button mat-icon-button (click)="copySlug(element.slug, $event)" matTooltip="Copy slug"
+                  class="!w-6 !h-6 !leading-none text-slate-400 hover:text-slate-700">
+                  <mat-icon class="!text-xs !w-3.5 !h-3.5">content_copy</mat-icon>
                 </button>
-                <a [routerLink]="['/ingredient', element.slug]" target="_blank" matTooltip="View on site"
-                  class="text-slate-400 hover:text-amber-600">
-                  <mat-icon class="!text-xs !w-3.5 !h-3.5 leading-none">open_in_new</mat-icon>
+                <a mat-icon-button [routerLink]="['/ingredient', element.slug]" target="_blank" matTooltip="View on site"
+                  class="!w-6 !h-6 !leading-none text-slate-400 hover:text-amber-600">
+                  <mat-icon class="!text-xs !w-3.5 !h-3.5">open_in_new</mat-icon>
                 </a>
               </div>
             </div>
@@ -283,17 +291,16 @@
             <span class="text-xs font-bold text-slate-500 uppercase tracking-wider" i18n>Categories</span>
           </th>
           <td mat-cell *matCellDef="let element" class="!py-3">
-            <div class="flex flex-wrap gap-1 max-w-xs">
+            <mat-chip-set class="!inline-flex max-w-xs">
               @for (cat of element.ingredientCategory; track cat) {
-              <span
-                class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200/60">
+              <mat-chip class="!text-[11px] !min-h-[22px] !h-auto !py-0.5 !bg-amber-50 !text-amber-800 !border !border-amber-200/60">
                 {{ cat | categoryTranslate }}
-              </span>
+              </mat-chip>
               }
               @if (!element.ingredientCategory || element.ingredientCategory.length === 0) {
               <span class="text-xs text-slate-400 italic">—</span>
               }
-            </div>
+            </mat-chip-set>
           </td>
         </ng-container>
 
@@ -357,8 +364,7 @@
           </th>
           <td mat-cell *matCellDef="let element" class="!py-3 text-center text-xs text-slate-500">
             <span class="block">Na: <strong class="text-slate-700">{{ element.sodium || 0 }}</strong> mg</span>
-            <span class="block text-[11px]">Chol: <strong class="text-slate-700">{{ element.cholesterol || 0 }}</strong>
-              mg</span>
+            <span class="block text-[11px]">Chol: <strong class="text-slate-700">{{ element.cholesterol || 0 }}</strong> mg</span>
           </td>
         </ng-container>
 
@@ -413,14 +419,14 @@
     <div class="p-6">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @for (ingredient of dataSource.data; track ingredient._id) {
-        <div
-          class="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
+        <mat-card appearance="outlined"
+          class="!rounded-2xl !bg-white border !border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
           <!-- Card Header Image -->
           <div class="relative aspect-[16/10] w-full bg-slate-100 overflow-hidden cursor-pointer"
             (click)="openDetailDialog(ingredient)">
             @if (ingredient.images && ingredient.images.length > 0) {
-            <img [src]="ingredient.images[0]" alt="{{ getTitle(ingredient.title) }}" (error)="handleImageError($event)"
-              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
+            <img mat-card-image [src]="ingredient.images[0]" alt="{{ getTitle(ingredient.title) }}" (error)="handleImageError($event)"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 !m-0" />
             } @else {
             <div class="w-full h-full flex items-center justify-center text-slate-300 bg-slate-50">
               <mat-icon class="!text-3xl">image_not_supported</mat-icon>
@@ -429,7 +435,7 @@
 
             <!-- Gradient overlay -->
             <div
-              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity">
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity pointer-events-none">
             </div>
 
             <!-- Floating Primary Category Badge -->
@@ -447,7 +453,7 @@
               <span>{{ ingredient.calories || 0 }} kcal</span>
             </div>
 
-            <!-- Quick preview button -->
+            <!-- Quick preview button with MatMiniFab -->
             <button mat-mini-fab (click)="openDetailDialog(ingredient, $event)" matTooltip="Quick preview"
               class="!absolute bottom-3 right-3 !bg-white/90 !text-slate-800 hover:!bg-white !w-8 !h-8 shadow-md">
               <mat-icon class="!text-base">visibility</mat-icon>
@@ -455,20 +461,21 @@
           </div>
 
           <!-- Card Body -->
-          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+          <mat-card-content class="!p-4 flex-1 flex flex-col justify-between space-y-3">
             <div>
               <h3
-                class="font-bold text-slate-900 text-base line-clamp-1 hover:text-amber-600 transition-colors cursor-pointer"
+                class="font-bold text-slate-900 text-base line-clamp-1 hover:text-amber-600 transition-colors cursor-pointer m-0"
                 (click)="openDetailDialog(ingredient)">
                 {{ getTitle(ingredient.title) }}
               </h3>
               @if (getSecondaryTitle(ingredient.title)) {
-              <p class="text-xs text-slate-500 line-clamp-1">{{ getSecondaryTitle(ingredient.title) }}</p>
+              <p class="text-xs text-slate-500 line-clamp-1 mt-0.5 mb-0">{{ getSecondaryTitle(ingredient.title) }}</p>
               }
 
               <div class="flex items-center gap-1 text-xs text-slate-400 mt-1">
                 <span class="font-mono text-[11px] truncate max-w-[150px]">{{ ingredient.slug }}</span>
-                <button (click)="copySlug(ingredient.slug, $event)" matTooltip="Copy slug" class="hover:text-slate-600">
+                <button mat-icon-button (click)="copySlug(ingredient.slug, $event)" matTooltip="Copy slug"
+                  class="!w-5 !h-5 !leading-none hover:text-slate-600">
                   <mat-icon class="!text-xs !w-3 !h-3">content_copy</mat-icon>
                 </button>
               </div>
@@ -498,13 +505,15 @@
                 <span class="font-bold">{{ ingredient.fat || 0 }}g</span>
               </div>
             </div>
-          </div>
+          </mat-card-content>
 
-          <!-- Card Footer Actions -->
-          <div class="px-4 py-3 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between">
-            <a [routerLink]="['/ingredient', ingredient.slug]" target="_blank"
-              class="text-xs text-slate-500 hover:text-amber-600 flex items-center gap-1 font-medium">
-              <mat-icon class="!text-xs !w-3.5 !h-3.5">open_in_new</mat-icon>
+          <mat-divider></mat-divider>
+
+          <!-- Card Footer Actions with MatCardActions -->
+          <mat-card-actions align="end" class="!px-4 !py-2 bg-slate-50/80 flex items-center justify-between !m-0">
+            <a mat-button [routerLink]="['/ingredient', ingredient.slug]" target="_blank"
+              class="!text-xs !text-slate-500 hover:!text-amber-600 !p-1 !min-w-0 flex items-center gap-1 font-medium">
+              <mat-icon class="!text-xs !w-3.5 !h-3.5 mr-0.5">open_in_new</mat-icon>
               <span i18n>Public</span>
             </a>
 
@@ -518,8 +527,8 @@
                 <mat-icon class="!text-base">delete</mat-icon>
               </button>
             </div>
-          </div>
-        </div>
+          </mat-card-actions>
+        </mat-card>
         }
       </div>
     </div>
@@ -530,5 +539,5 @@
     <mat-paginator class="border-t border-slate-200 bg-white" [pageSize]="24" [length]="totalCount()" [pageIndex]="0"
       [pageSizeOptions]="[12, 24, 48, 96]" showFirstLastButtons (page)="loadData()">
     </mat-paginator>
-  </div>
+  </mat-card>
 </div>

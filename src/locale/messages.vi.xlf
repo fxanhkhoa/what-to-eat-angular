@@ -7386,6 +7386,726 @@
                     <context context-type="linenumber">23,25</context>
                 </context-group>
             </trans-unit>
+                    <trans-unit id="4730079511562614480" datatype="html">
+                <source>No categories assigned</source>
+                <target>Chưa phân loại danh mục</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">69,70</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3349573246767574460" datatype="html">
+                <source>Serving Measure</source>
+                <target>Khẩu phần ăn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">78,79</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">197</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3388261751665724933" datatype="html">
+                <source>Standard Weight</source>
+                <target>Trọng lượng tiêu chuẩn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">82,83</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="488799603315113699" datatype="html">
+                <source>Translations</source>
+                <target>Bản dịch ngôn ngữ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">90,91</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5067596298722772472" datatype="html">
+                <source>Nutritional Profile</source>
+                <target>Thông tin dinh dưỡng</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">113,114</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">221</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="9085261795635711968" datatype="html">
+                <source>Energy / Calories</source>
+                <target>Năng lượng / Calo</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">124,125</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7493341169434342599" datatype="html">
+                <source>Macronutrient Energy Distribution</source>
+                <target>Tỷ lệ phân bổ năng lượng đa lượng</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">136,137</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">252,253</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6128418476228439129" datatype="html">
+                <source>Carbohydrate</source>
+                <target>Carbohydrate (Đường/Bột)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">164,165</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">285,286</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2815329618202050825" datatype="html">
+                <source>View on Public Website</source>
+                <target>Xem trên trang công khai</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">213,214</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3969118363662152086" datatype="html">
+                <source>Edit Ingredient</source>
+                <target>Chỉnh sửa nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.html</context>
+                    <context context-type="linenumber">220,221</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">17</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2115592966120408375" datatype="html">
+                <source>Copied</source>
+                <target>Đã sao chép</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.ts</context>
+                    <context context-type="linenumber">89</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
+                    <context context-type="linenumber">294</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4038291202749237938" datatype="html">
+                <source>Slug copied to clipboard</source>
+                <target>Đã sao chép slug vào bộ nhớ tạm</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-detail-dialog/admin-ingredient-detail-dialog.component.ts</context>
+                    <context context-type="linenumber">89</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
+                    <context context-type="linenumber">294</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="9015336246045548718" datatype="html">
+                <source>Ingredients Catalog</source>
+                <target>Danh mục nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">14,15</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4793362051203387319" datatype="html">
+                <source>Ingredient Management</source>
+                <target>Quản lý nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">16,17</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3179217765763221238" datatype="html">
+                <source> Maintain raw food components, portion metrics, nutritional facts, and dietary categorization. </source>
+                <target> Quản lý các thành phần thực phẩm, định lượng khẩu phần, thông tin dinh dưỡng và phân loại chế độ ăn. </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">18,19</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1358239534403218079" datatype="html">
+                <source>Table</source>
+                <target>Dạng bảng</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">32,33</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5811097982080929097" datatype="html">
+                <source>Cards</source>
+                <target>Dạng thẻ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">38,39</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7615831122378516633" datatype="html">
+                <source>Add Ingredient</source>
+                <target>Thêm nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">52,53</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5408395109673657250" datatype="html">
+                <source>Page Categories</source>
+                <target>Danh mục trên trang</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">77,78</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1939414034446866657" datatype="html">
+                <source>Avg. Energy</source>
+                <target>Năng lượng TB</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">90,91</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4755349002856453541" datatype="html">
+                <source>Filter Status</source>
+                <target>Trạng thái bộ lọc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">106,107</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6978234364807213493" datatype="html">
+                <source> Reset Filters </source>
+                <target> Đặt lại bộ lọc </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">113</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1268972660420905801" datatype="html">
+                <source>Viewing all items</source>
+                <target>Đang hiển thị tất cả</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">116,117</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7878980687294018588" datatype="html">
+                <source>Search ingredients by name or slug...</source>
+                <target>Tìm nguyên liệu theo tên hoặc slug...</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">133</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7778501733043156987" datatype="html">
+                <source>Category Filter</source>
+                <target>Lọc theo danh mục</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">147</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="221922226324249098" datatype="html">
+                <source>All Categories</source>
+                <target>Tất cả danh mục</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">149</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2244739816494694425" datatype="html">
+                <source>Quick:</source>
+                <target>Nhanh:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">171,172</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1616102757855967475" datatype="html">
+                <source>All</source>
+                <target>Tất cả</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">178,179</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7864624738939393320" datatype="html">
+                <source>No ingredients matched your filter criteria. Try clearing search filters or search for another food.</source>
+                <target>Không tìm thấy nguyên liệu phù hợp với tiêu chí lọc. Hãy thử xóa bộ lọc hoặc tìm thực phẩm khác.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">206,207</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3970899357695466965" datatype="html">
+                <source>There are currently no ingredients in the catalog. Start by adding one!</source>
+                <target>Hiện chưa có nguyên liệu nào trong danh mục. Hãy bắt đầu bằng cách thêm một nguyên liệu mới!</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">208,209</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4359014576353578997" datatype="html">
+                <source>Clear Filters</source>
+                <target>Xóa bộ lọc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">215,216</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="9076106114834445313" datatype="html">
+                <source>Create Ingredient</source>
+                <target>Tạo nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">220,221</context>
+                </context-group>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">57,58</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5750485945694679561" datatype="html">
+                <source>Photo</source>
+                <target>Hình ảnh</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">232,233</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3613162578024659270" datatype="html">
+                <source>Portion</source>
+                <target>Khẩu phần</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">310,311</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6004597606736726149" datatype="html">
+                <source>Macros (P / C / F)</source>
+                <target>Đa lượng (Đạm / Đường / Béo)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">337,338</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3662583217952548618" datatype="html">
+                <source>Na / Chol</source>
+                <target>Natri / Cholesterol</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">363,364</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8221147586809519537" datatype="html">
+                <source>Serving Portion:</source>
+                <target>Khẩu phần ăn:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">487,488</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8928816882866356838" datatype="html">
+                <source>Public</source>
+                <target>Công khai</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+                    <context context-type="linenumber">517,518</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1700406338056778236" datatype="html">
+                <source>Failed to load ingredients</source>
+                <target>Không thể tải danh sách nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
+                    <context context-type="linenumber">238</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2225673929241786202" datatype="html">
+                <source>Delete Ingredient</source>
+                <target>Xóa nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
+                    <context context-type="linenumber">332</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6167970469786777986" datatype="html">
+                <source>Are you sure you want to delete this ingredient? This action cannot be undone.</source>
+                <target>Bạn có chắc chắn muốn xóa nguyên liệu này? Thao tác này không thể hoàn tác.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
+                    <context context-type="linenumber">333</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2839185229693461455" datatype="html">
+                <source>Failed to delete ingredient</source>
+                <target>Không thể xóa nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
+                    <context context-type="linenumber">348</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7436023810212050820" datatype="html">
+                <source>Back to Ingredients</source>
+                <target>Quay lại danh sách nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">12,13</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2523997793928513568" datatype="html">
+                <source>Create New Ingredient</source>
+                <target>Tạo nguyên liệu mới</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">19,20</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2364085097539181633" datatype="html">
+                <source> New </source>
+                <target> Mới </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">30</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="11350610173906961" datatype="html">
+                <source> Define multilingual titles, dietary categories, portion sizes, and accurate nutritional metrics. </source>
+                <target> Thiết lập tiêu đề đa ngôn ngữ, danh mục chế độ ăn, định lượng khẩu phần và chỉ số dinh dưỡng chính xác. </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">35,36</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7903093338461599659" datatype="html">
+                <source>Loading ingredient details...</source>
+                <target>Đang tải chi tiết nguyên liệu...</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">68,69</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2776647095330748664" datatype="html">
+                <source>Multilingual Titles</source>
+                <target>Tiêu đề đa ngôn ngữ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">82</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1634393010660333897" datatype="html">
+                <source>Ingredient Name</source>
+                <target>Tên nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">107</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2939517730455737008" datatype="html">
+                <source> URL Identifier (Slug) </source>
+                <target> Định danh URL (Slug) </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">128</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3818038167057246303" datatype="html">
+                <source>Generate from Title</source>
+                <target>Tạo tự động từ tiêu đề</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">133,134</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3760722839337754846" datatype="html">
+                <source>Lowercase letters, numbers, and hyphens only (e.g., sweet-potato)</source>
+                <target>Chỉ dùng chữ thường, số và dấu gạch nối (ví dụ: khoai-lang)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">141</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8066517240031359965" datatype="html">
+                <source>Slug is required</source>
+                <target>Slug là bắt buộc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">143</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5205856936923312565" datatype="html">
+                <source>Slug must only contain lowercase letters, numbers, and hyphens</source>
+                <target>Slug chỉ được chứa chữ thường, chữ số và dấu gạch nối</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">146</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8858487277677063102" datatype="html">
+                <source>Categories &amp; Portion Sizing</source>
+                <target>Danh mục &amp; Định lượng khẩu phần</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">157</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="1192847564885635972" datatype="html">
+                <source>At least one category is required</source>
+                <target>Cần chọn ít nhất một danh mục</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">174</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7717766142572247430" datatype="html">
+                <source>Quick toggle:</source>
+                <target>Chọn nhanh:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">180,181</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3620648144853948885" datatype="html">
+                <source>Human-readable serving (e.g. 1 medium, 1 tbsp)</source>
+                <target>Khẩu phần dễ hiểu (ví dụ: 1 củ vừa, 1 muỗng canh)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">200</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5395661318799948216" datatype="html">
+                <source>Weight in Grams (g)</source>
+                <target>Trọng lượng tính bằng gam (g)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">204</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5911219223699262791" datatype="html">
+                <source>Must be a positive number</source>
+                <target>Phải là số dương</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">209</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7772089208384545538" datatype="html">
+                <source>Standard nutritional content</source>
+                <target>Hàm lượng dinh dưỡng tiêu chuẩn</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">223,224</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4144883982003993429" datatype="html">
+                <source>Energy Value</source>
+                <target>Giá trị năng lượng</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">234,235</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3927467786120171671" datatype="html">
+                <source>Total calories per serving</source>
+                <target>Tổng calo trên mỗi khẩu phần</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">235,236</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8446752035959355076" datatype="html">
+                <source>Photo Gallery</source>
+                <target>Thư viện hình ảnh</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">336</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2789993640334395854" datatype="html">
+                <source>Add Image URL</source>
+                <target>Thêm liên kết ảnh (URL)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">347</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7855622799905009583" datatype="html">
+                <source> Primary Cover </source>
+                <target> Ảnh bìa chính </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">378</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="2859677759268581976" datatype="html">
+                <source> Set as Primary </source>
+                <target> Đặt làm ảnh chính </target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">383</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8787658220867001461" datatype="html">
+                <source>No images added yet.</source>
+                <target>Chưa có hình ảnh nào được thêm.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">408,409</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4478513763339880215" datatype="html">
+                <source>Paste an image URL above to attach photos.</source>
+                <target>Dán đường dẫn ảnh vào ô phía trên để đính kèm hình ảnh.</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">409,410</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5133433505316744056" datatype="html">
+                <source>Live Catalog Preview</source>
+                <target>Xem trước thẻ hiển thị</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">421</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="7759619609150755464" datatype="html">
+                <source>Interactive</source>
+                <target>Tương tác trực tiếp</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">426,427</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="443292609435333920" datatype="html">
+                <source>Portion:</source>
+                <target>Khẩu phần:</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">463,464</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="5075138323547183262" datatype="html">
+                <source>Please fill in all required fields (Slug, Titles, Categories)</source>
+                <target>Vui lòng điền đầy đủ các trường bắt buộc (Slug, Tiêu đề, Danh mục)</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">500,501</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3220443948577669505" datatype="html">
+                <source>Form is ready to submit</source>
+                <target>Biểu mẫu đã sẵn sàng để lưu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">505,506</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="898800191387471408" datatype="html">
+                <source>Update Ingredient</source>
+                <target>Cập nhật nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">523,524</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4293154462397634882" datatype="html">
+                <source>Save Ingredient</source>
+                <target>Lưu nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+                    <context context-type="linenumber">525,526</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3733874721033413747" datatype="html">
+                <source>Failed to load ingredient details</source>
+                <target>Không thể tải thông tin chi tiết nguyên liệu</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">139</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3042471551767868839" datatype="html">
+                <source>Notice</source>
+                <target>Thông báo</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">203</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="4457468013804447104" datatype="html">
+                <source>At least one title translation is required</source>
+                <target>Cần ít nhất một tiêu đề ngôn ngữ</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">203</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="8250323176330086640" datatype="html">
+                <source>Image set as primary</source>
+                <target>Đã đặt hình ảnh làm ảnh chính</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">228</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6759205696902713848" datatype="html">
+                <source>Warning</source>
+                <target>Cảnh báo</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">239</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6457875440598238367" datatype="html">
+                <source>Please enter an ingredient title before generating a slug</source>
+                <target>Vui lòng nhập tên nguyên liệu trước khi tạo slug</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">240</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6908459728359109947" datatype="html">
+                <source>Failed to update ingredient</source>
+                <target>Cập nhật nguyên liệu thất bại</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">381</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="6786795732526976232" datatype="html">
+                <source>Failed to create ingredient</source>
+                <target>Tạo mới nguyên liệu thất bại</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">411</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="3933446673931252881" datatype="html">
+                <source>Validation Error</source>
+                <target>Lỗi xác thực</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">419</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="9084903141749611740" datatype="html">
+                <source>Please complete all required fields correctly</source>
+                <target>Vui lòng hoàn thành đúng các trường bắt buộc</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+                    <context context-type="linenumber">420</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>
