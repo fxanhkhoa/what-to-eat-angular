@@ -70,6 +70,7 @@ import { AdminIngredientDetailDialogComponent } from '../admin-ingredient-detail
 export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'image',
+    'slug',
     'title',
     'categories',
     'measure',
@@ -77,7 +78,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     'macros',
     'micronutrients',
     'updatedAt',
-    'actions',
+    'action',
   ];
 
   dataSource = new MatTableDataSource<Ingredient>([]);
@@ -90,10 +91,8 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   categoryCount = signal(0);
   avgCalories = signal(0);
 
+  availableCategories: string[] = [];
   allCategories = Object.values(INGREDIENT_CATEGORIES);
-  get availableCategories(): string[] {
-    return this.allCategories;
-  }
   quickCategories: string[] = [
     'ALL',
     INGREDIENT_CATEGORIES.VEGETABLES,
@@ -124,20 +123,18 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
 
     // Debounced search
     this.searchControl.valueChanges
-      .pipe(debounceTime(350))
-      .subscribe(() => {
-        if (this.paginator) {
-          this.paginator.pageIndex = 0;
+      .pipe(debounceTime(300))
+      .subscribe((value) => {
+        if (value === '') {
+          this.loadData();
+        } else if (value && value !== '') {
+          this.loadData(value);
         }
-        this.loadData();
       });
 
     // Category filter changes
-    this.categoryFilter.valueChanges.subscribe(() => {
-      if (this.paginator) {
-        this.paginator.pageIndex = 0;
-      }
-      this.loadData();
+    this.categoryFilter.valueChanges.subscribe((value) => {
+      this.filterByCategory(value || '');
     });
   }
 
@@ -146,8 +143,10 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
 
     const page = parseInt(this.route.snapshot.paramMap.get('page') ?? '1', 10);
     const limit = parseInt(this.route.snapshot.paramMap.get('limit') ?? '24', 10);
-    this.paginator.pageIndex = Math.max(0, page - 1);
-    this.paginator.pageSize = limit;
+    if (this.paginator) {
+      this.paginator.pageIndex = Math.max(0, page - 1);
+      this.paginator.pageSize = limit;
+    }
     this.loadData();
   }
 
@@ -157,7 +156,9 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'title':
-          return this.getTitle(item.title).toLowerCase();
+          const englishTitle = item.title?.find((t) => t.lang === 'en');
+          return englishTitle ? englishTitle.data : item.title?.[0]?.data || '';
+        case 'ingredientCategory':
         case 'categories':
           return (item.ingredientCategory || []).join(', ');
         case 'calories':
@@ -177,27 +178,22 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  loadData(searchTerm?: string): void {
+  loadData(keyword?: string): void {
     if (isPlatformServer(this.platformId)) {
       return;
     }
-
-    if (searchTerm !== undefined) {
-      this.searchControl.setValue(searchTerm, { emitEvent: false });
-    }
-
-    const keyword = this.searchControl.value?.trim() || '';
-    const selectedCategory = this.categoryFilter.value;
 
     const query: QueryIngredientDto = {
       page: this.paginator ? this.paginator.pageIndex + 1 : 1,
       limit: this.paginator ? this.paginator.pageSize : 24,
     };
 
-    if (keyword) {
-      query.keyword = keyword;
+    const effectiveKeyword = keyword !== undefined ? keyword : this.searchControl.value?.trim() || '';
+    if (effectiveKeyword) {
+      query.keyword = effectiveKeyword;
     }
 
+    const selectedCategory = this.categoryFilter.value;
     if (selectedCategory && selectedCategory !== 'ALL') {
       query.ingredientCategory = [selectedCategory];
     }
@@ -208,6 +204,18 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
       .pipe(finalize(() => this.isLoading.set(false)))
       .subscribe({
         next: (res) => {
+          if (res.count === 0) {
+            this.dataSource.data = [];
+            this.totalCount.set(0);
+            this.avgCalories.set(0);
+            this.categoryCount.set(0);
+            this.availableCategories = [];
+            if (this.paginator) {
+              this.paginator.length = 0;
+            }
+            return;
+          }
+
           this.dataSource.data = res.data || [];
           this.totalCount.set(res.count || 0);
 
@@ -215,14 +223,18 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
             this.paginator.length = res.count || 0;
           }
 
+          // Extract all unique categories
+          const allCats = new Set<string>();
+          (res.data || []).forEach((item) => {
+            (item.ingredientCategory || []).forEach((cat) => allCats.add(cat));
+          });
+          this.availableCategories = Array.from(allCats).sort();
+
           // Compute quick stats
           if (res.data && res.data.length > 0) {
             const totalCals = res.data.reduce((sum, item) => sum + (item.calories || 0), 0);
             this.avgCalories.set(Math.round(totalCals / res.data.length));
-
-            const uniqueCats = new Set<string>();
-            res.data.forEach((i) => (i.ingredientCategory || []).forEach((c) => uniqueCats.add(c)));
-            this.categoryCount.set(uniqueCats.size);
+            this.categoryCount.set(allCats.size);
           } else {
             this.avgCalories.set(0);
             this.categoryCount.set(0);
@@ -241,9 +253,9 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   }
 
   getTitle(titles: MultiLanguage<string>[]): string {
-    if (!titles || titles.length === 0) return 'Unnamed';
+    if (!titles || titles.length === 0) return 'N/A';
     const english = titles.find((t) => t.lang === 'en');
-    return english ? english.data : titles[0].data || 'Unnamed';
+    return english ? english.data : titles[0]?.data || 'N/A';
   }
 
   getSecondaryTitle(titles: MultiLanguage<string>[]): string | null {
@@ -253,11 +265,34 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(filterValue: string): void {
-    this.searchControl.setValue(filterValue.trim().toLowerCase());
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   filterByCategory(category: string): void {
-    this.categoryFilter.setValue(category);
+    if (!category) {
+      this.dataSource.filterPredicate = (data, filter) =>
+        !filter || filter === '' ? true : data.slug.includes(filter);
+      this.dataSource.filter = this.searchControl.value || '';
+      return;
+    }
+
+    this.dataSource.filterPredicate = (data: Ingredient, filter: string) => {
+      const searchTerm = this.searchControl.value?.toLowerCase() || '';
+      const matchesCategory = (data.ingredientCategory || []).includes(category);
+      const titleMatch = (data.title || []).some((t) =>
+        t.data.toLowerCase().includes(searchTerm)
+      );
+      const slugMatch = (data.slug || '').toLowerCase().includes(searchTerm);
+      const matchesSearch = !searchTerm || titleMatch || slugMatch;
+
+      return matchesCategory && matchesSearch;
+    };
+
+    this.dataSource.filter = category;
   }
 
   selectQuickCategory(category: string): void {
@@ -279,6 +314,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
   clearFilters(): void {
     this.searchControl.setValue('');
     this.categoryFilter.setValue('');
+    this.dataSource.filter = '';
   }
 
   hasActiveFilters(): boolean {
@@ -321,6 +357,7 @@ export class AdminIngredientListComponent implements OnInit, AfterViewInit {
 
   handleImageError(event: any): void {
     event.target.src = '/assets/images/placeholder.png';
+    event.target.classList?.add('error-image');
   }
 
   onDelete(id: string, event?: Event): void {

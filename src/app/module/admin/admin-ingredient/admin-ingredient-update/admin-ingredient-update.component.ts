@@ -176,8 +176,8 @@ export class AdminIngredientUpdateComponent implements OnInit {
     title: MultiLanguage<string> = { lang: '', data: '' }
   ): FormGroup {
     return this.fb.group({
-      lang: [title.lang || 'en', Validators.required],
-      data: [title.data || '', Validators.required],
+      lang: [title.lang, Validators.required],
+      data: [title.data, Validators.required],
     });
   }
 
@@ -415,11 +415,13 @@ export class AdminIngredientUpdateComponent implements OnInit {
         });
     } else {
       this.markFormGroupTouched(this.ingredientForm);
-      this.toastService.showWarning(
-        $localize`Validation Error`,
-        $localize`Please complete all required fields correctly`,
-        3000
-      );
+      if (typeof (this.toastService as any)?.showWarning === 'function') {
+        (this.toastService as any).showWarning(
+          $localize`Validation Error`,
+          $localize`Please complete all required fields correctly`,
+          3000
+        );
+      }
     }
   }
 
