@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
 import { MasonryGalleryComponent } from './masonry-gallery.component';
 import { By } from '@angular/platform-browser';
 
@@ -13,6 +13,7 @@ import { By } from '@angular/platform-browser';
     </app-masonry-gallery>
   `,
   imports: [MasonryGalleryComponent],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 class TestHostComponent {
   images = [

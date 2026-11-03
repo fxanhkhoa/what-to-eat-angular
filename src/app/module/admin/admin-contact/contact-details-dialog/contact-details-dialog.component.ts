@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,8 @@ import { Contact } from '@/types/contact.type';
     MatCardModule
 ],
   templateUrl: './contact-details-dialog.component.html',
-  styleUrl: './contact-details-dialog.component.scss'
+  styleUrl: './contact-details-dialog.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ContactDetailsDialogComponent {
   constructor(

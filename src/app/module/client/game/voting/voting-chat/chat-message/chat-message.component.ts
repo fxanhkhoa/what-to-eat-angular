@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,6 +20,7 @@ import { ChatMessage } from '@/types/chat.type';
   ],
   templateUrl: './chat-message.component.html',
   styleUrls: ['./chat-message.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ChatMessageComponent {
   @Input() message!: ChatMessage;

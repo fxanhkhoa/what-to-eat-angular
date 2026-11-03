@@ -259,7 +259,13 @@ export class VotingComponent implements OnInit, OnDestroy {
               ?.customTitle || slug
           );
         }
-        return dish?.title.find((t) => t?.lang === this.localeID)?.data;
+        return (
+          dish?.title.find(
+            (t) =>
+              t?.lang === this.localeID ||
+              this.localeID.split('-')[0] === t?.lang?.split('-')[0]
+          )?.data || dish.slug
+        );
       })
       .join(', ');
   }
@@ -271,7 +277,13 @@ export class VotingComponent implements OnInit, OnDestroy {
 
   getDishTitle(dish: Dish): string {
     if (dish.deleted) return dish.slug;
-    return dish.title.find((t) => t?.lang === this.localeID)?.data || dish.slug;
+    return (
+      dish.title.find(
+        (t) =>
+          t?.lang === this.localeID ||
+          this.localeID.split('-')[0] === t?.lang?.split('-')[0]
+      )?.data || dish.slug
+    );
   }
 
   getDishDescription(dish: Dish): string {

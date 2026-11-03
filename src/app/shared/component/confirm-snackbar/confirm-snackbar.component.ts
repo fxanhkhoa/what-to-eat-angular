@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -12,6 +12,7 @@ import {
   imports: [MatIconModule, MatButtonModule],
   templateUrl: './confirm-snackbar.component.html',
   styleUrl: './confirm-snackbar.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ConfirmSnackbarComponent {
   constructor(

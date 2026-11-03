@@ -2,7 +2,7 @@ import { MultiLanguagePipe } from '@/app/pipe/multi-language.pipe';
 import { GameStateService } from '@/app/state/game-state.service';
 import { Dish } from '@/types/dish.type';
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, LOCALE_ID, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, LOCALE_ID, signal } from '@angular/core';
 import { take } from 'rxjs';
 
 @Component({
@@ -10,6 +10,7 @@ import { take } from 'rxjs';
   imports: [MultiLanguagePipe, CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class CardComponent {
   @Input() card!: Dish;

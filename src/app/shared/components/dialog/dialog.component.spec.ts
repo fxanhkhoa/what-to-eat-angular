@@ -43,7 +43,7 @@ describe('DialogComponent', () => {
   // ── title input ───────────────────────────────────────────────────────────
 
   it('should render the title when provided', () => {
-    component.title = 'My Dialog';
+    fixture.componentRef.setInput('title', 'My Dialog');
     fixture.detectChanges();
     const h2: HTMLElement = fixture.nativeElement.querySelector('h2');
     expect(h2).not.toBeNull();
@@ -51,7 +51,7 @@ describe('DialogComponent', () => {
   });
 
   it('should not render the title row when title is empty', () => {
-    component.title = '';
+    fixture.componentRef.setInput('title', '');
     fixture.detectChanges();
     const h2 = fixture.nativeElement.querySelector('h2');
     expect(h2).toBeNull();
@@ -60,16 +60,16 @@ describe('DialogComponent', () => {
   // ── showClose input ───────────────────────────────────────────────────────
 
   it('should render the close button when showClose is true and title is set', () => {
-    component.title = 'Test';
-    component.showClose = true;
+    fixture.componentRef.setInput('title', 'Test');
+    fixture.componentRef.setInput('showClose', true);
     fixture.detectChanges();
     const btn = fixture.nativeElement.querySelector('button[mat-icon-button]');
     expect(btn).not.toBeNull();
   });
 
   it('should not render the close button when showClose is false', () => {
-    component.title = 'Test';
-    component.showClose = false;
+    fixture.componentRef.setInput('title', 'Test');
+    fixture.componentRef.setInput('showClose', false);
     fixture.detectChanges();
     const btn = fixture.nativeElement.querySelector('button[mat-icon-button]');
     expect(btn).toBeNull();
@@ -90,8 +90,8 @@ describe('DialogComponent', () => {
   });
 
   it('should call dialogRef.close() when the close button is clicked', () => {
-    component.title = 'Test';
-    component.showClose = true;
+    fixture.componentRef.setInput('title', 'Test');
+    fixture.componentRef.setInput('showClose', true);
     fixture.detectChanges();
     const btn: HTMLButtonElement = fixture.nativeElement.querySelector('button[mat-icon-button]');
     btn.click();
@@ -99,8 +99,8 @@ describe('DialogComponent', () => {
   });
 
   it('should emit closed event when the close button is clicked', () => {
-    component.title = 'Test';
-    component.showClose = true;
+    fixture.componentRef.setInput('title', 'Test');
+    fixture.componentRef.setInput('showClose', true);
     fixture.detectChanges();
     const spy = jasmine.createSpy('closedSpy');
     component.closed.subscribe(spy);

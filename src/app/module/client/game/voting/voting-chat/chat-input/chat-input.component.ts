@@ -6,6 +6,7 @@ import {
   signal,
   ViewChild,
   ElementRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
@@ -32,6 +33,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 ],
   templateUrl: './chat-input.component.html',
   styleUrls: ['./chat-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ChatInputComponent {
   @Input() isConnected = false;
