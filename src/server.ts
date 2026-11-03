@@ -5,11 +5,13 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import { existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import localeVi from '@angular/common/locales/vi';
 import localeEn from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
+import { environment } from './environments/environment';
 
 // Register the Vietnamese locale data
 registerLocaleData(localeVi);
@@ -48,16 +50,35 @@ app.use(
   })
 );
 
-app.use('/:locale/*', (req, res, next) => {
-  const locale = req.params.locale;
-  if (SUPPORTED_LOCALES.includes(locale)) {
+const isDev = !environment.production || !existsSync(browserDistFolder);
+
+if (isDev) {
+  // In development mode (e.g. ng serve), the dev server serves a single locale mounted at root ('/')
+  app.use((req, res, next) => {
+    // If request contains /en or /vi prefix, strip it and redirect to root-relative path
+    for (const locale of SUPPORTED_LOCALES) {
+      if (req.path === `/${locale}`) {
+        return res.redirect(302, '/');
+      }
+      if (req.path.startsWith(`/${locale}/`)) {
+        const strippedPath = req.originalUrl.replace(new RegExp(`^/${locale}`), '') || '/';
+        return res.redirect(302, strippedPath);
+      }
+    }
     next();
-  } else {
-    // If URL doesn't have a valid locale, redirect to default locale
+  });
+} else {
+  // In production mode, Angular multi-locale is active (/en and /vi)
+  app.use((req, res, next) => {
+    const firstSegment = req.path.split('/')[1];
+    if (SUPPORTED_LOCALES.includes(firstSegment) || req.path === '/') {
+      return next();
+    }
+    // If URL doesn't have a valid locale in production, redirect to default locale
     const redirectPath = `/en${req.originalUrl}`;
     res.redirect(302, redirectPath);
-  }
-});
+  });
+}
 
 app.use('/**', (req, res, next) => {
   angularApp
