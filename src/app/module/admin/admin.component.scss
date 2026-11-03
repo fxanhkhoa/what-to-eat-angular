@@ -5,17 +5,23 @@
 
 .sidenav {
   width: fit-content;
-  height: 50%;
-  margin-top: auto;
-  margin-bottom: auto;
+  min-width: 240px;
+  max-height: calc(100vh - 2rem);
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
-}
-
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+// Active navigation item styling
+::ng-deep .active-nav-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%) !important;
+  border-left: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  .mat-icon {
+    color: white !important;
+    transform: scale(1.1);
+  }
+  
+  span {
+    color: white !important;
+    font-weight: 600 !important;
+  }
 }

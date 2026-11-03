@@ -10,16 +10,18 @@ import {
   OnInit,
   PLATFORM_ID,
   ViewChild,
+  signal,
 } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { finalize } from 'rxjs';
-import { MasonryGalleryComponent } from '@/app/shared/component/masonry-gallery/masonry-gallery.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { INGREDIENT_CATEGORIES } from '@/enum/ingredient.enum';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatBadgeModule } from '@angular/material/badge';
 import { CategoryTranslatePipe } from "@/app/pipe/category-translate.pipe";
 
 type ButtonPosition = {
@@ -32,11 +34,12 @@ type ButtonPosition = {
   imports: [
     MatProgressSpinnerModule,
     CommonModule,
-    MasonryGalleryComponent,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
     MatTooltipModule,
+    MatChipsModule,
+    MatBadgeModule,
     CategoryTranslatePipe
 ],
   templateUrl: './ingredient-section.component.html',
@@ -54,14 +57,13 @@ export class IngredientSectionComponent implements OnInit, OnDestroy {
 
   scrollAnimationId: number | null = null;
   scrollDirection: 'down' | 'up' = 'down';
-  carouselRotation = 0;
-  rotationStep = 45;
 
-  isLoading = false;
-  ingredients: Ingredient[] = [];
+  isLoading = signal(false);
+  ingredients = signal<Ingredient[]>([]);
   ingredientCategories: string[] = Object.values(INGREDIENT_CATEGORIES);
   ingredientCategoryIcons: string[] = [];
-  selectedIngredientCategories: string[] = [];
+  selectedIngredientCategories = signal<string[]>([]);
+  hoveredIndex = signal<number | null>(null);
 
   constructor() {
     this.ingredientCategories.forEach((category) => {
@@ -83,40 +85,51 @@ export class IngredientSectionComponent implements OnInit, OnDestroy {
   }
 
   getIngredients() {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.stopScrollAnimation();
     this.ingredientService
-      .findRandom(12, this.selectedIngredientCategories)
+      .findRandom(12, this.selectedIngredientCategories())
       .pipe(
         finalize(() => {
-          this.isLoading = false;
+          this.isLoading.set(false);
           setTimeout(() => this.startScrollAnimation(), 1000);
         })
       )
-      .subscribe((res) => (this.ingredients = res));
+      .subscribe((res) => this.ingredients.set(res));
   }
 
   selectIngredientCategory(category: string) {
-    if (this.selectedIngredientCategories.includes(category)) {
-      this.selectedIngredientCategories =
-        this.selectedIngredientCategories.filter((item) => item !== category);
+    const current = this.selectedIngredientCategories();
+    if (current.includes(category)) {
+      this.selectedIngredientCategories.set(
+        current.filter((item) => item !== category)
+      );
     } else {
-      this.selectedIngredientCategories.push(category);
+      this.selectedIngredientCategories.set([...current, category]);
     }
 
     this.getIngredients();
   }
 
   isSelected(category: string) {
-    return this.selectedIngredientCategories.includes(category);
+    return this.selectedIngredientCategories().includes(category);
+  }
+
+  getIngredientTitle(ingredient: Ingredient): string {
+    return ingredient.title.find((t) => t.lang === this.localeId)?.data || '';
   }
 
   get images() {
-    if (!this.ingredients) return [];
-    return this.ingredients.map((item) => ({
+    const ingredients = this.ingredients();
+    if (!ingredients) return [];
+    return ingredients.map((item) => ({
       src: item.images[0],
       title: item.title.find((t) => t.lang === this.localeId)?.data,
     }));
+  }
+
+  onImageLoad(index: number): void {
+    // Handle image load if needed
   }
 
   startScrollAnimation(): void {
@@ -160,34 +173,8 @@ export class IngredientSectionComponent implements OnInit, OnDestroy {
     this.startScrollAnimation();
   }
 
-  pauseCarousel() {
-    const carousel = document.querySelector('.curved-carousel');
-    if (carousel) {
-      carousel.classList.add('paused');
-    }
-  }
-
-  resumeCarousel() {
-    const carousel = document.querySelector('.curved-carousel');
-    if (carousel) {
-      carousel.classList.remove('paused');
-    }
-  }
-
-  rotateCarousel(direction: 'left' | 'right'): void {
-    // Calculate new rotation angle
-    if (direction === 'left') {
-      this.carouselRotation -= this.rotationStep;
-    } else {
-      this.carouselRotation += this.rotationStep;
-    }
-
-    // Normalize angle to stay within 0-360 range (optional)
-    this.carouselRotation = this.carouselRotation % 360;
-  }
-
   resetFilters() {
-    this.selectedIngredientCategories = [];
+    this.selectedIngredientCategories.set([]);
     this.getIngredients();
   }
 }

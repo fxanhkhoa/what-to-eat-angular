@@ -1,15 +1,19 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { AuthService } from './service/auth.service';
+import { PushNotificationService } from './service/push-notification.service';
+import { ToastService } from './shared/service/toast.service';
 import cookies from 'js-cookie';
 import { isPlatformServer } from '@angular/common';
 import { Cookies_Key } from '@/enum/cookies.enum';
+import { environment } from '@/environments/environment';
 import { WebsiteVisitService } from './service/website-visit.service';
 import { FeedbackFabComponent } from './components/feedback-fab/feedback-fab.component';
+import { CookieConsentBannerComponent } from './shared/component/cookie-consent-banner/cookie-consent-banner.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule, FeedbackFabComponent],
+  imports: [RouterModule, FeedbackFabComponent, CookieConsentBannerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -18,6 +22,8 @@ export class AppComponent implements OnInit {
   private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
   private websiteVisitService = inject(WebsiteVisitService);
+  private pushNotificationService = inject(PushNotificationService);
+  private toastService = inject(ToastService);
 
   title = 'what-to-eat-angular';
 
@@ -34,12 +40,27 @@ export class AppComponent implements OnInit {
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
           if (typeof window.gtag === 'function') {
-            window.gtag('config', 'G-FWE0TE8LCZ', {
+            window.gtag('config', environment.FIREBASE_MEASUREMENT_ID, {
               page_path: event.urlAfterRedirects,
             });
           }
         }
       });
+      // Foreground push notification listener
+      this.pushNotificationService
+        .onForegroundMessage()
+        .subscribe((payload) => {
+          console.log('[FCM] Foreground message received', payload);
+          this.pushNotificationService.refreshUnreadCount();
+          // Show in-app notification toast instead of native browser notification
+          this.toastService.showNotification(
+            payload.notification?.title || 'New Notification',
+            payload.notification?.body || '',
+            5000000,
+            payload.data?.['url'] || '/',
+            payload.data?.['type'] || 'activity',
+          );
+        });
     }
   }
 
@@ -49,15 +70,17 @@ export class AppComponent implements OnInit {
     }
 
     const refreshToken = cookies.get(Cookies_Key.REFRESH_TOKEN);
-    
+
     if (refreshToken) {
       // Refresh the access token if refresh token exists
       this.authService.refreshToken(refreshToken).subscribe({
         next: (tokenResult) => {
           // Save new tokens to cookies
           cookies.set(Cookies_Key.TOKEN, tokenResult.token, { expires: 7 });
-          cookies.set(Cookies_Key.REFRESH_TOKEN, tokenResult.refreshToken, { expires: 30 });
-          
+          cookies.set(Cookies_Key.REFRESH_TOKEN, tokenResult.refreshToken, {
+            expires: 30,
+          });
+
           // Now get the profile with the refreshed token
           this.getProfile();
         },
@@ -84,6 +107,9 @@ export class AppComponent implements OnInit {
     }
     this.authService.getProfileAPI().subscribe({
       next: (profile) => {
+        if (!profile) {
+          return;
+        }
         this.authService.setProfile(profile);
       },
       error: (error) => {

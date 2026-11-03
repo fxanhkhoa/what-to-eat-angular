@@ -1,0 +1,25 @@
+FROM node:24-alpine AS build
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# Copy source code
+COPY . .
+RUN npm run build:ssr
+
+FROM node:24-alpine
+WORKDIR /app
+
+COPY --from=build /app/dist/what-to-eat-angular ./dist/what-to-eat-angular
+COPY --from=build /app/package*.json ./
+
+# Install only production dependencies
+RUN npm ci --omit=dev
+
+# Expose the port the app runs on
+EXPOSE 4000
+
+CMD ["npm", "run", "serve:ssr:what-to-eat-angular"]
+

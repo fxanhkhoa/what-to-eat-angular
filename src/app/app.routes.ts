@@ -50,6 +50,33 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'my-dishes',
+        canActivate: [authenticationGuard],
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list.component').then(
+                (m) => m.UserDishListComponent
+              ),
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component').then(
+                (m) => m.UserDishListCreateComponent
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component').then(
+                (m) => m.UserDishListCreateComponent
+              ),
+          },
+        ],
+      },
+      {
         path: 'game',
         children: [
           {
@@ -126,6 +153,22 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./module/login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'profile',
+    canActivate: [authenticationGuard],
+    loadComponent: () =>
+      import('./module/profile/profile.component').then(
+        (m) => m.ProfileComponent
+      ),
+  },
+  {
+    path: 'data-deletion',
+    canActivate: [authenticationGuard],
+    loadComponent: () =>
+      import('./module/data-deletion/data-deletion.component').then(
+        (m) => m.DataDeletionComponent
+      ),
   },
   {
     path: 'admin',
@@ -340,7 +383,33 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'notification',
+        canActivate: [authenticationGuard, authorizationGuard],
+        data: {
+          permissions: [Permissions.SEND_NOTIFICATIONS],
+          breadcrumb: 'Push Notifications',
+        },
+        loadComponent: () =>
+          import('./module/admin/admin-notification/admin-notification.component').then(
+            (m) => m.AdminNotificationComponent
+          ),
+      },
     ],
+  },
+  {
+    path: 'terms',
+    loadComponent: () =>
+      import('./module/terms/terms.component').then(
+        (m) => m.TermsComponent
+      ),
+  },
+  {
+    path: 'privacy-policy',
+    loadComponent: () =>
+      import('./module/privacy-policy/privacy-policy.component').then(
+        (m) => m.PrivacyPolicyComponent
+      ),
   },
   {
     path: 'forbidden',

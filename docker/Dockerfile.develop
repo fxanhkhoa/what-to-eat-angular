@@ -1,4 +1,4 @@
-FROM node:22-alpine as build
+FROM node:24-alpine AS build
 WORKDIR /app
 
 # Copy package files and install dependencies
@@ -9,7 +9,7 @@ RUN npm ci
 COPY . .
 RUN npm run build:ssr
 
-FROM node:22-alpine
+FROM node:24-alpine
 WORKDIR /app
 
 COPY --from=build /app/dist/what-to-eat-angular ./dist/what-to-eat-angular

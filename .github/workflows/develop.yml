@@ -8,10 +8,28 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --no-watch --browsers=ChromeHeadless
+
   build-check:
     name: Build Check (No Deploy)
     runs-on: ubuntu-latest
-
+    needs: [test]
     steps:
       - uses: actions/checkout@v4
       
@@ -25,6 +43,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./docker/Dockerfile.develop
+          file: ./Dockerfile
           push: false
           tags: fxanhkhoa/what-to-eat:develop-check

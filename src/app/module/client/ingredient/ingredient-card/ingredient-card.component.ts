@@ -7,14 +7,21 @@ import {
   LOCALE_ID,
   OnInit,
   signal,
-  ViewEncapsulation,
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { CategoryBadgesComponent } from "../../../../shared/component/category-badges/category-badges.component";
+import { MatIconModule } from '@angular/material/icon';
+import { CategoryBadgesComponent } from '../../../../shared/component/category-badges/category-badges.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-ingredient-card',
-  imports: [MultiLanguagePipe, MatCardModule, CategoryBadgesComponent],
+  imports: [
+    MultiLanguagePipe,
+    MatCardModule,
+    MatIconModule,
+    CategoryBadgesComponent,
+    MatButtonModule,
+  ],
   templateUrl: './ingredient-card.component.html',
   styleUrl: './ingredient-card.component.scss',
 })
@@ -36,7 +43,7 @@ export class IngredientCardComponent implements OnInit {
   ngOnInit(): void {
     const randomIndex = Math.floor(Math.random() * this.backgroundList.length);
     this.selectedBackground.set(
-      `background-image: url("${this.backgroundList[randomIndex]}") !important;`
+      `background-image: url("${this.backgroundList[randomIndex]}") !important;`,
     );
   }
 

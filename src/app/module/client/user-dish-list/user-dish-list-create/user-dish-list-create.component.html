@@ -1,0 +1,263 @@
+<section id="main" class="min-h-screen p-5 md:p-10 mt-20 bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900">
+    <div class="max-w-7xl mx-auto">
+        <!-- Loading Overlay -->
+        @if (loading) {
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center">
+            <div
+                class="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl flex flex-col items-center gap-4">
+                <mat-spinner diameter="60" strokeWidth="4" class="!text-blue-400" />
+                <p class="text-white text-lg font-semibold" i18n>{{ isEditMode() ? 'Loading collection...' : 'Saving
+                    collection...' }}</p>
+            </div>
+        </div>
+        }
+
+        <div
+            class="mb-8 rounded-3xl backdrop-blur-xl bg-white/5 border border-white/10 p-8 shadow-2xl animate-in slide-in-from-top duration-500">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <mat-icon [class]="isEditMode() ? 'text-blue-400' : 'text-purple-400'">{{ isEditMode() ? 'edit' :
+                    'add_circle' }}</mat-icon>
+                <span i18n>{{ isEditMode() ? 'Edit Collection' : 'Create New Collection' }}</span>
+            </h2>
+            <form [formGroup]="collectionForm" (ngSubmit)="createCollection()" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Collection Name -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label i18n>Collection Name</mat-label>
+                        <input matInput formControlName="name" placeholder="e.g., My Birthday Dishes" i18n-placeholder>
+                        <mat-icon matPrefix class="text-blue-400 mr-2">label</mat-icon>
+                        <mat-error *ngIf="collectionForm.get('name')?.hasError('required')" i18n>Name is
+                            required</mat-error>
+                    </mat-form-field>
+
+                    <!-- Occasion -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label i18n>Occasion</mat-label>
+                        <mat-select formControlName="occasion">
+                            <mat-option value="">None</mat-option>
+                            @for (occasion of occasions; track occasion) {
+                            <mat-option [value]="occasion">{{ occasion | titlecase }}</mat-option>
+                            }
+                        </mat-select>
+                        <mat-icon matPrefix class="text-purple-400 mr-2">event</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <!-- Description -->
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label i18n>Description</mat-label>
+                    <textarea matInput formControlName="description" rows="3" placeholder="Describe your collection..."
+                        i18n-placeholder></textarea>
+                    <mat-icon matPrefix class="text-green-400 mr-2">description</mat-icon>
+                </mat-form-field>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Event Date -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label i18n>Event Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="eventDate">
+                        <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <!-- Icon -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label i18n>Icon</mat-label>
+                        <mat-select formControlName="icon">
+                            @for (icon of availableIcons; track icon.name) {
+                            <mat-option [value]="icon.name">
+                                <div class="flex items-center gap-2">
+                                    <mat-icon>{{ icon.name }}</mat-icon>
+                                    <span>{{ icon.label }}</span>
+                                </div>
+                            </mat-option>
+                            }
+                        </mat-select>
+                        <mat-icon matPrefix class="mr-2">{{ collectionForm.get('icon')?.value }}</mat-icon>
+                    </mat-form-field>
+
+                    <!-- Color -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label i18n>Color</mat-label>
+                        <mat-select formControlName="color">
+                            @for (color of availableColors; track color.value) {
+                            <mat-option [value]="color.value">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-full border-2 border-gray-300 shadow-sm"
+                                        [style.background-color]="color.value"></span>
+                                    <span>{{ color.name }}</span>
+                                </div>
+                            </mat-option>
+                            }
+                        </mat-select>
+                        <span matPrefix
+                            class="inline-block w-6 h-6 ml-2 rounded-full border-2 border-gray-300 shadow-md mr-2 flex-shrink-0"
+                            [style.background-color]="collectionForm.get('color')?.value || '#3b82f6'"></span>
+                    </mat-form-field>
+                </div>
+
+                <!-- Public Toggle -->
+                <div class="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10">
+                    <mat-slide-toggle formControlName="isPublic" color="primary">
+                        <span class="text-white" i18n>Make this collection public</span>
+                    </mat-slide-toggle>
+                    <mat-icon class="text-gray-400 text-sm" matTooltip="Public collections can be viewed by others"
+                        i18n-matTooltip>
+                        info
+                    </mat-icon>
+                </div>
+
+                <!-- Dish Selection Section -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                            <mat-icon class="text-orange-400">restaurant</mat-icon>
+                            <span i18n>Add Dishes</span>
+                            <span class="text-sm text-gray-400">({{ selectedDishes.length }})</span>
+                        </h3>
+                    </div>
+
+                    <!-- Search Box -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label i18n>Search dishes</mat-label>
+                        <input matInput [value]="searchQuery" (input)="onSearchChange($any($event.target).value)"
+                            placeholder="Type to search dishes..." i18n-placeholder>
+                        <mat-icon matPrefix class="text-orange-400 mr-2">search</mat-icon>
+                        @if (loadingDishes) {
+                        <mat-icon matSuffix class="animate-spin">refresh</mat-icon>
+                        }
+                    </mat-form-field>
+
+                    <!-- Selected Dishes -->
+                    @if (selectedDishes.length > 0) {
+                    <div class="space-y-2">
+                        <p class="text-sm text-gray-400" i18n>Selected dishes:</p>
+                        <div class="flex flex-wrap gap-2">
+                            @for (dish of selectedDishes; track dish.slug) {
+                            <div
+                                class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-500/30 backdrop-blur-sm group cursor-pointer hover:from-orange-500/30 hover:to-red-500/30 transition-all">
+                                <button mat-icon-button type="button" (click)="openDishDetail(dish, $event)"
+                                    matTooltip="View details" i18n-matTooltip aria-label="View details" title="View details">
+                                    <mat-icon>info</mat-icon>
+                                </button>
+                                <span class="text-sm text-white" (click)="openDishDetail(dish, $event)">{{ (dish.title |
+                                    multiLanguage: localeId)?.data }}</span>
+                                <button mat-icon-button type="button" (click)="removeDish(dish.slug)"
+                                    matTooltip="Remove" i18n-matTooltip aria-label="Remove dish" title="Remove dish">
+                                    <mat-icon class="!text-red-500">close</mat-icon>
+                                </button>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Search Results -->
+                    @if (loadingDishes && searchQuery.length >= 2) {
+                    <div class="flex flex-col items-center justify-center py-16 text-gray-400">
+                        <mat-spinner diameter="50" strokeWidth="3" class="!text-orange-400 mb-4" />
+                        <p class="text-sm" i18n>Searching dishes...</p>
+                    </div>
+                    } @else if (searchResults.length > 0) {
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[500px] overflow-y-auto rounded-xl p-4 bg-black/20 border border-white/5">
+                        @for (dish of searchResults; track dish.slug) {
+                        <div class="group relative rounded-xl overflow-hidden bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/10 hover:border-orange-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer"
+                            [class.ring-2]="isDishSelected(dish.slug)"
+                            [class.ring-orange-500]="isDishSelected(dish.slug)"
+                            (click)="isDishSelected(dish.slug) ? removeDish(dish.slug) : addDish(dish)">
+
+                            <!-- Image -->
+                            <div
+                                class="relative h-40 overflow-hidden bg-gradient-to-br from-orange-600/20 to-red-600/20">
+                                @if (dish.thumbnail) {
+                                <img [src]="dish.thumbnail" [alt]="(dish.title | multiLanguage: localeId)?.data"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                } @else {
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <mat-icon class="!w-16 !h-16 !text-6xl text-white/30">restaurant</mat-icon>
+                                </div>
+                                }
+
+                                <!-- Selected Badge -->
+                                @if (isDishSelected(dish.slug)) {
+                                <div
+                                    class="absolute top-2 right-2 bg-orange-500 text-white rounded-full px-1.5 py-1 shadow-lg">
+                                    <mat-icon>check</mat-icon>
+                                </div>
+                                }
+
+                                <!-- Gradient Overlay -->
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent">
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-4 space-y-2">
+                                <div class="flex items-start justify-between gap-2">
+                                    <h4
+                                        class="text-white font-semibold text-sm line-clamp-1 group-hover:text-orange-400 transition-colors flex-1">
+                                        {{ (dish.title | multiLanguage: localeId)?.data }}
+                                    </h4>
+                                    <button mat-icon-button type="button" (click)="openDishDetail(dish, $event)"
+                                        class="!w-8 !h-8 !text-white/60 hover:!text-orange-400 hover:!bg-orange-500/10 transition-all flex-shrink-0"
+                                        matTooltip="View details" i18n-matTooltip aria-label="View details" title="View details">
+                                        <mat-icon class="!text-xl">info</mat-icon>
+                                    </button>
+                                </div>
+
+                                @if (dish.shortDescription) {
+                                <p class="text-gray-400 text-xs line-clamp-2">
+                                    {{ (dish.shortDescription | multiLanguage: localeId)?.data }}
+                                </p>
+                                }
+
+                                <!-- Tags -->
+                                @if (dish.mealCategories && dish.mealCategories.length > 0) {
+                                <div class="flex flex-wrap gap-1">
+                                    @for (category of dish.mealCategories.slice(0, 2); track category) {
+                                    <span
+                                        class="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 text-xs border border-orange-500/30">
+                                        {{ category }}
+                                    </span>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Hover Action -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-orange-500/0 to-orange-500/0 group-hover:from-orange-500/10 group-hover:to-transparent transition-all duration-300 pointer-events-none">
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    } @else if (searchQuery && searchQuery.length >= 2 && !loadingDishes) {
+                    <div class="text-center py-12 text-gray-400">
+                        <mat-icon class="!w-16 !h-16 !text-6xl mb-2 text-gray-500">search_off</mat-icon>
+                        <p i18n>No dishes found</p>
+                    </div>
+                    }
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-end gap-4">
+                    <button mat-stroked-button type="button" (click)="cancel()" class="!text-white !border-white/20">
+                        <mat-icon>close</mat-icon>
+                        <span i18n>Cancel</span>
+                    </button>
+                    <button mat-raised-button type="submit" [disabled]="collectionForm.invalid || loading"
+                        class="!bg-gradient-to-r !from-blue-500 !to-purple-500 !text-white hover:!shadow-xl transition-all">
+                        @if (loading) {
+                        <mat-spinner diameter="20" strokeWidth="3" class="mr-2" />
+                        } @else {
+                        <mat-icon>{{ isEditMode() ? 'save' : 'add' }}</mat-icon>
+                        }
+                        <span i18n>{{ isEditMode() ? 'Update Collection' : 'Create Collection' }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

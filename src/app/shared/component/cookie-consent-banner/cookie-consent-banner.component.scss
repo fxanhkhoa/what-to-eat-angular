@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+section {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}

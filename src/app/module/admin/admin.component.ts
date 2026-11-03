@@ -99,8 +99,18 @@ export class AdminComponent implements OnInit {
       const newUrl = `${baseUrl}/${langCode}${pathWithoutLocale}${window.location.search}`;
 
       // Redirect to the new URL with the selected language
-      window.location.href = newUrl;
+      this.navigateTo(newUrl);
     }
+  }
+
+  /** @protected — extracted for testability */
+  navigateTo(url: string) {
+    window.location.href = url;
+  }
+
+  /** @protected — extracted for testability */
+  reloadPage() {
+    window.location.reload();
   }
 
   get currentLanguageObject() {
@@ -127,7 +137,7 @@ export class AdminComponent implements OnInit {
         this.payload = undefined;
 
         // Navigate to login page
-        window.location.reload();
+        this.reloadPage();
       },
       error: (error) => {
         console.error('Logout failed', error);

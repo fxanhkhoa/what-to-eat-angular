@@ -8,6 +8,9 @@
     "build:ssr": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:file": "ng test --include",
+    "test:coverage": "ng test --code-coverage --no-watch --browsers=ChromeHeadless",
+    "test:coverage:file": "ng test --code-coverage --no-watch --browsers=ChromeHeadless --include",
     "serve:ssr:what-to-eat-angular": "node dist/what-to-eat-angular/server/server.mjs"
   },
   "private": true,

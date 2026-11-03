@@ -1,17 +1,29 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthorizationService } from '@/app/service/authorization.service';
-import { Permissions } from '@/constant/permission.constant';
-import { RolePermission, CreateRolePermissionDto, UpdateRolePermissionDto } from '@/types/role_permission.type';
+import {
+  CreateRolePermissionDto,
+  UpdateRolePermissionDto,
+} from '@/types/role_permission.type';
 import { ToastService } from '@/app/shared/service/toast.service';
 
 @Component({
@@ -28,7 +40,7 @@ import { ToastService } from '@/app/shared/service/toast.service';
     DragDropModule,
   ],
   templateUrl: './admin-role-permission-form.component.html',
-  styleUrl: './admin-role-permission-form.component.scss'
+  styleUrl: './admin-role-permission-form.component.scss',
 })
 export class AdminRolePermissionFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -42,8 +54,9 @@ export class AdminRolePermissionFormComponent implements OnInit {
   rolePermissionId: string | null = null;
   loading = false;
 
-  // Available permissions from constants
-  availablePermissions: string[] = Object.values(Permissions);
+  // Available permissions from API
+  availablePermissions: string[] = [];
+  allPermissions: string[] = [];
 
   // Selected permissions for the role
   selectedPermissions: string[] = [];
@@ -59,12 +72,25 @@ export class AdminRolePermissionFormComponent implements OnInit {
     this.rolePermissionId = this.route.snapshot.paramMap.get('id');
     this.isEdit = !!this.rolePermissionId;
 
+    // Load all available permissions from API
+    this.loadAllPermissions();
+
     if (this.isEdit && this.rolePermissionId) {
       this.loadRolePermission(this.rolePermissionId);
     }
+  }
 
-    // Filter out already selected permissions from available list
-    this.updateAvailablePermissions();
+  loadAllPermissions() {
+    this.authorizationService.getAllPermissions().subscribe({
+      next: (response) => {
+        this.allPermissions = response.data;
+        this.updateAvailablePermissions();
+      },
+      error: (error) => {
+        console.error('Error loading permissions', error);
+        this.toastService.showError('Failed to load permissions', '', 3000);
+      },
+    });
   }
 
   loadRolePermission(id: string) {
@@ -81,20 +107,24 @@ export class AdminRolePermissionFormComponent implements OnInit {
         console.error('Error loading role permission', error);
         this.toastService.showError('Failed to load role permission', '', 3000);
         this.router.navigate(['/admin/role-permission']);
-      }
+      },
     });
   }
 
   updateAvailablePermissions() {
-    this.availablePermissions = Object.values(Permissions).filter(
-      perm => !this.selectedPermissions.includes(perm)
+    this.availablePermissions = this.allPermissions.filter(
+      (perm) => !this.selectedPermissions.includes(perm),
     );
   }
 
   onDrop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       // Reorder within the same list
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
     } else {
       // Move between lists
       transferArrayItem(
@@ -128,17 +158,27 @@ export class AdminRolePermissionFormComponent implements OnInit {
           description: formValue.description,
         };
 
-        this.authorizationService.update(this.rolePermissionId, updateDto).subscribe({
-          next: () => {
-            this.toastService.showSuccess('Role permission updated successfully', '', 3000);
-            this.router.navigate(['/admin/role-permission']);
-          },
-          error: (error) => {
-            console.error('Error updating role permission', error);
-            this.toastService.showError('Failed to update role permission', '', 3000);
-            this.loading = false;
-          }
-        });
+        this.authorizationService
+          .update(this.rolePermissionId, updateDto)
+          .subscribe({
+            next: () => {
+              this.toastService.showSuccess(
+                'Role permission updated successfully',
+                '',
+                3000,
+              );
+              this.router.navigate(['/admin/role-permission']);
+            },
+            error: (error) => {
+              console.error('Error updating role permission', error);
+              this.toastService.showError(
+                'Failed to update role permission',
+                '',
+                3000,
+              );
+              this.loading = false;
+            },
+          });
       } else {
         const createDto: CreateRolePermissionDto = {
           name: formValue.name,
@@ -148,14 +188,22 @@ export class AdminRolePermissionFormComponent implements OnInit {
 
         this.authorizationService.create(createDto).subscribe({
           next: () => {
-            this.toastService.showSuccess('Role permission created successfully', '', 3000);
+            this.toastService.showSuccess(
+              'Role permission created successfully',
+              '',
+              3000,
+            );
             this.router.navigate(['/admin/role-permission']);
           },
           error: (error) => {
             console.error('Error creating role permission', error);
-            this.toastService.showError('Failed to create role permission', '', 3000);
+            this.toastService.showError(
+              'Failed to create role permission',
+              '',
+              3000,
+            );
             this.loading = false;
-          }
+          },
         });
       }
     } else {

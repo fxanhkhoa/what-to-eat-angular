@@ -8,10 +8,29 @@ on:
   workflow_dispatch:
 
 jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --no-watch --browsers=ChromeHeadless
+
   build:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-
+    environment: development
+    needs: [test]
     steps:
       - uses: actions/checkout@v4
       
@@ -22,6 +41,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -31,20 +51,40 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v5
         with:
+          context: .
+          file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: fxanhkhoa/what-to-eat:latest
 
   deploy:
     name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: development
     needs: [build]
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
     steps:
-      - name: Executing remote deploy commands via SSH
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy docker-compose.yml via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DRATINI_HOST }}
+          username: ${{ secrets.DRATINI_USERNAME }}
+          password: ${{ secrets.DRATINI_PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "docker-compose.yml"
+          target: "what-to-eat"
+
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          host: ${{ secrets.DRATINI_HOST }}
+          username: ${{ secrets.DRATINI_USERNAME }}
+          password: ${{ secrets.DRATINI_PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: sh deploy-dratini.sh ${{ secrets.DRATINI_HOST }} ${{ secrets.DRATINI_PASSWORD }} 'sh what-to-eat/deploy.sh what-to-eat'
+          script: |
+            cd what-to-eat
+            docker compose down || true
+            docker compose pull
+            docker compose up -d

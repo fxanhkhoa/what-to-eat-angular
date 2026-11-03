@@ -49,6 +49,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddCustomDishComponent } from './add-custom-dish/add-custom-dish.component';
+import { VotingCollectionPickerComponent } from './voting-collection-picker/voting-collection-picker.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { DishVoteService } from '@/app/service/dish-vote.service';
 import { VOTING_SESSION_TIMEOUT } from '@/constant/general.constant';
@@ -80,6 +81,7 @@ import { ToastService } from '@/app/shared/service/toast.service';
     MatTooltipModule,
     MatDialogModule,
     MatDividerModule,
+    VotingCollectionPickerComponent,
   ],
   templateUrl: './voting-create-update.component.html',
   styleUrl: './voting-create-update.component.scss',
@@ -208,6 +210,42 @@ export class VotingCreateUpdateComponent implements OnDestroy, OnInit {
         this.dishVoteItems.controls.findIndex(
           (item) => item.value.slug === customDish.slug
         )
+      );
+    }
+  }
+
+  onCollectionDishesSelected(dishes: Dish[]) {
+    // Filter out dishes that are already selected or in available list
+    const newDishes = dishes.filter(
+      (dish) =>
+        !this.selectedDishes().some((d) => d._id === dish._id) &&
+        !this.availableDishes().some((d) => d._id === dish._id)
+    );
+
+    // Add each dish to the selected dishes and form array
+    newDishes.forEach((dish) => {
+      const dishVoteItem = this.createDishVoteItem();
+      dishVoteItem.patchValue({
+        slug: dish.slug,
+        isCustom: false,
+      });
+      this.dishVoteItems.push(dishVoteItem);
+    });
+
+    // Update selected dishes signal
+    this.selectedDishes.update((current) => [...current, ...newDishes]);
+
+    if (newDishes.length > 0) {
+      this.toastService.showSuccess(
+        $localize`Dishes Added`,
+        $localize`${newDishes.length} dishes added to voting`,
+        2000
+      );
+    } else {
+      this.toastService.showWarning(
+        $localize`No New Dishes`,
+        $localize`All dishes from this collection are already in the voting`,
+        2000
       );
     }
   }

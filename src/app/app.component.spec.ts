@@ -5,16 +5,19 @@ import { of, Subject } from 'rxjs';
 import { AppComponent } from './app.component';
 import { AuthService } from './service/auth.service';
 import { WebsiteVisitService } from './service/website-visit.service';
+import { PushNotificationService } from './service/push-notification.service';
+import { ToastService } from './shared/service/toast.service';
 import { provideRouter } from '@angular/router';
 import { User } from '@/types/user.type';
 import cookies from 'js-cookie';
+import { environment } from '@/environments/environment';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let authService: jasmine.SpyObj<AuthService>;
   let websiteVisitService: jasmine.SpyObj<WebsiteVisitService>;
-  let router: jasmine.SpyObj<Router>;
+  let router: Router;
   let routerEventsSubject: Subject<any>;
 
   beforeEach(async () => {
@@ -22,15 +25,20 @@ describe('AppComponent', () => {
     const authServiceSpy = jasmine.createSpyObj('AuthService', [
       'getProfileAPI',
       'setProfile',
+      'refreshToken',
     ]);
     const websiteVisitServiceSpy = jasmine.createSpyObj('WebsiteVisitService', [
       'trackVisit',
     ]);
-    
+    const pushNotificationServiceSpy = jasmine.createSpyObj('PushNotificationService', [
+      'onForegroundMessage',
+      'refreshUnreadCount',
+    ]);
+    const toastServiceSpy = jasmine.createSpyObj('ToastService', [
+      'showNotification',
+    ]);
+
     routerEventsSubject = new Subject();
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate'], {
-      events: routerEventsSubject.asObservable(),
-    });
 
     // Create mock user profile
     const mockUser: User = {
@@ -45,14 +53,17 @@ describe('AppComponent', () => {
 
     // Setup default return values
     authServiceSpy.getProfileAPI.and.returnValue(of(mockUser));
+    authServiceSpy.refreshToken.and.returnValue(of({ token: 'tok', refreshToken: 'rtok' }));
     websiteVisitServiceSpy.trackVisit.and.returnValue(of({}));
+    pushNotificationServiceSpy.onForegroundMessage.and.returnValue(of());
 
     await TestBed.configureTestingModule({
       imports: [AppComponent],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
         { provide: WebsiteVisitService, useValue: websiteVisitServiceSpy },
-        { provide: Router, useValue: routerSpy },
+        { provide: PushNotificationService, useValue: pushNotificationServiceSpy },
+        { provide: ToastService, useValue: toastServiceSpy },
         { provide: PLATFORM_ID, useValue: 'browser' },
         provideRouter([]),
       ],
@@ -64,7 +75,8 @@ describe('AppComponent', () => {
     websiteVisitService = TestBed.inject(
       WebsiteVisitService
     ) as jasmine.SpyObj<WebsiteVisitService>;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    router = TestBed.inject(Router);
+    spyOnProperty(router, 'events').and.returnValue(routerEventsSubject.asObservable());
 
     // Mock localStorage
     let store: { [key: string]: string } = {};
@@ -104,10 +116,10 @@ describe('AppComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should call getProfile on init', () => {
-      spyOn(component, 'getProfile');
+    it('should call refreshTokenAndInitialize on init', () => {
+      spyOn(component, 'refreshTokenAndInitialize');
       component.ngOnInit();
-      expect(component.getProfile).toHaveBeenCalled();
+      expect(component.refreshTokenAndInitialize).toHaveBeenCalled();
     });
 
     it('should track website visit if not already visited', () => {
@@ -151,7 +163,7 @@ describe('AppComponent', () => {
       
       expect((window as any).gtag).toHaveBeenCalledWith(
         'config',
-        'G-FWE0TE8LCZ',
+        environment.FIREBASE_MEASUREMENT_ID,
         { page_path: '/test' }
       );
     });
@@ -233,20 +245,25 @@ describe('AppComponent', () => {
       const authServiceSpy = jasmine.createSpyObj('AuthService', [
         'getProfileAPI',
         'setProfile',
+        'refreshToken',
       ]);
       const websiteVisitServiceSpy = jasmine.createSpyObj('WebsiteVisitService', [
         'trackVisit',
       ]);
-      const routerSpy = jasmine.createSpyObj('Router', ['navigate'], {
-        events: of(),
-      });
-
+      const pushNotificationServiceSpy = jasmine.createSpyObj('PushNotificationService', [
+        'onForegroundMessage',
+        'refreshUnreadCount',
+      ]);
+      const toastServiceSpy = jasmine.createSpyObj('ToastService', [
+        'showNotification',
+      ]);
       await TestBed.configureTestingModule({
         imports: [AppComponent],
         providers: [
           { provide: AuthService, useValue: authServiceSpy },
           { provide: WebsiteVisitService, useValue: websiteVisitServiceSpy },
-          { provide: Router, useValue: routerSpy },
+          { provide: PushNotificationService, useValue: pushNotificationServiceSpy },
+          { provide: ToastService, useValue: toastServiceSpy },
           { provide: PLATFORM_ID, useValue: 'server' },
           provideRouter([]),
         ],

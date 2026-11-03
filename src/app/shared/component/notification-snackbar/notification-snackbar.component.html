@@ -1,11 +1,26 @@
-<div class="container clickable" (click)="notificationClicked()">
-  <div class="flex justify-center mb-2">
-    <mat-icon class="icon">tips_and_updates</mat-icon>
+<div class="notif-toast relative overflow-hidden cursor-pointer rounded-[14px] p-4 pb-0" (click)="navigate()">
+  <!-- Icon + text -->
+  <div class="flex items-start gap-3">
+    <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 notif-icon-circle {{ iconBgClass }}">
+      <mat-icon class="notif-mat-icon">{{ typeIcon }}</mat-icon>
+    </div>
+    <div class="flex-1 min-w-0 pr-6">
+      <p class="notif-title text-sm font-semibold leading-snug m-0 mb-0.5 line-clamp-1">{{ data.mainMsg }}</p>
+      <p class="notif-body text-[13px] leading-relaxed m-0 line-clamp-2">{{ data.subMsg }}</p>
+    </div>
   </div>
-  <div class="flex justify-center">
-    <h2 class="text-center">{{ data.mainMsg }}</h2>
-  </div>
-  <div class="flex justify-center">
-    <span class="text-main-color">{{ data.subMsg }}</span>
+
+  <!-- Dismiss -->
+  <button
+    class="notif-dismiss absolute top-2 right-2 p-1 rounded-md flex items-center justify-center border-0 cursor-pointer transition-colors duration-150"
+    (click)="dismiss($event)"
+    aria-label="Dismiss notification"
+  >
+    <mat-icon class="notif-dismiss-icon">close</mat-icon>
+  </button>
+
+  <!-- Auto-dismiss progress bar -->
+  <div class="notif-progress -mx-4 mt-3 h-[3px]">
+    <div class="notif-progress-fill h-full w-full {{ barClass }}" [style.animation-duration]="animDuration"></div>
   </div>
 </div>

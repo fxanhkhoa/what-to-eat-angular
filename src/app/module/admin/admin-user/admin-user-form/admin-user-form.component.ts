@@ -1,6 +1,11 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformServer } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,7 +36,7 @@ import { RolePermission } from '@/types/role_permission.type';
     MatNativeDateModule,
   ],
   templateUrl: './admin-user-form.component.html',
-  styleUrl: './admin-user-form.component.scss'
+  styleUrl: './admin-user-form.component.scss',
 })
 export class AdminUserFormComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -93,7 +98,7 @@ export class AdminUserFormComponent implements OnInit {
         console.error('Error loading user', error);
         this.toastService.showError('Failed to load user', '', 3000);
         this.router.navigate(['/admin/user']);
-      }
+      },
     });
   }
 
@@ -102,7 +107,9 @@ export class AdminUserFormComponent implements OnInit {
     this.authorizationService.findAll({}).subscribe({
       next: (response) => {
         // Extract unique role names from role permissions
-        this.availableRoles = [...new Set(response.data.map(role => role.name))];
+        this.availableRoles = [
+          ...new Set(response.data.map((role) => role.name)),
+        ];
         this.rolesLoading = false;
       },
       error: (error) => {
@@ -111,7 +118,7 @@ export class AdminUserFormComponent implements OnInit {
         // Fallback to default roles
         this.availableRoles = ['admin', 'user', 'moderator'];
         this.rolesLoading = false;
-      }
+      },
     });
   }
 
@@ -121,7 +128,9 @@ export class AdminUserFormComponent implements OnInit {
       const formValue = this.form.value;
 
       // Convert date to ISO string if present
-      const dateOfBirth = formValue.dateOfBirth ? new Date(formValue.dateOfBirth).toISOString() : null;
+      const dateOfBirth = formValue.dateOfBirth
+        ? new Date(formValue.dateOfBirth).toISOString()
+        : null;
 
       if (this.isEdit && this.userId) {
         const updateDto: UpdateUserDto = {
@@ -135,14 +144,18 @@ export class AdminUserFormComponent implements OnInit {
 
         this.userService.update(updateDto).subscribe({
           next: () => {
-            this.toastService.showSuccess('User updated successfully', '', 3000);
+            this.toastService.showSuccess(
+              'User updated successfully',
+              '',
+              3000,
+            );
             this.router.navigate(['/admin/user']);
           },
           error: (error) => {
             console.error('Error updating user', error);
             this.toastService.showError('Failed to update user', '', 3000);
             this.loading = false;
-          }
+          },
         });
       } else {
         const createDto: CreateUserDto = {
@@ -155,14 +168,18 @@ export class AdminUserFormComponent implements OnInit {
 
         this.userService.create(createDto).subscribe({
           next: () => {
-            this.toastService.showSuccess('User created successfully', '', 3000);
+            this.toastService.showSuccess(
+              'User created successfully',
+              '',
+              3000,
+            );
             this.router.navigate(['/admin/user']);
           },
           error: (error) => {
             console.error('Error creating user', error);
             this.toastService.showError('Failed to create user', '', 3000);
             this.loading = false;
-          }
+          },
         });
       }
     } else {

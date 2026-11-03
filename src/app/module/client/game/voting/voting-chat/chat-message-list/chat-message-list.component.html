@@ -1,0 +1,40 @@
+<div
+  class="flex-1 overflow-y-auto p-3 min-h-30 max-h-52 scrollbar-thin scrollbar-thumb-gray-300"
+  #messagesContainer
+>
+  <!-- Load More Button -->
+  @if (messages.length > 0) {
+  <div class="text-center mb-3">
+    <button
+      mat-button
+      (click)="onLoadMore()"
+      class="text-xs text-gray-500 min-h-[32px] hover:text-gray-700"
+    >
+      <mat-icon class="text-[16px] mr-1">keyboard_arrow_up</mat-icon>
+      <span i18n>Load earlier messages</span>
+    </button>
+  </div>
+  }
+
+  <!-- Messages List -->
+  <div class="flex flex-col gap-3">
+    @for (message of messages; track trackByMessageId($index, message)) {
+    <app-chat-message
+      [message]="message"
+      [isOwnMessage]="isOwnMessage(message)"
+      [availableReactions]="availableReactions"
+      (reactionAdded)="onReactionAdded($event)"
+    ></app-chat-message>
+    }
+  </div>
+
+  <!-- Empty State -->
+  @if (messages.length === 0 && isConnected) {
+  <div class="flex flex-col items-center justify-center py-8 text-gray-500">
+    <mat-icon class="text-[48px] opacity-30 mb-2">chat_bubble_outline</mat-icon>
+    <p class="text-sm text-center" i18n>
+      No messages yet. Start the conversation!
+    </p>
+  </div>
+  }
+</div>

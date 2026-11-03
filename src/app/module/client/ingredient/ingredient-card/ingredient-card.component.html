@@ -1,89 +1,205 @@
-<div class="group perspective w-full glassmorphic-container_dark slide-in-blurred-right">
-    <div class="relative preserve-3d duration-1000 w-full h-72" [class.my-rotate-y-180]="flipCard()"
-        (click)="toggleFlipCard()">
+<div class="group perspective w-full h-full cursor-pointer" (click)="toggleFlipCard()">
+    <div class="relative preserve-3d duration-700 w-full h-full min-h-[500px] sm:min-h-[550px]"
+        [class.my-rotate-y-180]="flipCard()">
+
         <!-- Front Side -->
-        <div class="absolute inset-0 backface-hidden flex flex-col justify-end items-start overflow-hidden px-4 pb-4">
-            <img [src]="ingredient.images[0]" [alt]="(ingredient.title | multiLanguage: localeId)?.data"
-                class="absolute inset-0 h-full w-full object-contain z-1" />
-            <h3 class="z-10 mt-3 text-3xl font-bold text-white">
-                {{(ingredient.title | multiLanguage: localeId)?.data}}
-            </h3>
-            <div class="z-10 gap-y-1 overflow-y-hidden text-sm leading-6 flex flex-nowrap overflow-x-auto w-full">
-                <app-category-badges [categories]="ingredient.ingredientCategory"></app-category-badges>
-            </div>
+        <div class="absolute inset-0 backface-hidden rounded-2xl overflow-hidden">
+            <mat-card
+                class="!bg-gradient-to-br !from-white/10 !to-white/5 backdrop-blur-xl !border !border-white/20 !shadow-2xl hover:!shadow-purple-500/20 !transition-all !duration-500 hover:!scale-105 !rounded-2xl h-full group-hover:!border-purple-500/40">
+                <div class="relative h-full flex flex-col">
+                    <!-- Image Container -->
+                    <div
+                        class="relative h-64 sm:h-72 md:h-80 lg:h-96 overflow-hidden rounded-t-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10">
+                        <!-- Gradient Overlay -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent z-10">
+                        </div>
+
+                        <!-- Image -->
+                        <img [src]="ingredient.images[0]" [alt]="(ingredient.title | multiLanguage: localeId)?.data"
+                            class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                            onerror="this.src='/assets/images/placeholder-ingredient.jpg'" />
+
+                        <!-- Flip Icon Badge -->
+                        <div
+                            class="absolute top-3 right-3 z-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <mat-icon class="text-white !text-xl">flip</mat-icon>
+                        </div>
+
+                        <!-- Image Count Badge -->
+                        @if (ingredient.images.length > 1) {
+                        <div
+                            class="absolute top-3 left-3 z-20 bg-black/60 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1">
+                            <mat-icon class="text-white !text-sm">photo_library</mat-icon>
+                            <span class="text-white text-xs font-semibold">{{ ingredient.images.length }}</span>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4 sm:p-6 flex-1 flex flex-col">
+                        <!-- Title -->
+                        <h3
+                            class="text-xl sm:text-2xl font-bold text-white mb-3 line-clamp-2 group-hover:text-purple-300 transition-colors">
+                            {{ (ingredient.title | multiLanguage: localeId)?.data }}
+                        </h3>
+
+                        <!-- Categories -->
+                        <div class="mb-4 overflow-x-auto scrollbar-hide" tabindex="0">
+                            <app-category-badges [categories]="ingredient.ingredientCategory"></app-category-badges>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-2 gap-3 mt-auto">
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <mat-icon class="text-orange-400 !text-lg">local_fire_department</mat-icon>
+                                    <span class="text-xs text-gray-400" i18n>Calories</span>
+                                </div>
+                                <p class="text-lg font-bold text-white">{{ ingredient.calories || 0 }}</p>
+                            </div>
+
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 border border-white/10">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <mat-icon class="text-green-400 !text-lg">fitness_center</mat-icon>
+                                    <span class="text-xs text-gray-400" i18n>Protein</span>
+                                </div>
+                                <p class="text-lg font-bold text-white">{{ ingredient.protein || 0 }}g</p>
+                            </div>
+                        </div>
+
+                        <!-- Tap to flip hint -->
+                        <div class="mt-4 flex items-center justify-center gap-2 text-purple-300 text-sm opacity-70">
+                            <mat-icon class="!text-base">touch_app</mat-icon>
+                            <span i18n>Tap for details</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
         </div>
+
         <!-- Back Side -->
-        <div
-            class="absolute inset-0 my-rotate-y-180 backface-hidden flex flex-col gap-3 justify-end overflow-hidden px-4 pb-4 rounded-2xl">
-            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 rounded-2xl"></div>
-            <div class="z-10 flex flex-wrap gap-2">
-                @for(image of ingredient.images; track image) {
-                <div class="col-span-1 mt-3">
-                    <img alt="" [src]="image" class="rounded-lg w-auto h-20 w-auto" />
+        <div class="absolute inset-0 my-rotate-y-180 backface-hidden rounded-2xl overflow-hidden">
+            <mat-card
+                class="!bg-gradient-to-br !from-purple-900/50 !to-pink-900/50 backdrop-blur-xl !border !border-purple-500/30 !shadow-2xl !rounded-2xl h-full">
+                <div class="relative h-full flex flex-col p-4 sm:p-6">
+                    <!-- Header with Images -->
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="text-lg sm:text-xl font-bold text-white" i18n>Nutritional Info</h4>
+                            <button mat-icon-button (click)="toggleFlipCard()" aria-label="Close details"
+                                i18n-aria-label title="Close details" i18n-title>
+                                <mat-icon class="!text-purple-300">close</mat-icon>
+                            </button>
+                        </div>
+
+                        <!-- Images Gallery -->
+                        @if (ingredient.images.length > 0) {
+                        <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2" tabindex="0">
+                            @for(image of ingredient.images; track image; let i = $index) {
+                            @if (i < 4) { <div class="relative flex-shrink-0">
+                                <img [src]="image" alt="Ingredient image"
+                                    class="rounded-lg w-16 h-16 sm:w-20 sm:h-20 object-cover border-2 border-white/20 hover:border-purple-400 transition-colors" />
+                                @if (i === 3 && ingredient.images.length > 4) {
+                                <div class="absolute inset-0 bg-black/60 rounded-lg flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">+{{ ingredient.images.length - 4
+                                        }}</span>
+                                </div>
+                                }
+                        </div>
+                        }
+                        }
+                    </div>
+                    }
                 </div>
-                }
-            </div>
-            <div class="z-10 flex gap-1 text-gray-400">
-                <span class="text-md font-bold drop-shadow-lg" i18n>
-                    Reference Over
-                </span>
-                <span class="text-md font-bold drop-shadow-lg">
-                    {{ingredient.weight}}
-                </span>
-                <span class="text-md font-bold drop-shadow-lg">
-                    {{ingredient.measure}}
-                </span>
-            </div>
-            <div class="z-10 grid grid-cols-12 gap-2 text-white">
-                <div class="col-span-6 md:col-span-6 text-left flex gap-1">
-                    <span i18n>
-                        Calories
-                    </span>
-                    <span>
-                        {{ingredient.calories}}
-                    </span>
+
+                <!-- Reference Info -->
+                <div class="bg-white/5 backdrop-blur-sm rounded-xl p-3 mb-4 border border-white/10">
+                    <div class="flex items-center gap-2 text-purple-300">
+                        <mat-icon class="!text-lg">scale</mat-icon>
+                        <span class="text-sm font-semibold" i18n>Reference:</span>
+                        <span class="text-white font-bold">{{ ingredient.weight }} {{ ingredient.measure }}</span>
+                    </div>
                 </div>
-                <div class="col-span-6 md:col-span-6 text-left">
-                    <span i18n>
-                        Carbohydrate
-                    </span>
-                    <span>
-                        {{ingredient.carbohydrate}}
-                    </span>
+
+                <!-- Nutrition Grid -->
+                <div class="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500/50 scrollbar-track-white/5"
+                    tabindex="0">
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Calories -->
+                        <div
+                            class="bg-gradient-to-br from-orange-500/20 to-red-500/20 backdrop-blur-sm rounded-xl p-4 border border-orange-500/30">
+                            <div class="flex items-center gap-2 mb-2">
+                                <mat-icon class="text-orange-400 !text-xl">local_fire_department</mat-icon>
+                                <span class="text-xs text-gray-300" i18n>Calories</span>
+                            </div>
+                            <p class="text-2xl font-bold text-white">{{ ingredient.calories || 0 }}</p>
+                        </div>
+
+                        <!-- Protein -->
+                        <div
+                            class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 backdrop-blur-sm rounded-xl p-4 border border-green-500/30">
+                            <div class="flex items-center gap-2 mb-2">
+                                <mat-icon class="text-green-400 !text-xl">fitness_center</mat-icon>
+                                <span class="text-xs text-gray-300" i18n>Protein</span>
+                            </div>
+                            <p class="text-2xl font-bold text-white">{{ ingredient.protein || 0 }}<span
+                                    class="text-sm">g</span></p>
+                        </div>
+
+                        <!-- Carbohydrate -->
+                        <div
+                            class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-xl p-4 border border-blue-500/30">
+                            <div class="flex items-center gap-2 mb-2">
+                                <mat-icon class="text-blue-400 !text-xl">grain</mat-icon>
+                                <span class="text-xs text-gray-300" i18n>Carbs</span>
+                            </div>
+                            <p class="text-2xl font-bold text-white">{{ ingredient.carbohydrate || 0 }}<span
+                                    class="text-sm">g</span></p>
+                        </div>
+
+                        <!-- Fat -->
+                        <div
+                            class="bg-gradient-to-br from-yellow-500/20 to-amber-500/20 backdrop-blur-sm rounded-xl p-4 border border-yellow-500/30">
+                            <div class="flex items-center gap-2 mb-2">
+                                <mat-icon class="text-yellow-400 !text-xl">water_drop</mat-icon>
+                                <span class="text-xs text-gray-300" i18n>Fat</span>
+                            </div>
+                            <p class="text-2xl font-bold text-white">{{ ingredient.fat || 0 }}<span
+                                    class="text-sm">g</span></p>
+                        </div>
+
+                        <!-- Cholesterol -->
+                        <div
+                            class="bg-gradient-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-sm rounded-xl p-4 border border-purple-500/30">
+                            <div class="flex items-center gap-2 mb-2">
+                                <mat-icon class="text-purple-400 !text-xl">favorite</mat-icon>
+                                <span class="text-xs text-gray-300" i18n>Cholesterol</span>
+                            </div>
+                            <p class="text-2xl font-bold text-white">{{ ingredient.cholesterol || 0 }}<span
+                                    class="text-sm">mg</span></p>
+                        </div>
+
+                        <!-- Sodium -->
+                        <div
+                            class="bg-gradient-to-br from-pink-500/20 to-rose-500/20 backdrop-blur-sm rounded-xl p-4 border border-pink-500/30">
+                            <div class="flex items-center gap-2 mb-2">
+                                <mat-icon class="text-pink-400 !text-xl">opacity</mat-icon>
+                                <span class="text-xs text-gray-300" i18n>Sodium</span>
+                            </div>
+                            <p class="text-2xl font-bold text-white">{{ ingredient.sodium || 0 }}<span
+                                    class="text-sm">mg</span></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-span-6 md:col-span-6 text-left">
-                    <span i18n>
-                        Fat
-                    </span>
-                    <span>
-                        {{ingredient.fat}}
-                    </span>
+
+                <!-- Tap to flip back hint -->
+                <div class="mt-4 flex items-center justify-center gap-2 text-purple-300 text-sm">
+                    <mat-icon class="!text-base">touch_app</mat-icon>
+                    <span i18n>Tap to flip back</span>
                 </div>
-                <div class="col-span-6 md:col-span-6 text-left">
-                    <span i18n>
-                        Protein
-                    </span>
-                    <span>
-                        {{ingredient.protein}}
-                    </span>
-                </div>
-                <div class="col-span-6 md:col-span-6 text-left">
-                    <span i18n>
-                        Cholesterol
-                    </span>
-                    <span>
-                        {{ingredient.cholesterol}}
-                    </span>
-                </div>
-                <div class="col-span-6 md:col-span-6 text-left">
-                    <span i18n>
-                        Sodium
-                    </span>
-                    <span>
-                        {{ingredient.sodium}}
-                    </span>
-                </div>
-            </div>
         </div>
+        </mat-card>
     </div>
+</div>
 </div>

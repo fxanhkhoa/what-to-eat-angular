@@ -1,12 +1,58 @@
+.perspective {
+  perspective: 1000px;
+}
+
 .preserve-3d {
   transform-style: preserve-3d;
 }
-.my-rotate-y-180 {
-  transform: rotateY(180deg);
-}
+
 .backface-hidden {
   backface-visibility: hidden;
 }
-.perspective {
-  perspective: 1000px;
+
+.my-rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Smooth card transitions */
+mat-card {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar for nutrition info */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thumb-purple-500\/50::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 85, 247, 0.5);
+  border-radius: 9999px;
+}
+
+.scrollbar-track-white\/5::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure images don't break layout */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Add subtle glow effect on hover */
+.group:hover mat-card {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.3), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }

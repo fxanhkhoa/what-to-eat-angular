@@ -1,0 +1,66 @@
+<div class="flex" [class.justify-end]="isOwnMessage">
+    <!-- Message Bubble -->
+    <mat-card class="!max-w-xs p-3 !relative !h-auto group !relative" [ngClass]="{
+      'bg-gradient-to-br from-[#F3A446] to-[#A06235] ml-auto mr-2': isOwnMessage
+    }">
+        <!-- Sender Info (only for others' messages) -->
+        @if (!isOwnMessage) {
+        <div class="flex items-center gap-2 mb-2">
+            @if (message.senderAvatar) {
+            <img [src]="message.senderAvatar" [alt]="message.senderName" class="w-6 h-6 rounded-full object-cover" />
+            } @else {
+            <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-gray-300 text-gray-400">
+                {{ message.senderName.charAt(0).toUpperCase() }}
+            </div>
+            }
+            <span class="text-xs font-medium text-gray-400" [ngClass]="{ 'text-gray-400/80': isOwnMessage }">{{
+                message.senderName }}</span>
+        </div>
+        }
+
+        <!-- Message Content -->
+        <div>
+            <div class="text-sm leading-snug break-words">{{ message.content }}</div>
+            <div class="text-xs text-gray-200 mt-1" [ngClass]="{ 'text-gray-100/80': isOwnMessage }">
+                {{ formatMessageTime(message.timestamp) }}
+            </div>
+        </div>
+
+        <!-- Message Reactions -->
+        @if (hasReactionKeys(message.reactions)) {
+        <div class="flex flex-wrap gap-1 mt-2">
+            @for (reaction of getObjectKeys(message.reactions); track reaction) { @if
+            (getReactionCount(reaction) > 0) {
+            <div class="flex items-center gap-1 px-2 py-1 rounded-full cursor-pointer transition-all bg-white/10 border border-white/20 hover:scale-105 text-xs"
+                [ngClass]="{
+          'bg-green-400/20 border-green-400/40': hasReacted(reaction)
+        }" (click)="addReaction(reaction)" matTooltip="{{ reaction }} {{ getReactionCount(reaction) }}">
+                <span class="text-xs">{{ reaction }}</span>
+                <span class="font-medium text-xs">{{ getReactionCount(reaction) }}</span>
+            </div>
+            } }
+        </div>
+        }
+
+        <!-- Reaction Menu Button -->
+        <button mat-icon-button [matMenuTriggerFor]="reactionMenu"
+            class="!absolute -top-4 -right-4 opacity-0 group-hover:opacity-100 transition-opacity scale-90"
+            matTooltip="Add reaction" i18n-matTooltip aria-label="Add reaction" title="Add reaction">
+            <mat-icon class="material-symbols-outlined">add_reaction</mat-icon>
+        </button>
+
+        <!-- Reaction Menu -->
+        <mat-menu #reactionMenu="matMenu" class="reaction-menu">
+            <div class="grid grid-cols-5 gap-1 p-2 max-w-[240px]" (click)="$event.stopPropagation()">
+                @for (reaction of availableReactions; track reaction) {
+                <button mat-button
+                    class="!min-w-0 !w-10 !h-10 !p-0 flex items-center justify-center rounded-lg hover:bg-gray-100 hover:scale-110 active:scale-105 transition-all duration-200"
+                    (click)="addReaction(reaction)">
+                    <span class="text-2xl leading-none">{{ reaction }}</span>
+                </button>
+                }
+            </div>
+        </mat-menu>
+    </mat-card>
+</div>

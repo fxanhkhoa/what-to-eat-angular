@@ -5,24 +5,24 @@
         <mat-form-field class="!flex-1">
             <input matInput type="text" [value]="shareUrl" readonly />
         </mat-form-field>
-        <button mat-icon-button (click)="copyLink()" [matTooltip]="copied ? 'Copied!' : 'Copy link'" i18n-matTooltip>
+        <button mat-icon-button (click)="copyLink()" [matTooltip]="copied ? 'Copied!' : 'Copy link'" i18n-matTooltip aria-label="Copy link" title="Copy link">
             <mat-icon color="primary">content_copy</mat-icon>
         </button>
-        <button mat-icon-button (click)="openInNewTab()" matTooltip="Open in new tab" i18n-matTooltip>
+        <button mat-icon-button (click)="openInNewTab()" matTooltip="Open in new tab" i18n-matTooltip aria-label="Open in new tab" title="Open in new tab">
             <mat-icon>open_in_new</mat-icon>
         </button>
     </div>
     <div class="flex gap-3 items-center">
         <a [href]="'https://www.facebook.com/sharer/sharer.php?u=' + (shareUrl | encodeURIComponent)" target="_blank"
-            class="hover:scale-110 duration-300" matTooltip="Share on Facebook" i18n-matTooltip>
+            class="hover:scale-110 duration-300" matTooltip="Share on Facebook" i18n-matTooltip aria-label="Share on Facebook" title="Share on Facebook">
             <mat-icon svgIcon="facebook" class="!w-14 !h-14"></mat-icon>
         </a>
         <a [href]="'https://twitter.com/intent/tweet?url=' + (shareUrl | encodeURIComponent)" target="_blank"
-            class="hover:scale-110 duration-300" matTooltip="Share on X" i18n-matTooltip>
+            class="hover:scale-110 duration-300" matTooltip="Share on X" i18n-matTooltip aria-label="Share on X" title="Share on X">
             <mat-icon svgIcon="x-social" class="!w-10 !h-10"></mat-icon>
         </a>
         <a [href]="'https://t.me/share/url?url=' + (shareUrl | encodeURIComponent)" target="_blank"
-            class="hover:scale-110 duration-300 ml-2" matTooltip="Share on Telegram" i18n-matTooltip>
+            class="hover:scale-110 duration-300 ml-2" matTooltip="Share on Telegram" i18n-matTooltip aria-label="Share on Telegram" title="Share on Telegram">
             <mat-icon svgIcon="telegram" class="!w-10 !h-10"></mat-icon>
         </a>
     </div>

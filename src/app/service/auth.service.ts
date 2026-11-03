@@ -2,9 +2,11 @@ import { environment } from '@/environments/environment';
 import { ResultToken } from '@/types/auth.type';
 import { User } from '@/types/user.type';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject, Injector, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, switchMap, timeout } from 'rxjs/operators';
+import { catchError, switchMap, tap, timeout } from 'rxjs/operators';
+import { PushNotificationService } from './push-notification.service';
 
 const prefix = 'auth';
 
@@ -14,6 +16,12 @@ const prefix = 'auth';
 export class AuthService {
   private profile: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
+  private platformId = inject(PLATFORM_ID);
+  private injector = inject(Injector);
+
+  private get pushNotificationService(): PushNotificationService {
+    return this.injector.get(PushNotificationService);
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -37,6 +45,18 @@ export class AuthService {
             `${environment.API_URL}/${prefix}/login`,
             body
           );
+        }),
+        tap(() => {
+          // Register FCM token after successful login
+          if (isPlatformBrowser(this.platformId)) {
+            this.pushNotificationService
+              .requestPermission()
+              .then((granted) => {
+                if (granted) {
+                  this.pushNotificationService.getAndRegisterToken();
+                }
+              });
+          }
         })
       );
   }
@@ -49,13 +69,29 @@ export class AuthService {
   }
 
   logout(refreshToken: string) {
+    // Unregister FCM token before logout
+    if (isPlatformBrowser(this.platformId)) {
+      this.pushNotificationService.deleteAndUnregisterToken();
+    }
     return this.http.post<any>(`${environment.API_URL}/${prefix}/logout`, {
       refreshToken,
     });
   }
 
   getProfileAPI() {
-    return this.http.get<User>(`${environment.API_URL}/${prefix}/profile`);
+    return this.http.get<User>(`${environment.API_URL}/${prefix}/profile`).pipe(
+      tap(() => {
+        if (isPlatformBrowser(this.platformId)) {
+          this.pushNotificationService
+            .requestPermission()
+            .then((granted) => {
+              if (granted) {
+                this.pushNotificationService.getAndRegisterToken();
+              }
+            });
+        }
+      })
+    );
   }
 
   getProfile() {

@@ -10,12 +10,7 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  CommonModule,
-  Location,
-  DOCUMENT,
-  isPlatformBrowser,
-} from '@angular/common';
+import { CommonModule, Location, DOCUMENT } from '@angular/common';
 import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -31,6 +26,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { v4 as uuidv4 } from 'uuid';
 import { IngredientService } from '@/app/service/ingredient.service';
 import { DishService } from '@/app/service/dish.service';
+import { UserDishInteractionService } from '@/app/service/user-dish-interaction.service';
 import { Ingredient } from '@/types/ingredient.type';
 import { finalize, forkJoin, mergeMap, of } from 'rxjs';
 import { EmptyComponent } from '../../../../components/empty/empty.component';
@@ -56,7 +52,6 @@ import { environment } from '@/environments/environment';
   templateUrl: './dish-detail.component.html',
   styleUrls: ['./dish-detail.component.scss'],
   standalone: true,
-  // Add imports for Angular Material, child components, etc.
 })
 export class DishDetailComponent implements OnDestroy, OnInit {
   private route = inject(ActivatedRoute);
@@ -66,6 +61,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
   private iconRegistry = inject(MatIconRegistry);
   private ingredientService = inject(IngredientService);
   private dishService = inject(DishService);
+  private userDishInteractionService = inject(UserDishInteractionService);
   private titleService = inject(Title);
   private metaService = inject(Meta);
   private document = inject(DOCUMENT);
@@ -81,37 +77,37 @@ export class DishDetailComponent implements OnDestroy, OnInit {
   constructor() {
     this.iconRegistry.addSvgIcon(
       'easy',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/easy.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/easy.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'medium',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/medium.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/medium.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'hard',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/hard.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/hard.svg'),
     );
     this.iconRegistry.addSvgIcon(
       'cooking_time',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/cooking_time.svg'
-      )
+        '/assets/icons/cooking_time.svg',
+      ),
     );
     this.iconRegistry.addSvgIcon(
       'preparation_time',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/preparation_time.svg'
-      )
+        '/assets/icons/preparation_time.svg',
+      ),
     );
     this.iconRegistry.addSvgIcon(
       'facebook',
       this.sanitizer.bypassSecurityTrustResourceUrl(
-        '/assets/icons/facebook.svg'
-      )
+        '/assets/icons/facebook.svg',
+      ),
     );
     this.iconRegistry.addSvgIcon(
       'tiktok',
-      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/tiktok.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('/assets/icons/tiktok.svg'),
     );
   }
 
@@ -129,13 +125,11 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     });
   }
 
-  get dishThumbUrl() {
-    return computed(() => {
-      const dish = this.dish();
-      if (!dish || !dish.thumbnail) return '';
-      return `url("${dish.thumbnail}")`;
-    });
-  }
+  dishThumbUrl = computed(() => {
+    const dish = this.dish();
+    if (!dish || !dish.thumbnail) return '';
+    return `url("${dish.thumbnail}")`;
+  });
 
   getData(slug: string) {
     if (!slug) return;
@@ -151,11 +145,11 @@ export class DishDetailComponent implements OnDestroy, OnInit {
 
           const dishObservables =
             dish.relatedDishes?.map((relatedDish) =>
-              this.dishService.findOne(relatedDish)
+              this.dishService.findOne(relatedDish),
             ) ?? [];
           const ingredientObservables =
             dish.ingredients?.map((ingredient) =>
-              this.ingredientService.findOne(ingredient.ingredientId)
+              this.ingredientService.findOne(ingredient.ingredientId),
             ) ?? [];
 
           return forkJoin([...dishObservables, ...ingredientObservables]).pipe(
@@ -164,14 +158,16 @@ export class DishDetailComponent implements OnDestroy, OnInit {
               const relatedDishesLength = dishObservables.length;
 
               const relatedDishes = results.slice(0, relatedDishesLength);
-              const ingredients = results.slice(relatedDishesLength) as Ingredient[];
+              const ingredients = results.slice(
+                relatedDishesLength,
+              ) as Ingredient[];
 
               this.relatedDishes.set(relatedDishes as Dish[]);
               this.ingredients.set(ingredients as Ingredient[]);
               return of(dish);
-            })
+            }),
           );
-        })
+        }),
       )
       .subscribe((dish) => {
         if (dish) {
@@ -179,6 +175,22 @@ export class DishDetailComponent implements OnDestroy, OnInit {
           this.updateSEOWithDishData(dish);
           this.addStructuredData(dish);
           this.addOrUpdateCanonicalLink();
+
+          // Record view interaction
+          this.userDishInteractionService
+            .recordView({
+              userId: '', // Will be set by backend from token
+              dishId: dish._id,
+              dishSlug: dish.slug,
+            })
+            .subscribe({
+              next: () => {
+                console.log('View recorded');
+              },
+              error: (err) => {
+                console.error('Failed to record view', err);
+              },
+            });
           this.addHrefLangLinks();
         }
       });
@@ -282,7 +294,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     ];
     if (categories.length > 0) {
       const keywords = `${dishName}, ${categories.join(
-        ', '
+        ', ',
       )}, công thức nấu ăn, what to eat, món ngon`;
       this.metaService.updateTag({ name: 'keywords', content: keywords });
     }
@@ -297,7 +309,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
   private getDishDescription(dish: Dish): string {
     if (!dish.shortDescription) return '';
     const descObj = dish.shortDescription.find(
-      (d: any) => d.lang === this.localeId
+      (d: any) => d.lang === this.localeId,
     );
     const description = descObj?.data || dish.shortDescription[0]?.data || '';
     // Limit description length for meta tags
@@ -335,11 +347,11 @@ export class DishDetailComponent implements OnDestroy, OnInit {
       recipeCategory: dish.mealCategories,
       recipeCuisine: 'Vietnamese',
       keywords: [...dish.mealCategories, ...dish.ingredientCategories].join(
-        ', '
+        ', ',
       ),
       recipeIngredient: this.ingredients().map((ingredient) => {
         const dishIngredient = dish.ingredients.find(
-          (di) => di.ingredientId === ingredient._id
+          (di) => di.ingredientId === ingredient._id,
         );
         const ingredientName =
           ingredient.title?.find((n: any) => n.lang === this.localeId)?.data ||
@@ -398,7 +410,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     const video = this.dish()?.videos?.[0];
     if (!video) return '';
     const match = video.match(
-      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/,
     );
     return match ? match[1] : '';
   });
@@ -414,7 +426,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     if (!currentVideo) return '';
 
     const match = currentVideo.match(
-      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/,
     );
     return match ? match[1] : '';
   });
@@ -443,13 +455,14 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     const img = event.target as HTMLImageElement;
     if (img) {
       // Fallback to a simple play button SVG
-      img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA4MCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjQ4IiBmaWxsPSIjMzc0MTUxIi8+CjxwYXRoIGQ9Ik0zMiAyNEwxNiAyNEwxNiAzMkwzMiAzMloiBmaWxsPSIjOWNhM2FmIi8+CjxwYXRoIGQ9Ik0zMiAyNEw0OCAyNEw0OCAzMkwzMiAzMloiIGZpbGw9IiM5Y2EzYWYiLz4KPHBhdGggZD0iTTMyIDI0TDMyIDE2TDMyIDMyTDMyIDI0WiIgZmlsbD0iIzlhYzNhZiIvPgo8L3N2Zz4K';
+      img.src =
+        'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA4MCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjQ4IiBmaWxsPSIjMzc0MTUxIi8+CjxwYXRoIGQ9Ik0zMiAyNEwxNiAyNEwxNiAzMkwzMiAzMloiBmaWxsPSIjOWNhM2FmIi8+CjxwYXRoIGQ9Ik0zMiAyNEw0OCAyNEw0OCAzMkwzMiAzMloiIGZpbGw9IiM5Y2EzYWYiLz4KPHBhdGggZD0iTTMyIDI0TDMyIDE2TDMyIDMyTDMyIDI0WiIgZmlsbD0iIzlhYzNhZiIvPgo8L3N2Zz4K';
     }
   }
 
   private extractVideoId(videoUrl: string): string {
     const match = videoUrl.match(
-      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/,
     );
     return match ? match[1] : '';
   }
@@ -460,7 +473,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
 
   getQuantity(ingredient: Ingredient): string {
     const found = this.dish()?.ingredients?.find(
-      (i) => i.ingredientId === ingredient._id
+      (i) => i.ingredientId === ingredient._id,
     );
     if (!found) return '';
     return found.quantity.toString();
@@ -468,7 +481,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
 
   getNote(ingredient: Ingredient): string {
     const found = this.dish()?.ingredients?.find(
-      (i) => i.ingredientId === ingredient._id
+      (i) => i.ingredientId === ingredient._id,
     );
     if (!found) return '';
     return found.note;
@@ -477,7 +490,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
   private addOrUpdateCanonicalLink() {
     // Remove existing canonical link if it exists
     const existingCanonical = this.document.querySelector(
-      'link[rel="canonical"]'
+      'link[rel="canonical"]',
     );
     if (existingCanonical) {
       existingCanonical.remove();
@@ -507,7 +520,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
   private addHrefLangLinks() {
     // Remove existing hreflang links if they exist
     const existingHrefLangs = this.document.querySelectorAll(
-      'link[rel="alternate"][hreflang]'
+      'link[rel="alternate"][hreflang]',
     );
     existingHrefLangs.forEach((link) => link.remove());
 
@@ -548,7 +561,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
 
     // Clean up canonical link
     const existingCanonical = this.document.querySelector(
-      'link[rel="canonical"]'
+      'link[rel="canonical"]',
     );
     if (existingCanonical) {
       existingCanonical.remove();
@@ -556,7 +569,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
 
     // Clean up hreflang links
     const existingHrefLangs = this.document.querySelectorAll(
-      'link[rel="alternate"][hreflang]'
+      'link[rel="alternate"][hreflang]',
     );
     existingHrefLangs.forEach((link) => link.remove());
   }
