@@ -4,15 +4,15 @@
     class="!m-0 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 px-6 py-4 text-white flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm flex items-center justify-center">
-        <mat-icon class="!text-2xl text-white">nutrition</mat-icon>
+        <mat-icon class="text-white">nutrition</mat-icon>
       </div>
       <div>
         <h2 class="text-xl font-bold tracking-tight leading-tight text-white m-0">{{ englishTitle }}</h2>
         <div class="flex items-center gap-2 mt-1">
           <span class="text-xs bg-white/25 px-2 py-0.5 rounded-full font-mono text-white">{{ ingredient.slug }}</span>
           <button mat-icon-button (click)="copySlug()" matTooltip="Copy slug"
-            class="!w-6 !h-6 !leading-none text-white/80 hover:text-white">
-            <mat-icon class="!text-xs !w-3.5 !h-3.5">content_copy</mat-icon>
+            class="text-white/80 hover:text-white">
+            <mat-icon>content_copy</mat-icon>
           </button>
         </div>
       </div>
@@ -34,7 +34,7 @@
             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
           @if (ingredient.calories) {
             <div class="absolute bottom-3 left-3 bg-black/75 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-lg font-medium flex items-center gap-1 shadow">
-              <mat-icon class="!text-sm !w-4 !h-4 text-amber-400">local_fire_department</mat-icon>
+              <mat-icon class="text-amber-400">local_fire_department</mat-icon>
               <span>{{ ingredient.calories }} kcal</span>
             </div>
           }
@@ -209,7 +209,7 @@
   <mat-dialog-actions align="end" class="!border-t !border-slate-200 !px-6 !py-3 !bg-slate-50 flex items-center justify-between !m-0">
     <a mat-button [routerLink]="['/ingredient', ingredient.slug]" target="_blank"
       class="!text-xs !font-medium !text-slate-600 hover:!text-amber-600">
-      <mat-icon class="!text-sm !w-4 !h-4 mr-1">open_in_new</mat-icon>
+      <mat-icon class="mr-1">open_in_new</mat-icon>
       <span i18n>View on Public Website</span>
     </a>
 

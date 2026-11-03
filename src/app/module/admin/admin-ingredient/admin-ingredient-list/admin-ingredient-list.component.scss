@@ -21,6 +21,48 @@
   background-color: rgba(254, 243, 199, 0.35) !important;
 }
 
+/* View mode toggle: high contrast on header */
+.view-mode-toggle {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden;
+
+  .mat-button-toggle {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    transition: all 0.2s ease-in-out;
+
+    .mat-button-toggle-label-content {
+      color: #ffffff !important;
+      font-weight: 600;
+      padding: 0 14px;
+      line-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    mat-icon {
+      color: #ffffff !important;
+    }
+  }
+
+  .mat-button-toggle-checked {
+    background-color: #ffffff !important;
+    color: #78350f !important;
+
+    .mat-button-toggle-label-content {
+      color: #78350f !important;
+      font-weight: 700 !important;
+    }
+
+    mat-icon {
+      color: #78350f !important;
+    }
+  }
+}
+
 /* Hide horizontal scrollbar when not hovering or use slim scrollbars */
 .scrollbar-none {
   scrollbar-width: none;

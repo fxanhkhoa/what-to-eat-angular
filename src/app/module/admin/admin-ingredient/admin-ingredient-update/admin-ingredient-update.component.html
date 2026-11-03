@@ -8,7 +8,7 @@
       <div>
         <a routerLink="/admin/ingredient"
           class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-100 hover:text-white mb-2 transition-colors">
-          <mat-icon class="!text-sm !w-4 !h-4">arrow_back</mat-icon>
+          <mat-icon>arrow_back</mat-icon>
           <span i18n>Back to Ingredients</span>
         </a>
         <div class="flex items-center gap-3">
@@ -48,7 +48,7 @@
           @if (isSaving) {
           <mat-spinner diameter="18" strokeWidth="3"></mat-spinner>
           } @else {
-          <mat-icon class="!text-amber-900">save</mat-icon>
+          <mat-icon class="text-amber-900">save</mat-icon>
           }
           <span>
             @if (ingredientId && ingredientId !== 'create') {
@@ -83,7 +83,7 @@
             </div>
             <button type="button" mat-stroked-button color="primary" (click)="addLanguage()"
               class="!text-xs !h-8 !rounded-lg ml-auto">
-              <mat-icon class="!text-xs">add</mat-icon>
+              <mat-icon>add</mat-icon>
               <span i18n>Add Language</span>
             </button>
           </mat-card-header>
@@ -129,7 +129,7 @@
                 </label>
                 <button type="button" mat-button color="primary" (click)="generateSlug()"
                   class="!text-xs !font-semibold !h-auto !p-0 flex items-center gap-1">
-                  <mat-icon class="!text-sm !w-4 !h-4 mr-1">auto_fix_high</mat-icon>
+                  <mat-icon class="mr-1">auto_fix_high</mat-icon>
                   <span i18n>Generate from Title</span>
                 </button>
               </div>
@@ -228,7 +228,7 @@
             <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl flex items-center justify-between">
               <div class="flex items-center gap-2.5">
                 <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-xs">
-                  <mat-icon class="!text-xl">local_fire_department</mat-icon>
+                  <mat-icon>local_fire_department</mat-icon>
                 </div>
                 <div>
                   <h4 class="font-bold text-amber-950 text-sm m-0" i18n>Energy Value</h4>
@@ -391,12 +391,12 @@
                 <!-- Actions -->
                 <div class="flex flex-col gap-1">
                   <button type="button" mat-icon-button (click)="previewImageModal(img.value)" matTooltip="Enlarge"
-                    class="!w-8 !h-8 text-slate-500 hover:text-slate-800">
-                    <mat-icon class="!text-base">zoom_in</mat-icon>
+                    class="text-slate-500 hover:text-slate-800">
+                    <mat-icon>zoom_in</mat-icon>
                   </button>
                   <button type="button" mat-icon-button color="warn" (click)="removeImage(i)" matTooltip="Delete image"
-                    class="!w-8 !h-8 text-rose-500 hover:bg-rose-50 rounded-lg">
-                    <mat-icon class="!text-base">delete</mat-icon>
+                    class="text-rose-500 hover:bg-rose-50 rounded-lg">
+                    <mat-icon>delete</mat-icon>
                   </button>
                 </div>
               </div>
@@ -404,7 +404,7 @@
 
               @if (imagesArray.length === 0) {
               <div class="text-center py-8 px-4 border-2 border-dashed border-slate-200 rounded-xl text-slate-400">
-                <mat-icon class="!text-3xl !w-8 !h-8 text-slate-300 mb-1">image</mat-icon>
+                <mat-icon class="text-slate-300 mb-1">image</mat-icon>
                 <p class="text-xs font-medium m-0" i18n>No images added yet.</p>
                 <p class="text-[11px] text-slate-400 mt-1 mb-0" i18n>Paste an image URL above to attach photos.</p>
               </div>
@@ -446,7 +446,7 @@
 
                 <div
                   class="absolute bottom-3 left-3 text-white flex items-center gap-1 font-bold text-xs bg-black/70 backdrop-blur-md px-2 py-0.5 rounded-lg shadow">
-                  <mat-icon class="!text-xs !w-3.5 !h-3.5 text-amber-400">local_fire_department</mat-icon>
+                  <mat-icon class="text-amber-400">local_fire_department</mat-icon>
                   <span>{{ previewCalories }} kcal</span>
                 </div>
               </div>
@@ -496,12 +496,12 @@
         <div class="flex items-center gap-2 text-xs">
           @if (ingredientForm.invalid) {
           <span class="inline-flex items-center gap-1.5 text-amber-600 font-medium">
-            <mat-icon class="!text-sm !w-4 !h-4">info</mat-icon>
+            <mat-icon>info</mat-icon>
             <span i18n>Please fill in all required fields (Slug, Titles, Categories)</span>
           </span>
           } @else {
           <span class="inline-flex items-center gap-1.5 text-emerald-600 font-medium">
-            <mat-icon class="!text-sm !w-4 !h-4">check_circle</mat-icon>
+            <mat-icon>check_circle</mat-icon>
             <span i18n>Form is ready to submit</span>
           </span>
           }
