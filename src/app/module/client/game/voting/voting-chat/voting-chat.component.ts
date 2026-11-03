@@ -10,7 +10,7 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Subject, takeUntil, debounceTime, distinctUntilChanged } from 'rxjs';
 
 // Angular Material
@@ -43,7 +43,6 @@ import { reactions } from '@/app/shared/constant/reactions.constant';
   selector: 'app-voting-chat',
   standalone: true,
   imports: [
-    CommonModule,
     MatCardModule,
     MatIconModule,
     MatExpansionModule,
@@ -51,8 +50,8 @@ import { reactions } from '@/app/shared/constant/reactions.constant';
     ChatHeaderComponent,
     ChatMessageListComponent,
     ChatInputComponent,
-    TypingIndicatorComponent,
-  ],
+    TypingIndicatorComponent
+],
   templateUrl: './voting-chat.component.html',
   styleUrls: ['./voting-chat.component.scss'],
 })

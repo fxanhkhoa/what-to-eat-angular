@@ -6,8 +6,9 @@ import {
   signal,
   ViewChild,
   ElementRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -21,7 +22,6 @@ import { TextFieldModule } from '@angular/cdk/text-field';
   selector: 'app-chat-input',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatCardModule,
     MatInputModule,
@@ -29,10 +29,11 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     MatIconModule,
     MatTooltipModule,
     MatFormFieldModule,
-    TextFieldModule,
-  ],
+    TextFieldModule
+],
   templateUrl: './chat-input.component.html',
   styleUrls: ['./chat-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ChatInputComponent {
   @Input() isConnected = false;

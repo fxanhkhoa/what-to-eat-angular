@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   FormBuilder,
   FormGroup,
@@ -29,7 +29,6 @@ import { ToastService } from '@/app/shared/service/toast.service';
 @Component({
   selector: 'app-admin-role-permission-form',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -37,8 +36,8 @@ import { ToastService } from '@/app/shared/service/toast.service';
     MatIconModule,
     MatCardModule,
     MatChipsModule,
-    DragDropModule,
-  ],
+    DragDropModule
+],
   templateUrl: './admin-role-permission-form.component.html',
   styleUrl: './admin-role-permission-form.component.scss',
 })

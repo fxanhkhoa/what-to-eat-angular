@@ -1,5 +1,5 @@
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, PLATFORM_ID } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import cookies from 'js-cookie';
@@ -11,9 +11,10 @@ const CONSENT_EXPIRES_IN_DAYS = 90;
 @Component({
   selector: 'app-cookie-consent-banner',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatButtonModule],
+  imports: [RouterModule, MatButtonModule],
   templateUrl: './cookie-consent-banner.component.html',
   styleUrl: './cookie-consent-banner.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class CookieConsentBannerComponent {
   private platformId = inject(PLATFORM_ID);

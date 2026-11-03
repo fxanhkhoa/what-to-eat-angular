@@ -77,6 +77,11 @@ describe('CategoryTranslatePipe', () => {
     expect(pipe.transform('ALCOHOLIC_BEVERAGES')).not.toBe('ALCOHOLIC_BEVERAGES');
   });
 
+  it('should translate ALCOHOLIC BEVERAGES', () => {
+    expect(pipe.transform('ALCOHOLIC BEVERAGES')).toBeTruthy();
+    expect(pipe.transform('ALCOHOLIC BEVERAGES')).not.toBe('ALCOHOLIC BEVERAGES');
+  });
+
   it('should translate WATER', () => {
     expect(pipe.transform('WATER')).toBeTruthy();
     expect(pipe.transform('WATER')).not.toBe('WATER');

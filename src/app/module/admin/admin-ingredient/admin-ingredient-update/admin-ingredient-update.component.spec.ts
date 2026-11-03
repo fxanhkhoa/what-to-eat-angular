@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of, Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { of, Subject, throwError } from 'rxjs';
 
 import { AdminIngredientUpdateComponent } from './admin-ingredient-update.component';
 import { IngredientService } from '@/app/service/ingredient.service';
@@ -285,6 +284,7 @@ describe('AdminIngredientUpdateComponent', () => {
 
     it('should patch the form with the fetched ingredient', () => {
       paramsSubject.next({ id: 'ing-1' });
+      fixture.detectChanges();
       expect(component.ingredientForm.get('slug')?.value).toBe(mockIngredient.slug);
     });
 
@@ -301,6 +301,25 @@ describe('AdminIngredientUpdateComponent', () => {
     it('should set ingredientId from the route params', () => {
       paramsSubject.next({ id: 'ing-1' });
       expect((component as any).ingredientId).toBe('ing-1');
+    });
+
+    it('should set isLoading to false after successful load', () => {
+      paramsSubject.next({ id: 'ing-1' });
+      expect(component.isLoading()).toBeFalse();
+    });
+
+    it('should handle findOne error gracefully and set isLoading to false', () => {
+      ingredientServiceMock.findOne.and.returnValue(throwError(() => new Error('Not found')));
+      paramsSubject.next({ id: 'non-existent' });
+      expect(component.isLoading()).toBeFalse();
+      expect(toastServiceMock.showError).toHaveBeenCalled();
+    });
+
+    it('should handle null response gracefully and set isLoading to false', () => {
+      ingredientServiceMock.findOne.and.returnValue(of(null as any));
+      paramsSubject.next({ id: 'null-id' });
+      expect(component.isLoading()).toBeFalse();
+      expect(toastServiceMock.showError).toHaveBeenCalled();
     });
   });
 

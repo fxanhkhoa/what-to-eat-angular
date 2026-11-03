@@ -7,7 +7,7 @@ import {
   ElementRef,
   AfterViewChecked,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ChatMessage } from '@/types/chat.type';
@@ -16,7 +16,7 @@ import { ChatMessageComponent } from '../chat-message/chat-message.component';
 @Component({
   selector: 'app-chat-message-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, ChatMessageComponent],
+  imports: [MatButtonModule, MatIconModule, ChatMessageComponent],
   templateUrl: './chat-message-list.component.html',
   styleUrls: ['./chat-message-list.component.scss'],
 })

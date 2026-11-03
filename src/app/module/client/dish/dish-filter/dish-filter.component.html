@@ -1,148 +1,166 @@
 <!-- dish-filter.component.html -->
-<form [formGroup]="filterForm" class="grid grid-cols-12 gap-5 p-1 pb-3">
-    <!-- Search Bar -->
-    <div class="col-span-12">
-        <mat-form-field appearance="outline" class="w-full !text-lg">
-            <mat-label i18n>Search dishes...</mat-label>
-            <input matInput formControlName="keyword" placeholder="Try 'spicy chicken' or 'vegetarian pasta'"
-                i18n-placeholder [matAutocomplete]="auto" class="!text-lg">
-            <mat-icon matPrefix class="mr-2 text-gray-400">search</mat-icon>
-            @if (isLoadingSuggestions()) {
-            <mat-spinner matSuffix [diameter]="20"></mat-spinner>
+<form [formGroup]="filterForm" (ngSubmit)="onSearch()" class="dish-filter-form flex flex-col gap-3.5 text-white">
+  <!-- Top: Search Bar & Actions -->
+  <div class="flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
+    <!-- Keyword Search Input -->
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="flex-1 filter-compact-field">
+      <mat-icon matPrefix class="mr-2 text-amber-400">search</mat-icon>
+      <mat-label i18n>Search dishes...</mat-label>
+      <input matInput formControlName="keyword" placeholder="Try 'spicy chicken' or 'pasta'"
+        i18n-placeholder [matAutocomplete]="auto" (keyup.enter)="onSearch()">
+      @if (filterForm.get('keyword')?.value) {
+        <button mat-icon-button matSuffix type="button" (click)="clearKeyword()" aria-label="Clear search" class="!w-7 !h-7 text-gray-400 hover:text-white">
+          <mat-icon class="!text-[16px]">close</mat-icon>
+        </button>
+      }
+      @if (isLoadingSuggestions()) {
+        <mat-spinner matSuffix [diameter]="18" class="mr-2"></mat-spinner>
+      }
+    </mat-form-field>
+
+    <!-- Auto-complete suggestions -->
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSuggestionSelected($event.option.value)">
+      @for (suggestion of searchSuggestions(); track suggestion) {
+        <mat-option [value]="suggestion">
+          <mat-icon class="mr-2 text-gray-400">search</mat-icon>
+          {{ suggestion }}
+        </mat-option>
+      }
+    </mat-autocomplete>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center gap-2 shrink-0">
+      @if (hasActiveFilters) {
+        <button mat-stroked-button type="button" (click)="resetFilters()"
+          class="!border-white/20 !text-gray-300 hover:!bg-white/10 !h-10 !rounded-xl !px-3 text-xs sm:text-sm font-medium transition-all"
+          aria-label="Reset all filters">
+          <mat-icon class="!text-[18px] mr-1">restart_alt</mat-icon>
+          <span i18n>Reset</span>
+        </button>
+      }
+
+      <button mat-flat-button type="submit" (click)="onSearch()"
+        class="!bg-gradient-to-r !from-amber-500 !to-orange-500 !text-white !font-semibold !h-10 !rounded-xl !px-4 shadow-md shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-1.5 text-xs sm:text-sm"
+        aria-label="Search dishes">
+        <mat-icon class="!text-[18px]">search</mat-icon>
+        <span i18n>Search</span>
+        @if (activeFiltersCount > 0) {
+          <span class="ml-1 px-1.5 py-0.2 rounded-full bg-black/30 text-[11px] font-bold">
+            {{ activeFiltersCount }}
+          </span>
+        }
+      </button>
+    </div>
+  </div>
+
+  <!-- Filter Controls Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3">
+    <!-- Prep Time Card -->
+    <div class="lg:col-span-3 bg-white/5 border border-white/10 rounded-xl p-2.5 flex flex-col justify-between">
+      <div class="flex items-center justify-between text-xs mb-1">
+        <span class="flex items-center gap-1.5 font-semibold text-gray-200">
+          <mat-icon svgIcon="preparation_time" class="!w-4 !h-4 text-amber-400"></mat-icon>
+          <span i18n>Prep Time</span>
+        </span>
+        <span class="text-amber-400 font-mono font-medium text-[11px] bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
+          {{ filterForm.get('preparationTimeFrom')?.value }}m - {{ filterForm.get('preparationTimeTo')?.value }}m
+        </span>
+      </div>
+      <mat-slider [min]="1" [max]="600" [step]="1" [displayWith]="formatLabel" discrete class="!w-full compact-slider">
+        <input matSliderStartThumb formControlName="preparationTimeFrom">
+        <input matSliderEndThumb formControlName="preparationTimeTo">
+      </mat-slider>
+    </div>
+
+    <!-- Cooking Time Card -->
+    <div class="lg:col-span-3 bg-white/5 border border-white/10 rounded-xl p-2.5 flex flex-col justify-between">
+      <div class="flex items-center justify-between text-xs mb-1">
+        <span class="flex items-center gap-1.5 font-semibold text-gray-200">
+          <mat-icon svgIcon="cooking_time" class="!w-4 !h-4 text-amber-400"></mat-icon>
+          <span i18n>Cooking Time</span>
+        </span>
+        <span class="text-amber-400 font-mono font-medium text-[11px] bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20">
+          {{ filterForm.get('cookingTimeFrom')?.value }}m - {{ filterForm.get('cookingTimeTo')?.value }}m
+        </span>
+      </div>
+      <mat-slider [min]="1" [max]="600" [step]="1" [displayWith]="formatLabel" discrete class="!w-full compact-slider">
+        <input matSliderStartThumb formControlName="cookingTimeFrom">
+        <input matSliderEndThumb formControlName="cookingTimeTo">
+      </mat-slider>
+    </div>
+
+    <!-- Difficulty Card -->
+    <div class="lg:col-span-6 bg-white/5 border border-white/10 rounded-xl p-2.5 flex flex-col justify-between">
+      <div class="text-xs font-semibold text-gray-200 mb-1.5" i18n>Difficulty Level</div>
+      <div class="flex items-center gap-2 flex-wrap">
+        @for(item of difficultLevelsOptions; track item) {
+          <button type="button"
+                  (click)="toggleDifficultyLevel(item)"
+                  class="diff-chip inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-medium border transition-all duration-200"
+                  [ngClass]="{
+                    'border-emerald-500/50 bg-emerald-500/20 text-emerald-300 shadow-sm shadow-emerald-500/20 font-semibold': item === 'EASY' && difficultyLevels?.value?.includes(item),
+                    'border-amber-500/50 bg-amber-500/20 text-amber-300 shadow-sm shadow-amber-500/20 font-semibold': item === 'MEDIUM' && difficultyLevels?.value?.includes(item),
+                    'border-rose-500/50 bg-rose-500/20 text-rose-300 shadow-sm shadow-rose-500/20 font-semibold': item === 'HARD' && difficultyLevels?.value?.includes(item),
+                    'border-white/10 bg-white/5 text-gray-400 hover:text-white hover:bg-white/10': !difficultyLevels?.value?.includes(item)
+                  }">
+            @if (item === 'EASY') {
+              <mat-icon svgIcon="easy" class="!w-4 !h-4"></mat-icon>
+            } @else if (item === 'MEDIUM') {
+              <mat-icon svgIcon="medium" class="!w-4 !h-4"></mat-icon>
+            } @else if (item === 'HARD') {
+              <mat-icon svgIcon="hard" class="!w-4 !h-4"></mat-icon>
             }
-        </mat-form-field>
-
-        <!-- Auto-complete suggestions -->
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSuggestionSelected($event.option.value)">
-            @for (suggestion of searchSuggestions(); track suggestion) {
-            <mat-option [value]="suggestion">
-                <mat-icon class="mr-2 text-gray-400">search</mat-icon>
-                {{ suggestion }}
-            </mat-option>
-            }
-        </mat-autocomplete>
-    </div>
-
-    <div class="col-span-12">
-        <mat-divider></mat-divider>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-4">
-        <div class="flex flex-col gap-3">
-            <!-- Preparation Time -->
-            <div class="font-medium">
-                <span i18n-matTooltip matTooltip="in minute" class="flex items-center">
-                    <span i18n class="mr-3">Preparation Time</span>
-                    <mat-icon svgIcon="preparation_time"></mat-icon>
-                </span>
-            </div>
-            <div>
-                <mat-slider [min]="1" [max]="600" [step]="1" [displayWith]="formatLabel" discrete class="!w-full">
-                    <input matSliderStartThumb formControlName="preparationTimeFrom">
-                    <input matSliderEndThumb formControlName="preparationTimeTo">
-                </mat-slider>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-span-12 md:col-span-6 lg:col-span-4">
-        <div class="flex flex-col gap-3">
-            <!-- Cooking Time -->
-            <div class="font-medium">
-                <span i18n-matTooltip matTooltip="in minute" class="flex items-center">
-                    <span i18n class="mr-3">Cooking Time</span>
-                    <mat-icon svgIcon="cooking_time"></mat-icon>
-                </span>
-            </div>
-            <div>
-                <mat-slider [min]="1" [max]="600" [step]="1" [displayWith]="formatLabel" discrete class="!w-full">
-                    <input matSliderStartThumb formControlName="cookingTimeFrom">
-                    <input matSliderEndThumb formControlName="cookingTimeTo">
-                </mat-slider>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-span-12">
-        <!-- Difficulty Levels -->
-        <div class="flex gap-2 flex-wrap items-center h-full">
-            @for(item of difficultLevelsOptions; track item) {
-            <button type="button" [matButton]="difficultyLevels?.value?.includes(item) ? 'tonal' : 'outlined'"
-                (click)="toggleDifficultyLevel(item)" [ngClass]="{
-                        'neumorphic-easy': item === 'EASY' && difficultyLevels?.value?.includes(item),
-                        'neumorphic-medium': item === 'MEDIUM' && difficultyLevels?.value?.includes(item),
-                        'neumorphic-hard': item === 'HARD' && difficultyLevels?.value?.includes(item)
-                    }">
-                @if (item === 'EASY') {
-                <mat-icon svgIcon="easy"></mat-icon>
-                } @else if (item === 'MEDIUM') {
-                <mat-icon svgIcon="medium"></mat-icon>
-                }
-                @else if (item === 'HARD') {
-                <mat-icon svgIcon="hard"></mat-icon>
-                }
-                {{ item | categoryTranslate }}
-            </button>
-            }
-        </div>
-    </div>
-
-    <div class="col-span-12">
-        <mat-divider></mat-divider>
+            <span>{{ item | categoryTranslate }}</span>
+          </button>
+        }
+      </div>
     </div>
 
     <!-- Meal Categories -->
-    <div class="col-span-12 md:col-span-6">
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label i18n>Meal Categories</mat-label>
-            <mat-select formControlName="mealCategories" multiple>
-                @for (option of mealCategoriesOptions; track option) {
-                <mat-option [value]="option">
-                    {{ option | categoryTranslate }}
-                </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
+    <div class="lg:col-span-4">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full filter-compact-field">
+        <mat-label i18n>Meal Categories</mat-label>
+        <mat-select formControlName="mealCategories" multiple>
+          @for (option of mealCategoriesOptions; track option) {
+            <mat-option [value]="option">
+              {{ option | categoryTranslate }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <!-- Ingredient Categories -->
-    <div class="col-span-12 md:col-span-6">
-        <mat-form-field appearance="fill" class="w-full">
-            <mat-label i18n>Ingredient Categories</mat-label>
-            <mat-select formControlName="ingredientCategories" multiple>
-                @for (option of ingredientCategoriesOptions; track option) {
-                <mat-option *ngFor="let option of ingredientCategoriesOptions" [value]="option">
-                    {{ option }}
-                </mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
+    <div class="lg:col-span-4">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full filter-compact-field">
+        <mat-label i18n>Ingredient Categories</mat-label>
+        <mat-select formControlName="ingredientCategories" multiple>
+          @for (option of ingredientCategoriesOptions; track option) {
+            <mat-option [value]="option">
+              {{ option | categoryTranslate }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <!-- Tags -->
-    <div class="col-span-12">
-        <div class="flex flex-col gap-3">
-            <mat-form-field appearance="fill" class="w-full">
-                <mat-label i18n>{{ 'tags' }}</mat-label>
-                <mat-chip-grid #chipGrid aria-label="Tag selection">
-                    <mat-chip-row *ngFor="let tag of tags" [removable]="true" (removed)="removeTag(tag)">
-                        {{tag.value}}
-                        <button matChipRemove>
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip-row>
-                    <input i18n-placeholder placeholder="{{ 'add-tag' }}" [matChipInputFor]="chipGrid"
-                        (matChipInputTokenEnd)="addTag($event.value); $event.chipInput.clear()">
-                </mat-chip-grid>
-            </mat-form-field>
-        </div>
+    <div class="lg:col-span-4">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-full filter-compact-field">
+        <mat-label i18n>Tags</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Tag selection">
+          @for (tag of tags; track tag) {
+            <mat-chip-row [removable]="true" (removed)="removeTag(tag)" class="!text-xs">
+              {{tag.value}}
+              <button matChipRemove aria-label="Remove tag">
+                <mat-icon class="!text-[14px]">cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          }
+          <input i18n-placeholder placeholder="Add tag..." [matChipInputFor]="chipGrid"
+            (matChipInputTokenEnd)="addTag($event.value); $event.chipInput.clear()">
+        </mat-chip-grid>
+      </mat-form-field>
     </div>
-
-    <!-- Search Button -->
-    <div class="col-span-12">
-        <button matButton="filled" (click)="onSearch()">
-            <span i18n>Search</span>
-            <mat-icon svgIcon="search"></mat-icon>
-        </button>
-    </div>
+  </div>
 </form>

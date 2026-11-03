@@ -3,7 +3,7 @@
     <mat-card-header class="pb-4">
       <mat-card-title>
         <span class="text-xl font-semibold bg-gradient-to-r from-[#F3A446] to-[#A06235] text-transparent bg-clip-text"
-          i18n>Add Custom Dish</span>
+        i18n>Add Custom Dish</span>
       </mat-card-title>
       <mat-card-subtitle class="!text-gray-400 !mt-2">
         <span i18n>Create a custom dish for voting</span>
@@ -20,12 +20,16 @@
             class="text-white placeholder-gray-400">
           <mat-icon matSuffix class="text-orange-400">restaurant</mat-icon>
           <mat-hint class="text-gray-400">Enter a descriptive name for the dish</mat-hint>
-          <mat-error *ngIf="dishVoteItemForm.get('customTitle')?.hasError('required')" class="text-red-400">
-            Title is required
-          </mat-error>
-          <mat-error *ngIf="dishVoteItemForm.get('customTitle')?.hasError('minlength')" class="text-red-400">
-            Title must be at least 2 characters long
-          </mat-error>
+          @if (dishVoteItemForm.get('customTitle')?.hasError('required')) {
+            <mat-error class="text-red-400">
+              Title is required
+            </mat-error>
+          }
+          @if (dishVoteItemForm.get('customTitle')?.hasError('minlength')) {
+            <mat-error class="text-red-400">
+              Title must be at least 2 characters long
+            </mat-error>
+          }
         </mat-form-field>
 
         <!-- Slug Field -->

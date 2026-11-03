@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   inject,
@@ -23,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { AvailableLanguages } from '@/constant/language.constant';
 import { DIFFICULT_LEVELS, MEAL_CATEGORIES } from '@/enum/dish.enum';
@@ -76,6 +78,7 @@ import { CategoryTranslatePipe } from '@/app/pipe/category-translate.pipe';
     MatChipsModule,
     MatIconModule,
     MatCardModule,
+    MatTooltipModule,
     CommonModule,
     MatAutocompleteModule,
     MultiLanguagePipe,
@@ -96,6 +99,7 @@ export class AdminDishUpdateComponent {
   private route = inject(ActivatedRoute);
   private toastService = inject(ToastService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
   localeId = inject(LOCALE_ID);
 
   dishForm: FormGroup = new FormGroup([]);
@@ -109,6 +113,28 @@ export class AdminDishUpdateComponent {
   filteredDishes: Observable<Dish[]> = new Observable<Dish[]>();
   selectedRelatedDishes: Dish[] = [];
   separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  dishId?: string;
+  isLoading = false;
+  loadedDishTitle = '';
+
+  get previewTitle(): string {
+    const titles = this.titleArray?.value || [];
+    const current = titles.find((t: any) => t?.lang === this.localeId)?.data;
+    if (current && current.trim()) return current;
+    const first = titles.find((t: any) => t?.data && t.data.trim())?.data;
+    return first || this.dishForm?.get('slug')?.value || '';
+  }
+
+  get totalTime(): number {
+    const prep = Number(this.dishForm?.get('preparationTime')?.value) || 0;
+    const cook = Number(this.dishForm?.get('cookingTime')?.value) || 0;
+    return prep + cook;
+  }
+
+  onCancel(): void {
+    this.router.navigate(['admin', 'dish']);
+  }
 
   @ViewChild('relatedDishInput')
   relatedDishInput?: ElementRef<HTMLInputElement>;
@@ -139,9 +165,6 @@ export class AdminDishUpdateComponent {
     },
   };
 
-  dishId?: string;
-  isLoading = false;
-
   ngOnInit(): void {
     this.initForm();
     this.route.params.subscribe((params) => {
@@ -166,6 +189,10 @@ export class AdminDishUpdateComponent {
               dish.title.forEach((title) => {
                 this.addLanguageField('title', title.lang, title.data);
               });
+              const current = dish.title.find((t) => t.lang === this.localeId)?.data || dish.title[0]?.data;
+              if (current) {
+                this.loadedDishTitle = current;
+              }
               dish.shortDescription.forEach((shortDescription) => {
                 this.addLanguageField(
                   'shortDescription',
@@ -221,10 +248,12 @@ export class AdminDishUpdateComponent {
               });
 
               this.selectedRelatedDishes = res.relatedDishes;
+              this.cdr.markForCheck();
             },
             error: (error) => {
               console.error('Error in forkJoin:', error);
               this.isLoading = false;
+              this.cdr.markForCheck();
             }
           });
       }
@@ -380,10 +409,12 @@ export class AdminDishUpdateComponent {
     this.ingredientsArray.controls.forEach((control, index) => {
       this.setupIngredientFilter(control, index);
     });
+    this.cdr.markForCheck();
   }
 
   removeIngredient(index: number): void {
     this.ingredientsArray.removeAt(index);
+    this.cdr.markForCheck();
   }
 
   onSubmit(): void {

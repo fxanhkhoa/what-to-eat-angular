@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, LOCALE_ID, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -14,15 +14,14 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-ingredient',
   imports: [
-    CommonModule,
     MatIconModule,
     MatProgressSpinnerModule,
     IngredientCardComponent,
     SearchBarComponent,
     RouterModule,
     MatPaginatorModule,
-    MatButtonModule,
-  ],
+    MatButtonModule
+],
   templateUrl: './ingredient.component.html',
   styleUrl: './ingredient.component.scss',
 })

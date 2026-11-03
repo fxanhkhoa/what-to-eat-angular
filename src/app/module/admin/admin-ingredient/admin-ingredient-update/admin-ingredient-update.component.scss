@@ -2,8 +2,22 @@
   display: block;
 }
 
-/* Ensure material form fields align properly */
-mat-form-field {
+/* Ensure proper responsive sizing for multilingual title rows without stretching */
+.title-lang-field {
+  width: 140px !important;
+  min-width: 110px !important;
+  max-width: 150px !important;
+  flex: 0 0 140px !important;
+}
+
+.title-data-field {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* General full-width fields */
+mat-form-field.w-full {
   width: 100%;
 }
+
 

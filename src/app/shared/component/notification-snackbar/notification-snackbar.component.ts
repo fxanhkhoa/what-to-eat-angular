@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -36,6 +36,7 @@ export type NotificationSnackbarData = {
   styleUrls: ['./notification-snackbar.component.scss'],
   imports: [MatIconModule],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class NotificationSnackbarComponent {
   snackBarRef = inject(MatSnackBarRef);

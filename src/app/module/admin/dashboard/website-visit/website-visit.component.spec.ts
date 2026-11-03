@@ -96,6 +96,20 @@ describe('WebsiteVisitComponent', () => {
     expect(component.isLoadingPage).toBeFalse();
   });
 
+  it('should handle null data response gracefully and clear loading', () => {
+    websiteVisitServiceSpy.findAll.and.returnValue(
+      of({ data: null as any, count: 0 })
+    );
+
+    component.dataSource.data = [];
+    component.loadVisits(1, 10);
+
+    expect(component.dataSource.data).toEqual([]);
+    expect(component.totalItems).toBe(0);
+    expect(component.isLoading).toBeFalse();
+    expect(component.isLoadingPage).toBeFalse();
+  });
+
   it('should update page and limit on page change', () => {
     const loadVisitsSpy = spyOn(component, 'loadVisits');
     const event: PageEvent = {

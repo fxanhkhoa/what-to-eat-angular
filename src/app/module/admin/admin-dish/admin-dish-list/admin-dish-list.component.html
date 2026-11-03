@@ -219,7 +219,7 @@
                 <mat-label i18n>Ingredient Categories</mat-label>
                 <mat-select formControlName="ingredientCategories" multiple>
                   @for (category of ingredientCategoryOptions; track category) {
-                  <mat-option [value]="category">{{ category | titlecase }}</mat-option>
+                  <mat-option [value]="category">{{ category | categoryTranslate }}</mat-option>
                   }
                 </mat-select>
               </mat-form-field>

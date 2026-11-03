@@ -189,6 +189,57 @@ export class DishFilterComponent implements OnInit {
     return value + $localize`m`;
   }
 
+  clearKeyword(): void {
+    this.filterForm.patchValue({ keyword: '' });
+    this.onSearch();
+  }
+
+  resetFilters(): void {
+    this.filterForm.reset({
+      keyword: '',
+      preparationTimeFrom: 1,
+      preparationTimeTo: 60,
+      cookingTimeFrom: 1,
+      cookingTimeTo: 60,
+      difficultLevels: [],
+      mealCategories: [],
+      ingredientCategories: [],
+    });
+    this.tags = [];
+    if (this.filter) {
+      this.filter.tags = [];
+    }
+    this.onSearch();
+  }
+
+  get hasActiveFilters(): boolean {
+    const v = this.filterForm.value;
+    return !!(
+      (v.keyword && v.keyword.trim().length > 0) ||
+      (v.preparationTimeFrom && v.preparationTimeFrom > 1) ||
+      (v.preparationTimeTo && v.preparationTimeTo < 60) ||
+      (v.cookingTimeFrom && v.cookingTimeFrom > 1) ||
+      (v.cookingTimeTo && v.cookingTimeTo < 60) ||
+      (v.difficultLevels && v.difficultLevels.length > 0) ||
+      (v.mealCategories && v.mealCategories.length > 0) ||
+      (v.ingredientCategories && v.ingredientCategories.length > 0) ||
+      this.tags.length > 0
+    );
+  }
+
+  get activeFiltersCount(): number {
+    let count = 0;
+    const v = this.filterForm.value;
+    if (v.keyword && v.keyword.trim().length > 0) count++;
+    if ((v.preparationTimeFrom && v.preparationTimeFrom > 1) || (v.preparationTimeTo && v.preparationTimeTo < 60)) count++;
+    if ((v.cookingTimeFrom && v.cookingTimeFrom > 1) || (v.cookingTimeTo && v.cookingTimeTo < 60)) count++;
+    if (v.difficultLevels && v.difficultLevels.length > 0) count += v.difficultLevels.length;
+    if (v.mealCategories && v.mealCategories.length > 0) count += v.mealCategories.length;
+    if (v.ingredientCategories && v.ingredientCategories.length > 0) count += v.ingredientCategories.length;
+    if (this.tags.length > 0) count += this.tags.length;
+    return count;
+  }
+
   toggleDifficultyLevel(level: string) {
     if (this.difficultyLevels?.value?.includes(level)) {
       this.difficultyLevels?.setValue(

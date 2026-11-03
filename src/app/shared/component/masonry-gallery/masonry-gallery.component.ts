@@ -1,9 +1,6 @@
+import { CommonModule, isPlatformBrowser, isPlatformServer } from '@angular/common';
 import {
-  CommonModule,
-  isPlatformBrowser,
-  isPlatformServer,
-} from '@angular/common';
-import {
+  ChangeDetectionStrategy,
   Component,
   ContentChild,
   ElementRef,
@@ -19,6 +16,7 @@ import {
   imports: [CommonModule],
   templateUrl: './masonry-gallery.component.html',
   styleUrl: './masonry-gallery.component.scss',
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class MasonryGalleryComponent {
   @Input() images: { src: string; title?: string }[] = [];

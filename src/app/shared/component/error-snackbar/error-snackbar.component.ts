@@ -1,4 +1,4 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {
   MAT_SNACK_BAR_DATA,
@@ -12,6 +12,7 @@ import {
   templateUrl: './error-snackbar.component.html',
   styleUrl: './error-snackbar.component.scss',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ErrorSnackbarComponent {
   constructor(

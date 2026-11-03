@@ -207,7 +207,7 @@
                                 </label>
 
                                 <a mat-icon-button target="_blank"
-                                    [href]="'/ingredient?keyword=' + (item?.slug?.replaceAll('-', ' '))"
+                                    [href]="'/ingredient?keyword=' + (item.slug ? item.slug.replaceAll('-', ' ') : '')"
                                     [attr.aria-label]="(item.title | multiLanguage: localeId)?.data"
                                     class="!text-gray-400 hover:!text-orange-400 opacity-0 group-hover:opacity-100 transition-all duration-200">
                                     <mat-icon>open_in_new</mat-icon>

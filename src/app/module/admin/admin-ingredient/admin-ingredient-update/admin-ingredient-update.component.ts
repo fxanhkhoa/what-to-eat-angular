@@ -1,5 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
+import { CommonModule, isPlatformServer } from '@angular/common';
+
 import {
   FormArray,
   FormBuilder,
@@ -58,6 +67,7 @@ import { ImageViewerComponent } from '@/app/shared/widget/image-viewer/image-vie
   ],
   templateUrl: './admin-ingredient-update.component.html',
   styleUrl: './admin-ingredient-update.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminIngredientUpdateComponent implements OnInit {
   private fb = inject(FormBuilder);
@@ -66,12 +76,14 @@ export class AdminIngredientUpdateComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private toastService = inject(ToastService);
   private dialog = inject(MatDialog);
+  private cdr = inject(ChangeDetectorRef);
+  private platformId = inject(PLATFORM_ID);
 
   ingredientForm: FormGroup = new FormGroup([]);
   availableLanguages = AvailableLanguages;
   ingredientCategoriesArray = Object.values(INGREDIENT_CATEGORIES);
-  isLoading = false;
-  isSaving = false;
+  isLoading = signal(false);
+  isSaving = signal(false);
   ingredientId?: string;
   loadedIngredientTitle: string = '';
 
@@ -90,27 +102,49 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
+
     this.route.params.subscribe((params) => {
       const id = params['id'];
       this.ingredientId = id;
       if (id && id !== 'create') {
-        this.isLoading = true;
+        this.isLoading.set(true);
+        this.cdr.markForCheck();
         this.ingredientService
           .findOne(id)
-          .pipe(finalize(() => (this.isLoading = false)))
+          .pipe(
+            finalize(() => {
+              this.isLoading.set(false);
+              this.cdr.markForCheck();
+            })
+          )
           .subscribe({
             next: (res) => {
+              if (!res) {
+                this.toastService.showError(
+                  $localize`Error`,
+                  $localize`Failed to load ingredient details`,
+                  3000
+                );
+                this.isLoading.set(false);
+                this.cdr.markForCheck();
+                return;
+              }
+
               this.ingredientForm.patchValue({
                 slug: res.slug,
-                measure: res.measure,
-                calories: res.calories,
-                carbohydrate: res.carbohydrate,
-                fat: res.fat,
+                measure: res.measure || '',
+                calories: res.calories ?? null,
+                carbohydrate: res.carbohydrate ?? null,
+                fat: res.fat ?? null,
                 ingredientCategory: res.ingredientCategory || [],
-                weight: res.weight,
-                protein: res.protein,
-                cholesterol: res.cholesterol,
-                sodium: res.sodium,
+                weight: res.weight ?? null,
+                protein: res.protein ?? null,
+                cholesterol: res.cholesterol ?? null,
+                sodium: res.sodium ?? null,
               });
 
               this.titleArray.clear();
@@ -132,6 +166,8 @@ export class AdminIngredientUpdateComponent implements OnInit {
                   );
                 });
               }
+
+              this.cdr.markForCheck();
             },
             error: () => {
               this.toastService.showError(
@@ -139,11 +175,14 @@ export class AdminIngredientUpdateComponent implements OnInit {
                 $localize`Failed to load ingredient details`,
                 3000
               );
+              this.isLoading.set(false);
+              this.cdr.markForCheck();
             },
           });
       } else {
         // Default languages for creation
         this.addDefaultLanguages();
+        this.cdr.markForCheck();
       }
     });
   }
@@ -194,11 +233,13 @@ export class AdminIngredientUpdateComponent implements OnInit {
     const existing = this.titleArray.controls.map((c) => c.get('lang')?.value);
     const unused = this.availableLanguages.find((l) => !existing.includes(l));
     this.titleArray.push(this.createLanguageControl({ lang: unused || 'en', data: '' }));
+    this.cdr.markForCheck();
   }
 
   removeLanguage(index: number): void {
     if (this.titleArray.length > 1) {
       this.titleArray.removeAt(index);
+      this.cdr.markForCheck();
     } else {
       this.toastService.showWarning($localize`Notice`, $localize`At least one title translation is required`, 2500);
     }
@@ -206,6 +247,7 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
   addImage(url: string = ''): void {
     this.imagesArray.push(this.fb.control(url, Validators.required));
+    this.cdr.markForCheck();
   }
 
   addImageFromInput(): void {
@@ -213,11 +255,13 @@ export class AdminIngredientUpdateComponent implements OnInit {
     if (url) {
       this.addImage(url);
       this.newImageUrl = '';
+      this.cdr.markForCheck();
     }
   }
 
   removeImage(index: number): void {
     this.imagesArray.removeAt(index);
+    this.cdr.markForCheck();
   }
 
   setPrimaryImage(index: number): void {
@@ -226,6 +270,7 @@ export class AdminIngredientUpdateComponent implements OnInit {
       this.imagesArray.removeAt(index);
       this.imagesArray.insert(0, control);
       this.toastService.showSuccess($localize`Updated`, $localize`Image set as primary`, 2000);
+      this.cdr.markForCheck();
     }
   }
 
@@ -256,6 +301,7 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
     this.ingredientForm.get('slug')?.setValue(slug);
     this.ingredientForm.get('slug')?.markAsDirty();
+    this.cdr.markForCheck();
   }
 
   quickToggleCategory(category: string): void {
@@ -268,6 +314,7 @@ export class AdminIngredientUpdateComponent implements OnInit {
     }
     this.ingredientForm.get('ingredientCategory')?.setValue(updated);
     this.ingredientForm.get('ingredientCategory')?.markAsDirty();
+    this.cdr.markForCheck();
   }
 
   isCategoryActive(category: string): boolean {
@@ -351,7 +398,8 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.ingredientForm.valid) {
-      this.isSaving = true;
+      this.isSaving.set(true);
+      this.cdr.markForCheck();
       const formValue = this.ingredientForm.value;
 
       if (this.ingredientId && this.ingredientId !== 'create') {
@@ -365,7 +413,12 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
         this.ingredientService
           .update(this.ingredientId, ingredient)
-          .pipe(finalize(() => (this.isSaving = false)))
+          .pipe(
+            finalize(() => {
+              this.isSaving.set(false);
+              this.cdr.markForCheck();
+            })
+          )
           .subscribe({
             next: () => {
               this.toastService.showSuccess(
@@ -381,6 +434,8 @@ export class AdminIngredientUpdateComponent implements OnInit {
                 $localize`Failed to update ingredient`,
                 3000
               );
+              this.isSaving.set(false);
+              this.cdr.markForCheck();
             },
           });
         return;
@@ -395,7 +450,12 @@ export class AdminIngredientUpdateComponent implements OnInit {
 
       this.ingredientService
         .create(ingredient)
-        .pipe(finalize(() => (this.isSaving = false)))
+        .pipe(
+          finalize(() => {
+            this.isSaving.set(false);
+            this.cdr.markForCheck();
+          })
+        )
         .subscribe({
           next: () => {
             this.toastService.showSuccess(
@@ -411,6 +471,8 @@ export class AdminIngredientUpdateComponent implements OnInit {
               $localize`Failed to create ingredient`,
               3000
             );
+            this.isSaving.set(false);
+            this.cdr.markForCheck();
           },
         });
     } else {
@@ -422,6 +484,7 @@ export class AdminIngredientUpdateComponent implements OnInit {
           3000
         );
       }
+      this.cdr.markForCheck();
     }
   }
 

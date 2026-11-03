@@ -15,6 +15,7 @@ export class CategoryTranslatePipe implements PipeTransform {
       'PROTEIN FOODS': $localize`Protein Foods`,
       'SNACKS AND SWEETS': $localize`Snacks & sweets`,
       ALCOHOLIC_BEVERAGES: $localize`Alcoholic beverages`,
+      'ALCOHOLIC BEVERAGES': $localize`Alcoholic beverages`,
       WATER: $localize`Water`,
       'FATS AND OILS': $localize`Fats & oils`,
       'MIXED DISHES': $localize`Mixed dishes`,

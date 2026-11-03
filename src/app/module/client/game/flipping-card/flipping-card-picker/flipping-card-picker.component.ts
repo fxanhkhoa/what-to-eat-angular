@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { DishFilterComponent } from '../../../dish/dish-filter/dish-filter.component';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { DishCardComponent } from '../../../dish/dish-card/dish-card.component';
 import { EmptyComponent } from '@/app/components/empty/empty.component';
@@ -18,15 +18,14 @@ import { finalize, take } from 'rxjs';
   selector: 'app-flipping-card-picker',
   imports: [
     DishFilterComponent,
-    CommonModule,
     DishCardComponent,
     MatButtonModule,
     MatIconModule,
     EmptyComponent,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatPaginatorModule,
-  ],
+    MatPaginatorModule
+],
   templateUrl: './flipping-card-picker.component.html',
   styleUrl: './flipping-card-picker.component.scss',
 })

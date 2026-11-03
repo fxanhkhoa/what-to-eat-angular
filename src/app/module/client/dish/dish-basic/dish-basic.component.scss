@@ -1,0 +1,63 @@
+:host {
+  display: block;
+}
+
+.filter-accordion {
+  mat-expansion-panel {
+    background: rgba(17, 24, 39, 0.7) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 1rem !important;
+
+    ::ng-deep .mat-expansion-panel-header-title,
+    ::ng-deep .mat-expansion-panel-header-description {
+      color: inherit;
+    }
+
+    ::ng-deep .mat-expansion-indicator::after {
+      color: #f3a446 !important;
+    }
+  }
+}
+
+mat-paginator {
+  ::ng-deep {
+    .mat-mdc-paginator-container {
+      color: #e2e8f0;
+      font-size: 0.875rem;
+    }
+
+    .mat-mdc-select-value {
+      color: #f3a446;
+      font-weight: 600;
+    }
+
+    .mat-mdc-select-arrow {
+      color: #f3a446;
+    }
+
+    .mat-mdc-paginator-range-label {
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .mat-mdc-icon-button {
+      color: #f3a446;
+
+      &:hover {
+        background-color: rgba(243, 164, 70, 0.15);
+      }
+
+      &[disabled] {
+        color: rgba(255, 255, 255, 0.25) !important;
+      }
+    }
+  }
+}
+
+mat-spinner {
+  ::ng-deep circle {
+    stroke: #f3a446 !important;
+  }
+}

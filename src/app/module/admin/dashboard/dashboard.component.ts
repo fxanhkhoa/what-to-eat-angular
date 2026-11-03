@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { AuthorizationService } from '@/app/service/authorization.service';
 import { RolePermission } from '@/types/auth.type';
-import { CommonModule } from '@angular/common';
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
@@ -14,14 +14,13 @@ import { WebsiteVisitComponent } from './website-visit/website-visit.component';
 @Component({
   selector: 'app-dashboard',
   imports: [
-    CommonModule,
     MatProgressSpinnerModule,
     MatCardModule,
     MatTableModule,
     DishAnalyticComponent,
     UserLoginTrackingComponent,
-    WebsiteVisitComponent,
-  ],
+    WebsiteVisitComponent
+],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

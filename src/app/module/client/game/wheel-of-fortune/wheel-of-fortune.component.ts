@@ -1,4 +1,4 @@
-import { CommonModule, isPlatformServer, DOCUMENT } from '@angular/common';
+import { isPlatformServer, DOCUMENT } from '@angular/common';
 import {
   Component,
   inject,
@@ -29,15 +29,14 @@ import { environment } from '@/environments/environment';
   selector: 'app-wheel-of-fortune',
   imports: [
     RouterModule,
-    CommonModule,
     MatIconModule,
     MatButtonModule,
     WheelPlayerComponent,
     MatProgressSpinnerModule,
     WheelDishPickerComponent,
     WheelCollectionPickerComponent,
-    MatTabsModule,
-  ],
+    MatTabsModule
+],
   templateUrl: './wheel-of-fortune.component.html',
   styleUrl: './wheel-of-fortune.component.scss',
 })
