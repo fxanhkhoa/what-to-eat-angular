@@ -79,6 +79,9 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "vi": {
+              "localize": ["vi"]
             }
           },
           "defaultConfiguration": "production"
@@ -91,6 +94,9 @@
             },
             "development": {
               "buildTarget": "what-to-eat-angular:build:development"
+            },
+            "vi": {
+              "buildTarget": "what-to-eat-angular:build:development,vi"
             }
           },
           "defaultConfiguration": "development"
