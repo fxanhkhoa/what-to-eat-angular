@@ -8345,6 +8345,22 @@
                 <source> No recipes matched your current filters. Try searching for different keywords or relaxing cooking time and difficulty options. </source>
                 <target> Không tìm thấy món ăn nào phù hợp với bộ lọc của bạn. Hãy thử tìm từ khóa khác hoặc mở rộng thời gian nấu và độ khó. </target>
             </trans-unit>
+            <trans-unit id="5306671993240910791" datatype="html">
+                <source>Try 'spicy chicken' or 'pasta'</source>
+                <target>Thử 'gà cay' hoặc 'mì ống'</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">9,10</context>
+                </context-group>
+            </trans-unit>
+            <trans-unit id="447087955491643018" datatype="html">
+                <source>Add tag...</source>
+                <target>Thêm thẻ...</target>
+                <context-group purpose="location">
+                    <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+                    <context context-type="linenumber">160</context>
+                </context-group>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -99,7 +99,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">360</context>
+          <context context-type="linenumber">361</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8134695558272106554" datatype="html">
@@ -114,7 +114,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">361,362</context>
+          <context context-type="linenumber">364,365</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2990758986298089631" datatype="html">
@@ -153,7 +153,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">586,587</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
@@ -161,7 +165,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">512,513</context>
+          <context context-type="linenumber">520,521</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-role-permission/admin-role-permission-form/admin-role-permission-form.component.html</context>
@@ -181,7 +185,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">248,249</context>
+          <context context-type="linenumber">250,251</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.html</context>
@@ -206,21 +210,21 @@
         <source>success</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/feedback-form/feedback-form.component.ts</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1170467781494346824" datatype="html">
         <source>Thank you for your feedback! 🎉</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/feedback-form/feedback-form.component.ts</context>
-          <context context-type="linenumber">88</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8772116786769251214" datatype="html">
         <source>error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/feedback-form/feedback-form.component.ts</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">96</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/service/toast.service.ts</context>
@@ -362,7 +366,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">341</context>
+          <context context-type="linenumber">378</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
@@ -415,7 +419,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1612722476211621614" datatype="html">
@@ -448,7 +452,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">384,385</context>
+          <context context-type="linenumber">393,394</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-role-permission/admin-role-permission.component.html</context>
@@ -525,7 +529,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">66</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
@@ -554,7 +558,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">2,4</context>
+          <context context-type="linenumber">19,20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6362395035206911844" datatype="html">
@@ -565,7 +569,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2286916911030107189" datatype="html">
@@ -573,10 +577,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
           <context context-type="linenumber">21,22</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1138305185042607809" datatype="html">
@@ -642,8 +642,8 @@
           <context context-type="linenumber">111</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">212</context>
+          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+          <context context-type="linenumber">150</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
@@ -679,11 +679,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">478</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">122</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
@@ -707,24 +707,12 @@
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
           <context context-type="linenumber">196</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
       </trans-unit>
       <trans-unit id="635380272893205485" datatype="html">
         <source>Preparation Time</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
           <context context-type="linenumber">178,179</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">35,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3114412928513670072" datatype="html">
@@ -735,7 +723,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">53,54</context>
+          <context context-type="linenumber">80,81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8643766030088118864" datatype="html">
@@ -753,15 +741,15 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">491</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">164</context>
+          <context context-type="linenumber">172</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3527360827333815044" datatype="html">
@@ -783,10 +771,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-list/admin-dish-list.component.html</context>
           <context context-type="linenumber">245</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">226</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1615637592531886602" datatype="html">
@@ -958,7 +942,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">291,292</context>
+          <context context-type="linenumber">300,301</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
@@ -973,7 +957,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">239,240</context>
+          <context context-type="linenumber">241,242</context>
         </context-group>
       </trans-unit>
       <trans-unit id="33745007557288932" datatype="html">
@@ -1041,7 +1025,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">342</context>
+          <context context-type="linenumber">379</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8033953731717586115" datatype="html">
@@ -1055,368 +1039,549 @@
           <context context-type="linenumber">189</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="2861306361489095884" datatype="html">
-        <source>Slug</source>
+      <trans-unit id="1309405748203859567" datatype="html">
+        <source>Back to Dishes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6512505240208200347" datatype="html">
+        <source>Edit Dish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2364085097539181633" datatype="html">
+        <source> New </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">30</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1070100241426793981" datatype="html">
-        <source>dish-name-slug</source>
+      <trans-unit id="1319881706020360569" datatype="html">
+        <source> Manage culinary recipes, ingredient portions, cooking times, media previews, and categories. </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="762666927216265292" datatype="html">
-        <source> Slug is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">13,14</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3740800358802324441" datatype="html">
-        <source>Thumbnail URL</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1051658720487673104" datatype="html">
-        <source>https://example.com/image.jpg</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5259580604136479408" datatype="html">
-        <source>Preview image</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7316295206355728469" datatype="html">
-        <source>Thumbnail Preview</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">36,37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5239378693856551316" datatype="html">
-        <source>Title Translations</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">45,46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7267134654485829321" datatype="html">
-        <source>Add Language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">47,48</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">88,89</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">126,127</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">87,88</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1398212496711566831" datatype="html">
-        <source>Click the button above to add another language field to all translation sections.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">51,52</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2826581353496868063" datatype="html">
-        <source>Language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">95</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">134</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">98</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5701618810648052610" datatype="html">
-        <source>Title</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
-          <context context-type="linenumber">172</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
-          <context context-type="linenumber">244,245</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
-          <context context-type="linenumber">304,305</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6407708715680632065" datatype="html">
-        <source>Dish Title</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">68</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1692809180938956990" datatype="html">
-        <source>Remove language</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">73</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">112</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">146</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1358251450593236167" datatype="html">
-        <source>Short Description Translations</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">85,86</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="327506474392813699" datatype="html">
-        <source>Short Description</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="196634745678416543" datatype="html">
-        <source>Brief description of the dish</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1425054865678397401" datatype="html">
-        <source>Content Translations</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">124,125</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2854461762715777172" datatype="html">
-        <source>Preparation Time (minutes)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">163</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1160882447788839386" datatype="html">
-        <source>Cooking Time (minutes)</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">168</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8935012235401556052" datatype="html">
-        <source>Difficulty Level</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">173</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4951584403453789335" datatype="html">
-        <source>-- Select Difficulty --</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">175</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5570547002581457684" datatype="html">
-        <source>New tag...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">220</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1909008903506182754" datatype="html">
-        <source>New label...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">234</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8936704404804793618" datatype="html">
-        <source>Videos</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">243,244</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1366989440817520480" datatype="html">
-        <source>Add Video</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">245,246</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4631262903114543634" datatype="html">
-        <source>Video URL</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">254</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8184605499689404808" datatype="html">
-        <source>Preview video</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">260</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7033014824731925315" datatype="html">
-        <source>Remove video</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">264,265</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9113906794544800679" datatype="html">
-        <source>Ingredients</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">286,287</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
-          <context context-type="linenumber">87,88</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6762504134540024018" datatype="html">
-        <source>Quantity</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">296</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2544699997265019532" datatype="html">
-        <source> Quantity is required </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">300</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2502346355173116049" datatype="html">
-        <source>Ingredient</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">305</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">258,259</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin.component.html</context>
-          <context context-type="linenumber">67,68</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">28,29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4105274606240146714" datatype="html">
-        <source>Search ingredient...</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">306</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4388879716045736175" datatype="html">
-        <source>Note</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">329</context>
+          <context context-type="linenumber">35,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3341447853095041200" datatype="html">
         <source>Update Dish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">381,382</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">599,600</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6706857740888168377" datatype="html">
         <source>Create Dish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
-          <context context-type="linenumber">383,384</context>
+          <context context-type="linenumber">57,58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">601,602</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="535097976321429338" datatype="html">
+        <source>Loading dish details...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2037809872802320745" datatype="html">
+        <source>Basic Information &amp; Titles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7267134654485829321" datatype="html">
+        <source>Add Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">87,88</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">245,246</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">300,301</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+          <context context-type="linenumber">92,93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4168981061700286424" datatype="html">
+        <source>URL Slug</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">94</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8430682423511511800" datatype="html">
+        <source>e.g. beef-pho-special</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2578492055805159610" datatype="html">
+        <source>Unique URL-friendly identifier for the dish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8066517240031359965" datatype="html">
+        <source>Slug is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="188619297487182490" datatype="html">
+        <source> Title Translations </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2826581353496868063" datatype="html">
+        <source>Language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">256</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">311</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6407708715680632065" datatype="html">
+        <source>Dish Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5955964541125325072" datatype="html">
+        <source>e.g. Traditional Beef Pho</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1692809180938956990" datatype="html">
+        <source>Remove language</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">268</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">323</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="67310683219283888" datatype="html">
+        <source>Ingredients &amp; Recipe Portions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="636094060843272845" datatype="html">
+        <source> List required ingredients, measured quantities, and special preparation notes </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7615831122378516633" datatype="html">
+        <source>Add Ingredient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">156,157</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1019448218961657852" datatype="html">
+        <source>Ingredient #<x id="INTERPOLATION" equiv-text="{{ i + 1 }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">170,171</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2597947852693023038" datatype="html">
+        <source>Remove ingredient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">174</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3536314854901975221" datatype="html">
+        <source>Select Ingredient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">184</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3391193219852065265" datatype="html">
+        <source>Search ingredient name...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">186</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8795104669016152260" datatype="html">
+        <source>Ingredient selection is required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">205</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6762504134540024018" datatype="html">
+        <source>Quantity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">213</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7045123878111147511" datatype="html">
+        <source>Required</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">216</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7948378070328482637" datatype="html">
+        <source>Prep Note</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">224</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3676299822125179807" datatype="html">
+        <source>e.g. sliced, diced</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">225</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="327506474392813699" datatype="html">
+        <source>Short Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">240</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8814017997329522030" datatype="html">
+        <source>Brief Summary</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">275</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9184399479212110992" datatype="html">
+        <source>Brief summary of flavor, origin, or key qualities...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">276</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5802344053781705016" datatype="html">
+        <source>Cooking Instructions &amp; Content</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">291</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1740412153067661287" datatype="html">
+        <source> Detailed step-by-step preparation steps, chef tips, and cooking methods </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">293</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5411078901674653287" datatype="html">
+        <source>Thumbnail &amp; Media</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">348</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3740800358802324441" datatype="html">
+        <source>Thumbnail URL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">354</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3246467004668431059" datatype="html">
+        <source>https://...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">356</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4068534059924607442" datatype="html">
+        <source>View full image</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">359</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6421460271971606186" datatype="html">
+        <source>Zoom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">375,376</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3435467983509908051" datatype="html">
+        <source>No image URL entered</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">381,382</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4145287881406093444" datatype="html">
+        <source>Video Tutorials</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">391,392</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1366989440817520480" datatype="html">
+        <source>Add Video</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">395,396</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3848292639607916939" datatype="html">
+        <source>Video Link</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">403</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3772101299371629356" datatype="html">
+        <source>YouTube / Vimeo URL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">404</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3150473190925738800" datatype="html">
+        <source>Watch video</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">409</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7033014824731925315" datatype="html">
+        <source>Remove video</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">415</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2096869320547819484" datatype="html">
+        <source>Times &amp; Difficulty</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">429</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7154290956147824049" datatype="html">
+        <source>Prep Time (min)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">435</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1399885603107132466" datatype="html">
+        <source>Cook Time (min)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">441</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1021894577520027480" datatype="html">
+        <source>Estimated Total Time:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">449,450</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="982745398054129955" datatype="html">
+        <source>minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">450</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8935012235401556052" datatype="html">
+        <source>Difficulty Level</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">455</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4951584403453789335" datatype="html">
+        <source>-- Select Difficulty --</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">457</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7511812466159222682" datatype="html">
+        <source>Categories &amp; Taxonomies</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">472</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4385207902924130626" datatype="html">
+        <source>Select applicable meal types (Breakfast, Dinner, etc.)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">486</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8311598386431868163" datatype="html">
+        <source>Primary food groups present in dish</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">499</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3764454298790732867" datatype="html">
+        <source>Tags &amp; Related Dishes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">508</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5594220919782017548" datatype="html">
+        <source>Search Tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">514</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7901104294558612339" datatype="html">
+        <source>Add tag + press Enter...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">522</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5517191838480860809" datatype="html">
+        <source>Badges / Labels</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">529</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2880936328032282325" datatype="html">
+        <source>Add label + press Enter...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">537</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2167689405923897250" datatype="html">
+        <source>Related Dishes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">544</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7334808953567606161" datatype="html">
+        <source>Search related dish...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.html</context>
+          <context context-type="linenumber">557</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7239750919884229270" datatype="html">
         <source>Updated</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-          <context context-type="linenumber">420</context>
+          <context context-type="linenumber">451</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">374,375</context>
+          <context context-type="linenumber">383,384</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">228</context>
+          <context context-type="linenumber">272</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">372</context>
+          <context context-type="linenumber">425</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4367885771380896819" datatype="html">
         <source>Dish <x id="PH" equiv-text="res.title.find((e) =&gt; e.lang === this.localeId)?.data"/> <x id="PH_1" equiv-text="&apos; &apos;"/> updated successfully</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-          <context context-type="linenumber">421,423</context>
+          <context context-type="linenumber">452,454</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4207916966377787111" datatype="html">
         <source>Created</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-          <context context-type="linenumber">441</context>
+          <context context-type="linenumber">472</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">402</context>
+          <context context-type="linenumber">462</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
@@ -1427,7 +1592,7 @@
         <source>Dish <x id="PH" equiv-text="res.title.find((e) =&gt; e.lang === this.localeId)?.data"/> created successfully</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-dish/admin-dish-update/admin-dish-update.component.ts</context>
-          <context context-type="linenumber">442,444</context>
+          <context context-type="linenumber">473,475</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4730079511562614480" datatype="html">
@@ -1445,7 +1610,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">197</context>
+          <context context-type="linenumber">205</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3388261751665724933" datatype="html">
@@ -1470,7 +1635,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">221</context>
+          <context context-type="linenumber">229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9085261795635711968" datatype="html">
@@ -1488,7 +1653,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">252,253</context>
+          <context context-type="linenumber">260,261</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3488683882555681558" datatype="html">
@@ -1499,7 +1664,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">271,272</context>
+          <context context-type="linenumber">279,280</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -1518,7 +1683,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">285,286</context>
+          <context context-type="linenumber">293,294</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8936746239272851343" datatype="html">
@@ -1529,7 +1694,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">299,300</context>
+          <context context-type="linenumber">307,308</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -1544,7 +1709,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">319</context>
+          <context context-type="linenumber">327</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -1559,7 +1724,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">313</context>
+          <context context-type="linenumber">321</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -1592,7 +1757,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">294</context>
+          <context context-type="linenumber">330</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4038291202749237938" datatype="html">
@@ -1603,7 +1768,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">294</context>
+          <context context-type="linenumber">330</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9015336246045548718" datatype="html">
@@ -1631,28 +1796,21 @@
         <source>Table</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">32,33</context>
+          <context context-type="linenumber">30,31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5811097982080929097" datatype="html">
         <source>Cards</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="7615831122378516633" datatype="html">
-        <source>Add Ingredient</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">52,53</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4331958706564637849" datatype="html">
         <source>Total Ingredients</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">64,65</context>
+          <context context-type="linenumber">60,61</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/dashboard/dashboard.component.html</context>
@@ -1663,77 +1821,77 @@
         <source>Page Categories</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">77,78</context>
+          <context context-type="linenumber">73,74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1939414034446866657" datatype="html">
         <source>Avg. Energy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">90,91</context>
+          <context context-type="linenumber">86,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4755349002856453541" datatype="html">
         <source>Filter Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">106,107</context>
+          <context context-type="linenumber">102,103</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6978234364807213493" datatype="html">
         <source> Reset Filters </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">113</context>
+          <context context-type="linenumber">109</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1268972660420905801" datatype="html">
         <source>Viewing all items</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">116,117</context>
+          <context context-type="linenumber">112,113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7878980687294018588" datatype="html">
         <source>Search ingredients by name or slug...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">133</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7778501733043156987" datatype="html">
         <source>Category Filter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">147</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="221922226324249098" datatype="html">
         <source>All Categories</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">145</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2244739816494694425" datatype="html">
         <source>Quick:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">171,172</context>
+          <context context-type="linenumber">167,168</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1616102757855967475" datatype="html">
         <source>All</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">178,179</context>
+          <context context-type="linenumber">174,175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6218637637174693266" datatype="html">
         <source>Loading ingredients...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">194,195</context>
+          <context context-type="linenumber">190,191</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient.component.html</context>
@@ -1744,7 +1902,7 @@
         <source>No Ingredients Found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">203,204</context>
+          <context context-type="linenumber">199,200</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient.component.html</context>
@@ -1755,28 +1913,28 @@
         <source>No ingredients matched your filter criteria. Try clearing search filters or search for another food.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">206,207</context>
+          <context context-type="linenumber">202,203</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3970899357695466965" datatype="html">
         <source>There are currently no ingredients in the catalog. Start by adding one!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">208,209</context>
+          <context context-type="linenumber">204,205</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4359014576353578997" datatype="html">
         <source>Clear Filters</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">215,216</context>
+          <context context-type="linenumber">211,212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9076106114834445313" datatype="html">
         <source>Create Ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">220,221</context>
+          <context context-type="linenumber">216,217</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
@@ -1787,21 +1945,47 @@
         <source>Photo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">232,233</context>
+          <context context-type="linenumber">228,229</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2861306361489095884" datatype="html">
+        <source>Slug</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+          <context context-type="linenumber">254,255</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2502346355173116049" datatype="html">
+        <source>Ingredient</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
+          <context context-type="linenumber">267,268</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/client.component.html</context>
+          <context context-type="linenumber">28,29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3613162578024659270" datatype="html">
         <source>Portion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">310,311</context>
+          <context context-type="linenumber">319,320</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7951766998557177322" datatype="html">
         <source>Calories</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">323,324</context>
+          <context context-type="linenumber">332,333</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/ingredient/ingredient-card/ingredient-card.component.html</context>
@@ -1816,91 +2000,95 @@
         <source>Macros (P / C / F)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">337,338</context>
+          <context context-type="linenumber">346,347</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3662583217952548618" datatype="html">
         <source>Na / Chol</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">363,364</context>
+          <context context-type="linenumber">372,373</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8221147586809519537" datatype="html">
         <source>Serving Portion:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">487,488</context>
+          <context context-type="linenumber">496,497</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8928816882866356838" datatype="html">
         <source>Public</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.html</context>
-          <context context-type="linenumber">517,518</context>
+          <context context-type="linenumber">526,527</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1519954996184640001" datatype="html">
         <source>Error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">250</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">348</context>
+          <context context-type="linenumber">385</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">138</context>
+          <context context-type="linenumber">128</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">380</context>
+          <context context-type="linenumber">174</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">410</context>
+          <context context-type="linenumber">433</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+          <context context-type="linenumber">470</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">116</context>
+          <context context-type="linenumber">115</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">149</context>
+          <context context-type="linenumber">148</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">187</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1700406338056778236" datatype="html">
         <source>Failed to load ingredients</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">238</context>
+          <context context-type="linenumber">250</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2225673929241786202" datatype="html">
         <source>Delete Ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">332</context>
+          <context context-type="linenumber">369</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6167970469786777986" datatype="html">
         <source>Are you sure you want to delete this ingredient? This action cannot be undone.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">333</context>
+          <context context-type="linenumber">370</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2839185229693461455" datatype="html">
         <source>Failed to delete ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-list/admin-ingredient-list.component.ts</context>
-          <context context-type="linenumber">348</context>
+          <context context-type="linenumber">385</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7436023810212050820" datatype="html">
@@ -1915,13 +2103,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
           <context context-type="linenumber">19,20</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2364085097539181633" datatype="html">
-        <source> New </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="11350610173906961" datatype="html">
@@ -1953,21 +2134,28 @@
         <source>Multilingual Titles</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="477506357815848870" datatype="html">
+        <source>Provide translations for ingredient name in multiple languages</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
+          <context context-type="linenumber">86,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1634393010660333897" datatype="html">
         <source>Ingredient Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">107</context>
+          <context context-type="linenumber">113</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3833692663709091545" datatype="html">
         <source>Name is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">116</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
@@ -1983,7 +2171,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.html</context>
@@ -1994,119 +2182,112 @@
         <source> URL Identifier (Slug) </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">128</context>
+          <context context-type="linenumber">136</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3818038167057246303" datatype="html">
         <source>Generate from Title</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">133,134</context>
+          <context context-type="linenumber">141,142</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3760722839337754846" datatype="html">
         <source>Lowercase letters, numbers, and hyphens only (e.g., sweet-potato)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">141</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8066517240031359965" datatype="html">
-        <source>Slug is required</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5205856936923312565" datatype="html">
         <source>Slug must only contain lowercase letters, numbers, and hyphens</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8858487277677063102" datatype="html">
         <source>Categories &amp; Portion Sizing</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">165</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1192847564885635972" datatype="html">
         <source>At least one category is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">174</context>
+          <context context-type="linenumber">182</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7717766142572247430" datatype="html">
         <source>Quick toggle:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">180,181</context>
+          <context context-type="linenumber">188,189</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3620648144853948885" datatype="html">
         <source>Human-readable serving (e.g. 1 medium, 1 tbsp)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">208</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5395661318799948216" datatype="html">
         <source>Weight in Grams (g)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">204</context>
+          <context context-type="linenumber">212</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5911219223699262791" datatype="html">
         <source>Must be a positive number</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">209</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7772089208384545538" datatype="html">
         <source>Standard nutritional content</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">223,224</context>
+          <context context-type="linenumber">231,232</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4144883982003993429" datatype="html">
         <source>Energy Value</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">234,235</context>
+          <context context-type="linenumber">242,243</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3927467786120171671" datatype="html">
         <source>Total calories per serving</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">235,236</context>
+          <context context-type="linenumber">243,244</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8446752035959355076" datatype="html">
         <source>Photo Gallery</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">336</context>
+          <context context-type="linenumber">344</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2789993640334395854" datatype="html">
         <source>Add Image URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">347</context>
+          <context context-type="linenumber">355</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3249513483374643425" datatype="html">
         <source>Add</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">355,356</context>
+          <context context-type="linenumber">363,364</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
@@ -2121,161 +2302,165 @@
         <source> Primary Cover </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">378</context>
+          <context context-type="linenumber">386</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2859677759268581976" datatype="html">
         <source> Set as Primary </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">383</context>
+          <context context-type="linenumber">391</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8787658220867001461" datatype="html">
         <source>No images added yet.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">408,409</context>
+          <context context-type="linenumber">416,417</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4478513763339880215" datatype="html">
         <source>Paste an image URL above to attach photos.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">409,410</context>
+          <context context-type="linenumber">417,418</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5133433505316744056" datatype="html">
         <source>Live Catalog Preview</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">421</context>
+          <context context-type="linenumber">429</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7759619609150755464" datatype="html">
         <source>Interactive</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">426,427</context>
+          <context context-type="linenumber">434,435</context>
         </context-group>
       </trans-unit>
       <trans-unit id="443292609435333920" datatype="html">
         <source>Portion:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">463,464</context>
+          <context context-type="linenumber">471,472</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5075138323547183262" datatype="html">
         <source>Please fill in all required fields (Slug, Titles, Categories)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">500,501</context>
+          <context context-type="linenumber">508,509</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3220443948577669505" datatype="html">
         <source>Form is ready to submit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">505,506</context>
+          <context context-type="linenumber">513,514</context>
         </context-group>
       </trans-unit>
       <trans-unit id="898800191387471408" datatype="html">
         <source>Update Ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">523,524</context>
+          <context context-type="linenumber">531,532</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4293154462397634882" datatype="html">
         <source>Save Ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.html</context>
-          <context context-type="linenumber">525,526</context>
+          <context context-type="linenumber">533,534</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3733874721033413747" datatype="html">
         <source>Failed to load ingredient details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">139</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
+          <context context-type="linenumber">175</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3042471551767868839" datatype="html">
         <source>Notice</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">244</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4457468013804447104" datatype="html">
         <source>At least one title translation is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">203</context>
+          <context context-type="linenumber">244</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8250323176330086640" datatype="html">
         <source>Image set as primary</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">228</context>
+          <context context-type="linenumber">272</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6759205696902713848" datatype="html">
         <source>Warning</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">239</context>
+          <context context-type="linenumber">284</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6457875440598238367" datatype="html">
         <source>Please enter an ingredient title before generating a slug</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">240</context>
+          <context context-type="linenumber">285</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2011668245644239562" datatype="html">
         <source>Ingredient updated successfully</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">373</context>
+          <context context-type="linenumber">426</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6908459728359109947" datatype="html">
         <source>Failed to update ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">381</context>
+          <context context-type="linenumber">434</context>
         </context-group>
       </trans-unit>
       <trans-unit id="214682143078046939" datatype="html">
         <source>Ingredient created successfully</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">403</context>
+          <context context-type="linenumber">463</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6786795732526976232" datatype="html">
         <source>Failed to create ingredient</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">411</context>
+          <context context-type="linenumber">471</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3933446673931252881" datatype="html">
         <source>Validation Error</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">419</context>
+          <context context-type="linenumber">482</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9084903141749611740" datatype="html">
         <source>Please complete all required fields correctly</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-ingredient/admin-ingredient-update/admin-ingredient-update.component.ts</context>
-          <context context-type="linenumber">420</context>
+          <context context-type="linenumber">483</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7462666978471511375" datatype="html">
@@ -2343,6 +2528,25 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
           <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5701618810648052610" datatype="html">
+        <source>Title</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
+          <context context-type="linenumber">172</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
+          <context context-type="linenumber">244,245</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-notification/admin-notification.component.html</context>
+          <context context-type="linenumber">304,305</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5642836248241530789" datatype="html">
@@ -2478,14 +2682,6 @@
           <context context-type="linenumber">159</context>
         </context-group>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">126,127</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">134</context>
-        </context-group>
-        <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/game-section/game-section.component.html</context>
           <context context-type="linenumber">107,108</context>
         </context-group>
@@ -2503,7 +2699,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">257,258</context>
+          <context context-type="linenumber">259,260</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2884868433691856240" datatype="html">
@@ -2635,7 +2831,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">50</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
@@ -2725,7 +2921,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
-          <context context-type="linenumber">144,145</context>
+          <context context-type="linenumber">46,47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1035150703896968730" datatype="html">
@@ -2965,6 +3161,10 @@
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="8429316238784832901" datatype="html">
         <source>Feedback</source>
@@ -3178,6 +3378,10 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/feedback-list/feedback-list.component.html</context>
           <context context-type="linenumber">43,44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4677201150311885502" datatype="html">
@@ -3436,35 +3640,35 @@
         <source>Subscribe</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">370,371</context>
+          <context context-type="linenumber">374,375</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4721007402656921350" datatype="html">
         <source> Privacy Policy </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">385</context>
+          <context context-type="linenumber">389</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7571375880734710634" datatype="html">
         <source> Terms of Service </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">389</context>
+          <context context-type="linenumber">393</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8779173778325924127" datatype="html">
         <source> Cookie Policy </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/client.component.html</context>
-          <context context-type="linenumber">393</context>
+          <context context-type="linenumber">397</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8890553633144307762" datatype="html">
         <source>Back</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
-          <context context-type="linenumber">25,26</context>
+          <context context-type="linenumber">17,18</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
@@ -3495,7 +3699,11 @@
         <source> Filter </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
@@ -3510,11 +3718,46 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="1233482864703216366" datatype="html">
+        <source>Food Guide &amp; Recipe Search</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3784877622425032431" datatype="html">
+        <source> The Ultimate Food Guide: What to Eat Now </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2666463722860541544" datatype="html">
+        <source> Hungry? Discover delicious dishes, restaurant recommendations, and food guides for every craving. Find your next meal! </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2431454692062371107" datatype="html">
+        <source>Dishes Found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6037196991598476003" datatype="html">
+        <source>recipes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="3097363650198188884" datatype="html">
         <source>Let&apos;s find your favorite dishes!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">81</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.html</context>
@@ -3529,11 +3772,46 @@
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="8167408879288470866" datatype="html">
+        <source>Explore Dishes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">99,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1946364768984151105" datatype="html">
+        <source> Page <x id="INTERPOLATION" equiv-text="{{ currentPage() }}"/> of <x id="INTERPOLATION_1" equiv-text="{{ totalPages }}"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">109,111</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="901252465736456968" datatype="html">
+        <source>Discovering Delicious Recipes...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">121,122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2816394757216705305" datatype="html">
+        <source>Cooking up matching dishes based on your filters. Just a moment!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">122,123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4612500536333059318" datatype="html">
+        <source> No recipes matched your current filters. Try searching for different keywords or relaxing cooking time and difficulty options. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4790349114862451776" datatype="html">
         <source>The Ultimate Food Guide: What to Eat Now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="592782721370819575" datatype="html">
@@ -3541,7 +3819,7 @@
             for every craving. Find your next meal!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-basic/dish-basic.component.ts</context>
-          <context context-type="linenumber">69,70</context>
+          <context context-type="linenumber">68,69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="winner" datatype="html">
@@ -3653,6 +3931,31 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.ts</context>
           <context context-type="linenumber">397</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5306671993240910791" datatype="html">
+        <source>Try &apos;spicy chicken&apos; or &apos;pasta&apos;</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5584762056232685248" datatype="html">
+        <source>Prep Time</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+          <context context-type="linenumber">63,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="447087955491643018" datatype="html">
+        <source>Add tag...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-filter/dish-filter.component.html</context>
+          <context context-type="linenumber">160</context>
         </context-group>
       </trans-unit>
       <trans-unit id="filter" datatype="html">
@@ -3826,26 +4129,26 @@
         <source>Success</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">179</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5620114162133982317" datatype="html">
         <source>Dish added!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/flipping-card/flipping-card-picker/flipping-card-picker.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">60</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/wheel-of-fortune/wheel-dish-picker/wheel-dish-picker.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1863000588570928532" datatype="html">
@@ -3954,7 +4257,7 @@
         <source>Someone</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/voting/voting-chat/voting-chat.component.ts</context>
-          <context context-type="linenumber">93</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="826286621791998638" datatype="html">
@@ -3975,14 +4278,14 @@
         <source>Enter dish URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/voting/voting-create-update/add-custom-dish/add-custom-dish.component.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="linenumber">38,39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="818405343611669472" datatype="html">
         <source>Reference link to dish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/game/voting/voting-create-update/add-custom-dish/add-custom-dish.component.html</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5110222210765015989" datatype="html">
@@ -4293,7 +4596,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">148</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8175558606636421137" datatype="html">
@@ -4391,56 +4694,56 @@
         <source> Name is required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">16</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3880249303857935022" datatype="html">
         <source>your.email@example.com</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1391056849737890767" datatype="html">
         <source>Your message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1562002170982087724" datatype="html">
         <source> Message is required </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">42</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8730666920545442370" datatype="html">
         <source>Send Message</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">46,47</context>
+          <context context-type="linenumber">54,55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7850868685265554798" datatype="html">
         <source> Get In Touch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="66889124423938629" datatype="html">
         <source>Follow Us</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.html</context>
-          <context context-type="linenumber">76,77</context>
+          <context context-type="linenumber">84,85</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6804893314792512442" datatype="html">
         <source>Message sent successfully!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/contact-section/contact-section.component.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="891060578192602838" datatype="html">
@@ -4878,95 +5181,95 @@
         <source>Occasion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8827343041634624381" datatype="html">
         <source>Describe your collection...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">49,50</context>
+          <context context-type="linenumber">51,52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="808290236256490257" datatype="html">
         <source>Event Date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3074987902485823708" datatype="html">
         <source>Icon</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9011959596901584887" datatype="html">
         <source>Color</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">83</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6672997488566032433" datatype="html">
         <source>Make this collection public</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">102,103</context>
+          <context context-type="linenumber">104,105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3737402445048363630" datatype="html">
         <source>Public collections can be viewed by others</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">104,105</context>
+          <context context-type="linenumber">106,107</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1780893984847847326" datatype="html">
         <source>Add Dishes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">115,116</context>
+          <context context-type="linenumber">117,118</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8530129542507408758" datatype="html">
         <source>Search dishes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">122</context>
+          <context context-type="linenumber">124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8860681559537375134" datatype="html">
         <source>Type to search dishes...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8445409909623962979" datatype="html">
         <source>Selected dishes:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">134,135</context>
+          <context context-type="linenumber">136,137</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2776617638046368313" datatype="html">
         <source>View details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">140</context>
+          <context context-type="linenumber">142</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">207</context>
         </context-group>
       </trans-unit>
       <trans-unit id="499211652050874170" datatype="html">
         <source>Searching dishes...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/user-dish-list/user-dish-list-create/user-dish-list-create.component.html</context>
-          <context context-type="linenumber">159,160</context>
+          <context context-type="linenumber">161,162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3540774662944260221" datatype="html">
@@ -5201,35 +5504,35 @@
         <source>Permanently Delete All Your Data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/data-deletion/data-deletion.component.ts</context>
-          <context context-type="linenumber">79</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5327512616450321851" datatype="html">
         <source>This action cannot be undone. All your data including your account, favorites, saved dishes, interactions, and collections will be permanently deleted. Are you absolutely sure you want to proceed?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/data-deletion/data-deletion.component.ts</context>
-          <context context-type="linenumber">80</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8698314719725530953" datatype="html">
         <source>User ID not found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/data-deletion/data-deletion.component.ts</context>
-          <context context-type="linenumber">94</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2026833290185470826" datatype="html">
         <source>All your data has been permanently deleted</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/data-deletion/data-deletion.component.ts</context>
-          <context context-type="linenumber">102</context>
+          <context context-type="linenumber">101</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9058027224703696948" datatype="html">
         <source>Failed to delete data. Please try again.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/data-deletion/data-deletion.component.ts</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">131</context>
         </context-group>
       </trans-unit>
       <trans-unit id="privacyTitle" datatype="html">
@@ -5586,49 +5889,49 @@
         <source>Failed to load profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3129604876054849035" datatype="html">
         <source>Please fill in all required fields</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4219429959475101385" datatype="html">
         <source>Profile updated successfully</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">181</context>
+          <context context-type="linenumber">180</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4654779097697117547" datatype="html">
         <source>Failed to update profile</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">189</context>
+          <context context-type="linenumber">188</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3242255798983858463" datatype="html">
         <source><x id="PH" equiv-text="diffDays"/> days</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">210</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2888623698412132582" datatype="html">
         <source><x id="PH" equiv-text="months"/> months</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">214</context>
+          <context context-type="linenumber">213</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6129309513432396551" datatype="html">
         <source><x id="PH" equiv-text="years"/> years</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/profile/profile.component.ts</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">216</context>
         </context-group>
       </trans-unit>
       <trans-unit id="termsTitle" datatype="html">
@@ -5861,341 +6164,345 @@
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
           <context context-type="linenumber">17</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="6399303218734406494" datatype="html">
         <source>Water</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">18</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7090250572484335190" datatype="html">
         <source>Fats &amp; oils</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3507887667144809646" datatype="html">
         <source>Mixed dishes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">20</context>
+          <context context-type="linenumber">21</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3260498915359298439" datatype="html">
         <source>Fruit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4006450107765993293" datatype="html">
         <source>Condiments &amp; sauces</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7936483931185368206" datatype="html">
         <source>Sugars</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6560345168147574630" datatype="html">
         <source>Vegetables</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">25</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1601655633967957673" datatype="html">
         <source>Herbs &amp; spices</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5596879958232870419" datatype="html">
         <source>Nuts &amp; seeds</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6974777728423484538" datatype="html">
         <source>Baking ingredients</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1625714612002770194" datatype="html">
         <source>Canned &amp; preserved</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">28</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8216610232934279724" datatype="html">
         <source>Infant formula &amp; baby food</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8693603235657020323" datatype="html">
         <source>Other</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">30</context>
+          <context context-type="linenumber">31</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6116346225726789838" datatype="html">
         <source>Hard</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5982496808088686844" datatype="html">
         <source>Medium</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8037134183854795009" datatype="html">
         <source>Easy</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5310530945730171806" datatype="html">
         <source>Breakfast</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7766125218438790242" datatype="html">
         <source>Lunch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7499734983206731562" datatype="html">
         <source>Brunch</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4813703461296397215" datatype="html">
         <source>Dinner</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5930163615897546708" datatype="html">
         <source>Snack</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">39</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="420931489272556690" datatype="html">
         <source>Burger</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">42</context>
+          <context context-type="linenumber">43</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1358961254764688493" datatype="html">
         <source>Salad</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8704582860257325532" datatype="html">
         <source>Soup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="710211205292228053" datatype="html">
         <source>Appetizer</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">46</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5584107564920356978" datatype="html">
         <source>Dessert</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">46</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6069047560378654483" datatype="html">
         <source>Hotpot</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">47</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1527700940748627092" datatype="html">
         <source>Sweet soup</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">48</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6838208194427890843" datatype="html">
         <source>Noodle</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">51</context>
+          <context context-type="linenumber">52</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4635154111117669095" datatype="html">
         <source>Rice dish</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">52</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8466299950045776643" datatype="html">
         <source>Seafood</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">53</context>
+          <context context-type="linenumber">54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5702626357802443273" datatype="html">
         <source>Meat</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="791836343883095823" datatype="html">
         <source>Vegetarian</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8518686941512066717" datatype="html">
         <source>Vegan</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">56</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4192044416003236579" datatype="html">
         <source>Grilled</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="640363729610563697" datatype="html">
         <source>Fried</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">61</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3845514477401866837" datatype="html">
         <source>Steamed</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7359663805162447232" datatype="html">
         <source>Baked</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1507373671305394106" datatype="html">
         <source>Street food</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2235451887163585310" datatype="html">
         <source>Fast food</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">66</context>
+          <context context-type="linenumber">67</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5146243889958025627" datatype="html">
         <source>Traditional</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">67</context>
+          <context context-type="linenumber">68</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5929505490343014465" datatype="html">
         <source>Fusion</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">68</context>
+          <context context-type="linenumber">69</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5214487824945146701" datatype="html">
         <source>North Vietnam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">71</context>
+          <context context-type="linenumber">72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1902816665117817922" datatype="html">
         <source>Central Vietnam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">72</context>
+          <context context-type="linenumber">73</context>
         </context-group>
       </trans-unit>
       <trans-unit id="281102520230787005" datatype="html">
         <source>South Vietnam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">73</context>
+          <context context-type="linenumber">74</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3982196677108901324" datatype="html">
         <source>Beverage</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">76</context>
+          <context context-type="linenumber">77</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3226088354912741446" datatype="html">
         <source>Smoothie</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">77</context>
+          <context context-type="linenumber">78</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6656519326134077435" datatype="html">
         <source>Vitamin</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipe/category-translate.pipe.ts</context>
-          <context context-type="linenumber">78</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7977761628594328784" datatype="html">
@@ -6247,13 +6554,6 @@
           <context context-type="linenumber">22,24</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5584762056232685248" datatype="html">
-        <source>Prep Time</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
-          <context context-type="linenumber">32,33</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="8092404101332014808" datatype="html">
         <source>Cook Time</source>
         <context-group purpose="location">
@@ -6273,6 +6573,13 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
           <context context-type="linenumber">62,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9113906794544800679" datatype="html">
+        <source>Ingredients</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/component/dish-detail-dialog/dish-detail-dialog.component.html</context>
+          <context context-type="linenumber">87,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7290374659252540217" datatype="html">
