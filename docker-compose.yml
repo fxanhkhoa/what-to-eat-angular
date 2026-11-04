@@ -3,6 +3,8 @@ services:
     image: fxanhkhoa/what-to-eat:latest
     container_name: what-to-eat
     restart: always
+    environment:
+      - NG_ALLOWED_HOSTS=localhost,127.0.0.1,eatwhat.io.vn,*.eatwhat.io.vn
     networks:
       - traefik-public
     labels:
