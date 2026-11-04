@@ -24,8 +24,24 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const SUPPORTED_LOCALES = ['en', 'vi'];
 
+const defaultAllowedHosts = [
+  'localhost',
+  '127.0.0.1',
+  'eatwhat.io.vn',
+  '*.eatwhat.io.vn',
+];
+
+const envAllowedHosts = process.env['NG_ALLOWED_HOSTS']
+  ? process.env['NG_ALLOWED_HOSTS'].split(',').map((h) => h.trim()).filter(Boolean)
+  : [];
+
 const app = express();
-const angularApp = new AngularNodeAppEngine();
+app.set('trust proxy', true);
+
+const angularApp = new AngularNodeAppEngine({
+  allowedHosts: [...new Set([...defaultAllowedHosts, ...envAllowedHosts])],
+  trustProxyHeaders: true,
+});
 
 /**
  * Example Express Rest API endpoints can be defined here.
