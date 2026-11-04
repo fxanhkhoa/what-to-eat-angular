@@ -51,6 +51,14 @@
             "ssr": {
               "entry": "src/server.ts"
             },
+            "security": {
+              "allowedHosts": [
+                "localhost",
+                "127.0.0.1",
+                "eatwhat.io.vn",
+                "*.eatwhat.io.vn"
+              ]
+            },
             "localize": true
           },
           "configurations": {
@@ -88,6 +96,14 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": [
+              "localhost",
+              "127.0.0.1",
+              "eatwhat.io.vn",
+              "*.eatwhat.io.vn"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "what-to-eat-angular:build:production"
