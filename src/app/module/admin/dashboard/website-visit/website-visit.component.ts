@@ -15,6 +15,7 @@ import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 import { WebsiteVisit } from '@/types/website_visit.type';
 import { APIPagination } from '@/types/base.type';
 
@@ -32,6 +33,7 @@ import { APIPagination } from '@/types/base.type';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatIconModule,
+    RouterModule,
   ],
   templateUrl: './website-visit.component.html',
   styleUrls: ['./website-visit.component.scss'],
