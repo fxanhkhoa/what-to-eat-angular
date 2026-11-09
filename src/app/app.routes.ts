@@ -191,6 +191,18 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'tracking',
+        loadComponent: () =>
+          import(
+            './module/admin/admin-tracking/admin-tracking.component'
+          ).then((m) => m.AdminTrackingComponent),
+        canActivate: [authorizationGuard],
+        data: {
+          permissions: [Permissions.FIND_ALL_WEBSITE_VISIT],
+          breadcrumb: 'Visitor Tracking',
+        },
+      },
+      {
         path: 'ingredient',
         loadComponent: () =>
           import(

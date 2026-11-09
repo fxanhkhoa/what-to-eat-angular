@@ -1,0 +1,35 @@
+:host {
+  display: block;
+}
+
+.dense-form-field {
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+::ng-deep .chart-legend {
+  .legend-labels {
+    background: transparent !important;
+    text-align: center !important;
+    white-space: normal !important;
+    width: 100% !important;
+  }
+  .legend-label {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 4px 8px !important;
+  }
+  .legend-label-text {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: none !important;
+    width: auto !important;
+    font-size: 12px !important;
+    color: #374151 !important;
+  }
+  .legend-title {
+    display: none !important;
+  }
+}

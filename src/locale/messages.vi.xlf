@@ -8361,6 +8361,218 @@
                     <context context-type="linenumber">160</context>
                 </context-group>
             </trans-unit>
+            <trans-unit id="1856674520170300426" datatype="html">
+                <source>Visitor Tracking</source>
+                <target>Theo dõi lượt truy cập</target>
+            </trans-unit>
+            <trans-unit id="2359167495562281228" datatype="html">
+                <source>Visitor Tracking &amp; Analytics</source>
+                <target>Theo dõi &amp; Phân tích khách truy cập</target>
+            </trans-unit>
+            <trans-unit id="177632630368096391" datatype="html">
+                <source>Real-time traffic, country breakdown, and visitor interactions</source>
+                <target>Lưu lượng thời gian thực, phân bổ theo quốc gia và tương tác người dùng</target>
+            </trans-unit>
+            <trans-unit id="3786128724463570346" datatype="html">
+                <source>Time Window</source>
+                <target>Khoảng thời gian</target>
+            </trans-unit>
+            <trans-unit id="5829072187577655484" datatype="html">
+                <source>Total Visits</source>
+                <target>Tổng lượt truy cập</target>
+            </trans-unit>
+            <trans-unit id="667967764905089552" datatype="html">
+                <source>Page views across sessions</source>
+                <target>Số lượt xem trang qua các phiên</target>
+            </trans-unit>
+            <trans-unit id="5407391081085424174" datatype="html">
+                <source>User Clicks</source>
+                <target>Lượt nhấp chuột</target>
+            </trans-unit>
+            <trans-unit id="4013199558154226298" datatype="html">
+                <source>UI interactions &amp; actions</source>
+                <target>Tương tác &amp; hành động trên giao diện</target>
+            </trans-unit>
+            <trans-unit id="1065418568651976631" datatype="html">
+                <source>Unique Visitors</source>
+                <target>Khách truy cập duy nhất</target>
+            </trans-unit>
+            <trans-unit id="6356274566306761024" datatype="html">
+                <source>Distinct IP addresses</source>
+                <target>Địa chỉ IP riêng biệt</target>
+            </trans-unit>
+            <trans-unit id="8162114379821297634" datatype="html">
+                <source>Today's Activity</source>
+                <target>Hoạt động hôm nay</target>
+            </trans-unit>
+            <trans-unit id="2321627298309012487" datatype="html">
+                <source>Since midnight UTC</source>
+                <target>Kể từ 0h UTC</target>
+            </trans-unit>
+            <trans-unit id="5661648069736620530" datatype="html">
+                <source>Traffic by Country</source>
+                <target>Lưu lượng theo quốc gia</target>
+            </trans-unit>
+            <trans-unit id="1514992901739541983" datatype="html">
+                <source> Click any country bar below to filter the activity table </source>
+                <target> Nhấp vào bất kỳ thanh quốc gia nào bên dưới để lọc bảng hoạt động </target>
+            </trans-unit>
+            <trans-unit id="3643034674790531726" datatype="html">
+                <source>Clear <x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/></source>
+                <target>Bỏ lọc <x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/></target>
+            </trans-unit>
+            <trans-unit id="527149829175967160" datatype="html">
+                <source>Filtering by country: <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+                <target>Đang lọc theo quốc gia: <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+            </trans-unit>
+            <trans-unit id="820484705545045048" datatype="html">
+                <source>Page View</source>
+                <target>Xem trang</target>
+            </trans-unit>
+            <trans-unit id="4261686035183042145" datatype="html">
+                <source>No country data recorded yet</source>
+                <target>Chưa có dữ liệu quốc gia nào</target>
+            </trans-unit>
+            <trans-unit id="1486428122336502718" datatype="html">
+                <source>Device Breakdown</source>
+                <target>Phân bổ thiết bị</target>
+            </trans-unit>
+            <trans-unit id="9126234696785414932" datatype="html">
+                <source>Desktop vs Mobile vs Tablet</source>
+                <target>Máy tính vs Di động vs Máy tính bảng</target>
+            </trans-unit>
+            <trans-unit id="5590155879913679847" datatype="html">
+                <source>No device data</source>
+                <target>Chưa có dữ liệu thiết bị</target>
+            </trans-unit>
+            <trans-unit id="6320412225333383390" datatype="html">
+                <source>Top Browsers</source>
+                <target>Trình duyệt hàng đầu</target>
+            </trans-unit>
+            <trans-unit id="7752087345624368695" datatype="html">
+                <source>Traffic Trend (Daily)</source>
+                <target>Xu hướng lưu lượng (Hàng ngày)</target>
+            </trans-unit>
+            <trans-unit id="178401779705869200" datatype="html">
+                <source>Volume of visitors and interactions over time</source>
+                <target>Lượng khách truy cập và tương tác theo thời gian</target>
+            </trans-unit>
+            <trans-unit id="8884230918331878446" datatype="html">
+                <source>No timeline data yet</source>
+                <target>Chưa có dữ liệu biểu đồ thời gian</target>
+            </trans-unit>
+            <trans-unit id="8476223628759044919" datatype="html">
+                <source>Top Pages &amp; Actions</source>
+                <target>Trang &amp; Hành động hàng đầu</target>
+            </trans-unit>
+            <trans-unit id="3841792527855124434" datatype="html">
+                <source>Most active URLs and clicked features</source>
+                <target>Các URL hoạt động nhiều nhất và tính năng được nhấp</target>
+            </trans-unit>
+            <trans-unit id="2646039505703891545" datatype="html">
+                <source>Popular Pages</source>
+                <target>Trang phổ biến</target>
+            </trans-unit>
+            <trans-unit id="323338315616870495" datatype="html">
+                <source>No page view records yet</source>
+                <target>Chưa có bản ghi xem trang nào</target>
+            </trans-unit>
+            <trans-unit id="5023506689288293096" datatype="html">
+                <source>Top Clicked Elements</source>
+                <target>Các phần tử được nhấp nhiều nhất</target>
+            </trans-unit>
+            <trans-unit id="8592810979813952950" datatype="html">
+                <source>Visitor Logs</source>
+                <target>Nhật ký khách truy cập</target>
+            </trans-unit>
+            <trans-unit id="7926122598596712589" datatype="html">
+                <source>Detailed visitor records and interaction telemetry</source>
+                <target>Chi tiết bản ghi khách truy cập và dữ liệu tương tác</target>
+            </trans-unit>
+            <trans-unit id="5386463682965462145" datatype="html">
+                <source>Visits</source>
+                <target>Lượt truy cập</target>
+            </trans-unit>
+            <trans-unit id="569285066181689741" datatype="html">
+                <source>Clicks</source>
+                <target>Lượt nhấp</target>
+            </trans-unit>
+            <trans-unit id="6162339764493486612" datatype="html">
+                <source>Search IP, country, path...</source>
+                <target>Tìm kiếm IP, quốc gia, đường dẫn...</target>
+            </trans-unit>
+            <trans-unit id="7075671510957904797" datatype="html">
+                <source>Filtering by country: <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+                <target>Đang lọc theo quốc gia: <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+            </trans-unit>
+            <trans-unit id="1748116495714559897" datatype="html">
+                <source>Clear Filter</source>
+                <target>Xóa bộ lọc</target>
+            </trans-unit>
+            <trans-unit id="9085260088898870371" datatype="html">
+                <source> Country / Location </source>
+                <target> Quốc gia / Vị trí </target>
+            </trans-unit>
+            <trans-unit id="7175831147405774690" datatype="html">
+                <source> IP Address </source>
+                <target> Địa chỉ IP </target>
+            </trans-unit>
+            <trans-unit id="2951980617418186650" datatype="html">
+                <source> Event </source>
+                <target> Sự kiện </target>
+            </trans-unit>
+            <trans-unit id="3158035581938683136" datatype="html">
+                <source> Path </source>
+                <target> Đường dẫn </target>
+            </trans-unit>
+            <trans-unit id="8796811383919303859" datatype="html">
+                <source> Device &amp; Browser </source>
+                <target> Thiết bị &amp; Trình duyệt </target>
+            </trans-unit>
+            <trans-unit id="1375913333051334272" datatype="html">
+                <source> Timestamp </source>
+                <target> Thời gian </target>
+            </trans-unit>
+            <trans-unit id="662739241074050907" datatype="html">
+                <source>No visitor records found</source>
+                <target>Không tìm thấy bản ghi khách truy cập nào</target>
+            </trans-unit>
+            <trans-unit id="7312877922830095275" datatype="html">
+                <source>Try adjusting your search or time window filter</source>
+                <target>Thử điều chỉnh tìm kiếm hoặc khoảng thời gian lọc</target>
+            </trans-unit>
+            <trans-unit id="3977297895075145495" datatype="html">
+                <source>Website Visits</source>
+                <target>Lượt truy cập trang web</target>
+            </trans-unit>
+            <trans-unit id="295504890792789676" datatype="html">
+                <source>Total visits recorded</source>
+                <target>Tổng số lượt truy cập đã ghi nhận</target>
+            </trans-unit>
+            <trans-unit id="3759842817399765200" datatype="html">
+                <source> Visit Details </source>
+                <target> Chi tiết lượt truy cập </target>
+            </trans-unit>
+            <trans-unit id="2010112426770695301" datatype="html">
+                <source>Analytics &amp; Tracking</source>
+                <target>Phân tích &amp; Theo dõi</target>
+            </trans-unit>
+            <trans-unit id="6113757655018262022" datatype="html">
+                <source> User Agent </source>
+                <target> User Agent </target>
+            </trans-unit>
+            <trans-unit id="41799055081459683" datatype="html">
+                <source> Visit Time </source>
+                <target> Thời gian truy cập </target>
+            </trans-unit>
+            <trans-unit id="5460834923471849273" datatype="html">
+                <source>No website visits found</source>
+                <target>Không tìm thấy lượt truy cập nào</target>
+            </trans-unit>
+            <trans-unit id="5750318357416172605" datatype="html">
+                <source>Page View</source>
+                <target>Xem trang</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
