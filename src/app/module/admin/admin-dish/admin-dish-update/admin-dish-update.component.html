@@ -109,7 +109,7 @@
                 @for (title of titleArray.controls; track title; let i = $index) {
                 <div [formGroupName]="i"
                   class="flex items-center gap-3 p-3 bg-slate-50/70 rounded-xl border border-slate-200/60">
-                  <mat-form-field appearance="outline" class="w-32 !mb-0" subscriptSizing="dynamic">
+                  <mat-form-field appearance="outline" class="!w-32 !mb-0" subscriptSizing="dynamic">
                     <mat-label i18n>Language</mat-label>
                     <mat-select formControlName="lang">
                       @for (lang of availableLanguages; track lang) {
