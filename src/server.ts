@@ -92,9 +92,29 @@ if (isDev) {
     }
     // If URL doesn't have a valid locale in production, redirect to default locale
     const redirectPath = `/en${req.originalUrl}`;
-    res.redirect(302, redirectPath);
+    res.redirect(301, redirectPath);
   });
 }
+
+// 301 permanent redirects for legacy / removed routes to prevent 404s in search engines
+app.get(['/:locale(en|vi)/tim-kiem/:slug', '/tim-kiem/:slug'], (req, res) => {
+  const locale = req.params['locale'] || 'vi';
+  const keyword = decodeURIComponent(req.params['slug'] || '').replace(/-/g, ' ').trim();
+  const target = keyword
+    ? `/${locale}/dish?keyword=${encodeURIComponent(keyword)}`
+    : `/${locale}/dish`;
+  res.redirect(301, target);
+});
+
+app.get(['/:locale(en|vi)/vao-bep/:slug', '/vao-bep/:slug'], (req, res) => {
+  const locale = req.params['locale'] || 'vi';
+  res.redirect(301, `/${locale}/dish`);
+});
+
+app.get(['/:locale(en|vi)/about', '/:locale(en|vi)/contact', '/about', '/contact'], (req, res) => {
+  const locale = req.params['locale'] || 'en';
+  res.redirect(301, `/${locale}`);
+});
 
 app.use('/**', (req, res, next) => {
   angularApp
