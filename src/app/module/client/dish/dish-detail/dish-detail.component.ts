@@ -250,6 +250,14 @@ export class DishDetailComponent implements OnDestroy, OnInit {
       this.metaService.updateTag({ property: 'og:title', content: title });
     }
 
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      this.metaService.updateTag({
+        property: 'og:url',
+        content: `${environment.BASE_URL}/vi/dish/${slug}`,
+      });
+    }
+
     if (dishDescription) {
       this.metaService.updateTag({
         name: 'description',
@@ -361,14 +369,24 @@ export class DishDetailComponent implements OnDestroy, OnInit {
           ? `${dishIngredient.quantity} ${ingredientName}`
           : ingredientName;
       }),
-      recipeInstructions:
+      recipeInstructions: (
         dish.content?.find((c: any) => c.lang === this.localeId)?.data ||
         dish.content?.[0]?.data ||
-        '',
-      video: dish.videos?.map((video) => ({
-        '@type': 'VideoObject',
-        embedUrl: video,
-      })),
+        ''
+      )
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim(),
+      video:
+        dish.videos && dish.videos.length > 0
+          ? dish.videos.map((video) => ({
+              '@type': 'VideoObject',
+              name: dishName,
+              description: dishDescription || dishName,
+              thumbnailUrl: dish.thumbnail ? [dish.thumbnail] : undefined,
+              embedUrl: video,
+            }))
+          : undefined,
     };
 
     // Remove undefined values
@@ -504,13 +522,7 @@ export class DishDetailComponent implements OnDestroy, OnInit {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (slug) {
       const baseUrl = environment.BASE_URL;
-      let canonicalUrl = baseUrl;
-
-      if (this.localeId.startsWith('vi')) {
-        canonicalUrl = `${baseUrl}/vi/dish/${slug}`;
-      } else {
-        canonicalUrl = `${baseUrl}/en/dish/${slug}`;
-      }
+      const canonicalUrl = `${baseUrl}/vi/dish/${slug}`;
 
       link.setAttribute('href', canonicalUrl);
       this.document.head.appendChild(link);
