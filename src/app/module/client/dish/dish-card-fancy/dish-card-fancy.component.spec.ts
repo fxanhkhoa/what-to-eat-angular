@@ -11,6 +11,8 @@ import { UserFavoriteService } from '@/app/service/user-favorite.service';
 import { ToastService } from '@/app/shared/service/toast.service';
 import { ShareBottomSheetComponent } from '@/app/shared/components/share-bottom-sheet/share-bottom-sheet.component';
 import { Dish } from '@/types/dish.type';
+import { Cookies_Key } from '@/enum/cookies.enum';
+import cookies from 'js-cookie';
 
 const mockDish: Dish = {
   _id: 'dish-1',
@@ -68,6 +70,11 @@ describe('DishCardFancyComponent', () => {
     fixture = TestBed.createComponent(DishCardFancyComponent);
     component = fixture.componentInstance;
     component.dish = mockDish;
+    cookies.set(Cookies_Key.TOKEN, 'test-token');
+  });
+
+  afterEach(() => {
+    cookies.remove(Cookies_Key.TOKEN);
   });
 
   it('should create', () => {

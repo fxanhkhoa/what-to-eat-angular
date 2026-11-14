@@ -15,6 +15,8 @@ import { DishService } from '@/app/service/dish.service';
 import { UserDishInteractionService } from '@/app/service/user-dish-interaction.service';
 import { Dish } from '@/types/dish.type';
 import { Ingredient } from '@/types/ingredient.type';
+import { Cookies_Key } from '@/enum/cookies.enum';
+import cookies from 'js-cookie';
 
 // ─── Fixtures ──────────────────────────────────────────────────────────────────
 
@@ -147,6 +149,7 @@ describe('DishDetailComponent', () => {
     dishServiceSpy.findOne.and.returnValue(of(mockRelatedDish));
     ingredientServiceSpy.findOne.and.returnValue(of(mockIngredient));
     userDishInteractionSpy.recordView.and.returnValue(of({} as any));
+    cookies.set(Cookies_Key.TOKEN, 'test-token');
 
     const matIconRegistryMock: Partial<MatIconRegistry> = {
       addSvgIcon: () => ({}) as MatIconRegistry,

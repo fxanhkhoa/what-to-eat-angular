@@ -55,13 +55,8 @@ export class WebsiteVisitService {
           if (response.ip) {
             body['ip'] = response.ip;
           }
-          const resolvedPath =
-            path ||
-            (isPlatformBrowser(this.platformId)
-              ? window.location.pathname + window.location.search
-              : '');
-          if (resolvedPath) {
-            body['path'] = resolvedPath;
+          if (path) {
+            body['path'] = path;
           }
           if (path || additionalPayload) {
             const sessionId = this.getSessionId();
