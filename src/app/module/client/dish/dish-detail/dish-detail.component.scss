@@ -29,6 +29,15 @@
   animation: fade-in-up 0.8s ease-out;
 }
 
+// Checked ingredient visual feedback
+.ingredient-row:has(.mat-mdc-checkbox-checked) {
+  .ingredient-label {
+    opacity: 0.45;
+    text-decoration: line-through;
+    transition: opacity 0.2s ease;
+  }
+}
+
 // Custom scrollbar
 .custom-scrollbar {
   scrollbar-width: thin;

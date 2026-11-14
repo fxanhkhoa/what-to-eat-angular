@@ -253,7 +253,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">27,28</context>
+          <context context-type="linenumber">37,38</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/dashboard/website-visit/website-visit.component.html</context>
@@ -397,7 +397,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">269,270</context>
+          <context context-type="linenumber">294,295</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7922989125096435449" datatype="html">
@@ -1896,7 +1896,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">310</context>
+          <context context-type="linenumber">240</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6218637637174693266" datatype="html">
@@ -3016,242 +3016,193 @@
           <context context-type="linenumber">10,11</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3786128724463570346" datatype="html">
-        <source>Time Window</source>
+      <trans-unit id="6483680626836794824" datatype="html">
+        <source>Date Range</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5829072187577655484" datatype="html">
-        <source>Total Visits</source>
+      <trans-unit id="3786128724463570346" datatype="html">
+        <source>Time Window</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">38,39</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="667967764905089552" datatype="html">
-        <source>Page views across sessions</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">46,47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5407391081085424174" datatype="html">
-        <source>User Clicks</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">58,59</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4013199558154226298" datatype="html">
-        <source>UI interactions &amp; actions</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">66,67</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1065418568651976631" datatype="html">
-        <source>Unique Visitors</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">78,79</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6356274566306761024" datatype="html">
-        <source>Distinct IP addresses</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">86,87</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8162114379821297634" datatype="html">
-        <source>Today&apos;s Activity</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">98,99</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="2321627298309012487" datatype="html">
-        <source>Since midnight UTC</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">107,108</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5661648069736620530" datatype="html">
         <source>Traffic by Country</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">124,125</context>
+          <context context-type="linenumber">53,54</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1514992901739541983" datatype="html">
         <source> Click any country bar below to filter the activity table </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">127</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3643034674790531726" datatype="html">
         <source>Clear <x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">133,134</context>
+          <context context-type="linenumber">62,63</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4261686035183042145" datatype="html">
         <source>No country data recorded yet</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">158,159</context>
+          <context context-type="linenumber">87,88</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1486428122336502718" datatype="html">
         <source>Device Breakdown</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">169,170</context>
+          <context context-type="linenumber">98,99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9126234696785414932" datatype="html">
         <source>Desktop vs Mobile vs Tablet</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">171,173</context>
+          <context context-type="linenumber">100,102</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5590155879913679847" datatype="html">
         <source>No device data</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">190,191</context>
+          <context context-type="linenumber">120,121</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6320412225333383390" datatype="html">
         <source>Top Browsers</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">198,199</context>
+          <context context-type="linenumber">128,129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7752087345624368695" datatype="html">
         <source>Traffic Trend (Daily)</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">218,219</context>
+          <context context-type="linenumber">148,149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="178401779705869200" datatype="html">
         <source>Volume of visitors and interactions over time</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">220,221</context>
+          <context context-type="linenumber">150,151</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8884230918331878446" datatype="html">
         <source>No timeline data yet</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">241,242</context>
+          <context context-type="linenumber">171,172</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8476223628759044919" datatype="html">
         <source>Top Pages &amp; Actions</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">252,253</context>
+          <context context-type="linenumber">182,183</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3841792527855124434" datatype="html">
         <source>Most active URLs and clicked features</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">254,255</context>
+          <context context-type="linenumber">184,185</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2646039505703891545" datatype="html">
         <source>Popular Pages</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">259,260</context>
+          <context context-type="linenumber">189,190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="323338315616870495" datatype="html">
         <source>No page view records yet</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">270,271</context>
+          <context context-type="linenumber">200,201</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5023506689288293096" datatype="html">
         <source>Top Clicked Elements</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">276,277</context>
+          <context context-type="linenumber">206,207</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8592810979813952950" datatype="html">
         <source>Visitor Logs</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">298,299</context>
+          <context context-type="linenumber">228,229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7926122598596712589" datatype="html">
         <source>Detailed visitor records and interaction telemetry</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">303,304</context>
+          <context context-type="linenumber">233,234</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5386463682965462145" datatype="html">
         <source>Visits</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">311</context>
+          <context context-type="linenumber">241</context>
         </context-group>
       </trans-unit>
       <trans-unit id="569285066181689741" datatype="html">
         <source>Clicks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">312</context>
+          <context context-type="linenumber">242</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6162339764493486612" datatype="html">
         <source>Search IP, country, path...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">323,324</context>
+          <context context-type="linenumber">253,254</context>
         </context-group>
       </trans-unit>
       <trans-unit id="527149829175967160" datatype="html">
         <source>Filtering by country: <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ selectedCountryFilter }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">339,340</context>
+          <context context-type="linenumber">269,270</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1748116495714559897" datatype="html">
         <source>Clear Filter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">343,344</context>
+          <context context-type="linenumber">273,274</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9085260088898870371" datatype="html">
         <source> Country / Location </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">360</context>
+          <context context-type="linenumber">290</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7175831147405774690" datatype="html">
         <source> IP Address </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">382</context>
+          <context context-type="linenumber">312</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/dashboard/website-visit/website-visit.component.html</context>
@@ -3262,49 +3213,105 @@
         <source> Event </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">392</context>
+          <context context-type="linenumber">322</context>
         </context-group>
       </trans-unit>
       <trans-unit id="820484705545045048" datatype="html">
         <source>Page View</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">403,404</context>
+          <context context-type="linenumber">333,334</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3158035581938683136" datatype="html">
         <source> Path </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">412</context>
+          <context context-type="linenumber">342</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8796811383919303859" datatype="html">
         <source> Device &amp; Browser </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">422</context>
+          <context context-type="linenumber">352</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1375913333051334272" datatype="html">
         <source> Timestamp </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">438</context>
+          <context context-type="linenumber">368</context>
         </context-group>
       </trans-unit>
       <trans-unit id="662739241074050907" datatype="html">
         <source>No visitor records found</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">453,454</context>
+          <context context-type="linenumber">383,384</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7312877922830095275" datatype="html">
         <source>Try adjusting your search or time window filter</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/admin/admin-tracking/admin-tracking.component.html</context>
-          <context context-type="linenumber">454,455</context>
+          <context context-type="linenumber">384,385</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5829072187577655484" datatype="html">
+        <source>Total Visits</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="667967764905089552" datatype="html">
+        <source>Page views across sessions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5407391081085424174" datatype="html">
+        <source>User Clicks</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4013199558154226298" datatype="html">
+        <source>UI interactions &amp; actions</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1065418568651976631" datatype="html">
+        <source>Unique Visitors</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6356274566306761024" datatype="html">
+        <source>Distinct IP addresses</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8162114379821297634" datatype="html">
+        <source>Today&apos;s Activity</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">66,67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2321627298309012487" datatype="html">
+        <source>Since midnight UTC</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/admin/admin-tracking/components/tracking-kpi-cards/tracking-kpi-cards.component.html</context>
+          <context context-type="linenumber">75,76</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3693700889630183849" datatype="html">
@@ -4045,7 +4052,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">33,34</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish.component.html</context>
@@ -4233,11 +4240,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">76,77</context>
+          <context context-type="linenumber">83,84</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">86,87</context>
+          <context context-type="linenumber">93,94</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4794173083546045790" datatype="html">
@@ -4252,7 +4259,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
-          <context context-type="linenumber">95,96</context>
+          <context context-type="linenumber">96,97</context>
         </context-group>
         <note priority="1" from="description">MEDIUM</note>
         <note priority="1" from="meaning">EASY</note>
@@ -4264,46 +4271,46 @@
           <context context-type="linenumber">102,103</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="ingredients" datatype="html">
+        <source>Ingredients</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
+          <context context-type="linenumber">122,123</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7082225262867320439" datatype="html">
         <source>No video available</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">171,172</context>
+          <context context-type="linenumber">236,237</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8754368108904637510" datatype="html">
         <source>This dish doesn&apos;t have any video tutorials yet</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">172,173</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ingredients" datatype="html">
-        <source>Ingredients</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">182,183</context>
+          <context context-type="linenumber">237,238</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2060259765918222839" datatype="html">
         <source>Copy Link</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">245,246</context>
+          <context context-type="linenumber">270,271</context>
         </context-group>
       </trans-unit>
       <trans-unit id="related_dishes" datatype="html">
         <source> Related Dishes </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.html</context>
-          <context context-type="linenumber">285,286</context>
+          <context context-type="linenumber">310,311</context>
         </context-group>
       </trans-unit>
       <trans-unit id="copied" datatype="html">
         <source>Copied!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/dish/dish-detail/dish-detail.component.ts</context>
-          <context context-type="linenumber">397</context>
+          <context context-type="linenumber">428</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5306671993240910791" datatype="html">
@@ -4926,7 +4933,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
-          <context context-type="linenumber">122,123</context>
+          <context context-type="linenumber">123,124</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7996322740602577495" datatype="html">
@@ -5165,14 +5172,14 @@
         <source>Explore Now</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
-          <context context-type="linenumber">131,132</context>
+          <context context-type="linenumber">132,133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2627026817710937014" datatype="html">
         <source>Explore All Dishes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/module/client/home/dish-section/dish-section.component.html</context>
-          <context context-type="linenumber">154,155</context>
+          <context context-type="linenumber">155,156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2095533154450573289" datatype="html">

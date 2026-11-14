@@ -7,10 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { CommonModule, DatePipe, DecimalPipe, isPlatformBrowser } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -29,6 +31,7 @@ import {
   WebsiteVisitFilter,
 } from '@/types/website_visit.type';
 import { APIPagination } from '@/types/base.type';
+import { TrackingKpiCardsComponent } from './components/tracking-kpi-cards/tracking-kpi-cards.component';
 
 @Component({
   selector: 'app-admin-tracking',
@@ -36,11 +39,14 @@ import { APIPagination } from '@/types/base.type';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     DatePipe,
     DecimalPipe,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -51,6 +57,7 @@ import { APIPagination } from '@/types/base.type';
     MatChipsModule,
     MatTooltipModule,
     NgxChartsModule,
+    TrackingKpiCardsComponent,
   ],
   templateUrl: './admin-tracking.component.html',
   styleUrls: ['./admin-tracking.component.scss'],
@@ -67,6 +74,13 @@ export class AdminTrackingComponent implements OnInit {
 
   // Selected time window
   selectedDays = 30;
+  maxDate = new Date();
+  dateRangeForm = new FormGroup({
+    start: new FormControl<Date | null>(
+      new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+    ),
+    end: new FormControl<Date | null>(new Date()),
+  });
   timeRangeOptions = [
     { label: 'Last 7 Days', value: 7 },
     { label: 'Last 14 Days', value: 14 },
@@ -188,9 +202,24 @@ export class AdminTrackingComponent implements OnInit {
 
   onDaysChange(days: number): void {
     this.selectedDays = days;
+    const end = new Date();
+    const start = new Date(end.getTime() - days * 24 * 60 * 60 * 1000);
+    this.dateRangeForm.setValue({ start, end }, { emitEvent: false });
     this.page = 1;
     this.loadAnalytics();
     this.loadLogs();
+  }
+
+  onDateRangeChange(): void {
+    const start = this.dateRangeForm.value.start;
+    const end = this.dateRangeForm.value.end;
+    if (start && end) {
+      const diffMs = end.getTime() - start.getTime();
+      this.selectedDays = Math.max(1, Math.ceil(diffMs / (1000 * 60 * 60 * 24)) + 1);
+      this.page = 1;
+      this.loadAnalytics();
+      this.loadLogs();
+    }
   }
 
   // Interactive Chart Click ("frontend when click")

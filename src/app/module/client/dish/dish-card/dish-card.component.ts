@@ -3,6 +3,10 @@ import { MultiLanguagePipe } from '@/app/pipe/multi-language.pipe';
 import { DIFFICULT_LEVELS } from '@/enum/dish.enum';
 import { Dish } from '@/types/dish.type';
 import { UserFavoriteService } from '@/app/service/user-favorite.service';
+import { Cookies_Key } from '@/enum/cookies.enum';
+import { isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
+import cookies from 'js-cookie';
 import { CommonModule } from '@angular/common';
 import {
   Component,
@@ -42,6 +46,7 @@ export class DishCardComponent implements OnInit {
 
   localeId = inject<string>(LOCALE_ID);
   private userFavoriteService = inject(UserFavoriteService);
+  private platformId = inject(PLATFORM_ID);
   private toastr = inject(ToastService);
   private bottomSheet = inject(MatBottomSheet);
 
@@ -59,6 +64,10 @@ export class DishCardComponent implements OnInit {
   }
 
   private checkIsFavorite(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (!cookies.get(Cookies_Key.TOKEN) && !cookies.get(Cookies_Key.REFRESH_TOKEN)) {
+      return;
+    }
     this.userFavoriteService.checkIsFavorite(this.dish.slug).subscribe({
       next: (response) => {
         this.isFavorite.set(response.isFavorite);

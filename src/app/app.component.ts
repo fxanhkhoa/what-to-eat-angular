@@ -32,9 +32,11 @@ export class AppComponent implements OnInit {
     // Website visit tracking (unique per browser)
     if (!isPlatformServer(this.platformId)) {
       if (!localStorage.getItem('website_visited')) {
-        this.websiteVisitService.trackVisit().subscribe((res) => {
-          localStorage.setItem('website_visited', 'true');
-        });
+        this.websiteVisitService
+          .trackVisit(window.location.pathname + window.location.search)
+          .subscribe((res) => {
+            localStorage.setItem('website_visited', 'true');
+          });
       }
       // Google Analytics route tracking
       this.router.events.subscribe((event) => {

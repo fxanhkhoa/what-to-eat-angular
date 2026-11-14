@@ -56,7 +56,7 @@
 
     <!-- Dishes Grid -->
     <div class="relative max-w-7xl mx-auto">
-        @if (isLoading) {
+        @if (isLoading()) {
         <div class="flex flex-col items-center justify-center py-20">
             <mat-spinner [diameter]="60" class="mb-4"></mat-spinner>
             <p i18n class="text-gray-400 text-lg animate-pulse">Loading delicious dishes...</p>
@@ -64,7 +64,7 @@
         }
         @else {
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            @for (item of dishes; track item; let idx = $index) {
+            @for (item of dishes(); track item; let idx = $index) {
             <div class="dish-card-wrapper" [style.animation-delay.ms]="idx * 80">
                 <!-- Premium Card Design -->
                 <div class="dish-card group relative h-[420px] rounded-[28px] overflow-hidden cursor-pointer" 
@@ -72,7 +72,8 @@
                     
                     <!-- Full Background Image -->
                     <div class="absolute inset-0">
-                        <img [src]="item.thumbnail ?? '/assets/images/placeholder.png'"
+                        <img [src]="item.thumbnail || '/assets/images/placeholder.png'"
+                            (error)="$any($event.target).src = '/assets/images/placeholder.png'"
                             [alt]="(item.title | multiLanguage : localeId)?.data"
                             class="w-full h-full object-cover transition-all duration-[800ms] ease-out group-hover:scale-125" />
                     </div>

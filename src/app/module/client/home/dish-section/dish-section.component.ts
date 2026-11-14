@@ -2,7 +2,7 @@ import { MultiLanguagePipe } from '@/app/pipe/multi-language.pipe';
 import { DishService } from '@/app/service/dish.service';
 import { MEAL_CATEGORIES } from '@/enum/dish.enum';
 import { Dish } from '@/types/dish.type';
-import { Component, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, inject, LOCALE_ID, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -48,8 +48,8 @@ export class DishSectionComponent implements OnInit {
   localeId = inject<string>(LOCALE_ID);
 
   mealCategories = Object.values(MEAL_CATEGORIES);
-  isLoading = false;
-  dishes: Dish[] = [];
+  isLoading = signal(false);
+  dishes = signal<Dish[]>([]);
 
   mealCategoryForm: FormGroup = this.fb.group({
     mealCategory: [[]],
@@ -60,18 +60,22 @@ export class DishSectionComponent implements OnInit {
 
     this.mealCategoryForm.valueChanges.subscribe((value) => {
       const selectedCategories = value.mealCategory;
-      this.isLoading = true;
       this.getDishes(selectedCategories);
     });
   }
 
   getDishes(mealCategories?: string[]) {
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.dishService
       .findRandom(8, mealCategories)
-      .pipe(finalize(() => (this.isLoading = false)))
-      .subscribe((res) => {
-        this.dishes = res;
+      .pipe(finalize(() => this.isLoading.set(false)))
+      .subscribe({
+        next: (res) => {
+          this.dishes.set(res);
+        },
+        error: () => {
+          this.dishes.set([]);
+        },
       });
   }
 }

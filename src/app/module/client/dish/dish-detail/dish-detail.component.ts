@@ -10,7 +10,14 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule, Location, DOCUMENT } from '@angular/common';
+import {
+  CommonModule,
+  Location,
+  DOCUMENT,
+  isPlatformBrowser,
+} from '@angular/common';
+import { Cookies_Key } from '@/enum/cookies.enum';
+import cookies from 'js-cookie';
 import { DomSanitizer, SafeHtml, Title, Meta } from '@angular/platform-browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
@@ -176,21 +183,27 @@ export class DishDetailComponent implements OnDestroy, OnInit {
           this.addStructuredData(dish);
           this.addOrUpdateCanonicalLink();
 
-          // Record view interaction
-          this.userDishInteractionService
-            .recordView({
-              userId: '', // Will be set by backend from token
-              dishId: dish._id,
-              dishSlug: dish.slug,
-            })
-            .subscribe({
-              next: () => {
-                console.log('View recorded');
-              },
-              error: (err) => {
-                console.error('Failed to record view', err);
-              },
-            });
+          // Record view interaction only when authenticated
+          if (
+            isPlatformBrowser(this.platformId) &&
+            (cookies.get(Cookies_Key.TOKEN) ||
+              cookies.get(Cookies_Key.REFRESH_TOKEN))
+          ) {
+            this.userDishInteractionService
+              .recordView({
+                userId: '', // Will be set by backend from token
+                dishId: dish._id,
+                dishSlug: dish.slug,
+              })
+              .subscribe({
+                next: () => {
+                  console.log('View recorded');
+                },
+                error: (err) => {
+                  console.error('Failed to record view', err);
+                },
+              });
+          }
           this.addHrefLangLinks();
         }
       });
