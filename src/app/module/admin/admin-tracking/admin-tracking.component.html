@@ -1,8 +1,10 @@
 <div class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
   <!-- Header & Filter Bar -->
-  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+  <div
+    class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/80 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
     <div class="flex items-center gap-3">
-      <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md">
+      <div
+        class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md">
         <mat-icon>insights</mat-icon>
       </div>
       <div>
@@ -13,16 +15,27 @@
 
     <!-- Controls -->
     <div class="flex items-center flex-wrap gap-3">
+      <mat-form-field appearance="outline" class="w-64 !mb-0 dense-form-field">
+        <mat-label i18n>Date Range</mat-label>
+        <mat-date-range-input [formGroup]="dateRangeForm" [rangePicker]="picker" [max]="maxDate">
+          <input matStartDate formControlName="start" placeholder="Start date" (dateChange)="onDateRangeChange()" />
+          <input matEndDate formControlName="end" placeholder="End date" (dateChange)="onDateRangeChange()" />
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+
       <mat-form-field appearance="outline" class="w-40 !mb-0 dense-form-field">
         <mat-label i18n>Time Window</mat-label>
         <mat-select [value]="selectedDays" (selectionChange)="onDaysChange($event.value)">
           @for (opt of timeRangeOptions; track opt.value) {
-            <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
+          <mat-option [value]="opt.value">{{ opt.label }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
 
-      <button mat-flat-button color="primary" (click)="refresh()" [disabled]="isLoadingAnalytics || isLoadingTable" class="!rounded-xl !h-12 !px-5 shadow-sm">
+      <button mat-flat-button color="primary" (click)="refresh()" [disabled]="isLoadingAnalytics || isLoadingTable"
+        class="!rounded-xl !h-12 !px-5 shadow-sm">
         <mat-icon class="mr-1" [class.animate-spin]="isLoadingAnalytics || isLoadingTable">refresh</mat-icon>
         <span i18n>Refresh</span>
       </button>
@@ -30,91 +43,10 @@
   </div>
 
   <!-- Summary KPI Cards -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-    <!-- Total Visits -->
-    <mat-card class="!rounded-2xl !border !border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-white shadow-sm overflow-hidden">
-      <div class="p-5 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider" i18n>Total Visits</span>
-          <div class="text-3xl font-extrabold text-gray-900 mt-1">
-            @if (analytics) {
-              {{ analytics.totalVisits | number }}
-            } @else {
-              <span class="text-gray-300 animate-pulse">...</span>
-            }
-          </div>
-          <span class="text-xs text-gray-500 mt-1 block" i18n>Page views across sessions</span>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-          <mat-icon>visibility</mat-icon>
-        </div>
-      </div>
-    </mat-card>
-
-    <!-- Total Clicks / Interactions -->
-    <mat-card class="!rounded-2xl !border !border-emerald-100 bg-gradient-to-br from-emerald-50/80 via-white to-white shadow-sm overflow-hidden">
-      <div class="p-5 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider" i18n>User Clicks</span>
-          <div class="text-3xl font-extrabold text-gray-900 mt-1">
-            @if (analytics) {
-              {{ analytics.totalClicks | number }}
-            } @else {
-              <span class="text-gray-300 animate-pulse">...</span>
-            }
-          </div>
-          <span class="text-xs text-gray-500 mt-1 block" i18n>UI interactions & actions</span>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
-          <mat-icon>touch_app</mat-icon>
-        </div>
-      </div>
-    </mat-card>
-
-    <!-- Unique Visitors -->
-    <mat-card class="!rounded-2xl !border !border-purple-100 bg-gradient-to-br from-purple-50/80 via-white to-white shadow-sm overflow-hidden">
-      <div class="p-5 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold text-purple-600 uppercase tracking-wider" i18n>Unique Visitors</span>
-          <div class="text-3xl font-extrabold text-gray-900 mt-1">
-            @if (analytics) {
-              {{ analytics.uniqueVisitors | number }}
-            } @else {
-              <span class="text-gray-300 animate-pulse">...</span>
-            }
-          </div>
-          <span class="text-xs text-gray-500 mt-1 block" i18n>Distinct IP addresses</span>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
-          <mat-icon>people_alt</mat-icon>
-        </div>
-      </div>
-    </mat-card>
-
-    <!-- Today's Activity -->
-    <mat-card class="!rounded-2xl !border !border-amber-100 bg-gradient-to-br from-amber-50/80 via-white to-white shadow-sm overflow-hidden">
-      <div class="p-5 flex items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold text-amber-600 uppercase tracking-wider" i18n>Today's Activity</span>
-          <div class="text-3xl font-extrabold text-gray-900 mt-1 flex items-baseline gap-2">
-            @if (analytics) {
-              <span>{{ analytics.todayVisits | number }}</span>
-              <span class="text-sm font-semibold text-emerald-600">+{{ analytics.todayClicks }} clicks</span>
-            } @else {
-              <span class="text-gray-300 animate-pulse">...</span>
-            }
-          </div>
-          <span class="text-xs text-gray-500 mt-1 block" i18n>Since midnight UTC</span>
-        </div>
-        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
-          <mat-icon>today</mat-icon>
-        </div>
-      </div>
-    </mat-card>
-  </div>
+  <app-tracking-kpi-cards [analytics]="analytics"></app-tracking-kpi-cards>
 
   <!-- Interactive Charts Section -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
     <!-- Country Distribution (Large chart, click to filter!) -->
     <mat-card class="lg:col-span-8 !rounded-2xl !border !border-gray-100 shadow-sm p-5 bg-white">
       <div class="flex items-center justify-between mb-4">
@@ -128,41 +60,33 @@
           </p>
         </div>
         @if (selectedCountryFilter) {
-          <button mat-stroked-button color="warn" (click)="clearCountryFilter()" class="!rounded-lg !text-xs !h-8">
-            <mat-icon class="mr-1">close</mat-icon>
-            <span i18n>Clear {{ selectedCountryFilter }}</span>
-          </button>
+        <button mat-stroked-button color="warn" (click)="clearCountryFilter()" class="!rounded-lg !text-xs !h-8">
+          <mat-icon class="mr-1">close</mat-icon>
+          <span i18n>Clear {{ selectedCountryFilter }}</span>
+        </button>
         }
       </div>
 
       <div class="w-full h-80 flex items-center justify-center">
         @if (isLoadingAnalytics) {
-          <mat-spinner diameter="36"></mat-spinner>
+        <mat-spinner diameter="36"></mat-spinner>
         } @else if (analytics && analytics.visitsByCountry && analytics.visitsByCountry.length > 0) {
-          <ngx-charts-bar-horizontal
-            [results]="analytics.visitsByCountry"
-            [scheme]="primaryColorScheme"
-            [xAxis]="true"
-            [yAxis]="true"
-            [legend]="false"
-            [showXAxisLabel]="true"
-            [showYAxisLabel]="false"
-            [xAxisLabel]="'Visits'"
-            [animations]="true"
-            (select)="onCountrySelect($event)"
-            class="w-full h-full cursor-pointer">
-          </ngx-charts-bar-horizontal>
+        <ngx-charts-bar-horizontal [results]="analytics.visitsByCountry" [scheme]="primaryColorScheme" [xAxis]="true"
+          [yAxis]="true" [legend]="false" [showXAxisLabel]="true" [showYAxisLabel]="false" [xAxisLabel]="'Visits'"
+          [animations]="true" (select)="onCountrySelect($event)" class="w-full h-full cursor-pointer">
+        </ngx-charts-bar-horizontal>
         } @else {
-          <div class="text-center text-gray-400 py-12">
-            <mat-icon class="mb-1">public_off</mat-icon>
-            <p class="text-sm" i18n>No country data recorded yet</p>
-          </div>
+        <div class="text-center text-gray-400 py-12">
+          <mat-icon class="mb-1">public_off</mat-icon>
+          <p class="text-sm" i18n>No country data recorded yet</p>
+        </div>
         }
       </div>
     </mat-card>
 
     <!-- Device & Browser Distribution -->
-    <mat-card class="lg:col-span-4 !rounded-2xl !border !border-gray-100 shadow-sm p-5 bg-white flex flex-col justify-between">
+    <mat-card
+      class="lg:col-span-4 !rounded-2xl !border !border-gray-100 shadow-sm p-5 bg-white flex flex-col justify-between">
       <div>
         <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2 mb-1">
           <mat-icon class="text-indigo-600">devices</mat-icon>
@@ -172,24 +96,17 @@
 
         <div class="w-full h-64 flex items-center justify-center">
           @if (isLoadingAnalytics) {
-            <mat-spinner diameter="32"></mat-spinner>
+          <mat-spinner diameter="32"></mat-spinner>
           } @else if (analytics && analytics.visitsByDevice && analytics.visitsByDevice.length > 0) {
-            <ngx-charts-pie-chart
-              [results]="analytics.visitsByDevice"
-              [scheme]="deviceColorScheme"
-              [doughnut]="true"
-              [legend]="true"
-              [legendTitle]="''"
-              [legendPosition]="legendPositionBelow"
-              [labels]="false"
-              (select)="onDeviceSelect($event)"
-              class="w-full h-full">
-            </ngx-charts-pie-chart>
+          <ngx-charts-pie-chart [results]="analytics.visitsByDevice" [scheme]="deviceColorScheme" [doughnut]="true"
+            [legend]="true" [legendTitle]="''" [legendPosition]="legendPositionBelow" [labels]="false"
+            (select)="onDeviceSelect($event)" class="w-full h-full">
+          </ngx-charts-pie-chart>
           } @else {
-            <div class="text-center text-gray-400 py-8">
-              <mat-icon class="mb-1">devices</mat-icon>
-              <p class="text-sm" i18n>No device data</p>
-            </div>
+          <div class="text-center text-gray-400 py-8">
+            <mat-icon class="mb-1">devices</mat-icon>
+            <p class="text-sm" i18n>No device data</p>
+          </div>
           }
         </div>
       </div>
@@ -199,10 +116,11 @@
         <span class="text-xs font-semibold text-gray-700 uppercase tracking-wider block mb-2" i18n>Top Browsers</span>
         <div class="flex flex-wrap gap-2">
           @for (b of analytics?.visitsByBrowser; track b.name) {
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-              <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-              {{ b.name }}: <strong class="text-gray-900">{{ b.value }}</strong>
-            </span>
+          <span
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            {{ b.name }}: <strong class="text-gray-900">{{ b.value }}</strong>
+          </span>
           }
         </div>
       </div>
@@ -223,24 +141,17 @@
 
       <div class="w-full h-64 flex items-center justify-center">
         @if (isLoadingAnalytics) {
-          <mat-spinner diameter="32"></mat-spinner>
+        <mat-spinner diameter="32"></mat-spinner>
         } @else if (analytics && analytics.visitsOverTime && analytics.visitsOverTime.length > 0) {
-          <ngx-charts-bar-vertical
-            [results]="analytics.visitsOverTime"
-            [scheme]="primaryColorScheme"
-            [xAxis]="true"
-            [yAxis]="true"
-            [legend]="false"
-            [showXAxisLabel]="false"
-            [showYAxisLabel]="false"
-            [animations]="true"
-            class="w-full h-full">
-          </ngx-charts-bar-vertical>
+        <ngx-charts-bar-vertical [results]="analytics.visitsOverTime" [scheme]="primaryColorScheme" [xAxis]="true"
+          [yAxis]="true" [legend]="false" [showXAxisLabel]="false" [showYAxisLabel]="false" [animations]="true"
+          class="w-full h-full">
+        </ngx-charts-bar-vertical>
         } @else {
-          <div class="text-center text-gray-400 py-12">
-            <mat-icon class="mb-1">timeline</mat-icon>
-            <p class="text-sm" i18n>No timeline data yet</p>
-          </div>
+        <div class="text-center text-gray-400 py-12">
+          <mat-icon class="mb-1">timeline</mat-icon>
+          <p class="text-sm" i18n>No timeline data yet</p>
+        </div>
         }
       </div>
     </mat-card>
@@ -257,33 +168,38 @@
 
       <div class="space-y-4 max-h-64 overflow-y-auto pr-1">
         <div>
-          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2" i18n>Popular Pages</span>
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2" i18n>Popular
+            Pages</span>
           @if (analytics && analytics.topPages.length > 0) {
-            <div class="space-y-2">
-              @for (p of analytics.topPages; track p.name) {
-                <div class="flex items-center justify-between text-sm py-1.5 px-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                  <span class="font-mono text-xs text-blue-700 truncate max-w-[200px]" [title]="p.name">{{ p.name }}</span>
-                  <span class="font-semibold text-gray-700 text-xs px-2 py-0.5 bg-white rounded shadow-2xs">{{ p.value }} visits</span>
-                </div>
-              }
+          <div class="space-y-2">
+            @for (p of analytics.topPages; track p.name) {
+            <div
+              class="flex items-center justify-between text-sm py-1.5 px-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+              <span class="font-mono text-xs text-blue-700 truncate max-w-[200px]" [title]="p.name">{{ p.name }}</span>
+              <span class="font-semibold text-gray-700 text-xs px-2 py-0.5 bg-white rounded shadow-2xs">{{ p.value }}
+                visits</span>
             </div>
+            }
+          </div>
           } @else {
-            <p class="text-xs text-gray-400 italic" i18n>No page view records yet</p>
+          <p class="text-xs text-gray-400 italic" i18n>No page view records yet</p>
           }
         </div>
 
         @if (analytics && analytics.topClicks.length > 0) {
-          <div class="pt-2 border-t border-gray-100">
-            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2" i18n>Top Clicked Elements</span>
-            <div class="flex flex-wrap gap-1.5">
-              @for (c of analytics.topClicks; track c.name) {
-                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs bg-emerald-50 text-emerald-800 border border-emerald-100">
-                  <mat-icon>touch_app</mat-icon>
-                  {{ c.name }}: <strong>{{ c.value }}</strong>
-                </span>
-              }
-            </div>
+        <div class="pt-2 border-t border-gray-100">
+          <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider block mb-2" i18n>Top Clicked
+            Elements</span>
+          <div class="flex flex-wrap gap-1.5">
+            @for (c of analytics.topClicks; track c.name) {
+            <span
+              class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs bg-emerald-50 text-emerald-800 border border-emerald-100">
+              <mat-icon>touch_app</mat-icon>
+              {{ c.name }}: <strong>{{ c.value }}</strong>
+            </span>
+            }
           </div>
+        </div>
         }
       </div>
     </mat-card>
@@ -292,7 +208,8 @@
   <!-- Detailed Visitor Logs Table Card -->
   <mat-card class="!rounded-2xl !border !border-gray-100 shadow-sm bg-white overflow-hidden">
     <!-- Table Header & Filters -->
-    <div class="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div
+      class="p-5 border-b border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
         <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
           <mat-icon class="text-blue-600">format_list_bulleted</mat-icon>
@@ -307,7 +224,8 @@
       <!-- Quick Action / Type Chips & Search -->
       <div class="flex items-center flex-wrap gap-3 w-full md:w-auto">
         <!-- Event Type Filter -->
-        <mat-chip-listbox [value]="selectedActionFilter" (change)="setActionFilter($event.value)" aria-label="Filter action">
+        <mat-chip-listbox [value]="selectedActionFilter" (change)="setActionFilter($event.value)"
+          aria-label="Filter action">
           <mat-chip-option value="" [selected]="selectedActionFilter === ''" i18n>All</mat-chip-option>
           <mat-chip-option value="visit" [selected]="selectedActionFilter === 'visit'" i18n>Visits</mat-chip-option>
           <mat-chip-option value="click" [selected]="selectedActionFilter === 'click'" i18n>Clicks</mat-chip-option>
@@ -316,17 +234,12 @@
         <!-- Search Input -->
         <mat-form-field appearance="outline" class="w-full sm:w-64 !mb-0 dense-form-field">
           <mat-icon matPrefix class="mr-2 text-gray-400">search</mat-icon>
-          <input
-            matInput
-            type="text"
-            [(ngModel)]="searchQuery"
-            (keyup.enter)="onSearch()"
-            placeholder="Search IP, country, path..."
-            i18n-placeholder />
+          <input matInput type="text" [(ngModel)]="searchQuery" (keyup.enter)="onSearch()"
+            placeholder="Search IP, country, path..." i18n-placeholder />
           @if (searchQuery) {
-            <button matSuffix mat-icon-button (click)="searchQuery = ''; onSearch()" aria-label="Clear search">
-              <mat-icon>close</mat-icon>
-            </button>
+          <button matSuffix mat-icon-button (click)="searchQuery = ''; onSearch()" aria-label="Clear search">
+            <mat-icon>close</mat-icon>
+          </button>
           }
         </mat-form-field>
       </div>
@@ -334,30 +247,31 @@
 
     <!-- Active Filter Banner (if country filter is set from clicking chart) -->
     @if (selectedCountryFilter) {
-      <div class="bg-blue-50/70 border-b border-blue-100 px-5 py-2.5 flex items-center justify-between">
-        <div class="flex items-center gap-2 text-xs text-blue-800">
-          <mat-icon>filter_alt</mat-icon>
-          <span i18n>Filtering by country: <strong>{{ selectedCountryFilter }}</strong></span>
-        </div>
-        <button mat-button color="primary" (click)="clearCountryFilter()" class="!text-xs !h-7 !px-2">
-          <mat-icon class="mr-1">close</mat-icon>
-          <span i18n>Clear Filter</span>
-        </button>
+    <div class="bg-blue-50/70 border-b border-blue-100 px-5 py-2.5 flex items-center justify-between">
+      <div class="flex items-center gap-2 text-xs text-blue-800">
+        <mat-icon>filter_alt</mat-icon>
+        <span i18n>Filtering by country: <strong>{{ selectedCountryFilter }}</strong></span>
       </div>
+      <button mat-button color="primary" (click)="clearCountryFilter()" class="!text-xs !h-7 !px-2">
+        <mat-icon class="mr-1">close</mat-icon>
+        <span i18n>Clear Filter</span>
+      </button>
+    </div>
     }
 
     <!-- Table Container -->
     <div class="relative overflow-x-auto min-h-[300px]">
       @if (isLoadingTable) {
-        <div class="absolute inset-0 bg-white/70 backdrop-blur-2xs flex items-center justify-center z-10">
-          <mat-spinner diameter="36"></mat-spinner>
-        </div>
+      <div class="absolute inset-0 bg-white/70 backdrop-blur-2xs flex items-center justify-center z-10">
+        <mat-spinner diameter="36"></mat-spinner>
+      </div>
       }
 
       <table mat-table [dataSource]="dataSource" matSort class="w-full">
         <!-- Country Column -->
         <ng-container matColumnDef="country">
-          <th mat-header-cell *matHeaderCellDef class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
+          <th mat-header-cell *matHeaderCellDef
+            class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
             Country / Location
           </th>
           <td mat-cell *matCellDef="let row" class="px-5 py-4 whitespace-nowrap">
@@ -370,7 +284,7 @@
                   {{ row.country || 'Unknown' }}
                 </div>
                 @if (row.city) {
-                  <div class="text-xs text-gray-500">{{ row.city }}</div>
+                <div class="text-xs text-gray-500">{{ row.city }}</div>
                 }
               </div>
             </div>
@@ -379,7 +293,8 @@
 
         <!-- IP Address Column -->
         <ng-container matColumnDef="ip">
-          <th mat-header-cell *matHeaderCellDef class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
+          <th mat-header-cell *matHeaderCellDef
+            class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
             IP Address
           </th>
           <td mat-cell *matCellDef="let row" class="px-5 py-4 whitespace-nowrap text-xs font-mono text-gray-700">
@@ -389,37 +304,43 @@
 
         <!-- Action / Event Column -->
         <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
+          <th mat-header-cell *matHeaderCellDef
+            class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
             Event
           </th>
           <td mat-cell *matCellDef="let row" class="px-5 py-4 whitespace-nowrap">
             @if (row.action === 'click') {
-              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-                <mat-icon>touch_app</mat-icon>
-                <span>Click: {{ row.target || 'Interaction' }}</span>
-              </span>
+            <span
+              class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+              <mat-icon>touch_app</mat-icon>
+              <span>Click: {{ row.target || 'Interaction' }}</span>
+            </span>
             } @else {
-              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                <mat-icon>visibility</mat-icon>
-                <span i18n>Page View</span>
-              </span>
+            <span
+              class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+              <mat-icon>visibility</mat-icon>
+              <span i18n>Page View</span>
+            </span>
             }
           </td>
         </ng-container>
 
         <!-- Path Column -->
         <ng-container matColumnDef="path">
-          <th mat-header-cell *matHeaderCellDef class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
+          <th mat-header-cell *matHeaderCellDef
+            class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
             Path
           </th>
-          <td mat-cell *matCellDef="let row" class="px-5 py-4 text-xs font-mono text-gray-800 max-w-xs truncate" [title]="row.path">
+          <td mat-cell *matCellDef="let row" class="px-5 py-4 text-xs font-mono text-gray-800 max-w-xs truncate"
+            [title]="row.path">
             {{ row.path || '/' }}
           </td>
         </ng-container>
 
         <!-- Device & Browser Column -->
         <ng-container matColumnDef="device">
-          <th mat-header-cell *matHeaderCellDef class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
+          <th mat-header-cell *matHeaderCellDef
+            class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
             Device & Browser
           </th>
           <td mat-cell *matCellDef="let row" class="px-5 py-4 whitespace-nowrap text-xs text-gray-600">
@@ -427,7 +348,7 @@
               <mat-icon class="text-gray-400">{{ getDeviceIcon(row.device) }}</mat-icon>
               <span>{{ row.browser || 'Browser' }}</span>
               @if (row.os) {
-                <span class="text-gray-400">({{ row.os }})</span>
+              <span class="text-gray-400">({{ row.os }})</span>
               }
             </div>
           </td>
@@ -435,7 +356,8 @@
 
         <!-- Visited Time Column -->
         <ng-container matColumnDef="visitedAt">
-          <th mat-header-cell *matHeaderCellDef class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
+          <th mat-header-cell *matHeaderCellDef
+            class="px-5 py-3.5 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider" i18n>
             Timestamp
           </th>
           <td mat-cell *matCellDef="let row" class="px-5 py-4 whitespace-nowrap text-xs text-gray-500">
@@ -449,27 +371,22 @@
 
       <!-- Empty State -->
       @if (dataSource.data.length === 0 && !isLoadingTable) {
-        <div class="py-16 text-center text-gray-400">
-          <mat-icon class="text-gray-300 mb-2">travel_explore</mat-icon>
-          <p class="text-base font-medium text-gray-600" i18n>No visitor records found</p>
-          <p class="text-xs text-gray-400 mt-1" i18n>Try adjusting your search or time window filter</p>
-        </div>
+      <div class="py-16 text-center text-gray-400">
+        <mat-icon class="text-gray-300 mb-2">travel_explore</mat-icon>
+        <p class="text-base font-medium text-gray-600" i18n>No visitor records found</p>
+        <p class="text-xs text-gray-400 mt-1" i18n>Try adjusting your search or time window filter</p>
+      </div>
       }
     </div>
 
     <!-- Paginator -->
     @if (totalLogs > 0) {
-      <div class="border-t border-gray-100 bg-gray-50/50 p-2 sm:p-4">
-        <mat-paginator
-          [length]="totalLogs"
-          [pageSize]="limit"
-          [pageIndex]="page - 1"
-          [pageSizeOptions]="[10, 25, 50, 100]"
-          (page)="onPageChange($event)"
-          showFirstLastButtons
-          class="!bg-transparent">
-        </mat-paginator>
-      </div>
+    <div class="border-t border-gray-100 bg-gray-50/50 p-2 sm:p-4">
+      <mat-paginator [length]="totalLogs" [pageSize]="limit" [pageIndex]="page - 1"
+        [pageSizeOptions]="[10, 25, 50, 100]" (page)="onPageChange($event)" showFirstLastButtons
+        class="!bg-transparent">
+      </mat-paginator>
+    </div>
     }
   </mat-card>
 </div>

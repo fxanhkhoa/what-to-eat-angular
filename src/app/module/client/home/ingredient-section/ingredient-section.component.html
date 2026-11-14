@@ -131,9 +131,10 @@
             <!-- Image Container -->
             <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800">
               <img 
-                [src]="ingredient.images[0]" 
+                [src]="ingredient.images[0] || '/assets/images/placeholder-ingredient.jpg'" 
                 [alt]="getIngredientTitle(ingredient)"
                 (load)="onImageLoad(i)"
+                (error)="$any($event.target).src = '/assets/images/placeholder-ingredient.jpg'; onImageLoad(i)"
                 class="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
                 loading="lazy"
               >

@@ -8573,6 +8573,10 @@
                 <source>Page View</source>
                 <target>Xem trang</target>
             </trans-unit>
+            <trans-unit id="6483680626836794824" datatype="html">
+                <source>Date Range</source>
+                <target>Khoảng thời gian</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

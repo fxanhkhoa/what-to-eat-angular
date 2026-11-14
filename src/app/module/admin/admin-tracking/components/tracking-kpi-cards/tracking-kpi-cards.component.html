@@ -1,0 +1,82 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+  <!-- Total Visits -->
+  <mat-card class="!rounded-2xl !border !border-blue-100 bg-gradient-to-br from-blue-50/80 via-white to-white shadow-sm overflow-hidden">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <span class="text-xs font-semibold text-blue-600 uppercase tracking-wider" i18n>Total Visits</span>
+        <div class="text-3xl font-extrabold text-gray-900 mt-1">
+          @if (analytics) {
+            {{ analytics.totalVisits | number }}
+          } @else {
+            <span class="text-gray-300 animate-pulse">...</span>
+          }
+        </div>
+        <span class="text-xs text-gray-500 mt-1 block" i18n>Page views across sessions</span>
+      </div>
+      <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+        <mat-icon>visibility</mat-icon>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Total Clicks / Interactions -->
+  <mat-card class="!rounded-2xl !border !border-emerald-100 bg-gradient-to-br from-emerald-50/80 via-white to-white shadow-sm overflow-hidden">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <span class="text-xs font-semibold text-emerald-600 uppercase tracking-wider" i18n>User Clicks</span>
+        <div class="text-3xl font-extrabold text-gray-900 mt-1">
+          @if (analytics) {
+            {{ analytics.totalClicks | number }}
+          } @else {
+            <span class="text-gray-300 animate-pulse">...</span>
+          }
+        </div>
+        <span class="text-xs text-gray-500 mt-1 block" i18n>UI interactions & actions</span>
+      </div>
+      <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+        <mat-icon>touch_app</mat-icon>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Unique Visitors -->
+  <mat-card class="!rounded-2xl !border !border-purple-100 bg-gradient-to-br from-purple-50/80 via-white to-white shadow-sm overflow-hidden">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <span class="text-xs font-semibold text-purple-600 uppercase tracking-wider" i18n>Unique Visitors</span>
+        <div class="text-3xl font-extrabold text-gray-900 mt-1">
+          @if (analytics) {
+            {{ analytics.uniqueVisitors | number }}
+          } @else {
+            <span class="text-gray-300 animate-pulse">...</span>
+          }
+        </div>
+        <span class="text-xs text-gray-500 mt-1 block" i18n>Distinct IP addresses</span>
+      </div>
+      <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+        <mat-icon>people_alt</mat-icon>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Today's Activity -->
+  <mat-card class="!rounded-2xl !border !border-amber-100 bg-gradient-to-br from-amber-50/80 via-white to-white shadow-sm overflow-hidden">
+    <div class="p-5 flex items-center justify-between">
+      <div>
+        <span class="text-xs font-semibold text-amber-600 uppercase tracking-wider" i18n>Today's Activity</span>
+        <div class="text-3xl font-extrabold text-gray-900 mt-1 flex items-baseline gap-2">
+          @if (analytics) {
+            <span>{{ analytics.todayVisits | number }}</span>
+            <span class="text-sm font-semibold text-emerald-600">+{{ analytics.todayClicks }} clicks</span>
+          } @else {
+            <span class="text-gray-300 animate-pulse">...</span>
+          }
+        </div>
+        <span class="text-xs text-gray-500 mt-1 block" i18n>Since midnight UTC</span>
+      </div>
+      <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+        <mat-icon>today</mat-icon>
+      </div>
+    </div>
+  </mat-card>
+</div>

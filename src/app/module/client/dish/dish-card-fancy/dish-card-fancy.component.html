@@ -109,7 +109,9 @@
         </div>
         <div class="col-span-12 md:col-span-3 p-5 md:p-0">
             <div class="md:hidden relative !aspect-square">
-                <img [src]="dish.thumbnail" alt="{{ (dish.title | multiLanguage: localeId)?.data }}"
+                <img [src]="dish.thumbnail || '/assets/images/placeholder.png'"
+                    (error)="$any($event.target).src = '/assets/images/placeholder.png'"
+                    alt="{{ (dish.title | multiLanguage: localeId)?.data }}"
                     class="absolute bottom-0 aspect-square z-10 object-cover object-center !w-full !h-auto rounded-full" />
                 <div class="absolute bottom-0 w-full h-full aspect-square rounded-full blur-md bg-gray-300"></div>
             </div>
@@ -119,7 +121,9 @@
                     class="absolute lg:-right-16 aspect-square object-cover object-center w-auto h-full !rounded-full absolute aspect-square object-cover object-center w-auto h-full rounded-full">
                     <div class="absolute w-full h-full aspect-square rounded-full blur-md bg-gray-300">
                     </div>
-                    <img [src]="dish.thumbnail" alt="{{ (dish.title | multiLanguage: localeId)?.data }}"
+                    <img [src]="dish.thumbnail || '/assets/images/placeholder.png'"
+                        (error)="$any($event.target).src = '/assets/images/placeholder.png'"
+                        alt="{{ (dish.title | multiLanguage: localeId)?.data }}"
                         class="absolute z-10 aspect-square object-cover object-center w-auto h-full rounded-full" />
                 </div>
             </div>
